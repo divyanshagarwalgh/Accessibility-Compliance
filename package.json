@@ -1,0 +1,49 @@
+{
+  "name": "webyansh-accessibility-suite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Accessibility & Compliance Suite for webyansh.com — WCAG 2.1/2.2 AA scanning with Webflow Designer remediation steps.",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf-build": "opennextjs-cloudflare build",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "db:migrate:local": "wrangler d1 migrations apply a11y-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply a11y-db --remote"
+  },
+  "dependencies": {
+    "next": "15.5.22",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260804.1",
+    "@opennextjs/cloudflare": "1.20.2",
+    "@types/node": "22.18.13",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "typescript": "5.9.3",
+    "wrangler": "4.119.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.26",
+    "sharp": "^0.35.3",
+    "undici": "^7.29.0"
+  },
+  "comments": {
+    "overrides": [
+      "Transitive advisories in the build toolchain, forced to patched versions.",
+      "postcss: next@15.5.22 pins 8.4.31. GHSA-fxqj-rqcc-2cmp (<=8.5.22) is the newest of four.",
+      "sharp: next wants ^0.34.3, miniflare 0.35.2. GHSA-f88m-g3jw-g9cj (libvips) needs >=0.35.0.",
+      "  Not used at runtime — Workers has no Node image optimization pipeline.",
+      "undici: miniflare pins 7.28.0. Five advisories, all fixed in 7.29.0 (dev-only simulator)."
+    ]
+  }
+}

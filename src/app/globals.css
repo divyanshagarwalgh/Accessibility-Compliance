@@ -1,0 +1,111 @@
+@import "../styles/lumos-tokens.css";
+
+/* =============================================================================
+ * Base styles for the Webflow Cloud app surface.
+ *
+ * This app must pass its own audit. Every rule below exists because the scanner
+ * checks for it — see docs/rules-extracted.md.
+ * ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--swatch--gray-25);
+  color: var(--swatch--dark);
+  font-family: var(--_typography---font--primary-family);
+  font-size: var(--_typography---font-size--text-main);
+  line-height: var(--_typography---line-height--1-5);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Rule 9 (2.4.7 Focus Visible). No :focus-visible rule exists anywhere on the live
+ * site or in the prototype. The scanner flags exactly this, so the app ships it.
+ * Built from the live --focus--* variables rather than hardcoded values. */
+:focus-visible {
+  outline: var(--focus--width) solid var(--swatch--brand);
+  outline-offset: var(--focus--offset-outer);
+  border-radius: var(--radius--xsmall);
+}
+
+/* Never remove the ring — only replace it. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Rule 7 (2.5.8 Target Size, WCAG 2.2). 24x24 CSS px minimum for interactive controls. */
+a,
+button,
+input,
+select,
+textarea,
+summary,
+[role="button"],
+[role="tab"],
+[role="checkbox"] {
+  min-height: 24px;
+}
+
+a:where(:not([class])) {
+  /* Brand orange is only 3.08–3.33:1 on light surfaces and fails AA for body-size
+   * text. Body links use the accessible brand tone instead. */
+  color: var(--swatch--brand-accessible);
+  text-underline-offset: 0.2em;
+}
+
+/* Rule 10 (1.3.1) — the skip link is the first focusable element on the page. */
+.a11y_skip_link {
+  position: absolute;
+  left: var(--_spacing---space--3);
+  top: var(--_spacing---space--3);
+  z-index: 100;
+  padding: var(--_spacing---space--2) var(--_spacing---space--3);
+  background: var(--swatch--white);
+  color: var(--swatch--dark);
+  border: 1px solid var(--swatch--gray-200);
+  border-radius: var(--radius--small);
+  font-weight: var(--_typography---font--primary-semibold);
+  transform: translateY(-200%);
+}
+
+.a11y_skip_link:focus-visible {
+  transform: translateY(0);
+}
+
+/* Rule 13 (2.4.11 Focus Not Obscured, WCAG 2.2). Anchor targets must clear any
+ * sticky chrome when focused. */
+:target,
+[id] {
+  scroll-margin-top: var(--_spacing---space--8);
+}
+
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
