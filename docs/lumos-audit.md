@@ -329,6 +329,23 @@ All six proposed native slugs are unoccupied, and `/app` does not collide with a
 path is set in one place — `MOUNT_PATH` in `next.config.ts` — and internal links use `next/link`,
 which applies `basePath` automatically.
 
+## 7a. Webflow API limitation: library code components are not placeable
+
+Confirmed 7 Aug 2026. The REST Data API (`data_component_tool`) can create pages, insert elements,
+place *site* component instances and write JSON-LD — the whole page can be built headlessly. It
+**cannot see components installed from a shared library**.
+
+Evidence: with "Webyansh Accessibility" installed and **Contrast Checker** visible in the Designer's
+Components panel, the API returned 204 site components and zero matches for every one of
+`isCodeComponent: true`, `isLibrary: true`, `keywords: ["contrast"]`, `["Accessibility"]`,
+`["Webyansh"]`, and `get_component({name: "Contrast Checker"})`.
+
+**Consequence for the remaining five pages:** everything except placing the code component can be
+automated. Dropping each widget onto its page is a manual Designer step. Budget one drag per page.
+
+Mitigation in use: the target element is named **"DROP CONTRAST CHECKER HERE"** in the Navigator so
+the placement is unambiguous.
+
 ## 8. Carried to Checkpoint 0/1
 
 1. **Site ID confirmation** — I read `67fb46459daf80597440ed56`; confirm it is the right project.
