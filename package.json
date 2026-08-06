@@ -6,17 +6,23 @@
   "engines": {
     "node": ">=22.0.0"
   },
+  "//scripts": [
+    "Invoked via `node ./node_modules/...` rather than bare binary names.",
+    "npm's Windows shims mis-parse the '&' in this project's local path, so",
+    "`npx <bin>` and `npm run <script>` both fail with a truncated MODULE_NOT_FOUND.",
+    "Direct node paths behave identically on Webflow Cloud's Linux builder."
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "cf-build": "opennextjs-cloudflare build",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "db:migrate:local": "wrangler d1 migrations apply a11y-db --local",
-    "db:migrate:remote": "wrangler d1 migrations apply a11y-db --remote"
+    "dev": "node ./node_modules/next/dist/bin/next dev",
+    "build": "node ./node_modules/next/dist/bin/next build",
+    "start": "node ./node_modules/next/dist/bin/next start",
+    "lint": "node ./node_modules/next/dist/bin/next lint",
+    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
+    "preview": "node ./node_modules/@opennextjs/cloudflare/dist/cli/index.js build && node ./node_modules/@opennextjs/cloudflare/dist/cli/index.js preview",
+    "cf-build": "node ./node_modules/@opennextjs/cloudflare/dist/cli/index.js build",
+    "cf-typegen": "node ./node_modules/wrangler/bin/wrangler.js types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "db:migrate:local": "node ./node_modules/wrangler/bin/wrangler.js d1 migrations apply a11y-db --local",
+    "db:migrate:remote": "node ./node_modules/wrangler/bin/wrangler.js d1 migrations apply a11y-db --remote"
   },
   "dependencies": {
     "next": "15.5.22",

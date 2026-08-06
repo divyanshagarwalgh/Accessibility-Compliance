@@ -1,0 +1,51 @@
+{
+  "name": "webyansh-a11y-components",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Webflow code components for the Accessibility & Compliance Suite. Published to the Webyansh Workspace via DevLink.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "//scripts": [
+    "Invoked via `node ./node_modules/...` rather than bare binary names.",
+    "npm's Windows shims mis-parse the '&' in this project's path, so `npx <bin>`",
+    "and `npm run <script>` both fail with a truncated MODULE_NOT_FOUND.",
+    "Direct node paths work everywhere and cost nothing on other machines."
+  ],
+  "scripts": {
+    "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:watch": "node ./node_modules/vitest/vitest.mjs",
+    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
+    "import": "node ./node_modules/@webflow/webflow-cli/dist/index.js devlink import"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "@webflow/data-types": "^2.1.0",
+    "@webflow/react": "^2.1.0",
+    "@webflow/webflow-cli": "^2.3.0",
+    "typescript": "5.9.3",
+    "vitest": "^3.2.4"
+  },
+  "overrides": {
+    "adm-zip": "^0.6.0",
+    "form-data": "^4.0.6",
+    "undici": "^7.29.0"
+  },
+  "comments": {
+    "overrides": [
+      "Transitive advisories in @webflow/webflow-cli. Dev-only — the CLI publishes the",
+      "library, it is never part of the component bundle shipped to visitors.",
+      "adm-zip <0.6.0: 4GB allocation from a crafted ZIP.",
+      "form-data <4.0.6: CRLF injection via unescaped multipart field names.",
+      "undici <7.29.0: nine advisories incl. TLS validation bypass and cache disclosure.",
+      "KNOWN UNFIXABLE: elliptic <=6.6.1 (low, risky crypto primitive). 6.6.1 IS latest,",
+      "so no patched version exists. Dev-only and not reachable from published output."
+    ]
+  }
+}

@@ -37,10 +37,17 @@ mechanism.** What is actually true:
 
 1. **There is no `clamp()` in the shared stylesheet.** Zero occurrences. The `--size--*` tokens are
    declared there as fixed rems.
-2. **The fluid layer lives in site-wide custom code** — a `<style>` block in `<head>` that
-   re-declares 25 tokens (`--site--margin`, `--size--1-25rem`, and `--size--2rem` → `--size--16rem`)
-   as `clamp()`. Verified byte-identical on `/`, `/pricing`, `/contact` and `/tools/website-score`,
-   so it is site-wide, not per page. **New pages inherit it automatically.**
+2. **The fluid layer is delivered by a Webflow component, not by Project Settings custom code.**
+   A `<style>` block re-declares 25 tokens (`--site--margin`, `--size--1-25rem`, and
+   `--size--2rem` → `--size--16rem`) as `clamp()`. Verified byte-identical on `/`, `/pricing`,
+   `/contact` and `/tools/website-score`.
+   **Corrected 7 Aug 2026:** the block renders in `<body>`, not `<head>` — it comes from the
+   **"Custom Code"** component (`89894b6d-cf3f-dfb6-51d8-63b0d19309e1`, group Miscellaneous),
+   whose own description reads "Include on every page of the site. Contains global styles that
+   should run in designer view & on the published site."
+   **Consequence: new pages do NOT inherit it automatically.** Any new page must include that
+   component or it silently falls back to the fixed rem scale and sizes differently from the rest
+   of the site. `/tools/color-contrast-checker` includes it.
 3. **Webflow's native breakpoints are still in use, narrowly.** The stylesheet contains
    `max-width: 991px`, `767px` and `479px` blocks. They do two things only:
    - At **767px**, `.u-text-style-h1…h6` step down one rung (h1 borrows the h2 size, h2 borrows h3,
@@ -321,6 +328,33 @@ Eyebrow pattern already exists as `.g_eyebrow_wrap` / `.g_eyebrow_layout` / `.g_
 All six proposed native slugs are unoccupied, and `/app` does not collide with anything. The mount
 path is set in one place — `MOUNT_PATH` in `next.config.ts` — and internal links use `next/link`,
 which applies `basePath` automatically.
+
+## 7a. Webflow API limitation: library code components are not placeable
+
+Confirmed 7 Aug 2026. The REST Data API (`data_component_tool`) can create pages, insert elements,
+place *site* component instances and write JSON-LD — the whole page can be built headlessly. It
+**cannot see components installed from a shared library**.
+
+Evidence: with "Webyansh Accessibility" installed and **Contrast Checker** visible in the Designer's
+Components panel, the API returned 204 site components and zero matches for every one of
+`isCodeComponent: true`, `isLibrary: true`, `keywords: ["contrast"]`, `["Accessibility"]`,
+`["Webyansh"]`, and `get_component({name: "Contrast Checker"})`.
+
+**The component id is only discoverable once an instance exists.** After placing one by hand, the
+API reports the instance and its `instanceDetails.id` — for Contrast Checker that is
+`f0ded0fc-d582-657b-ec83-bb23d10f525d`. `insert_component_instance` takes a `component_id`
+directly, so subsequent placements should be scriptable with that id even though *lookup* by name
+still fails.
+
+**Practical rule:** place each new code component by hand once, record its id here, then automate
+every later placement.
+
+| Code component | Component id |
+|---|---|
+| Contrast Checker | `f0ded0fc-d582-657b-ec83-bb23d10f525d` |
+
+Prop ids follow `w-prop--<propName>--<Type>`, e.g. `w-prop--foreground--Text`,
+`w-prop--mode--Variant`. Set them with `data_component_props_tool`.
 
 ## 8. Carried to Checkpoint 0/1
 

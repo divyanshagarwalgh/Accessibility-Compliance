@@ -4,7 +4,8 @@ Parsed 6 Aug 2026 from the published site.
 
 **Sources**
 1. Shared stylesheet — `https://cdn.prod.website-files.com/67fb46459daf80597440ed56/css/webyansh-webflow-agency.shared.0026d52a9.min.css` (181,389 bytes). Contains the `:root` block with **184 declarations**.
-2. Site-wide custom code in `<head>` — three additional `:root` blocks (column maths, fluid `clamp()` overrides, nav component tokens). Verified present on `/`, `/pricing`, `/contact`, `/tools/website-score`, so these ship site-wide, not per page.
+2. Three additional `:root` blocks (column maths, fluid `clamp()` overrides, nav component tokens). Verified present on `/`, `/pricing`, `/contact`, `/tools/website-score`.
+   **Corrected 7 Aug 2026:** these render in `<body>`, not `<head>`. They are delivered by the **"Custom Code"** Webflow component (`89894b6d-cf3f-dfb6-51d8-63b0d19309e1`), which is placed on each page — not by Project Settings custom code. A new page that omits that component loses the fluid scale entirely. See [`lumos-audit.md`](lumos-audit.md) §2.
 
 **Webflow Site ID (read from `data-wf-site`): `67fb46459daf80597440ed56`** — needs your confirmation.
 
