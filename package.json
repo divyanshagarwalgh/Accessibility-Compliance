@@ -22,7 +22,9 @@
     "cf-build": "node ./node_modules/@opennextjs/cloudflare/dist/cli/index.js build",
     "cf-typegen": "node ./node_modules/wrangler/bin/wrangler.js types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "db:migrate:local": "node ./node_modules/wrangler/bin/wrangler.js d1 migrations apply a11y-db --local",
-    "db:migrate:remote": "node ./node_modules/wrangler/bin/wrangler.js d1 migrations apply a11y-db --remote"
+    "db:migrate:remote": "node ./node_modules/wrangler/bin/wrangler.js d1 migrations apply a11y-db --remote",
+    "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:watch": "node ./node_modules/vitest/vitest.mjs"
   },
   "dependencies": {
     "next": "15.5.22",
@@ -36,6 +38,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.1",
     "typescript": "5.9.3",
+    "vitest": "^3.2.7",
     "wrangler": "4.119.0"
   },
   "overrides": {
