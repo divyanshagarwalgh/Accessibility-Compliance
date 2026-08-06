@@ -3,7 +3,9 @@
     "name": "Webyansh Accessibility",
     "components": [
       "./src/**/*.webflow.@(js|jsx|mjs|ts|tsx)"
-    ]
+    ],
+    "description": "WCAG 2.2 accessibility tools for Webyansh sites. Client-side, no network calls.",
+    "id": "webyansh-accessibility"
   },
   "telemetry": {
     "global": {
