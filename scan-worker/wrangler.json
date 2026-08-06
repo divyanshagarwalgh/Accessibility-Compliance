@@ -5,14 +5,7 @@
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
-
-  "//browser": "Browser Rendering binding. Requires Workers Paid for meaningful concurrency — Free allows 3 concurrent browsers, Paid 120.",
   "browser": {
     "binding": "BROWSER"
-  },
-
-  "//limits": "A render plus an axe pass fits comfortably; the ceiling exists so a pathological page cannot run forever.",
-  "limits": {
-    "cpu_ms": 120000
   }
 }
