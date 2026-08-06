@@ -37,10 +37,17 @@ mechanism.** What is actually true:
 
 1. **There is no `clamp()` in the shared stylesheet.** Zero occurrences. The `--size--*` tokens are
    declared there as fixed rems.
-2. **The fluid layer lives in site-wide custom code** — a `<style>` block in `<head>` that
-   re-declares 25 tokens (`--site--margin`, `--size--1-25rem`, and `--size--2rem` → `--size--16rem`)
-   as `clamp()`. Verified byte-identical on `/`, `/pricing`, `/contact` and `/tools/website-score`,
-   so it is site-wide, not per page. **New pages inherit it automatically.**
+2. **The fluid layer is delivered by a Webflow component, not by Project Settings custom code.**
+   A `<style>` block re-declares 25 tokens (`--site--margin`, `--size--1-25rem`, and
+   `--size--2rem` → `--size--16rem`) as `clamp()`. Verified byte-identical on `/`, `/pricing`,
+   `/contact` and `/tools/website-score`.
+   **Corrected 7 Aug 2026:** the block renders in `<body>`, not `<head>` — it comes from the
+   **"Custom Code"** component (`89894b6d-cf3f-dfb6-51d8-63b0d19309e1`, group Miscellaneous),
+   whose own description reads "Include on every page of the site. Contains global styles that
+   should run in designer view & on the published site."
+   **Consequence: new pages do NOT inherit it automatically.** Any new page must include that
+   component or it silently falls back to the fixed rem scale and sizes differently from the rest
+   of the site. `/tools/color-contrast-checker` includes it.
 3. **Webflow's native breakpoints are still in use, narrowly.** The stylesheet contains
    `max-width: 991px`, `767px` and `479px` blocks. They do two things only:
    - At **767px**, `.u-text-style-h1…h6` step down one rung (h1 borrows the h2 size, h2 borrows h3,
