@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body { margin:0; font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#FF4D00; text-decoration:none; }
+  a:hover { color:#D93F00; }
+  input, button, select, textarea { font-family:inherit; }
+  svg.lucide { stroke-width:1.75; }
+  ::selection { background:#FFD9C7; }
+</style>
+</helmet>
+<div style="width:100%; min-height:100%; background:#FCFCFC; color:#1A1A1A; font-size:15px; line-height:1.5;">
+
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <header style="position:sticky; top:0; z-index:40; background:rgba(255,255,255,0.86); backdrop-filter:blur(12px); border-bottom:1px solid #EDEDED;">
+      <div style="max-width:1280px; margin:0 auto; padding:0 40px; height:68px; display:flex; align-items:center; justify-content:space-between; gap:32px;">
+        <div style="display:flex; align-items:center; gap:40px;">
+          <div style="font-weight:700; font-size:19px; letter-spacing:0.14em; color:#FF4D00;">WEBYANSH</div>
+          <nav style="display:flex; align-items:center; gap:26px; font-size:14.5px; color:#4A4A4A; font-weight:500;">
+            <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+              <div style="display:flex; align-items:center; gap:5px; cursor:pointer;">{{ n.label }}<i data-lucide="chevron-down" style="width:14px; height:14px; color:#ABABAB;"></i></div>
+            </sc-for>
+          </nav>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="display:flex; align-items:center; gap:7px; font-size:14px; color:#6B6B6B; font-weight:500; padding:7px 14px; border:1px solid #EDEDED; border-radius:999px; background:#fff;"><i data-lucide="wrench" style="width:15px; height:15px; color:#FF4D00;"></i>Free tools</div>
+          <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:14.5px; padding:11px 20px; border-radius:999px; cursor:pointer;">Book a call</div>
+        </div>
+      </div>
+    </header>
+  </sc-if>
+
+  <sc-if value="{{ isMobile }}">
+    <header style="position:sticky; top:0; z-index:40; background:#fff; border-bottom:1px solid #EDEDED; padding:0 18px; height:60px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="font-weight:700; font-size:16px; letter-spacing:0.13em; color:#FF4D00;">WEBYANSH</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:13px; padding:9px 15px; border-radius:999px;">Book a call</div>
+        <div style="width:38px; height:38px; border:1px solid #E6E6E6; border-radius:10px; display:grid; place-items:center;"><i data-lucide="menu" style="width:18px; height:18px;"></i></div>
+      </div>
+    </header>
+  </sc-if>
+
+  <sc-if value="{{ isHub }}" hint-placeholder-val="{{ true }}">
+    <section style="position:relative; padding:76px 40px 64px; text-align:center; background:radial-gradient(70% 100% at 50% 0%, #FFF6F2 0%, #FCFCFC 70%); border-bottom:1px solid #F0F0F0; overflow:hidden;">
+      <div style="max-width:900px; margin:0 auto; position:relative;">
+        <div style="display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border:1px solid #E6E6E6; border-radius:999px; background:#fff; font-size:13.5px; color:#6B6B6B; font-weight:500; margin-bottom:26px;">
+          <span style="color:#FF4D00; font-size:12px;">&#10022;</span>Accessibility &amp; compliance suite<span style="color:#DEDEDE;">|</span><span style="color:#1A1A1A;">Free</span>
+        </div>
+        <h1 style="margin:0 0 20px; font-size:56px; line-height:1.06; letter-spacing:-0.032em; font-weight:600; text-wrap:balance;">Find every accessibility issue<br /><span style="color:#ABABAB;">then fix it in Webflow.</span></h1>
+        <p style="margin:0 auto 34px; max-width:620px; font-size:17px; line-height:1.6; color:#6B6B6B;">Scan any page against WCAG 2.1 and 2.2 AA, see which laws apply to the markets you sell into, and get the exact fix for each issue in Webflow Designer.</p>
+        <div style="max-width:620px; margin:0 auto; display:flex; gap:10px; padding:8px; background:#fff; border:1px solid #E6E6E6; border-radius:16px; box-shadow:0 8px 24px -12px rgba(26,26,26,0.14);">
+          <div style="flex:1; display:flex; align-items:center; gap:10px; padding:0 14px;">
+            <i data-lucide="globe" style="width:18px; height:18px; color:#ABABAB;"></i>
+            <input value="cascadeops.com" style="flex:1; border:0; outline:0; font-size:16px; color:#1A1A1A; background:transparent; padding:14px 0;" />
+          </div>
+          <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:15px; padding:14px 26px; border-radius:11px; cursor:pointer; display:flex; align-items:center; gap:8px; white-space:nowrap;">Run free scan<i data-lucide="arrow-right" style="width:16px; height:16px;"></i></div>
+        </div>
+        <div style="margin-top:16px; font-size:13.5px; color:#ABABAB;">Free, unlimited. Email required for the full report. The contrast checker needs nothing at all.</div>
+      </div>
+    </section>
+
+    <section style="padding:0 40px; margin-top:-1px; border-bottom:1px solid #F0F0F0; background:#fff;">
+      <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr);">
+        <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="3">
+          <div style="padding:32px 36px; border-right:1px solid #F0F0F0;">
+            <div style="font-size:34px; font-weight:600; letter-spacing:-0.02em; margin-bottom:6px;">{{ s.figure }}</div>
+            <div style="font-size:14.5px; color:#6B6B6B; line-height:1.5;">{{ s.label }}</div>
+            <div style="font-size:12.5px; color:#ABABAB; margin-top:8px;">{{ s.source }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:80px 40px; background:#F6F6F6;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:44px;">
+          <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 13px; border:1px solid #E6E6E6; border-radius:999px; background:#fff; font-size:13px; color:#6B6B6B; font-weight:500; margin-bottom:18px;"><span style="color:#FF4D00; font-size:11px;">&#10022;</span>Modules</div>
+          <h2 style="margin:0 0 14px; font-size:40px; line-height:1.12; letter-spacing:-0.028em; font-weight:600;">Eight tools, <span style="color:#ABABAB;">one compliance workflow</span></h2>
+          <p style="margin:0 auto; max-width:600px; font-size:16px; color:#6B6B6B; line-height:1.6;">Every module runs on the same scan. Start anywhere, and the results carry across.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+          <sc-for list="{{ modules }}" as="m" hint-placeholder-count="8">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:12px; min-height:196px;">
+              <div style="width:40px; height:40px; border-radius:10px; background:#FFF1EB; display:grid; place-items:center;"><i data-lucide="{{ m.icon }}" style="width:20px; height:20px; color:#FF4D00;"></i></div>
+              <div style="font-size:16px; font-weight:600; letter-spacing:-0.01em;">{{ m.name }}</div>
+              <div style="font-size:14px; color:#6B6B6B; line-height:1.55; flex:1;">{{ m.desc }}</div>
+              <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#ABABAB; font-weight:500;">{{ m.tag }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:80px 40px; background:#fff; border-top:1px solid #F0F0F0;">
+      <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+        <div>
+          <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 13px; border:1px solid #E6E6E6; border-radius:999px; background:#fff; font-size:13px; color:#6B6B6B; font-weight:500; margin-bottom:18px;"><span style="color:#FF4D00; font-size:11px;">&#10022;</span>What this tool does not do</div>
+          <h2 style="margin:0 0 16px; font-size:38px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">Automated scanning catches <span style="color:#ABABAB;">about a third of WCAG.</span></h2>
+          <p style="margin:0 0 14px; font-size:16px; color:#6B6B6B; line-height:1.65;">No scanner can confirm that a page is compliant, and any tool that says otherwise is selling you something. Roughly two thirds of the success criteria need a human to judge them: reading order, meaningful alt text, error recovery, and whether a keyboard user can actually finish the task.</p>
+          <p style="margin:0; font-size:16px; color:#6B6B6B; line-height:1.65;">We tell you exactly which criteria were tested, which were not, and what a manual audit would add.</p>
+        </div>
+        <div style="background:#F6F6F6; border:1px solid #EDEDED; border-radius:20px; padding:32px;">
+          <div style="font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#ABABAB; margin-bottom:20px;">Coverage of WCAG 2.2 AA criteria</div>
+          <sc-for list="{{ coverage }}" as="c" hint-placeholder-count="3">
+            <div style="margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+                <div style="font-size:15px; font-weight:500;">{{ c.label }}</div>
+                <div style="font-size:15px; font-weight:600; color:{{ c.color }};">{{ c.pct }}</div>
+              </div>
+              <div style="height:8px; border-radius:999px; background:#E6E6E6; overflow:hidden;"><div style="height:100%; width:{{ c.pct }}; background:{{ c.color }}; border-radius:999px;"></div></div>
+              <div style="font-size:13px; color:#ABABAB; margin-top:8px;">{{ c.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:80px 40px; background:#F6F6F6; border-top:1px solid #F0F0F0;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="margin-bottom:40px; max-width:640px;">
+          <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 13px; border:1px solid #E6E6E6; border-radius:999px; background:#fff; font-size:13px; color:#6B6B6B; font-weight:500; margin-bottom:18px;"><span style="color:#FF4D00; font-size:11px;">&#10022;</span>Deadlines</div>
+          <h2 style="margin:0 0 14px; font-size:38px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">The dates are already <span style="color:#ABABAB;">on the calendar</span></h2>
+          <p style="margin:0; font-size:16px; color:#6B6B6B; line-height:1.6;">Which of these apply depends on where you sell and who you sell to. The jurisdiction mapper works it out from your markets.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+          <sc-for list="{{ deadlines }}" as="d" hint-placeholder-count="4">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:24px;">
+              <div style="display:inline-flex; padding:5px 10px; border-radius:6px; background:{{ d.chipBg }}; color:{{ d.chipFg }}; font-size:12px; font-weight:600; margin-bottom:16px;">{{ d.status }}</div>
+              <div style="font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-bottom:6px;">{{ d.date }}</div>
+              <div style="font-size:15px; font-weight:500; margin-bottom:8px;">{{ d.law }}</div>
+              <div style="font-size:13.5px; color:#6B6B6B; line-height:1.55;">{{ d.who }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 40px 80px; background:#F6F6F6;">
+      <div style="max-width:1280px; margin:0 auto; background:#1A1A1A; border-radius:24px; padding:64px; display:flex; align-items:center; justify-content:space-between; gap:48px;">
+        <div style="max-width:560px;">
+          <h2 style="margin:0 0 14px; font-size:38px; line-height:1.14; letter-spacing:-0.028em; font-weight:600; color:#fff;">Finding the issues is the easy part</h2>
+          <p style="margin:0; font-size:16.5px; color:#A8A8A8; line-height:1.6;">We are a Webflow design and development studio. If the scan turns up more than you want to handle, we will remediate the site, ship the fixes, and keep it compliant on a retainer.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-shrink:0;">
+          <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:15px; padding:14px 24px; border-radius:999px; cursor:pointer;">Book a call</div>
+          <div style="background:transparent; color:#fff; border:1px solid #3A3A3A; font-weight:600; font-size:15px; padding:14px 24px; border-radius:999px; cursor:pointer;">Request a quote</div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.contrast }}">
+    <section style="padding:44px 40px 0;">
+      <div style="max-width:1180px; margin:0 auto;">
+        <div style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:#ABABAB; margin-bottom:22px;">
+          <span>Tools</span><i data-lucide="chevron-right" style="width:14px; height:14px;"></i><span style="color:#1A1A1A;">Colour contrast checker</span>
+        </div>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-bottom:28px;">
+          <div style="max-width:640px;">
+            <h1 style="margin:0 0 12px; font-size:40px; line-height:1.1; letter-spacing:-0.03em; font-weight:600;">Colour contrast checker</h1>
+            <p style="margin:0; font-size:16.5px; color:#6B6B6B; line-height:1.6;">Check any foreground and background pair against WCAG 2.2 AA and AAA. Nothing to sign up for, no limit on how many you run.</p>
+          </div>
+          <div style="display:flex; gap:8px; padding:5px; background:#F2F2F2; border-radius:12px;">
+            <div style="padding:9px 18px; border-radius:9px; background:#fff; font-size:14px; font-weight:600; box-shadow:0 1px 2px rgba(26,26,26,0.08);">Single pair</div>
+            <div style="padding:9px 18px; border-radius:9px; font-size:14px; font-weight:500; color:#6B6B6B; cursor:pointer;">Whole palette</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 40px 72px;">
+      <div style="max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:28px;">
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:#6B6B6B; margin-bottom:8px;">Foreground</div>
+              <div style="display:flex; align-items:center; gap:12px; border:1px solid #E6E6E6; border-radius:12px; padding:10px 12px; background:#FCFCFC;">
+                <input type="color" value="{{ fg }}" onChange="{{ setFg }}" style="width:40px; height:40px; border:1px solid #E6E6E6; border-radius:9px; padding:2px; background:#fff; cursor:pointer;" />
+                <input value="{{ fg }}" onChange="{{ setFg }}" style="flex:1; border:0; outline:0; background:transparent; font-size:17px; font-weight:500; letter-spacing:0.01em;" />
+                <div style="font-size:12.5px; color:#ABABAB;">Text</div>
+              </div>
+            </div>
+            <div style="display:flex; justify-content:center; margin:-6px 0;">
+              <div onClick="{{ swap }}" style="width:34px; height:34px; border:1px solid #E6E6E6; border-radius:999px; background:#fff; display:grid; place-items:center; cursor:pointer;" style-hover="border-color:#FF4D00; color:#FF4D00;"><i data-lucide="arrow-up-down" style="width:15px; height:15px;"></i></div>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:600; color:#6B6B6B; margin-bottom:8px;">Background</div>
+              <div style="display:flex; align-items:center; gap:12px; border:1px solid #E6E6E6; border-radius:12px; padding:10px 12px; background:#FCFCFC;">
+                <input type="color" value="{{ bg }}" onChange="{{ setBg }}" style="width:40px; height:40px; border:1px solid #E6E6E6; border-radius:9px; padding:2px; background:#fff; cursor:pointer;" />
+                <input value="{{ bg }}" onChange="{{ setBg }}" style="flex:1; border:0; outline:0; background:transparent; font-size:17px; font-weight:500; letter-spacing:0.01em;" />
+                <div style="font-size:12.5px; color:#ABABAB;">Surface</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px; padding-top:24px; border-top:1px solid #F0F0F0; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:#6B6B6B; margin-bottom:6px;">Contrast ratio</div>
+              <div style="font-size:52px; line-height:1; font-weight:600; letter-spacing:-0.035em;">{{ ratioText }}</div>
+            </div>
+            <div style="padding:10px 16px; border-radius:999px; background:{{ verdict.bg }}; color:{{ verdict.fg }}; border:1px solid {{ verdict.bd }}; font-size:14px; font-weight:600; text-align:center;">{{ verdict.label }}</div>
+          </div>
+
+          <div style="margin-top:22px; display:flex; flex-direction:column; gap:2px;">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid #F4F4F4;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="width:22px; height:22px; border-radius:999px; background:{{ c.bg }}; border:1px solid {{ c.bd }}; display:grid; place-items:center;"><i data-lucide="{{ c.icon }}" style="width:13px; height:13px; color:{{ c.fg }};"></i></div>
+                  <div style="font-size:14.5px; color:#1A1A1A;">{{ c.label }}</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <div style="font-size:13px; color:#ABABAB;">needs {{ c.need }}</div>
+                  <div style="font-size:13px; font-weight:600; color:{{ c.fg }}; min-width:32px; text-align:right;">{{ c.label }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+            <div style="padding:12px 18px; background:#fff; border-bottom:1px solid #F0F0F0; font-size:13px; font-weight:600; color:#6B6B6B; display:flex; justify-content:space-between;"><span>Live preview</span><span style="color:#ABABAB; font-weight:500;">{{ fg }} on {{ bg }}</span></div>
+            <div style="padding:34px 30px; background:{{ bg }}; display:flex; flex-direction:column; gap:18px;">
+              <div style="font-size:30px; font-weight:600; letter-spacing:-0.025em; color:{{ fg }};">Route freight in real time</div>
+              <div style="font-size:16px; line-height:1.6; color:{{ fg }};">Body copy at 16 pixels. This is the size that has to clear 4.5 to 1, and it is the size most brand palettes quietly fail on.</div>
+              <div style="font-size:13px; line-height:1.6; color:{{ fg }};">Small print at 13 pixels, the size used for form hints, table captions and footnotes.</div>
+              <div style="display:flex; align-items:center; gap:14px; padding-top:4px;">
+                <div style="border:2px solid {{ fg }}; color:{{ fg }}; padding:10px 18px; border-radius:999px; font-size:14.5px; font-weight:600;">Secondary button</div>
+                <div style="color:{{ fg }}; font-size:14.5px; font-weight:500; text-decoration:underline; text-underline-offset:3px;">A text link</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:24px;">
+            <div style="font-size:13px; font-weight:600; color:#6B6B6B; margin-bottom:14px;">Nearest passing alternatives</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <sc-for list="{{ suggestions }}" as="s" hint-placeholder-count="3">
+                <div style="display:flex; align-items:center; gap:14px; padding:12px; border:1px solid #EDEDED; border-radius:12px;">
+                  <div style="width:36px; height:36px; border-radius:9px; background:{{ s.hex }}; border:1px solid rgba(26,26,26,0.1); flex-shrink:0;"></div>
+                  <div style="flex:1;">
+                    <div style="font-size:14.5px; font-weight:600;">{{ s.hex }}</div>
+                    <div style="font-size:13px; color:#ABABAB;">{{ s.note }}</div>
+                  </div>
+                  <div style="font-size:14px; font-weight:600; color:#0E6B4E;">{{ s.ratio }}</div>
+                  <div style="font-size:13px; font-weight:600; color:#FF4D00; cursor:pointer;">Use</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width:1180px; margin:20px auto 0; background:#1A1A1A; border-radius:20px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:32px;">
+        <div>
+          <div style="font-size:19px; font-weight:600; color:#fff; margin-bottom:5px;">One pair is a start. Your live site has 14 failing text nodes.</div>
+          <div style="font-size:14.5px; color:#A8A8A8;">Run the full scan to find every one of them, with the Webflow fix for each.</div>
+        </div>
+        <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:14.5px; padding:13px 22px; border-radius:999px; white-space:nowrap; cursor:pointer;">Scan a page</div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.palette }}">
+    <section style="padding:44px 40px 72px;">
+      <div style="max-width:1180px; margin:0 auto;">
+        <div style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:#ABABAB; margin-bottom:22px;">
+          <span>Tools</span><i data-lucide="chevron-right" style="width:14px; height:14px;"></i><span style="color:#1A1A1A;">Colour contrast checker</span>
+        </div>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-bottom:28px;">
+          <div style="max-width:640px;">
+            <h1 style="margin:0 0 12px; font-size:40px; line-height:1.1; letter-spacing:-0.03em; font-weight:600;">Palette sweep</h1>
+            <p style="margin:0; font-size:16.5px; color:#6B6B6B; line-height:1.6;">Every colour in the system checked against every other. Cells show the ratio for normal text at AA.</p>
+          </div>
+          <div style="display:flex; gap:8px; padding:5px; background:#F2F2F2; border-radius:12px;">
+            <div style="padding:9px 18px; border-radius:9px; font-size:14px; font-weight:500; color:#6B6B6B; cursor:pointer;">Single pair</div>
+            <div style="padding:9px 18px; border-radius:9px; background:#fff; font-size:14px; font-weight:600; box-shadow:0 1px 2px rgba(26,26,26,0.08);">Whole palette</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-bottom:20px;">
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px 20px;">
+            <div style="font-size:28px; font-weight:600; letter-spacing:-0.02em;">{{ failingPairs }}</div>
+            <div style="font-size:13.5px; color:#6B6B6B; margin-top:4px;">pairs below 4.5:1</div>
+          </div>
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px 20px;">
+            <div style="font-size:28px; font-weight:600; letter-spacing:-0.02em;">7</div>
+            <div style="font-size:13.5px; color:#6B6B6B; margin-top:4px;">colours in the palette</div>
+          </div>
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px 20px;">
+            <div style="font-size:28px; font-weight:600; letter-spacing:-0.02em; color:#B42318;">Orange 300</div>
+            <div style="font-size:13.5px; color:#6B6B6B; margin-top:4px;">worst offender, fails on 5 of 7</div>
+          </div>
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px 20px; display:flex; align-items:center; gap:12px;">
+            <div style="display:flex; gap:6px; align-items:center; font-size:12.5px; color:#6B6B6B;"><span style="width:12px; height:12px; border-radius:3px; background:#E7F5F0; border:1px solid #BFE5D6; display:inline-block;"></span>AA</div>
+            <div style="display:flex; gap:6px; align-items:center; font-size:12.5px; color:#6B6B6B;"><span style="width:12px; height:12px; border-radius:3px; background:#FEF3E6; border:1px solid #F6DFC0; display:inline-block;"></span>Large only</div>
+            <div style="display:flex; gap:6px; align-items:center; font-size:12.5px; color:#6B6B6B;"><span style="width:12px; height:12px; border-radius:3px; background:#FDECEA; border:1px solid #F6CFCA; display:inline-block;"></span>Fail</div>
+          </div>
+        </div>
+
+        <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:24px; overflow:hidden;">
+          <div style="display:grid; grid-template-columns:180px repeat(7, 1fr); gap:6px; align-items:center; margin-bottom:6px;">
+            <div style="font-size:12px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.06em;">Text on &#8594;</div>
+            <sc-for list="{{ paletteColors }}" as="p" hint-placeholder-count="7">
+              <div style="text-align:center; font-size:11.5px; color:#6B6B6B; font-weight:500; line-height:1.3;">
+                <div style="width:100%; height:8px; border-radius:3px; background:{{ p.hex }}; border:1px solid rgba(26,26,26,0.1); margin-bottom:6px;"></div>{{ p.name }}
+              </div>
+            </sc-for>
+          </div>
+          <sc-for list="{{ matrix }}" as="row" hint-placeholder-count="7">
+            <div style="display:grid; grid-template-columns:180px repeat(7, 1fr); gap:6px; align-items:center; margin-bottom:6px;">
+              <div style="display:flex; align-items:center; gap:10px; font-size:13.5px; font-weight:500;">
+                <div style="width:20px; height:20px; border-radius:5px; background:{{ row.hex }}; border:1px solid rgba(26,26,26,0.12); flex-shrink:0;"></div>{{ row.name }}
+              </div>
+              <sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="7">
+                <div style="height:44px; border-radius:8px; background:{{ c.bg }}; color:{{ c.fg }}; display:grid; place-items:center; font-size:13.5px; font-weight:600;">{{ c.val }}</div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.scan }}">
+    <section style="padding:80px 40px 100px; min-height:620px; background:radial-gradient(70% 90% at 50% 0%, #FFF6F2 0%, #FCFCFC 65%);">
+      <div style="max-width:760px; margin:0 auto; text-align:center;">
+        <div style="width:52px; height:52px; border-radius:14px; background:#FFF1EB; display:grid; place-items:center; margin:0 auto 22px;"><i data-lucide="scan-line" style="width:24px; height:24px; color:#FF4D00;"></i></div>
+        <h1 style="margin:0 0 14px; font-size:44px; line-height:1.08; letter-spacing:-0.03em; font-weight:600;">Scan a page for WCAG 2.2 issues</h1>
+        <p style="margin:0 auto 30px; max-width:540px; font-size:16.5px; color:#6B6B6B; line-height:1.6;">Paste any public URL. The scan takes about twenty seconds and checks 62 automated rules.</p>
+        <div style="display:flex; gap:10px; padding:8px; background:#fff; border:1px solid #E6E6E6; border-radius:16px; box-shadow:0 8px 24px -12px rgba(26,26,26,0.14); text-align:left;">
+          <div style="flex:1; display:flex; align-items:center; gap:10px; padding:0 14px;">
+            <i data-lucide="globe" style="width:18px; height:18px; color:#ABABAB;"></i>
+            <input placeholder="https://" style="flex:1; border:0; outline:0; font-size:16px; color:#1A1A1A; background:transparent; padding:14px 0;" />
+          </div>
+          <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:15px; padding:14px 26px; border-radius:11px; cursor:pointer; display:flex; align-items:center; gap:8px; white-space:nowrap;">Run free scan<i data-lucide="arrow-right" style="width:16px; height:16px;"></i></div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:center; gap:20px; margin-top:18px; font-size:13.5px; color:#ABABAB;">
+          <span>WCAG 2.2 AA</span><span style="color:#E0E0E0;">&#183;</span><span>axe-core 4.10</span><span style="color:#E0E0E0;">&#183;</span><span>We respect robots.txt</span>
+        </div>
+        <div style="margin-top:44px; padding-top:28px; border-top:1px solid #F0F0F0; text-align:left;">
+          <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:14px;">Or start with one of these</div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px; cursor:pointer;">
+              <div style="font-size:15px; font-weight:600; margin-bottom:5px;">Contrast checker</div>
+              <div style="font-size:13.5px; color:#6B6B6B; line-height:1.5;">One pair, instantly. No URL needed.</div>
+            </div>
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px; cursor:pointer;">
+              <div style="font-size:15px; font-weight:600; margin-bottom:5px;">Jurisdiction mapper</div>
+              <div style="font-size:13.5px; color:#6B6B6B; line-height:1.5;">Find out which laws bind you before you scan.</div>
+            </div>
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px; cursor:pointer;">
+              <div style="font-size:15px; font-weight:600; margin-bottom:5px;">See a sample report</div>
+              <div style="font-size:13.5px; color:#6B6B6B; line-height:1.5;">A real scan of a real site, no email.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.progress }}">
+    <section style="padding:90px 40px 120px; min-height:620px;">
+      <div style="max-width:620px; margin:0 auto;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:28px;">
+          <div style="width:38px; height:38px; border-radius:10px; background:#FFF1EB; display:grid; place-items:center;"><i data-lucide="loader" style="width:19px; height:19px; color:#FF4D00;"></i></div>
+          <div>
+            <div style="font-size:19px; font-weight:600; letter-spacing:-0.015em;">Scanning cascadeops.com/pricing</div>
+            <div style="font-size:13.5px; color:#ABABAB;">Usually finishes in under 20 seconds</div>
+          </div>
+        </div>
+        <div style="height:6px; border-radius:999px; background:#EDEDED; overflow:hidden; margin-bottom:30px;"><div style="height:100%; width:64%; background:#FF4D00; border-radius:999px;"></div></div>
+        <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:8px;">
+          <sc-for list="{{ progress }}" as="p" hint-placeholder-count="5">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-radius:12px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <sc-if value="{{ p.isDone }}"><div style="width:20px; height:20px; border-radius:999px; background:#E7F5F0; display:grid; place-items:center;"><i data-lucide="check" style="width:12px; height:12px; color:#0E6B4E;"></i></div></sc-if>
+                <sc-if value="{{ p.isActive }}"><div style="width:20px; height:20px; border-radius:999px; border:2px solid #FF4D00; border-top-color:transparent;"></div></sc-if>
+                <sc-if value="{{ p.isIdle }}"><div style="width:20px; height:20px; border-radius:999px; border:1.5px solid #E6E6E6;"></div></sc-if>
+                <div style="font-size:15px; color:{{ p.color }}; font-weight:{{ p.weight }};">{{ p.label }}</div>
+              </div>
+              <div style="font-size:13px; color:#ABABAB;">{{ p.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:24px; padding:18px 20px; background:#F6F6F6; border-radius:14px; font-size:14px; color:#6B6B6B; line-height:1.6;">
+          <span style="color:#1A1A1A; font-weight:600;">While you wait.</span> Automated rules cover roughly a third of WCAG. The report will tell you exactly which criteria were tested and which still need a person.
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.toolbar }}">
+    <div style="position:sticky; top:68px; z-index:30; background:#fff; border-bottom:1px solid #EDEDED;">
+      <div style="max-width:1280px; margin:0 auto; padding:0 40px; height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+        <div style="display:flex; align-items:center; gap:14px; min-width:0;">
+          <div style="width:34px; height:34px; border-radius:9px; background:#F2F2F2; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="globe" style="width:17px; height:17px; color:#6B6B6B;"></i></div>
+          <div style="min-width:0;">
+            <div style="font-size:15px; font-weight:600; letter-spacing:-0.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">cascadeops.com/pricing</div>
+            <div style="font-size:12.5px; color:#ABABAB;">Scanned 6 Aug 2026, 14:32 &#183; axe-core 4.10 &#183; WCAG 2.2 AA</div>
+          </div>
+        </div>
+        <nav style="display:flex; align-items:center; gap:4px;">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+            <div style="padding:8px 14px; border-radius:9px; font-size:14px; font-weight:{{ t.tabWeight }}; color:{{ t.tabFg }}; background:{{ t.tabBg }}; cursor:pointer;">{{ t.label }}</div>
+          </sc-for>
+        </nav>
+        <div style="display:flex; align-items:center; gap:9px; flex-shrink:0;">
+          <div style="display:flex; align-items:center; gap:7px; border:1px solid #E6E6E6; border-radius:999px; padding:9px 15px; font-size:14px; font-weight:600; background:#fff; cursor:pointer;"><i data-lucide="download" style="width:15px; height:15px; color:#6B6B6B;"></i>PDF</div>
+          <div style="border:1px solid #E6E6E6; border-radius:999px; padding:9px 15px; font-size:14px; font-weight:600; background:#fff; cursor:pointer;">Request a quote</div>
+          <div style="background:#FF4D00; color:#fff; border-radius:999px; padding:10px 18px; font-size:14px; font-weight:600; cursor:pointer;">Book a call</div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ is.report }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 340px; gap:24px; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:28px; display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:center;">
+            <div style="text-align:center; padding-right:32px; border-right:1px solid #F0F0F0;">
+              <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:10px;">Automated score</div>
+              <div style="font-size:68px; line-height:1; font-weight:600; letter-spacing:-0.04em; color:#B42318;">61</div>
+              <div style="font-size:14px; color:#6B6B6B; margin-top:6px;">out of 100</div>
+              <div style="display:inline-flex; margin-top:14px; padding:6px 12px; border-radius:999px; background:#FDECEA; color:#B42318; font-size:13px; font-weight:600;">Below the 2026 median of 74</div>
+            </div>
+            <div>
+              <div style="font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-bottom:6px;">62 issues across 13 rules</div>
+              <div style="font-size:14.5px; color:#6B6B6B; line-height:1.6; margin-bottom:20px;">Every issue below is tied to the WCAG success criterion it breaks and the element that broke it. Nine of the thirteen are fixable in Webflow Designer without touching custom code.</div>
+              <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+                <sc-for list="{{ bySev }}" as="s" hint-placeholder-count="4">
+                  <div style="border:1px solid #EDEDED; border-radius:12px; padding:14px;">
+                    <div style="display:flex; align-items:center; gap:7px; margin-bottom:8px;"><span style="width:8px; height:8px; border-radius:999px; background:{{ s.dot }}; display:inline-block;"></span><span style="font-size:13px; color:#6B6B6B; font-weight:500;">{{ s.label }}</span></div>
+                    <div style="font-size:26px; font-weight:600; letter-spacing:-0.02em;">{{ s.count }}</div>
+                    <div style="font-size:12.5px; color:#ABABAB; margin-top:2px;">across {{ s.rules }} rules</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#1A1A1A; border-radius:16px; padding:20px 24px; display:flex; align-items:center; gap:20px;">
+            <div style="width:44px; height:44px; border-radius:11px; background:rgba(255,77,0,0.16); display:grid; place-items:center; flex-shrink:0;"><i data-lucide="info" style="width:20px; height:20px; color:#FF7A45;"></i></div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:4px;">This scan covers about a third of WCAG 2.2 AA</div>
+              <div style="font-size:14px; color:#A8A8A8; line-height:1.55;">21 of the 62 criteria can be judged by software. The rest need a person: reading order, whether alt text is meaningful, whether a keyboard user can finish the task. We will not tell you that you are compliant, because no scanner can.</div>
+            </div>
+            <div style="flex-shrink:0; text-align:right;">
+              <div style="font-size:28px; font-weight:600; color:#fff; letter-spacing:-0.02em;">33%</div>
+              <div style="font-size:12.5px; color:#8A8A8A;">automated coverage</div>
+            </div>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+            <div style="padding:18px 22px; border-bottom:1px solid #F0F0F0; display:flex; align-items:center; justify-content:space-between; gap:16px;">
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
+                  <div style="padding:7px 13px; border-radius:999px; border:1px solid #E6E6E6; font-size:13.5px; font-weight:500; color:#6B6B6B; cursor:pointer; background:#fff;">{{ f.label }}</div>
+                </sc-for>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; border:1px solid #E6E6E6; border-radius:10px; padding:8px 12px; min-width:180px;"><i data-lucide="search" style="width:15px; height:15px; color:#ABABAB;"></i><input placeholder="Filter issues" style="border:0; outline:0; font-size:13.5px; width:100%; background:transparent;" /></div>
+            </div>
+            <sc-for list="{{ rules }}" as="r" hint-placeholder-count="8">
+              <div style="padding:18px 22px; border-bottom:1px solid #F4F4F4; display:flex; align-items:center; gap:16px; cursor:pointer;" style-hover="background:#FCFCFC;">
+                <div style="width:9px; height:9px; border-radius:999px; background:{{ r.dot }}; flex-shrink:0;"></div>
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; align-items:center; gap:10px; margin-bottom:5px;">
+                    <div style="font-size:15.5px; font-weight:600; letter-spacing:-0.01em;">{{ r.name }}</div>
+                    <div style="padding:3px 8px; border-radius:6px; background:{{ r.bg }}; color:{{ r.fg }}; font-size:11.5px; font-weight:600;">{{ r.sev }}</div>
+                  </div>
+                  <div style="font-size:13.5px; color:#ABABAB; font-family:'Roboto Mono',ui-monospace,monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ r.sel }}</div>
+                </div>
+                <div style="text-align:right; flex-shrink:0;">
+                  <div style="font-size:13.5px; color:#6B6B6B; font-weight:500;">{{ r.levelLabel }}</div>
+                  <div style="font-size:13px; color:#ABABAB;">{{ r.countLabel }}</div>
+                </div>
+                <i data-lucide="chevron-right" style="width:17px; height:17px; color:#D4D4D4; flex-shrink:0;"></i>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:16px; position:sticky; top:148px;">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+            <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Fix these three first</div>
+            <div style="font-size:13.5px; color:#ABABAB; line-height:1.5; margin-bottom:16px;">Ranked by severity and how many people they affect.</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <sc-for list="{{ topFixes }}" as="t" hint-placeholder-count="3">
+                <div style="border:1px solid #EDEDED; border-radius:12px; padding:14px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <div style="font-size:12px; font-weight:600; color:{{ t.fg }};">{{ t.sev }}</div>
+                    <div style="font-size:12px; color:#ABABAB;">{{ t.effort }}</div>
+                  </div>
+                  <div style="font-size:14px; font-weight:500; line-height:1.4;">{{ t.name }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+            <div style="font-size:15px; font-weight:600; margin-bottom:14px;">Take it further</div>
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <div style="display:flex; align-items:center; gap:11px; padding:11px 0; border-bottom:1px solid #F4F4F4; cursor:pointer;"><i data-lucide="map" style="width:17px; height:17px; color:#FF4D00;"></i><span style="font-size:14px; flex:1;">Which laws apply to us</span><i data-lucide="chevron-right" style="width:15px; height:15px; color:#D4D4D4;"></i></div>
+              <div style="display:flex; align-items:center; gap:11px; padding:11px 0; border-bottom:1px solid #F4F4F4; cursor:pointer;"><i data-lucide="file-text" style="width:17px; height:17px; color:#FF4D00;"></i><span style="font-size:14px; flex:1;">Generate a statement</span><i data-lucide="chevron-right" style="width:15px; height:15px; color:#D4D4D4;"></i></div>
+              <div style="display:flex; align-items:center; gap:11px; padding:11px 0; border-bottom:1px solid #F4F4F4; cursor:pointer;"><i data-lucide="clipboard-check" style="width:17px; height:17px; color:#FF4D00;"></i><span style="font-size:14px; flex:1;">Draft a VPAT</span><i data-lucide="chevron-right" style="width:15px; height:15px; color:#D4D4D4;"></i></div>
+              <div style="display:flex; align-items:center; gap:11px; padding:11px 0; cursor:pointer;"><i data-lucide="activity" style="width:17px; height:17px; color:#FF4D00;"></i><span style="font-size:14px; flex:1;">Monitor this page weekly</span><i data-lucide="chevron-right" style="width:15px; height:15px; color:#D4D4D4;"></i></div>
+            </div>
+          </div>
+
+          <div style="background:#1A1A1A; border-radius:18px; padding:22px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+              <div style="width:44px; height:44px; border-radius:999px; background:#333; display:grid; place-items:center; font-size:15px; font-weight:600; color:#fff;">DA</div>
+              <div>
+                <div style="font-size:14.5px; font-weight:600; color:#fff;">Divyansh Agarwal</div>
+                <div style="font-size:13px; color:#8A8A8A;">Founder, Webyansh</div>
+              </div>
+            </div>
+            <div style="font-size:14px; color:#A8A8A8; line-height:1.6; margin-bottom:16px;">Twenty minutes on a call and I will tell you which of these 62 we can clear in a week, and what a full remediation would cost.</div>
+            <div style="background:#FF4D00; color:#fff; text-align:center; font-weight:600; font-size:14.5px; padding:12px; border-radius:10px; cursor:pointer;">Book a call</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.issue }}">
+    <section style="padding:28px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:#ABABAB; margin-bottom:20px;">
+          <span style="cursor:pointer;">62 issues</span><i data-lucide="chevron-right" style="width:14px; height:14px;"></i><span style="color:#1A1A1A;">Contrast (Minimum)</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 360px; gap:24px; align-items:start;">
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:28px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+                <div style="padding:5px 11px; border-radius:7px; background:#FDECEA; color:#B42318; font-size:12.5px; font-weight:600;">Critical</div>
+                <div style="padding:5px 11px; border-radius:7px; background:#F2F2F2; color:#5A5A5A; font-size:12.5px; font-weight:600;">WCAG 1.4.3 &#183; Level AA</div>
+                <div style="padding:5px 11px; border-radius:7px; background:#EAF1FE; color:#1049A8; font-size:12.5px; font-weight:600;">Fixable in Designer</div>
+              </div>
+              <h1 style="margin:0 0 12px; font-size:32px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">Text has insufficient colour contrast</h1>
+              <p style="margin:0 0 22px; font-size:16px; color:#6B6B6B; line-height:1.65; max-width:680px;">Foreground and background do not reach a 4.5:1 ratio for body text. The secondary button uses #FF7A45 on #FFFFFF, which measures 2.59:1. Low vision users, and anyone reading in sunlight, will lose the label entirely.</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div style="border:1px solid #F6CFCA; background:#FFF8F7; border-radius:14px; padding:18px;">
+                  <div style="font-size:12px; font-weight:600; color:#B42318; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px;">Now &#183; 2.59:1</div>
+                  <div style="background:#fff; border-radius:10px; padding:22px; display:grid; place-items:center;"><div style="border:2px solid #FF7A45; color:#FF7A45; padding:10px 20px; border-radius:999px; font-size:15px; font-weight:600;">Talk to sales</div></div>
+                </div>
+                <div style="border:1px solid #BFE5D6; background:#F7FCFA; border-radius:14px; padding:18px;">
+                  <div style="font-size:12px; font-weight:600; color:#0E6B4E; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px;">Suggested &#183; 6.14:1</div>
+                  <div style="background:#fff; border-radius:10px; padding:22px; display:grid; place-items:center;"><div style="border:2px solid #B23600; color:#B23600; padding:10px 20px; border-radius:999px; font-size:15px; font-weight:600;">Talk to sales</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+              <div style="padding:18px 24px; border-bottom:1px solid #F0F0F0; display:flex; align-items:center; gap:10px;">
+                <div style="width:26px; height:26px; border-radius:7px; background:#EAF1FE; display:grid; place-items:center;"><i data-lucide="wrench" style="width:14px; height:14px; color:#146EF5;"></i></div>
+                <div style="font-size:16px; font-weight:600;">Fix it in Webflow Designer</div>
+                <div style="margin-left:auto; font-size:13px; color:#ABABAB;">About 30 minutes</div>
+              </div>
+              <div style="padding:8px 24px 24px;">
+                <sc-for list="{{ activeSteps }}" as="s" hint-placeholder-count="4">
+                  <div style="display:flex; gap:14px; padding:14px 0; border-bottom:1px solid #F6F6F6;">
+                    <div style="width:24px; height:24px; border-radius:999px; background:#F2F2F2; color:#1A1A1A; font-size:12.5px; font-weight:600; display:grid; place-items:center; flex-shrink:0;">{{ s.n }}</div>
+                    <div style="font-size:15px; line-height:1.6; color:#1A1A1A;">{{ s.text }}</div>
+                  </div>
+                </sc-for>
+                <div style="margin-top:18px; background:#1A1A1A; border-radius:12px; padding:16px 18px; font-family:'Roboto Mono',ui-monospace,monospace; font-size:13px; color:#E8E8E8; line-height:1.7;">
+                  <div style="color:#8A8A8A;">/* If you prefer custom code */</div>
+                  <div>.btn-secondary { color: <span style="color:#FF7A45;">#B23600</span>; border-color: <span style="color:#FF7A45;">#B23600</span>; }</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+              <div style="padding:18px 24px; border-bottom:1px solid #F0F0F0; font-size:16px; font-weight:600;">14 affected elements</div>
+              <div style="padding:0 24px;">
+                <sc-for list="{{ affected }}" as="a" hint-placeholder-count="4">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px solid #F6F6F6;">
+                    <div style="min-width:0;">
+                      <div style="font-family:'Roboto Mono',ui-monospace,monospace; font-size:13px; color:#1A1A1A; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ a.sel }}</div>
+                      <div style="font-size:13px; color:#ABABAB;">{{ a.text }}</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:14px; flex-shrink:0;">
+                      <div style="display:flex; align-items:center; gap:6px;"><span style="width:16px; height:16px; border-radius:4px; background:{{ a.fgHex }}; border:1px solid rgba(0,0,0,0.1); display:inline-block;"></span><span style="font-size:12.5px; color:#6B6B6B; font-family:'Roboto Mono',ui-monospace,monospace;">{{ a.fgHex }}</span></div>
+                      <div style="font-size:13.5px; font-weight:600; color:#B42318; min-width:56px; text-align:right;">{{ a.ratio }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:16px; position:sticky; top:148px;">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+              <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:14px;">Issue 1 of 13</div>
+              <div style="display:flex; gap:8px; margin-bottom:18px;">
+                <div style="flex:1; border:1px solid #E6E6E6; border-radius:10px; padding:10px; text-align:center; font-size:13.5px; font-weight:500; color:#ABABAB;">Previous</div>
+                <div style="flex:1; border:1px solid #E6E6E6; border-radius:10px; padding:10px; text-align:center; font-size:13.5px; font-weight:600; cursor:pointer;">Next issue</div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:2px;">
+                <div style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid #F4F4F4; cursor:pointer;"><i data-lucide="check-circle-2" style="width:16px; height:16px; color:#0E6B4E;"></i><span style="font-size:14px;">Mark as fixed</span></div>
+                <div style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid #F4F4F4; cursor:pointer;"><i data-lucide="clock" style="width:16px; height:16px; color:#6B6B6B;"></i><span style="font-size:14px;">Snooze until next scan</span></div>
+                <div style="display:flex; align-items:center; gap:11px; padding:10px 0; cursor:pointer;"><i data-lucide="link" style="width:16px; height:16px; color:#6B6B6B;"></i><span style="font-size:14px;">Copy link for a developer</span></div>
+              </div>
+            </div>
+            <div style="background:#F6F6F6; border:1px solid #EDEDED; border-radius:18px; padding:22px;">
+              <div style="font-size:14.5px; font-weight:600; margin-bottom:8px;">Why 4.5:1</div>
+              <div style="font-size:13.5px; color:#6B6B6B; line-height:1.6;">The ratio approximates the contrast loss of 20/40 vision, roughly what a typical 80 year old sees. Large text gets a lower bar of 3:1 because size compensates.</div>
+              <div style="margin-top:14px; font-size:13.5px; font-weight:600; color:#FF4D00; cursor:pointer;">Read the criterion &#8594;</div>
+            </div>
+            <div style="background:#1A1A1A; border-radius:18px; padding:22px;">
+              <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:8px;">Want us to just do it?</div>
+              <div style="font-size:13.5px; color:#A8A8A8; line-height:1.6; margin-bottom:16px;">We remediate Webflow sites and hand back a passing scan, usually inside two weeks.</div>
+              <div style="background:#FF4D00; color:#fff; text-align:center; font-weight:600; font-size:14.5px; padding:12px; border-radius:10px; cursor:pointer;">Request a quote</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.reportPass }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 340px; gap:24px; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:28px; display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:center;">
+            <div style="text-align:center; padding-right:32px; border-right:1px solid #F0F0F0;">
+              <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:10px;">Automated score</div>
+              <div style="font-size:68px; line-height:1; font-weight:600; letter-spacing:-0.04em; color:#0E6B4E;">94</div>
+              <div style="font-size:14px; color:#6B6B6B; margin-top:6px;">out of 100</div>
+              <div style="display:inline-flex; margin-top:14px; padding:6px 12px; border-radius:999px; background:#E7F5F0; color:#0E6B4E; font-size:13px; font-weight:600;">Up 33 points since June</div>
+            </div>
+            <div>
+              <div style="font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-bottom:6px;">3 issues across 2 rules</div>
+              <div style="font-size:14.5px; color:#6B6B6B; line-height:1.6; margin-bottom:18px;">Every critical and serious issue from the June scan has been cleared. What is left is two moderate and minor findings that will not block a procurement review.</div>
+              <div style="display:flex; align-items:center; gap:10px; padding:14px 16px; border:1px solid #F6DFC0; background:#FFFBF5; border-radius:12px;">
+                <i data-lucide="alert-circle" style="width:18px; height:18px; color:#93500B; flex-shrink:0;"></i>
+                <div style="font-size:14px; color:#93500B; line-height:1.5;"><strong style="font-weight:600;">A clean automated scan is not compliance.</strong> Two thirds of WCAG still needs a manual audit before you can claim conformance in a statement or a VPAT.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+            <div style="padding:18px 22px; border-bottom:1px solid #F0F0F0; font-size:16px; font-weight:600;">What is left</div>
+            <sc-for list="{{ passRules }}" as="r" hint-placeholder-count="2">
+              <div style="padding:18px 22px; border-bottom:1px solid #F4F4F4; display:flex; align-items:center; gap:16px;">
+                <div style="width:9px; height:9px; border-radius:999px; background:{{ r.dot }}; flex-shrink:0;"></div>
+                <div style="flex:1;">
+                  <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+                    <div style="font-size:15.5px; font-weight:600;">{{ r.name }}</div>
+                    <div style="padding:3px 8px; border-radius:6px; background:{{ r.bg }}; color:{{ r.fg }}; font-size:11.5px; font-weight:600;">{{ r.sev }}</div>
+                  </div>
+                  <div style="font-size:13.5px; color:#ABABAB;">{{ r.levelLabel }} &#183; {{ r.countLabel }}</div>
+                </div>
+                <i data-lucide="chevron-right" style="width:17px; height:17px; color:#D4D4D4;"></i>
+              </div>
+            </sc-for>
+            <div style="padding:22px; display:flex; align-items:center; gap:12px; background:#FCFCFC;">
+              <i data-lucide="check-circle-2" style="width:18px; height:18px; color:#0E6B4E;"></i>
+              <div style="font-size:14.5px; color:#6B6B6B;">11 rules passed, including all 5 that were critical in June.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+            <div style="font-size:15px; font-weight:600; margin-bottom:4px;">You can now</div>
+            <div style="font-size:13.5px; color:#ABABAB; line-height:1.5; margin-bottom:16px;">A score in this range is enough to start the paperwork.</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="border:1px solid #EDEDED; border-radius:12px; padding:14px; cursor:pointer;"><div style="font-size:14px; font-weight:600; margin-bottom:3px;">Publish an accessibility statement</div><div style="font-size:13px; color:#ABABAB;">Required by the EAA</div></div>
+              <div style="border:1px solid #EDEDED; border-radius:12px; padding:14px; cursor:pointer;"><div style="font-size:14px; font-weight:600; margin-bottom:3px;">Draft the VPAT</div><div style="font-size:13px; color:#ABABAB;">For procurement reviews</div></div>
+              <div style="border:1px solid #EDEDED; border-radius:12px; padding:14px; cursor:pointer;"><div style="font-size:14px; font-weight:600; margin-bottom:3px;">Book a manual audit</div><div style="font-size:13px; color:#ABABAB;">The other two thirds</div></div>
+            </div>
+          </div>
+          <div style="background:#1A1A1A; border-radius:18px; padding:22px;">
+            <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:8px;">Keep it this way</div>
+            <div style="font-size:13.5px; color:#A8A8A8; line-height:1.6; margin-bottom:16px;">One careless publish undoes months of work. Weekly scans with an alert the moment something regresses.</div>
+            <div style="background:#FF4D00; color:#fff; text-align:center; font-weight:600; font-size:14.5px; padding:12px; border-radius:10px; cursor:pointer;">Start monitoring</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.skeleton }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 340px; gap:24px; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:28px; display:grid; grid-template-columns:220px 1fr; gap:32px;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:12px; padding-right:32px; border-right:1px solid #F0F0F0;">
+              <div style="width:110px; height:14px; border-radius:6px; background:#F0F0F0;"></div>
+              <div style="width:90px; height:56px; border-radius:10px; background:#F0F0F0;"></div>
+              <div style="width:140px; height:26px; border-radius:999px; background:#F4F4F4;"></div>
+            </div>
+            <div>
+              <div style="width:280px; height:22px; border-radius:6px; background:#F0F0F0; margin-bottom:12px;"></div>
+              <div style="width:100%; height:12px; border-radius:6px; background:#F4F4F4; margin-bottom:8px;"></div>
+              <div style="width:80%; height:12px; border-radius:6px; background:#F4F4F4; margin-bottom:22px;"></div>
+              <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+                <div style="height:78px; border-radius:12px; background:#F6F6F6;"></div>
+                <div style="height:78px; border-radius:12px; background:#F6F6F6;"></div>
+                <div style="height:78px; border-radius:12px; background:#F6F6F6;"></div>
+                <div style="height:78px; border-radius:12px; background:#F6F6F6;"></div>
+              </div>
+            </div>
+          </div>
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+            <div style="padding:18px 22px; border-bottom:1px solid #F0F0F0; display:flex; gap:8px;">
+              <div style="width:96px; height:30px; border-radius:999px; background:#F2F2F2;"></div>
+              <div style="width:78px; height:30px; border-radius:999px; background:#F4F4F4;"></div>
+              <div style="width:78px; height:30px; border-radius:999px; background:#F4F4F4;"></div>
+            </div>
+            <sc-for list="{{ skeletonRows }}" as="s" hint-placeholder-count="7">
+              <div style="padding:20px 22px; border-bottom:1px solid #F6F6F6; display:flex; align-items:center; gap:16px;">
+                <div style="width:9px; height:9px; border-radius:999px; background:#EDEDED;"></div>
+                <div style="flex:1;">
+                  <div style="width:52%; height:13px; border-radius:6px; background:#F0F0F0; margin-bottom:9px;"></div>
+                  <div style="width:34%; height:11px; border-radius:6px; background:#F6F6F6;"></div>
+                </div>
+                <div style="width:90px; height:11px; border-radius:6px; background:#F4F4F4;"></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+            <div style="width:60%; height:14px; border-radius:6px; background:#F0F0F0; margin-bottom:16px;"></div>
+            <div style="height:64px; border-radius:12px; background:#F6F6F6; margin-bottom:10px;"></div>
+            <div style="height:64px; border-radius:12px; background:#F6F6F6; margin-bottom:10px;"></div>
+            <div style="height:64px; border-radius:12px; background:#F6F6F6;"></div>
+          </div>
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+            <div style="width:45%; height:14px; border-radius:6px; background:#F0F0F0; margin-bottom:16px;"></div>
+            <div style="height:11px; border-radius:6px; background:#F6F6F6; margin-bottom:14px;"></div>
+            <div style="height:11px; border-radius:6px; background:#F6F6F6; margin-bottom:14px;"></div>
+            <div style="height:11px; border-radius:6px; background:#F6F6F6;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.error }}">
+    <section style="padding:56px 40px 90px;">
+      <div style="max-width:760px; margin:0 auto;">
+        <div style="background:#fff; border:1px solid #F6CFCA; border-radius:20px; padding:36px; text-align:center; margin-bottom:32px;">
+          <div style="width:52px; height:52px; border-radius:14px; background:#FDECEA; display:grid; place-items:center; margin:0 auto 20px;"><i data-lucide="unplug" style="width:24px; height:24px; color:#B42318;"></i></div>
+          <h1 style="margin:0 0 12px; font-size:30px; line-height:1.15; letter-spacing:-0.025em; font-weight:600;">We could not reach that URL</h1>
+          <p style="margin:0 auto 20px; max-width:480px; font-size:15.5px; color:#6B6B6B; line-height:1.6;">The server returned a 403 before the page rendered. This usually means a firewall or bot protection is blocking our crawler.</p>
+          <div style="display:inline-flex; align-items:center; gap:10px; padding:12px 16px; background:#F6F6F6; border-radius:11px; font-family:'Roboto Mono',ui-monospace,monospace; font-size:13px; color:#6B6B6B; margin-bottom:24px;">GET https://cascadeops.com/pricing &#8594; 403 Forbidden</div>
+          <div style="display:flex; gap:10px; justify-content:center;">
+            <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:14.5px; padding:12px 22px; border-radius:999px; cursor:pointer;">Try another URL</div>
+            <div style="border:1px solid #E6E6E6; font-weight:600; font-size:14.5px; padding:12px 22px; border-radius:999px; cursor:pointer;">Paste HTML instead</div>
+          </div>
+          <div style="margin-top:20px; font-size:13.5px; color:#ABABAB;">Or allowlist <span style="font-family:'Roboto Mono',ui-monospace,monospace; color:#6B6B6B;">WebyanshBot</span> in Cloudflare and run it again.</div>
+        </div>
+
+        <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:14px;">Other ways a scan can stop</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <sc-for list="{{ errors }}" as="e" hint-placeholder-count="3">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:20px; display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:38px; height:38px; border-radius:10px; background:#F6F6F6; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="{{ e.icon }}" style="width:18px; height:18px; color:#6B6B6B;"></i></div>
+              <div style="flex:1;">
+                <div style="font-size:15.5px; font-weight:600; margin-bottom:5px;">{{ e.title }}</div>
+                <div style="font-size:14px; color:#6B6B6B; line-height:1.55; margin-bottom:8px;">{{ e.body }}</div>
+                <div style="font-size:13.5px; color:#ABABAB;">{{ e.fix }}</div>
+              </div>
+              <div style="border:1px solid #E6E6E6; border-radius:999px; padding:9px 16px; font-size:13.5px; font-weight:600; white-space:nowrap; cursor:pointer;">{{ e.cta }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.jurisdiction }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="margin-bottom:24px; max-width:680px;">
+          <h1 style="margin:0 0 10px; font-size:32px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">Which laws apply to you</h1>
+          <p style="margin:0; font-size:16px; color:#6B6B6B; line-height:1.6;">Tell us where you sell and who you sell to. This is a starting point for a conversation with counsel, not legal advice.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:320px 1fr; gap:24px; align-items:start;">
+          <div style="display:flex; flex-direction:column; gap:16px; position:sticky; top:148px;">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+              <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:14px;">Markets served</div>
+              <sc-for list="{{ markets }}" as="m" hint-placeholder-count="5">
+                <div style="display:flex; align-items:center; gap:11px; padding:11px 0; border-bottom:1px solid #F4F4F4;">
+                  <div style="width:19px; height:19px; border-radius:5px; background:{{ m.boxBg }}; border:1px solid {{ m.boxBd }}; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="{{ m.icon }}" style="width:12px; height:12px; color:#fff;"></i></div>
+                  <div style="font-size:14.5px; color:{{ m.color }};">{{ m.name }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+              <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:14px;">About the business</div>
+              <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="4">
+                <div style="display:flex; align-items:center; gap:11px; padding:11px 0; border-bottom:1px solid #F4F4F4;">
+                  <div style="width:19px; height:19px; border-radius:5px; background:{{ s.boxBg }}; border:1px solid {{ s.boxBd }}; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="{{ s.icon }}" style="width:12px; height:12px; color:#fff;"></i></div>
+                  <div style="font-size:14.5px; color:{{ s.color }}; line-height:1.4;">{{ s.name }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px;">
+              <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:20px;">
+                <div style="font-size:30px; font-weight:600; letter-spacing:-0.025em; color:#B42318;">5</div>
+                <div style="font-size:13.5px; color:#6B6B6B; margin-top:4px;">regimes bind you today</div>
+              </div>
+              <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:20px;">
+                <div style="font-size:30px; font-weight:600; letter-spacing:-0.025em;">WCAG 2.1 AA</div>
+                <div style="font-size:13.5px; color:#6B6B6B; margin-top:4px;">the strictest common baseline</div>
+              </div>
+              <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:20px;">
+                <div style="font-size:30px; font-weight:600; letter-spacing:-0.025em;">Yes</div>
+                <div style="font-size:13.5px; color:#6B6B6B; margin-top:4px;">a public statement is mandatory</div>
+              </div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+              <div style="display:grid; grid-template-columns:200px 1fr 150px 130px; gap:16px; padding:14px 22px; background:#FCFCFC; border-bottom:1px solid #EDEDED; font-size:12px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.06em;">
+                <div>Regime</div><div>What it means for you</div><div>Standard</div><div>Deadline</div>
+              </div>
+              <sc-for list="{{ regimes }}" as="r" hint-placeholder-count="6">
+                <div style="display:grid; grid-template-columns:200px 1fr 150px 130px; gap:16px; padding:18px 22px; border-bottom:1px solid #F4F4F4; align-items:start;">
+                  <div>
+                    <div style="font-size:15px; font-weight:600; margin-bottom:5px;">{{ r.law }}</div>
+                    <div style="font-size:13px; color:#ABABAB;">{{ r.region }}</div>
+                  </div>
+                  <div style="font-size:14px; color:#6B6B6B; line-height:1.55;">{{ r.note }}</div>
+                  <div style="font-size:13.5px; color:#1A1A1A;">{{ r.standard }}</div>
+                  <div><div style="display:inline-flex; padding:5px 10px; border-radius:6px; background:{{ r.chipBg }}; color:{{ r.chipFg }}; font-size:12px; font-weight:600; margin-bottom:6px;">{{ r.status }}</div><div style="font-size:12.5px; color:#ABABAB;">{{ r.deadline }}</div></div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="background:#1A1A1A; border-radius:18px; padding:24px; display:flex; gap:18px; align-items:flex-start;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(255,77,0,0.16); display:grid; place-items:center; flex-shrink:0;"><i data-lucide="gavel" style="width:19px; height:19px; color:#FF7A45;"></i></div>
+              <div>
+                <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:6px;">Partial compliance is not a legal position</div>
+                <div style="font-size:14px; color:#A8A8A8; line-height:1.6;">{{ caseNote }}</div>
+              </div>
+            </div>
+
+            <div style="font-size:13px; color:#ABABAB; line-height:1.6; padding:0 4px;">This mapping is generated from the markets you selected and is provided for planning. It is not legal advice. Have the wording reviewed by counsel before you rely on it.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.statement }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="margin-bottom:24px; max-width:680px;">
+          <h1 style="margin:0 0 10px; font-size:32px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">Accessibility statement</h1>
+          <p style="margin:0; font-size:16px; color:#6B6B6B; line-height:1.6;">The EAA requires a published statement with a working feedback channel. This one is populated from your latest scan, so the known issues section stays honest.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:400px 1fr; gap:24px; align-items:start;">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:24px; position:sticky; top:148px;">
+            <sc-for list="{{ statementFields }}" as="f" hint-placeholder-count="6">
+              <div style="margin-bottom:16px;">
+                <div style="font-size:13px; font-weight:600; color:#6B6B6B; margin-bottom:7px;">{{ f.label }}</div>
+                <input value="{{ f.value }}" readonly="readonly" style="width:100%; box-sizing:border-box; border:1px solid #E6E6E6; border-radius:10px; padding:11px 13px; font-size:14.5px; background:#FCFCFC; outline:0; color:#1A1A1A;" />
+                <div style="font-size:12.5px; color:#ABABAB; margin-top:6px;">{{ f.hint }}</div>
+              </div>
+            </sc-for>
+            <div style="display:flex; gap:10px; margin-top:22px;">
+              <div style="flex:1; background:#FF4D00; color:#fff; text-align:center; font-weight:600; font-size:14.5px; padding:12px; border-radius:10px; cursor:pointer;">Copy HTML</div>
+              <div style="border:1px solid #E6E6E6; font-weight:600; font-size:14.5px; padding:12px 16px; border-radius:10px; cursor:pointer;">Download</div>
+            </div>
+          </div>
+
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+            <div style="padding:14px 24px; border-bottom:1px solid #F0F0F0; display:flex; align-items:center; justify-content:space-between; background:#FCFCFC;">
+              <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.06em;">Preview</div>
+              <div style="display:flex; gap:6px;"><div style="padding:6px 12px; border-radius:7px; background:#fff; border:1px solid #E6E6E6; font-size:13px; font-weight:600;">Rendered</div><div style="padding:6px 12px; border-radius:7px; font-size:13px; color:#6B6B6B; cursor:pointer;">HTML</div></div>
+            </div>
+            <div style="padding:44px 56px; max-width:720px;">
+              <h2 style="margin:0 0 8px; font-size:28px; letter-spacing:-0.02em; font-weight:600;">Accessibility statement for Cascade Ops</h2>
+              <div style="font-size:13.5px; color:#ABABAB; margin-bottom:28px;">Last reviewed 6 August 2026</div>
+              <p style="margin:0 0 18px; font-size:15.5px; line-height:1.7; color:#3A3A3A;">Cascade Ops Inc. is committed to making cascadeops.com accessible to everyone, including people with disabilities. We are working towards conformance with the Web Content Accessibility Guidelines version 2.2, level AA.</p>
+              <h3 style="margin:28px 0 10px; font-size:18px; font-weight:600;">Conformance status</h3>
+              <p style="margin:0 0 18px; font-size:15.5px; line-height:1.7; color:#3A3A3A;">This website is <strong style="font-weight:600;">partially conformant</strong> with WCAG 2.2 level AA. Partially conformant means that some parts of the content do not fully conform to the standard.</p>
+              <h3 style="margin:28px 0 10px; font-size:18px; font-weight:600;">Known limitations</h3>
+              <ul style="margin:0 0 18px; padding-left:20px; font-size:15.5px; line-height:1.8; color:#3A3A3A;">
+                <sc-for list="{{ knownIssues }}" as="k" hint-placeholder-count="3">
+                  <li>{{ k }}</li>
+                </sc-for>
+              </ul>
+              <h3 style="margin:28px 0 10px; font-size:18px; font-weight:600;">Feedback</h3>
+              <p style="margin:0 0 18px; font-size:15.5px; line-height:1.7; color:#3A3A3A;">If you encounter a barrier on this site, email <span style="color:#FF4D00;">access@cascadeops.com</span>. We aim to respond within five working days.</p>
+              <h3 style="margin:28px 0 10px; font-size:18px; font-weight:600;">Assessment approach</h3>
+              <p style="margin:0; font-size:15.5px; line-height:1.7; color:#3A3A3A;">Cascade Ops assessed the accessibility of this website by a combination of automated scanning and manual review. Automated testing covers approximately one third of the WCAG success criteria; the remainder were reviewed by hand.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.vpat }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:24px;">
+          <div style="max-width:680px;">
+            <h1 style="margin:0 0 10px; font-size:32px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">VPAT 2.5 draft</h1>
+            <p style="margin:0; font-size:16px; color:#6B6B6B; line-height:1.6;">Pre-filled from the scan. Every row still needs a human to confirm it before you send this to a procurement team.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div style="border:1px solid #E6E6E6; border-radius:999px; padding:11px 18px; font-size:14px; font-weight:600; cursor:pointer;">Export .docx</div>
+            <div style="background:#FF4D00; color:#fff; border-radius:999px; padding:11px 20px; font-size:14px; font-weight:600; cursor:pointer;">Have Webyansh complete it</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-bottom:16px;">
+          <sc-for list="{{ vpatEditions }}" as="e" hint-placeholder-count="4">
+            <div style="display:flex; align-items:center; gap:9px; padding:11px 16px; border:1px solid {{ e.bd }}; background:{{ e.bg }}; border-radius:12px; font-size:14px; font-weight:500; color:{{ e.color }}; cursor:pointer;">
+              <div style="width:17px; height:17px; border-radius:5px; background:{{ e.boxBg }}; border:1px solid {{ e.boxBd }}; display:grid; place-items:center;"><i data-lucide="{{ e.icon }}" style="width:11px; height:11px; color:#fff;"></i></div>{{ e.name }}
+            </div>
+          </sc-for>
+          <div style="margin-left:auto; display:flex; align-items:center; gap:16px; font-size:13px; color:#ABABAB;">
+            <span>11 criteria pre-filled</span><span style="color:#E0E0E0;">&#183;</span><span>51 remaining need review</span>
+          </div>
+        </div>
+
+        <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+          <div style="display:grid; grid-template-columns:90px 1fr 190px 1fr; gap:16px; padding:14px 22px; background:#FCFCFC; border-bottom:1px solid #EDEDED; font-size:12px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.06em;">
+            <div>Criterion</div><div>Name</div><div>Conformance level</div><div>Remarks and explanations</div>
+          </div>
+          <sc-for list="{{ vpatRows }}" as="v" hint-placeholder-count="11">
+            <div style="display:grid; grid-template-columns:90px 1fr 190px 1fr; gap:16px; padding:15px 22px; border-bottom:1px solid #F4F4F4; align-items:center;">
+              <div style="font-size:13.5px; font-family:'Roboto Mono',ui-monospace,monospace; color:#6B6B6B;">{{ v.sc }}</div>
+              <div><span style="font-size:14.5px; font-weight:500;">{{ v.name }}</span> <span style="font-size:12.5px; color:#ABABAB;">Level {{ v.level }}</span></div>
+              <div><div style="display:inline-flex; align-items:center; gap:7px; padding:7px 12px; border-radius:8px; background:{{ v.chipBg }}; color:{{ v.chipFg }}; font-size:13px; font-weight:600;">{{ v.conf }}<i data-lucide="chevron-down" style="width:13px; height:13px; opacity:0.6;"></i></div></div>
+              <div style="font-size:13.5px; color:#6B6B6B; line-height:1.5;">{{ v.remark }}</div>
+            </div>
+          </sc-for>
+          <div style="padding:20px 22px; display:flex; align-items:center; gap:12px; background:#FCFCFC;">
+            <i data-lucide="alert-circle" style="width:17px; height:17px; color:#93500B;"></i>
+            <div style="font-size:14px; color:#6B6B6B;">51 criteria could not be evaluated automatically and are marked <strong style="font-weight:600; color:#1A1A1A;">Not evaluated</strong>. Sending a VPAT with unverified rows is a bigger risk than sending one that admits gaps.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.alt }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:24px;">
+          <div style="max-width:680px;">
+            <h1 style="margin:0 0 10px; font-size:32px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">Alt text auditor</h1>
+            <p style="margin:0; font-size:16px; color:#6B6B6B; line-height:1.6;">Missing and unhelpful alt text, with a drafted replacement for each. Review every line before applying. A wrong description is worse than none.</p>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <div style="font-size:13.5px; color:#ABABAB;">5 of 7 selected</div>
+            <div style="background:#FF4D00; color:#fff; border-radius:999px; padding:11px 20px; font-size:14px; font-weight:600; cursor:pointer;">Apply to Webflow CMS</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-bottom:16px;">
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:18px 20px;"><div style="font-size:26px; font-weight:600; letter-spacing:-0.02em; color:#B42318;">3</div><div style="font-size:13.5px; color:#6B6B6B; margin-top:3px;">missing entirely</div></div>
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:18px 20px;"><div style="font-size:26px; font-weight:600; letter-spacing:-0.02em; color:#93500B;">2</div><div style="font-size:13.5px; color:#6B6B6B; margin-top:3px;">unhelpful, such as "image"</div></div>
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:18px 20px;"><div style="font-size:26px; font-weight:600; letter-spacing:-0.02em; color:#1049A8;">1</div><div style="font-size:13.5px; color:#6B6B6B; margin-top:3px;">decorative, should be empty</div></div>
+          <div style="flex:1; background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:18px 20px;"><div style="font-size:26px; font-weight:600; letter-spacing:-0.02em; color:#0E6B4E;">1</div><div style="font-size:13.5px; color:#6B6B6B; margin-top:3px;">already good</div></div>
+        </div>
+
+        <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+          <div style="display:grid; grid-template-columns:40px 68px 1fr 150px 1fr; gap:16px; padding:14px 22px; background:#FCFCFC; border-bottom:1px solid #EDEDED; font-size:12px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.06em; align-items:center;">
+            <div></div><div>Image</div><div>File and location</div><div>Status</div><div>Drafted alt text</div>
+          </div>
+          <sc-for list="{{ altRows }}" as="a" hint-placeholder-count="7">
+            <div style="display:grid; grid-template-columns:40px 68px 1fr 150px 1fr; gap:16px; padding:14px 22px; border-bottom:1px solid #F4F4F4; align-items:center;">
+              <div style="width:19px; height:19px; border-radius:5px; background:{{ a.boxBg }}; border:1px solid {{ a.boxBd }}; display:grid; place-items:center;"><i data-lucide="{{ a.icon }}" style="width:12px; height:12px; color:#fff;"></i></div>
+              <div style="width:56px; height:40px; border-radius:8px; background:{{ a.thumb }}; border:1px solid #EDEDED; display:grid; place-items:center;"><i data-lucide="image" style="width:15px; height:15px; color:#C4C4C4;"></i></div>
+              <div style="min-width:0;">
+                <div style="font-size:14px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ a.file }}</div>
+                <div style="font-size:12.5px; color:#ABABAB;">{{ a.where }}</div>
+              </div>
+              <div><div style="display:inline-flex; padding:5px 10px; border-radius:6px; background:{{ a.chipBg }}; color:{{ a.chipFg }}; font-size:12px; font-weight:600;">{{ a.status }}</div></div>
+              <div style="font-size:13.5px; color:{{ a.draftColor }}; line-height:1.5; font-style:{{ a.draftStyle }};">{{ a.draftText }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:16px; background:#F6F6F6; border:1px solid #EDEDED; border-radius:16px; padding:20px 24px; display:flex; gap:16px; align-items:flex-start;">
+          <i data-lucide="info" style="width:18px; height:18px; color:#6B6B6B; flex-shrink:0; margin-top:2px;"></i>
+          <div style="font-size:14px; color:#6B6B6B; line-height:1.6;">Drafts are generated from the image, the surrounding copy and the page title. They are a starting point. Alt text depends on why the image is there, and only you know that. Decorative images should carry an empty alt attribute rather than a description.</div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.anyMonitor }}">
+    <section style="padding:32px 40px 80px;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <sc-if value="{{ is.monitorAlert }}">
+          <div style="background:#FFF8F7; border:1px solid #F6CFCA; border-radius:16px; padding:20px 24px; display:flex; align-items:center; gap:18px; margin-bottom:20px;">
+            <div style="width:42px; height:42px; border-radius:11px; background:#FDECEA; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="alert-triangle" style="width:20px; height:20px; color:#B42318;"></i></div>
+            <div style="flex:1;">
+              <div style="font-size:16px; font-weight:600; color:#B42318; margin-bottom:4px;">A publish on 4 August broke 3 checks that used to pass</div>
+              <div style="font-size:14px; color:#6B6B6B; line-height:1.55;">The pricing page lost its global focus indicator and two form inputs lost their labels. The score dropped 14 points in one deploy.</div>
+            </div>
+            <div style="display:flex; gap:9px; flex-shrink:0;">
+              <div style="border:1px solid #E6E6E6; background:#fff; border-radius:999px; padding:10px 16px; font-size:13.5px; font-weight:600; cursor:pointer;">See the diff</div>
+              <div style="background:#FF4D00; color:#fff; border-radius:999px; padding:10px 18px; font-size:13.5px; font-weight:600; cursor:pointer;">Get it fixed</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="display:grid; grid-template-columns:1fr 340px; gap:24px; align-items:start;">
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:26px;">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:24px;">
+                <div>
+                  <div style="font-size:16px; font-weight:600; margin-bottom:4px;">Score across 5 monitored pages</div>
+                  <div style="font-size:13.5px; color:#ABABAB;">Weekly scans since May 2026</div>
+                </div>
+                <div style="display:flex; gap:6px; padding:4px; background:#F2F2F2; border-radius:10px;">
+                  <div style="padding:7px 13px; border-radius:7px; background:#fff; font-size:13px; font-weight:600;">12 weeks</div>
+                  <div style="padding:7px 13px; border-radius:7px; font-size:13px; color:#6B6B6B; cursor:pointer;">6 months</div>
+                </div>
+              </div>
+              <div style="display:flex; align-items:flex-end; gap:10px; height:140px; padding-bottom:4px; border-bottom:1px solid #F0F0F0;">
+                <sc-for list="{{ trendBars }}" as="b" hint-placeholder-count="12">
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px;">
+                    <div style="font-size:11.5px; color:#ABABAB;">{{ b.v }}</div>
+                    <div style="width:100%; height:{{ b.h }}; background:{{ b.color }}; border-radius:6px 6px 0 0;"></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:10px; font-size:12px; color:#ABABAB;"><span>18 May</span><span>4 Aug</span></div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden;">
+              <div style="display:grid; grid-template-columns:1fr 100px 100px 110px 110px; gap:16px; padding:14px 22px; background:#FCFCFC; border-bottom:1px solid #EDEDED; font-size:12px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.06em;">
+                <div>Page</div><div>Score</div><div>Change</div><div>Issues</div><div>Last scan</div>
+              </div>
+              <sc-for list="{{ monitorPages }}" as="p" hint-placeholder-count="5">
+                <div style="display:grid; grid-template-columns:1fr 100px 100px 110px 110px; gap:16px; padding:16px 22px; border-bottom:1px solid #F4F4F4; align-items:center;">
+                  <div style="font-size:14.5px; font-weight:500; font-family:'Roboto Mono',ui-monospace,monospace;">{{ p.url }}</div>
+                  <div style="font-size:16px; font-weight:600;">{{ p.score }}</div>
+                  <div style="font-size:14px; font-weight:600; color:{{ p.deltaColor }};">{{ p.delta }}</div>
+                  <div style="font-size:14px; color:#6B6B6B;">{{ p.issues }}</div>
+                  <div style="font-size:13.5px; color:#ABABAB;">{{ p.last }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+              <div style="font-size:15px; font-weight:600; margin-bottom:16px;">Activity</div>
+              <div style="display:flex; flex-direction:column;">
+                <sc-for list="{{ events }}" as="e" hint-placeholder-count="4">
+                  <div style="display:flex; gap:12px; padding-bottom:18px;">
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+                      <div style="width:26px; height:26px; border-radius:999px; background:{{ e.iconBg }}; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="{{ e.icon }}" style="width:13px; height:13px; color:{{ e.iconFg }};"></i></div>
+                      <div style="width:1px; flex:1; background:#F0F0F0;"></div>
+                    </div>
+                    <div style="padding-bottom:4px;">
+                      <div style="font-size:12.5px; color:#ABABAB; margin-bottom:3px;">{{ e.when }}</div>
+                      <div style="font-size:14px; font-weight:500; line-height:1.45; margin-bottom:3px;">{{ e.title }}</div>
+                      <div style="font-size:13px; color:#6B6B6B; line-height:1.5;">{{ e.detail }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="background:#fff; border:1px solid #E6E6E6; border-radius:18px; padding:22px;">
+              <div style="font-size:15px; font-weight:600; margin-bottom:14px;">Schedule</div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #F4F4F4; font-size:14px;"><span style="color:#6B6B6B;">Frequency</span><span style="font-weight:500;">Weekly, Mondays</span></div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #F4F4F4; font-size:14px;"><span style="color:#6B6B6B;">On publish</span><span style="font-weight:500;">Scan within 5 min</span></div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #F4F4F4; font-size:14px;"><span style="color:#6B6B6B;">Alert to</span><span style="font-weight:500;">3 recipients</span></div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; font-size:14px;"><span style="color:#6B6B6B;">Digest</span><span style="font-weight:500;">Monday 09:00 IST</span></div>
+            </div>
+            <div style="background:#1A1A1A; border-radius:18px; padding:22px;">
+              <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:8px;">Monitoring is part of our support retainer</div>
+              <div style="font-size:13.5px; color:#A8A8A8; line-height:1.6; margin-bottom:16px;">We watch the scans, and when a publish breaks something we fix it before you hear about it from a customer.</div>
+              <div style="background:#FF4D00; color:#fff; text-align:center; font-weight:600; font-size:14.5px; padding:12px; border-radius:10px; cursor:pointer;">Book a call</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ is.gate }}">
+    <section style="padding:70px 40px 100px; min-height:620px; background:radial-gradient(70% 90% at 50% 0%, #FFF6F2 0%, #FCFCFC 65%);">
+      <div style="max-width:1080px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch;">
+        <div style="position:relative; border:1px solid #E6E6E6; border-radius:20px; overflow:hidden; background:#fff;">
+          <div style="padding:26px; filter:blur(3px); opacity:0.55; pointer-events:none;">
+            <div style="font-size:13px; color:#ABABAB; margin-bottom:8px;">cascadeops.com/pricing</div>
+            <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:20px;"><div style="font-size:56px; font-weight:600; letter-spacing:-0.03em;">61</div><div style="font-size:15px; color:#6B6B6B;">/ 100</div></div>
+            <sc-for list="{{ bySev }}" as="s" hint-placeholder-count="4">
+              <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid #F4F4F4; font-size:14.5px;"><span>{{ s.label }}</span><span style="font-weight:600;">{{ s.count }}</span></div>
+            </sc-for>
+            <div style="height:12px;"></div>
+            <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6">
+              <div style="padding:12px 0; border-bottom:1px solid #F4F4F4; font-size:14px;">{{ r.name }}</div>
+            </sc-for>
+          </div>
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 55%, #fff 100%);"></div>
+          <div style="position:absolute; left:26px; bottom:26px; right:26px; display:flex; align-items:center; gap:10px; font-size:14px; color:#6B6B6B;"><i data-lucide="lock" style="width:16px; height:16px; color:#ABABAB;"></i>62 issues across 13 rules are waiting behind this</div>
+        </div>
+
+        <div style="background:#fff; border:1px solid #E6E6E6; border-radius:20px; padding:36px; display:flex; flex-direction:column; justify-content:center;">
+          <div style="display:inline-flex; align-self:flex-start; align-items:center; gap:7px; padding:6px 12px; border-radius:999px; background:#E7F5F0; color:#0E6B4E; font-size:13px; font-weight:600; margin-bottom:20px;"><i data-lucide="check" style="width:14px; height:14px;"></i>Scan finished in 18.4s</div>
+          <h2 style="margin:0 0 12px; font-size:32px; line-height:1.14; letter-spacing:-0.028em; font-weight:600;">Your report is ready</h2>
+          <p style="margin:0 0 24px; font-size:15.5px; color:#6B6B6B; line-height:1.6;">We found <strong style="color:#1A1A1A; font-weight:600;">62 issues across 13 rules</strong>, 31 of them critical. Tell us where to send it and the full report opens straight away.</p>
+          <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:16px;">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:#6B6B6B; margin-bottom:7px;">Work email</div>
+              <input placeholder="you@company.com" style="width:100%; box-sizing:border-box; border:1px solid #E6E6E6; border-radius:11px; padding:13px 14px; font-size:15px; outline:0; background:#FCFCFC;" />
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:10px; font-size:13.5px; color:#6B6B6B; line-height:1.5;">
+              <div style="width:18px; height:18px; border:1px solid #D4D4D4; border-radius:5px; flex-shrink:0; margin-top:1px;"></div>
+              Also send me a monthly re-scan of this page. Unsubscribe in one click.
+            </div>
+          </div>
+          <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:15px; padding:14px 22px; border-radius:11px; text-align:center; cursor:pointer;">Open the full report</div>
+          <div style="margin-top:14px; font-size:12.5px; color:#ABABAB; line-height:1.55;">One email, no drip sequence, no reselling your address. The contrast checker stays free and ungated either way.</div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ im.hub }}">
+    <section style="padding:36px 18px 40px; background:radial-gradient(80% 60% at 50% 0%, #FFF6F2 0%, #FCFCFC 70%);">
+      <div style="display:inline-flex; align-items:center; gap:7px; padding:6px 12px; border:1px solid #E6E6E6; border-radius:999px; background:#fff; font-size:12.5px; color:#6B6B6B; font-weight:500; margin-bottom:18px;"><span style="color:#FF4D00; font-size:11px;">&#10022;</span>Accessibility &amp; compliance suite</div>
+      <h1 style="margin:0 0 14px; font-size:34px; line-height:1.1; letter-spacing:-0.03em; font-weight:600;">Find every accessibility issue <span style="color:#ABABAB;">then fix it in Webflow.</span></h1>
+      <p style="margin:0 0 24px; font-size:15.5px; line-height:1.6; color:#6B6B6B;">Scan any page against WCAG 2.2 AA and get the exact fix for each issue in Webflow Designer.</p>
+      <div style="background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:6px; display:flex; flex-direction:column; gap:8px; box-shadow:0 8px 24px -14px rgba(26,26,26,0.16);">
+        <div style="display:flex; align-items:center; gap:9px; padding:12px 12px 4px;"><i data-lucide="globe" style="width:17px; height:17px; color:#ABABAB;"></i><input value="cascadeops.com" style="flex:1; border:0; outline:0; font-size:16px; background:transparent;" /></div>
+        <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:15px; padding:14px; border-radius:10px; text-align:center;">Run free scan</div>
+      </div>
+      <div style="margin-top:14px; font-size:12.5px; color:#ABABAB; line-height:1.5;">Free and unlimited. Email required only for the full report.</div>
+    </section>
+    <section style="padding:8px 18px 36px;">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="3">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:18px;">
+            <div style="font-size:26px; font-weight:600; letter-spacing:-0.02em; margin-bottom:4px;">{{ s.figure }}</div>
+            <div style="font-size:13.5px; color:#6B6B6B; line-height:1.5;">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="padding:0 18px 44px;">
+      <div style="font-size:13px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:14px;">Eight modules</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <sc-for list="{{ modules }}" as="m" hint-placeholder-count="8">
+          <div style="background:#fff; border:1px solid #E6E6E6; border-radius:14px; padding:16px; display:flex; gap:13px; align-items:flex-start;">
+            <div style="width:36px; height:36px; border-radius:9px; background:#FFF1EB; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="{{ m.icon }}" style="width:18px; height:18px; color:#FF4D00;"></i></div>
+            <div>
+              <div style="font-size:15px; font-weight:600; margin-bottom:3px;">{{ m.name }}</div>
+              <div style="font-size:13.5px; color:#6B6B6B; line-height:1.5;">{{ m.desc }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ im.contrast }}">
+    <section style="padding:26px 18px 40px;">
+      <h1 style="margin:0 0 10px; font-size:28px; line-height:1.12; letter-spacing:-0.028em; font-weight:600;">Colour contrast checker</h1>
+      <p style="margin:0 0 22px; font-size:15px; color:#6B6B6B; line-height:1.55;">Check any pair against WCAG 2.2. Nothing to sign up for.</p>
+      <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:18px; margin-bottom:12px;">
+        <div style="font-size:12.5px; font-weight:600; color:#6B6B6B; margin-bottom:7px;">Foreground</div>
+        <div style="display:flex; align-items:center; gap:11px; border:1px solid #E6E6E6; border-radius:11px; padding:9px 11px; background:#FCFCFC; margin-bottom:14px;">
+          <input type="color" value="{{ fg }}" onChange="{{ setFg }}" style="width:36px; height:36px; border:1px solid #E6E6E6; border-radius:8px; padding:2px; background:#fff;" />
+          <input value="{{ fg }}" onChange="{{ setFg }}" style="flex:1; border:0; outline:0; background:transparent; font-size:16px; font-weight:500;" />
+        </div>
+        <div style="font-size:12.5px; font-weight:600; color:#6B6B6B; margin-bottom:7px;">Background</div>
+        <div style="display:flex; align-items:center; gap:11px; border:1px solid #E6E6E6; border-radius:11px; padding:9px 11px; background:#FCFCFC;">
+          <input type="color" value="{{ bg }}" onChange="{{ setBg }}" style="width:36px; height:36px; border:1px solid #E6E6E6; border-radius:8px; padding:2px; background:#fff;" />
+          <input value="{{ bg }}" onChange="{{ setBg }}" style="flex:1; border:0; outline:0; background:transparent; font-size:16px; font-weight:500;" />
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:20px; margin-bottom:12px; text-align:center;">
+        <div style="font-size:12.5px; font-weight:600; color:#6B6B6B; margin-bottom:8px;">Contrast ratio</div>
+        <div style="font-size:46px; line-height:1; font-weight:600; letter-spacing:-0.035em; margin-bottom:14px;">{{ ratioText }}</div>
+        <div style="display:inline-block; padding:9px 16px; border-radius:999px; background:{{ verdict.bg }}; color:{{ verdict.fg }}; border:1px solid {{ verdict.bd }}; font-size:13.5px; font-weight:600;">{{ verdict.label }}</div>
+      </div>
+      <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:6px 18px; margin-bottom:12px;">
+        <sc-for list="{{ checks }}" as="c" hint-placeholder-count="5">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 0; border-bottom:1px solid #F4F4F4;">
+            <div style="display:flex; align-items:center; gap:9px; min-width:0;">
+              <div style="width:20px; height:20px; border-radius:999px; background:{{ c.bg }}; border:1px solid {{ c.bd }}; display:grid; place-items:center; flex-shrink:0;"><i data-lucide="{{ c.icon }}" style="width:12px; height:12px; color:{{ c.fg }};"></i></div>
+              <div style="font-size:13.5px; line-height:1.35;">{{ c.label }}</div>
+            </div>
+            <div style="font-size:12.5px; color:#ABABAB; white-space:nowrap;">{{ c.need }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="border:1px solid #E6E6E6; border-radius:16px; overflow:hidden; margin-bottom:12px;">
+        <div style="padding:11px 16px; background:#fff; border-bottom:1px solid #F0F0F0; font-size:12.5px; font-weight:600; color:#6B6B6B;">Live preview</div>
+        <div style="padding:24px 18px; background:{{ bg }}; display:flex; flex-direction:column; gap:14px;">
+          <div style="font-size:23px; font-weight:600; letter-spacing:-0.02em; color:{{ fg }};">Route freight in real time</div>
+          <div style="font-size:15px; line-height:1.6; color:{{ fg }};">Body copy at 16 pixels, the size that has to clear 4.5 to 1.</div>
+          <div style="border:2px solid {{ fg }}; color:{{ fg }}; padding:10px 16px; border-radius:999px; font-size:14px; font-weight:600; align-self:flex-start;">Secondary button</div>
+        </div>
+      </div>
+      <div style="background:#1A1A1A; border-radius:16px; padding:20px;">
+        <div style="font-size:16px; font-weight:600; color:#fff; margin-bottom:6px;">Your live site has 14 failing text nodes</div>
+        <div style="font-size:13.5px; color:#A8A8A8; line-height:1.55; margin-bottom:16px;">Run the full scan to find every one, with the Webflow fix for each.</div>
+        <div style="background:#FF4D00; color:#fff; text-align:center; font-weight:600; font-size:14.5px; padding:13px; border-radius:10px;">Scan a page</div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ im.gate }}">
+    <section style="padding:26px 18px 40px;">
+      <div style="display:inline-flex; align-items:center; gap:7px; padding:6px 12px; border-radius:999px; background:#E7F5F0; color:#0E6B4E; font-size:12.5px; font-weight:600; margin-bottom:18px;"><i data-lucide="check" style="width:13px; height:13px;"></i>Scan finished in 18.4s</div>
+      <h1 style="margin:0 0 10px; font-size:28px; line-height:1.12; letter-spacing:-0.028em; font-weight:600;">Your report is ready</h1>
+      <p style="margin:0 0 20px; font-size:15px; color:#6B6B6B; line-height:1.6;">We found <strong style="color:#1A1A1A; font-weight:600;">62 issues across 13 rules</strong> on cascadeops.com/pricing, 31 of them critical.</p>
+      <div style="position:relative; border:1px solid #E6E6E6; border-radius:16px; overflow:hidden; background:#fff; margin-bottom:16px; height:150px;">
+        <div style="padding:18px; filter:blur(3px); opacity:0.5;">
+          <div style="font-size:44px; font-weight:600; letter-spacing:-0.03em;">61</div>
+          <sc-for list="{{ bySev }}" as="s" hint-placeholder-count="4">
+            <div style="display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid #F4F4F4; font-size:13.5px;"><span>{{ s.label }}</span><span style="font-weight:600;">{{ s.count }}</span></div>
+          </sc-for>
+        </div>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #fff 85%);"></div>
+      </div>
+      <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:20px;">
+        <div style="font-size:12.5px; font-weight:600; color:#6B6B6B; margin-bottom:7px;">Work email</div>
+        <input placeholder="you@company.com" style="width:100%; box-sizing:border-box; border:1px solid #E6E6E6; border-radius:11px; padding:14px; font-size:16px; outline:0; background:#FCFCFC; margin-bottom:14px;" />
+        <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:15px; padding:14px; border-radius:11px; text-align:center;">Open the full report</div>
+        <div style="margin-top:12px; font-size:12.5px; color:#ABABAB; line-height:1.5;">One email, no drip sequence. The contrast checker stays free and ungated either way.</div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ im.report }}">
+    <div style="position:sticky; top:60px; z-index:20; background:#fff; border-bottom:1px solid #EDEDED; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <div style="min-width:0;">
+        <div style="font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">cascadeops.com/pricing</div>
+        <div style="font-size:11.5px; color:#ABABAB;">6 Aug 2026 &#183; WCAG 2.2 AA</div>
+      </div>
+      <div style="display:flex; gap:8px; flex-shrink:0;">
+        <div style="width:38px; height:38px; border:1px solid #E6E6E6; border-radius:10px; display:grid; place-items:center;"><i data-lucide="download" style="width:16px; height:16px; color:#6B6B6B;"></i></div>
+        <div style="background:#FF4D00; color:#fff; font-weight:600; font-size:13.5px; padding:10px 15px; border-radius:10px;">Book a call</div>
+      </div>
+    </div>
+    <section style="padding:16px 18px 40px;">
+      <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; padding:22px; margin-bottom:12px; text-align:center;">
+        <div style="font-size:12px; font-weight:600; color:#ABABAB; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:8px;">Automated score</div>
+        <div style="font-size:56px; line-height:1; font-weight:600; letter-spacing:-0.04em; color:#B42318;">61</div>
+        <div style="font-size:13.5px; color:#6B6B6B; margin-top:5px; margin-bottom:14px;">62 issues across 13 rules</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <sc-for list="{{ bySev }}" as="s" hint-placeholder-count="4">
+            <div style="border:1px solid #EDEDED; border-radius:11px; padding:12px; text-align:left;">
+              <div style="display:flex; align-items:center; gap:6px; margin-bottom:5px;"><span style="width:7px; height:7px; border-radius:999px; background:{{ s.dot }}; display:inline-block;"></span><span style="font-size:12px; color:#6B6B6B;">{{ s.label }}</span></div>
+              <div style="font-size:21px; font-weight:600; letter-spacing:-0.02em;">{{ s.count }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#1A1A1A; border-radius:16px; padding:18px; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+          <div style="font-size:14.5px; font-weight:600; color:#fff;">Automated coverage</div>
+          <div style="font-size:20px; font-weight:600; color:#fff;">33%</div>
+        </div>
+        <div style="font-size:13px; color:#A8A8A8; line-height:1.55;">21 of 62 criteria can be judged by software. We will not tell you that you are compliant, because no scanner can.</div>
+      </div>
+      <div style="background:#fff; border:1px solid #E6E6E6; border-radius:16px; overflow:hidden;">
+        <sc-for list="{{ rules }}" as="r" hint-placeholder-count="8">
+          <div style="padding:15px 16px; border-bottom:1px solid #F4F4F4; display:flex; align-items:center; gap:12px;">
+            <div style="width:8px; height:8px; border-radius:999px; background:{{ r.dot }}; flex-shrink:0;"></div>
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:14.5px; font-weight:600; line-height:1.35; margin-bottom:4px;">{{ r.name }}</div>
+              <div style="font-size:12.5px; color:#ABABAB;">{{ r.levelLabel }} &#183; {{ r.countLabel }}</div>
+            </div>
+            <i data-lucide="chevron-right" style="width:16px; height:16px; color:#D4D4D4; flex-shrink:0;"></i>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showFooter }}">
+    <footer style="background:#fff; border-top:1px solid #EDEDED; padding:56px 40px 32px;">
+      <div style="max-width:1280px; margin:0 auto;">
+        <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:40px; border-bottom:1px solid #F0F0F0;">
+          <div>
+            <div style="font-weight:700; font-size:19px; letter-spacing:0.14em; color:#FF4D00; margin-bottom:16px;">WEBYANSH</div>
+            <div style="font-size:14px; color:#6B6B6B; line-height:1.7;">India, Rajajinagar, Bangalore,<br />Karnataka, 560021</div>
+            <div style="font-size:14px; color:#6B6B6B; line-height:1.7; margin-top:12px;">+91 6377588843<br />divyansh@webyansh.com</div>
+          </div>
+          <div>
+            <div style="font-size:14px; font-weight:600; margin-bottom:14px;">Free tools</div>
+            <div style="display:flex; flex-direction:column; gap:9px; font-size:14px; color:#6B6B6B;">
+              <div>Contrast checker</div><div>WCAG scanner</div><div>Jurisdiction mapper</div><div>Statement generator</div><div>VPAT draft</div><div>Alt text auditor</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:14px; font-weight:600; margin-bottom:14px;">Services</div>
+            <div style="display:flex; flex-direction:column; gap:9px; font-size:14px; color:#6B6B6B;">
+              <div>Web design (UI/UX)</div><div>Webflow development</div><div>Webflow migration</div><div>Webflow SEO</div><div>Maintenance and support</div><div>Conversion rate optimization</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:14px; font-weight:600; margin-bottom:14px;">Company</div>
+            <div style="display:flex; flex-direction:column; gap:9px; font-size:14px; color:#6B6B6B;">
+              <div>Portfolio</div><div>Pricing</div><div>Contact</div><div>Blogs</div><div>Press and media</div><div>Careers</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding-top:24px; display:flex; align-items:center; justify-content:space-between; font-size:13.5px; color:#ABABAB;">
+          <div>&#169; 2026 Webyansh. All rights reserved.</div>
+          <div style="display:flex; gap:22px;"><span>Privacy policy</span><span>Terms and conditions</span><span>Accessibility statement</span></div>
+        </div>
+      </div>
+    </footer>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;screen&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;hub&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;device&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;desktop&quot;,&quot;mobile&quot;],&quot;default&quot;:&quot;desktop&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { fg: null, bg: null, tab: 'single', sev: 'all', issue: 0, markets: null, email: '', gateStep: 'form' };
+
+  componentDidMount() { this.icons(); }
+  componentDidUpdate() { this.icons(); }
+  icons() {
+    clearTimeout(this._t);
+    this._t = setTimeout(() => { try { window.lucide && window.lucide.createIcons(); } catch (e) {} }, 30);
+  }
+
+  // ---- colour maths ----
+  hex2rgb(h) {
+    const s = String(h || '').replace('#', '').trim();
+    const v = s.length === 3 ? s.split('').map(c => c + c).join('') : s.padEnd(6, '0').slice(0, 6);
+    return [0, 2, 4].map(i => parseInt(v.slice(i, i + 2), 16) || 0);
+  }
+  lum(h) {
+    const [r, g, b] = this.hex2rgb(h).map(v => { const c = v / 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+  ratio(a, b) { const l1 = this.lum(a), l2 = this.lum(b); const hi = Math.max(l1, l2), lo = Math.min(l1, l2); return (hi + 0.05) / (lo + 0.05); }
+
+  chip(pass) {
+    return pass
+      ? { label: 'Pass', bg: '#E7F5F0', fg: '#0E6B4E', bd: '#BFE5D6', icon: 'check' }
+      : { label: 'Fail', bg: '#FDECEA', fg: '#B42318', bd: '#F6CFCA', icon: 'x' };
+  }
+
+  sevMeta(s) {
+    return {
+      Critical: { bg: '#FDECEA', fg: '#B42318', dot: '#D92D20' },
+      Serious: { bg: '#FEF3E6', fg: '#93500B', dot: '#E07A1F' },
+      Moderate: { bg: '#EAF1FE', fg: '#1049A8', dot: '#146EF5' },
+      Minor: { bg: '#F2F2F2', fg: '#5A5A5A', dot: '#9A9A9A' }
+    }[s];
+  }
+
+  rules() {
+    return [
+      { id: 'contrast', sc: '1.4.3', name: 'Text has insufficient colour contrast', level: 'AA', sev: 'Critical', count: 14, sel: '.btn-secondary, .footer__link, .pricing-card__note',
+        why: 'Foreground and background do not reach a 4.5:1 ratio for body text. The secondary button uses #FF7A45 on #FFFFFF, which measures 2.59:1.',
+        wf: ['Open Webflow Designer and select one instance of the Secondary button.', 'In the Style panel, confirm the class is btn-secondary rather than a combo class.', 'Under Typography, set Colour to #B23600. This measures 6.14:1 on white, comfortably clear of the 4.5:1 minimum.', 'Repeat for footer__link and pricing-card__note, then publish to staging and re-scan.'] },
+      { id: 'alt', sc: '1.1.1', name: 'Images are missing alternative text', level: 'A', sev: 'Critical', count: 9, sel: 'Blog posts collection, thumbnail field',
+        why: 'Nine images render with an empty alt attribute. Six of them are inside a CMS collection list, so the fix belongs on the field, not the element.',
+        wf: ['Go to CMS, then the Blog posts collection, and open the Thumbnail image field.', 'Add an Alt text plain-text field to the collection if one does not exist.', 'In Designer, select the collection item image and bind Alt text to the new field.', 'Use the alt text auditor to draft the nine strings, then paste them into the CMS in bulk.'] },
+      { id: 'labels', sc: '3.3.2', name: 'Form inputs have no associated label', level: 'A', sev: 'Critical', count: 4, sel: '#newsletter-email, #contact-name, #contact-phone, #search',
+        why: 'Placeholder text is being used instead of a label. Placeholders disappear on focus and are not announced reliably by screen readers.',
+        wf: ['Select the input in Designer and check the Settings panel for its Name.', 'Add a Label element above the input and set For to the same name.', 'If the design needs no visible label, keep the label and apply a screen-reader-only class instead of display: none.', 'Never delete the label to hide it. display: none removes it from the accessibility tree.'] },
+      { id: 'keyboard', sc: '2.1.1', name: 'Interactive element is not keyboard operable', level: 'A', sev: 'Critical', count: 3, sel: '.faq-toggle, .filter-chip, .video-play',
+        why: 'A div carries the click interaction. Keyboard and switch users cannot reach or trigger it.',
+        wf: ['Replace the div with a Link block or Button element, which are focusable by default.', 'If the element must stay a div, add tabindex="0" and role="button" in Settings, then handle Enter and Space.', 'Check the tab order in preview before publishing.'] },
+      { id: 'captions', sc: '1.2.2', name: 'Video has no captions', level: 'A', sev: 'Critical', count: 1, sel: '.testimonial-video',
+        why: 'The embedded testimonial has no caption track. Prerecorded audio content needs synchronised captions.',
+        wf: ['Upload a .vtt caption file to the hosting provider, or enable captions on the Vimeo or YouTube source.', 'If the video is background-only and decorative, mark it aria-hidden and provide a text alternative nearby.'] },
+      { id: 'linkname', sc: '2.4.4', name: 'Link text does not describe its destination', level: 'A', sev: 'Serious', count: 11, sel: 'a.card__cta ("Read more")',
+        why: 'Eleven links read as "Read more" out of context. A screen reader user listing links hears the same phrase eleven times.',
+        wf: ['Select the link inside the collection item and bind its text to the post title.', 'If the visible label must stay short, add an aria-label in Settings that includes the title.'] },
+      { id: 'target', sc: '2.5.8', name: 'Target size is below 24 by 24 CSS pixels', level: 'AA', sev: 'Serious', count: 7, sel: '.footer__social a, .table__sort',
+        why: 'New in WCAG 2.2. The footer social icons measure 18 by 18 with no spacing offset.',
+        wf: ['Select the social link and set a minimum height and width of 24px in the Style panel.', 'Add 8px padding and keep the icon at 18px so the visual weight does not change.'] },
+      { id: 'headings', sc: '1.3.1', name: 'Heading levels are skipped', level: 'A', sev: 'Serious', count: 6, sel: 'h2 followed by h4 in three sections',
+        why: 'The document outline jumps from h2 to h4, so assistive technology reports a missing level.',
+        wf: ['Select the heading and change the tag in Settings rather than restyling a lower level.', 'Create a text style class so an h3 can look like the current h4 without breaking the outline.'] },
+      { id: 'focus', sc: '2.4.7', name: 'Focus indicator has been removed', level: 'AA', sev: 'Serious', count: 1, sel: 'Global: *:focus { outline: none }',
+        why: 'A reset in the site-wide custom code removes the focus ring from every control.',
+        wf: ['Open Project settings, then Custom code, and remove the outline: none reset.', 'Replace it with a visible ring: :focus-visible { outline: 2px solid #FF4D00; outline-offset: 2px; }', 'Tab through the page in preview to confirm every control shows the ring.'] },
+      { id: 'landmark', sc: '1.3.1', name: 'Page has no main landmark', level: 'A', sev: 'Moderate', count: 1, sel: 'body > div.page-wrapper',
+        why: 'There is no main region, so screen reader users cannot skip past the navigation.',
+        wf: ['Select the page wrapper and set its tag to Main in the Settings panel.', 'Add a skip link as the first focusable element pointing at the main region.'] },
+      { id: 'lang', sc: '3.1.1', name: 'html element has no lang attribute', level: 'A', sev: 'Moderate', count: 1, sel: '<html>',
+        why: 'Without a language, screen readers guess the pronunciation rules.',
+        wf: ['Open Project settings, then General, and set the site language to English (United States).'] },
+      { id: 'zoom', sc: '1.4.4', name: 'Content is clipped at 200% zoom', level: 'AA', sev: 'Moderate', count: 2, sel: '.hero__eyebrow, .nav__cta',
+        why: 'Fixed pixel heights on two containers cut off text when the user enlarges type.',
+        wf: ['Change the fixed Height on the container to Auto and set a Min height instead.', 'Test at 200% in preview with browser zoom rather than device preview.'] },
+      { id: 'obscured', sc: '2.4.11', name: 'Focused element is hidden behind sticky header', level: 'AA', sev: 'Minor', count: 2, sel: '.section-anchor targets',
+        why: 'New in WCAG 2.2. The sticky header covers the focused element when a user tabs to an anchor.',
+        wf: ['Add scroll-margin-top equal to the header height on anchor targets via a custom class.'] }
+    ];
+  }
+
+  renderVals() {
+    const screen = this.props.screen || 'hub';
+    const device = this.props.device || 'desktop';
+    const rules = this.rules().map((r, i) => {
+      const m = this.sevMeta(r.sev);
+      return { ...r, ...m, idx: i, levelLabel: 'WCAG ' + r.sc + ' (' + r.level + ')', countLabel: r.count === 1 ? '1 element' : r.count + ' elements' };
+    });
+    const total = rules.reduce((a, r) => a + r.count, 0);
+    const active = rules[0];
+    const activeSteps = active.wf.map((s, i) => ({ n: i + 1, text: s }));
+    const topFixes = rules.slice(0, 3).map(r => ({ ...r, effort: ['30 min', '2 hours', '45 min'][rules.indexOf(r)] || '1 hour' }));
+    const passRules = [
+      { sc: '2.4.11', name: 'Focused element is hidden behind sticky header', level: 'AA', sev: 'Minor', count: 2, bg: '#F2F2F2', fg: '#5A5A5A', dot: '#9A9A9A', levelLabel: 'WCAG 2.4.11 (AA)', countLabel: '2 elements' },
+      { sc: '1.4.4', name: 'Content is clipped at 200% zoom', level: 'AA', sev: 'Moderate', count: 1, bg: '#EAF1FE', fg: '#1049A8', dot: '#146EF5', levelLabel: 'WCAG 1.4.4 (AA)', countLabel: '1 element' }
+    ];
+    const skeletonRows = [1, 2, 3, 4, 5, 6, 7];
+    const bySev = ['Critical', 'Serious', 'Moderate', 'Minor'].map(s => {
+      const m = this.sevMeta(s);
+      return { key: s, label: s, count: rules.filter(r => r.sev === s).reduce((a, r) => a + r.count, 0), rules: rules.filter(r => r.sev === s).length, ...m };
+    });
+
+    // contrast presets per screen
+    const preset = screen === 'contrast-pass' ? { fg: '#1A1A1A', bg: '#FFFFFF' } : { fg: '#FF7A45', bg: '#FFFFFF' };
+    const fg = this.state.fg || preset.fg;
+    const bg = this.state.bg || preset.bg;
+    const r = this.ratio(fg, bg);
+    const rr = Math.round(r * 100) / 100;
+    const checks = [
+      { label: 'AA  ·  Normal text', need: '4.5:1', pass: r >= 4.5 },
+      { label: 'AA  ·  Large text (18.66px bold, 24px)', need: '3:1', pass: r >= 3 },
+      { label: 'AAA  ·  Normal text', need: '7:1', pass: r >= 7 },
+      { label: 'AAA  ·  Large text', need: '4.5:1', pass: r >= 4.5 },
+      { label: 'UI components and graphics', need: '3:1', pass: r >= 3 }
+    ].map(c => ({ ...c, ...this.chip(c.pass) }));
+    const passCount = checks.filter(c => c.pass).length;
+    const verdict = r >= 4.5 ? { label: 'Passes AA for body text', bg: '#E7F5F0', fg: '#0E6B4E', bd: '#BFE5D6' }
+      : r >= 3 ? { label: 'Fails AA for body text', bg: '#FEF3E6', fg: '#93500B', bd: '#F6DFC0' }
+        : { label: 'Fails AA and AAA', bg: '#FDECEA', fg: '#B42318', bd: '#F6CFCA' };
+
+    // darkened suggestions that reach 4.5:1 on the current background
+    const suggestions = [];
+    const [r0, g0, b0] = this.hex2rgb(fg);
+    for (let step = 0; step <= 100 && suggestions.length < 3; step += 4) {
+      const k = 1 - step / 100;
+      const cand = '#' + [r0, g0, b0].map(v => Math.round(v * k).toString(16).padStart(2, '0')).join('').toUpperCase();
+      const cr = this.ratio(cand, bg);
+      if (cr >= 4.5 && !suggestions.length) suggestions.push({ hex: cand, ratio: cr.toFixed(2) + ':1', note: 'Closest darker tint that passes AA' });
+      if (cr >= 7 && suggestions.length === 1) suggestions.push({ hex: cand, ratio: cr.toFixed(2) + ':1', note: 'Passes AAA for body text' });
+    }
+    suggestions.push({ hex: '#1A1A1A', ratio: this.ratio('#1A1A1A', bg).toFixed(2) + ':1', note: 'Brand ink, safe at every size' });
+
+    const paletteColors = [
+      { name: 'Orange 500', hex: '#FF4D00' }, { name: 'Orange 300', hex: '#FF7A45' }, { name: 'Ink 900', hex: '#1A1A1A' },
+      { name: 'Grey 500', hex: '#6B6B6B' }, { name: 'Grey 300', hex: '#ABABAB' }, { name: 'Surface', hex: '#F6F6F6' }, { name: 'White', hex: '#FFFFFF' }
+    ];
+    const matrix = paletteColors.map(row => ({
+      name: row.name, hex: row.hex,
+      cells: paletteColors.map(col => {
+        const cr = this.ratio(row.hex, col.hex);
+        return { on: col.hex, val: cr >= 1.02 ? cr.toFixed(1) : '—',
+          bg: cr >= 4.5 ? '#E7F5F0' : cr >= 3 ? '#FEF3E6' : '#FDECEA',
+          fg: cr >= 4.5 ? '#0E6B4E' : cr >= 3 ? '#93500B' : '#B42318',
+          same: row.hex === col.hex };
+      })
+    }));
+    const failingPairs = 21;
+
+    const T = t => ({ red: { bg: '#FDECEA', fg: '#B42318' }, amber: { bg: '#FEF3E6', fg: '#93500B' }, green: { bg: '#E7F5F0', fg: '#0E6B4E' }, blue: { bg: '#EAF1FE', fg: '#1049A8' }, grey: { bg: '#F2F2F2', fg: '#5A5A5A' } }[t] || { bg: '#F2F2F2', fg: '#5A5A5A' });
+    const box = on => ({ boxBg: on ? '#FF4D00' : '#FFFFFF', boxBd: on ? '#FF4D00' : '#D4D4D4', icon: 'check', color: on ? '#1A1A1A' : '#ABABAB' });
+    const out = {
+      screen, device,
+      isDesktop: device === 'desktop', isMobile: device === 'mobile',
+      isHub: screen === 'hub',
+      is: {
+        hub: screen === 'hub',
+        contrast: screen === 'contrast' || screen === 'contrast-pass',
+        palette: screen === 'contrast-palette',
+        scan: screen === 'scan',
+        progress: screen === 'scan-progress',
+        gate: screen === 'gate',
+        gateSent: screen === 'gate-sent',
+        report: screen === 'report',
+        issue: screen === 'report-issue',
+        reportPass: screen === 'report-pass',
+        skeleton: screen === 'report-skeleton',
+        error: screen === 'report-error',
+        jurisdiction: screen === 'jurisdiction',
+        statement: screen === 'statement',
+        vpat: screen === 'vpat',
+        alt: screen === 'alt',
+        monitor: screen === 'monitor',
+        monitorAlert: screen === 'monitor-alert',
+        anyMonitor: screen === 'monitor' || screen === 'monitor-alert',
+        toolbar: ['report', 'report-issue', 'report-pass', 'report-skeleton', 'report-error', 'jurisdiction', 'statement', 'vpat', 'alt', 'monitor', 'monitor-alert'].indexOf(screen) > -1
+      },
+      tabs: [
+        { id: 'report', label: 'Overview', active: ['report', 'report-issue', 'report-pass', 'report-skeleton', 'report-error'].indexOf(screen) > -1 },
+        { id: 'jurisdiction', label: 'Jurisdictions', active: screen === 'jurisdiction' },
+        { id: 'alt', label: 'Alt text', active: screen === 'alt' },
+        { id: 'statement', label: 'Statement', active: screen === 'statement' },
+        { id: 'vpat', label: 'VPAT', active: screen === 'vpat' },
+        { id: 'monitor', label: 'Monitoring', active: screen === 'monitor' || screen === 'monitor-alert' }
+      ].map(t => ({ ...t, tabBg: t.active ? '#FFF1EB' : 'transparent', tabFg: t.active ? '#1A1A1A' : '#6B6B6B', tabWeight: t.active ? '600' : '500' })),
+      progress: [
+        { label: 'Fetching page', state: 'done', note: '1.2s' },
+        { label: 'Rendering with a headless browser', state: 'done', note: '3.4s' },
+        { label: 'Running axe-core against WCAG 2.2 AA', state: 'active', note: '62 rules' },
+        { label: 'Measuring contrast on every text node', state: 'idle', note: '' },
+        { label: 'Mapping issues to Webflow fixes', state: 'idle', note: '' }
+      ].map(p => ({
+        ...p,
+        isDone: p.state === 'done', isActive: p.state === 'active', isIdle: p.state === 'idle',
+        color: p.state === 'idle' ? '#ABABAB' : '#1A1A1A',
+        weight: p.state === 'active' ? '600' : '400'
+      })),
+      errors: [
+        { icon: 'unplug', title: 'We could not reach that URL', body: 'The server returned a 403 before the page rendered. This usually means a firewall or bot protection is blocking our crawler.', fix: 'Allowlist WebyanshBot in Cloudflare, or paste the HTML directly.', cta: 'Try another URL' },
+        { icon: 'shield-off', title: 'robots.txt blocks this path', body: 'cascadeops.com/robots.txt disallows /app/ for all user agents. We respect robots.txt and will not scan it.', fix: 'Scan a public page instead, or add an allow rule for WebyanshBot.', cta: 'Scan the homepage' },
+        { icon: 'timer-off', title: 'The page did not finish loading', body: 'Rendering timed out after 30 seconds. Heavy client-side apps sometimes need longer than a single-page scan allows.', fix: 'We can queue a slow scan and email you when it is done.', cta: 'Queue a slow scan' }
+      ],
+      markets: [
+        { code: 'us', name: 'United States', on: true },
+        { code: 'eu', name: 'European Union', on: true },
+        { code: 'uk', name: 'United Kingdom', on: false },
+        { code: 'ca', name: 'Canada (Ontario)', on: true },
+        { code: 'au', name: 'Australia', on: false }
+      ],
+      sectors: [
+        { name: 'Private business', on: true },
+        { name: 'Public sector body', on: false },
+        { name: 'Sells to US federal government', on: true },
+        { name: 'Banking, e-commerce or transport', on: true }
+      ],
+      regimes: [
+        { law: 'ADA Title III', region: 'United States', status: 'Applies now', deadline: 'In force', standard: 'WCAG 2.1 AA in practice', note: 'Enforced through private litigation. There is no certification and no safe harbour.', tone: 'red' },
+        { law: 'Section 508', region: 'United States', status: 'Applies now', deadline: 'In force', standard: 'Revised 508, WCAG 2.0 AA', note: 'Triggered because you sell to a federal agency. Procurement will ask for a VPAT.', tone: 'red' },
+        { law: 'European Accessibility Act', region: 'European Union', status: 'Applies now', deadline: '28 Jun 2025', standard: 'EN 301 549, WCAG 2.1 AA', note: 'Binds any business selling to EU consumers regardless of where it is based. An accessibility statement is mandatory.', tone: 'red' },
+        { law: 'EN 301 549', region: 'European Union', status: 'Applies now', deadline: 'In force', standard: 'WCAG 2.1 AA baseline', note: 'The harmonised standard the EAA is measured against.', tone: 'red' },
+        { law: 'AODA', region: 'Ontario, Canada', status: 'Applies now', deadline: 'In force since 1 Jan 2021', standard: 'WCAG 2.0 AA', note: 'Organisations with 50 or more employees must also file a compliance report.', tone: 'amber' },
+        { law: 'ADA Title II', region: 'United States', status: 'Does not apply', deadline: '26 Apr 2027', standard: 'WCAG 2.1 AA', note: 'Public entities only. Listed because it drives the wider US enforcement climate.', tone: 'grey' }
+      ],
+      caseNote: 'In June 2026 a French court ordered Carrefour to reach full compliance under a EUR 500 per day penalty, explicitly rejecting a 71% conformance score as insufficient. Partial compliance is not a legal position.',
+      statementFields: [
+        { label: 'Organisation', value: 'Cascade Ops Inc.', hint: 'Appears in the first line of the statement' },
+        { label: 'Conformance target', value: 'WCAG 2.2 level AA', hint: 'The standard you are measuring against' },
+        { label: 'Current status', value: 'Partially conformant', hint: 'Set from your latest scan. Do not overstate this.' },
+        { label: 'Contact for accessibility issues', value: 'access@cascadeops.com', hint: 'The EAA requires a working feedback channel' },
+        { label: 'Assessment method', value: 'Automated scan and manual audit', hint: 'Self-assessment, third-party audit, or both' },
+        { label: 'Last reviewed', value: '6 August 2026', hint: 'Review at least once a year' }
+      ],
+      knownIssues: [
+        'Colour contrast on secondary buttons and footer links falls below 4.5:1. Fix scheduled for 20 August 2026.',
+        'Nine blog thumbnails carry no alternative text. Being written now.',
+        'The testimonial video has no captions. A caption track is in production.'
+      ],
+      vpatEditions: [
+        { name: 'WCAG edition', on: true }, { name: 'Section 508 edition', on: true }, { name: 'EU edition (EN 301 549)', on: false }, { name: 'INT edition', on: false }
+      ],
+      vpatRows: [
+        { sc: '1.1.1', name: 'Non-text Content', level: 'A', conf: 'Partially supports', remark: 'Nine images inside the blog collection have no alt attribute. Static images are covered.', tone: 'amber' },
+        { sc: '1.2.2', name: 'Captions (Prerecorded)', level: 'A', conf: 'Does not support', remark: 'The testimonial video has no caption track.', tone: 'red' },
+        { sc: '1.3.1', name: 'Info and Relationships', level: 'A', conf: 'Partially supports', remark: 'Heading levels skip from h2 to h4 in three sections. No main landmark.', tone: 'amber' },
+        { sc: '1.4.3', name: 'Contrast (Minimum)', level: 'AA', conf: 'Does not support', remark: '14 text nodes measure below 4.5:1, the lowest at 2.59:1.', tone: 'red' },
+        { sc: '2.1.1', name: 'Keyboard', level: 'A', conf: 'Does not support', remark: 'Three controls built as divs cannot be reached by keyboard.', tone: 'red' },
+        { sc: '2.4.4', name: 'Link Purpose (In Context)', level: 'A', conf: 'Partially supports', remark: 'Eleven links read as "Read more".', tone: 'amber' },
+        { sc: '2.4.7', name: 'Focus Visible', level: 'AA', conf: 'Does not support', remark: 'A global reset removes the focus indicator.', tone: 'red' },
+        { sc: '2.5.8', name: 'Target Size (Minimum)', level: 'AA', conf: 'Partially supports', remark: 'Footer social links measure 18 by 18 pixels.', tone: 'amber' },
+        { sc: '3.1.1', name: 'Language of Page', level: 'A', conf: 'Does not support', remark: 'The html element has no lang attribute.', tone: 'red' },
+        { sc: '3.3.2', name: 'Labels or Instructions', level: 'A', conf: 'Does not support', remark: 'Four inputs rely on placeholder text alone.', tone: 'red' },
+        { sc: '4.1.2', name: 'Name, Role, Value', level: 'A', conf: 'Supports', remark: 'No ARIA violations detected.', tone: 'green' }
+      ],
+      altRows: [
+        { file: 'hero-dashboard-dark.avif', where: 'Static, homepage hero', status: 'Missing', tone: 'red', current: '', draft: 'The Cascade Ops dashboard showing live shipment routes across North America.', on: true },
+        { file: 'blog/warehouse-robotics.avif', where: 'CMS, Blog posts, Thumbnail', status: 'Missing', tone: 'red', current: '', draft: 'Robotic arms sorting parcels on a warehouse conveyor line.', on: true },
+        { file: 'blog/cold-chain.avif', where: 'CMS, Blog posts, Thumbnail', status: 'Missing', tone: 'red', current: '', draft: 'A refrigerated trailer being loaded at a distribution centre.', on: true },
+        { file: 'logo-acme.svg', where: 'Static, logo strip', status: 'Unhelpful', tone: 'amber', current: 'image', draft: 'Acme Logistics', on: true },
+        { file: 'icon-arrow-right.svg', where: 'Static, button icon', status: 'Should be empty', tone: 'blue', current: 'arrow', draft: '', on: true },
+        { file: 'team-photo-2026.avif', where: 'Static, about section', status: 'Unhelpful', tone: 'amber', current: 'IMG_4821', draft: 'The Cascade Ops team of eleven standing outside the Denver office.', on: false },
+        { file: 'og-share-card.png', where: 'Static, decorative', status: 'Good', tone: 'green', current: 'Cascade Ops brand card', draft: 'Cascade Ops brand card', on: false }
+      ],
+      monitorPages: [
+        { url: '/', score: 82, delta: '+4', tone: 'green', issues: 6, last: '2h ago' },
+        { url: '/pricing', score: 61, delta: '-14', tone: 'red', issues: 24, last: '2h ago' },
+        { url: '/blog', score: 74, delta: '0', tone: 'grey', issues: 11, last: '2h ago' },
+        { url: '/contact', score: 88, delta: '+1', tone: 'green', issues: 3, last: '2h ago' },
+        { url: '/product/routing', score: 70, delta: '-2', tone: 'amber', issues: 14, last: '2h ago' }
+      ],
+      trend: [72, 74, 74, 76, 79, 81, 80, 83, 84, 84, 70, 68],
+      events: [
+        { when: '4 Aug, 09:14', title: 'Publish broke 3 checks that previously passed', detail: 'Pricing page. Focus indicator removed globally, two inputs lost their labels.', tone: 'red', icon: 'alert-triangle' },
+        { when: '28 Jul, 11:02', title: 'Contrast fixed on 14 elements', detail: 'Secondary button and footer links moved to #B23600.', tone: 'green', icon: 'check' },
+        { when: '21 Jul, 08:00', title: 'Weekly scan completed, no change', detail: '5 pages, 58 issues, score held at 84.', tone: 'grey', icon: 'activity' },
+        { when: '14 Jul, 08:00', title: 'New page added to monitoring', detail: '/product/routing picked up from the sitemap.', tone: 'grey', icon: 'plus' }
+      ],
+      navItems: [{ label: 'Services' }, { label: 'Industries' }, { label: 'Portfolio' }, { label: 'Resources' }],
+      heroStats: [
+        { figure: '95.9%', label: 'of the top million homepages fail automated ADA checks', source: 'WebAIM Million, 2026' },
+        { figure: '56.1', label: 'average WCAG failures found per homepage', source: 'WebAIM Million, 2026' },
+        { figure: '26 Apr 2027', label: 'ADA Title II deadline for large public entities', source: 'US Department of Justice' }
+      ],
+      modules: [
+        { name: 'Colour contrast checker', desc: 'Any pair against AA and AAA, plus a palette-wide sweep that flags every failing combination in a brand system.', tag: 'No email needed', icon: 'contrast' },
+        { name: 'WCAG 2.1 and 2.2 scanner', desc: 'Full page audit with severity, the success criterion at fault, and the element that broke it.', tag: 'axe-core engine', icon: 'scan-line' },
+        { name: 'Webflow remediation steps', desc: 'Each issue mapped to the panel, class and setting in Webflow Designer that fixes it.', tag: 'Webflow-native', icon: 'wrench' },
+        { name: 'Jurisdiction mapper', desc: 'Pick the markets you sell into and see which regimes bind you, with the deadline for each.', tag: 'ADA, EAA, EN 301 549', icon: 'map' },
+        { name: 'Accessibility statement', desc: 'Generates the statement the EAA requires, populated from your own scan results.', tag: 'Required by law in the EU', icon: 'file-text' },
+        { name: 'VPAT and ACR draft', desc: 'Fills a Voluntary Product Accessibility Template so procurement stops blocking the deal.', tag: 'Section 508 ready', icon: 'clipboard-check' },
+        { name: 'Alt text auditor', desc: 'Finds missing and unhelpful alt text, drafts replacements, applies them to a CMS collection.', tag: 'Bulk CMS apply', icon: 'image' },
+        { name: 'Continuous monitoring', desc: 'Scheduled re-scans with an alert the moment a publish breaks something that used to pass.', tag: 'Retainer clients', icon: 'activity' }
+      ],
+      coverage: [
+        { label: 'Detected automatically', pct: '33%', color: '#FF4D00', note: 'Contrast, alt attributes, labels, landmarks, ARIA validity, target size' },
+        { label: 'Needs a human reviewer', pct: '67%', color: '#1A1A1A', note: 'Reading order, meaningful alt text, keyboard task completion, error recovery' },
+        { label: 'Covered in a Webyansh manual audit', pct: '100%', color: '#146EF5', note: 'Screen reader passes on NVDA, VoiceOver and JAWS, plus keyboard-only walkthroughs' }
+      ],
+      deadlines: [
+        { status: 'In force', date: '28 Jun 2025', law: 'European Accessibility Act', who: 'Any business selling to EU consumers, wherever it is based.', chipBg: '#FDECEA', chipFg: '#B42318' },
+        { status: 'In force', date: 'Ongoing', law: 'ADA Title III', who: 'Private businesses open to the US public. Enforced through litigation.', chipBg: '#FDECEA', chipFg: '#B42318' },
+        { status: '8 months', date: '26 Apr 2027', law: 'ADA Title II', who: 'US public entities with 50,000 people or more.', chipBg: '#FEF3E6', chipFg: '#93500B' },
+        { status: '20 months', date: '26 Apr 2028', law: 'ADA Title II', who: 'Smaller US public entities and special districts.', chipBg: '#F2F2F2', chipFg: '#5A5A5A' }
+      ],
+      // scan + report
+      site: { url: 'cascadeops.com', page: 'https://cascadeops.com/pricing', name: 'Cascade Ops', score: 61, when: '6 August 2026 at 14:32 IST', engine: 'axe-core 4.10', standard: 'WCAG 2.2 AA' },
+      rules, total, bySev, active, activeSteps, topFixes, passRules, skeletonRows,
+      affected: [
+        { sel: 'section.pricing > .btn-secondary', text: '"Talk to sales"', fgHex: '#FF7A45', ratio: '2.71:1' },
+        { sel: '.pricing-card__note', text: '"Billed annually, cancel any time"', fgHex: '#ABABAB', ratio: '2.32:1' },
+        { sel: 'footer .footer__link (10 instances)', text: '"Careers", "Press", "Status" and 7 more', fgHex: '#9A9A9A', ratio: '2.85:1' },
+        { sel: '.faq__answer p em', text: '"Prices exclude local tax"', fgHex: '#B8B8B8', ratio: '1.98:1' },
+        { sel: '.badge--beta', text: '"Beta"', fgHex: '#FFB199', ratio: '1.62:1' }
+      ],
+      trendBars: [72, 74, 74, 76, 79, 81, 80, 83, 84, 84, 70, 68].map((v, i) => ({ v, h: Math.round(v * 1.4) + 'px', last: i === 11, color: i === 10 || i === 11 ? '#D92D20' : '#1A1A1A' })),
+      filters: [
+        { label: 'All 13 rules', on: true }, { label: 'Critical', on: false }, { label: 'Serious', on: false }, { label: 'Moderate', on: false }, { label: 'Minor', on: false }, { label: 'WCAG 2.2 only', on: false }
+      ],
+      // contrast
+      fg, bg, ratioText: rr.toFixed(2) + ':1', checks, passCount, verdict, suggestions, matrix, paletteColors, failingPairs,
+      setFg: e => this.setState({ fg: e.target.value }),
+      setBg: e => this.setState({ bg: e.target.value }),
+      swap: () => this.setState({ fg: bg, bg: fg })
+    };
+
+    out.showFooter = device === 'desktop' && ['hub', 'contrast', 'contrast-pass', 'contrast-palette', 'scan'].indexOf(screen) > -1;
+    out.im = {
+      hub: device === 'mobile' && (screen === 'hub' || screen === 'scan'),
+      contrast: device === 'mobile' && (screen === 'contrast' || screen === 'contrast-pass'),
+      gate: device === 'mobile' && screen === 'gate',
+      report: device === 'mobile' && (screen === 'report' || screen === 'report-issue')
+    };
+    if (device === 'mobile') Object.keys(out.is).forEach(k => { out.is[k] = false; });
+    out.markets = out.markets.map(m => ({ ...m, ...box(m.on) }));
+    out.sectors = out.sectors.map(s => ({ ...s, ...box(s.on) }));
+    out.regimes = out.regimes.map(r => ({ ...r, chipBg: T(r.tone).bg, chipFg: T(r.tone).fg }));
+    out.vpatEditions = out.vpatEditions.map(e => ({ ...e, ...box(e.on), bg: e.on ? '#FFF8F5' : '#FFFFFF', bd: e.on ? '#FFD9C7' : '#E6E6E6' }));
+    out.vpatRows = out.vpatRows.map(v => ({ ...v, chipBg: T(v.tone).bg, chipFg: T(v.tone).fg }));
+    out.altRows = out.altRows.map(a => ({
+      ...a, ...box(a.on),
+      chipBg: T(a.tone).bg, chipFg: T(a.tone).fg,
+      thumb: '#F6F6F6',
+      draftText: a.draft || '(empty alt, decorative)',
+      draftColor: a.draft ? '#1A1A1A' : '#ABABAB',
+      draftStyle: a.draft ? 'normal' : 'italic'
+    }));
+    out.monitorPages = out.monitorPages.map(p => ({ ...p, deltaColor: T(p.tone).fg }));
+    out.events = out.events.map(e => ({ ...e, iconBg: T(e.tone).bg, iconFg: T(e.tone).fg }));
+    return out;
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin:0; height:100%; font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; background:#101010; }
+  a { color:#FF4D00; text-decoration:none; }
+  a:hover { color:#D93F00; }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-thumb { background:#2E2E2E; border-radius:99px; border:3px solid #101010; }
+</style>
+</helmet>
+<div style="display:flex; flex-direction:column; height:100vh; background:#101010; color:#EDEDED; overflow:hidden;">
+
+  <div style="height:54px; flex-shrink:0; background:#1A1A1A; border-bottom:1px solid #2A2A2A; display:flex; align-items:center; justify-content:space-between; padding:0 18px; gap:24px;">
+    <div style="display:flex; align-items:center; gap:14px; min-width:0;">
+      <div style="font-weight:700; font-size:15px; letter-spacing:0.14em; color:#FF4D00;">WEBYANSH</div>
+      <div style="width:1px; height:20px; background:#333;"></div>
+      <div style="font-size:14px; font-weight:500; color:#EDEDED; white-space:nowrap;">Tool 1 &#183; Accessibility and Compliance Suite</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+      <div style="display:flex; gap:3px; padding:3px; background:#232323; border-radius:9px;">
+        <div onClick="{{ setProto }}" style="padding:7px 14px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; background:{{ protoBg }}; color:{{ protoFg }};">Prototype</div>
+        <div onClick="{{ setGallery }}" style="padding:7px 14px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; background:{{ galleryBg }}; color:{{ galleryFg }};">All states</div>
+      </div>
+      <div style="display:flex; gap:3px; padding:3px; background:#232323; border-radius:9px;">
+        <div onClick="{{ setDesktop }}" style="padding:7px 12px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; background:{{ deskBg }}; color:{{ deskFg }};">Desktop</div>
+        <div onClick="{{ setMobile }}" style="padding:7px 12px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; background:{{ mobBg }}; color:{{ mobFg }};">Mobile</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex:1; display:flex; min-height:0;">
+    <div style="width:262px; flex-shrink:0; background:#151515; border-right:1px solid #2A2A2A; overflow-y:auto; padding:14px 0 40px;">
+      <div style="padding:10px 18px 4px; font-size:12px; color:#6A6A6A;">{{ countLabel }}</div>
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+        <div style="padding:14px 18px 6px; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#5E5E5E;">{{ g.name }}</div>
+        <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="4">
+          <div onClick="{{ s.pick }}" style="margin:1px 8px; padding:9px 11px; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer; background:{{ s.rowBg }};" style-hover="background:#202020;">
+            <div style="width:22px; font-size:11px; font-family:ui-monospace,monospace; color:{{ s.numFg }}; flex-shrink:0;">{{ s.num }}</div>
+            <div style="font-size:13.5px; color:{{ s.fg }}; font-weight:{{ s.weight }}; line-height:1.35;">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </sc-for>
+      <div style="margin:22px 14px 0; padding:14px; background:#1A1A1A; border:1px solid #262626; border-radius:10px;">
+        <div style="font-size:12px; color:#8A8A8A; line-height:1.6;">Contrast checker is ungated by design. Everything past the scan sits behind a single email, per the roadmap.</div>
+      </div>
+    </div>
+
+    <sc-if value="{{ isProto }}" hint-placeholder-val="{{ true }}">
+      <div ref="{{ stageRef }}" style="flex:1; overflow:auto; padding:22px; background:#101010;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; padding:0 2px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="font-size:14px; font-weight:600;">{{ currentLabel }}</div>
+            <div style="font-size:12px; color:#7A7A7A; font-family:ui-monospace,monospace;">{{ currentId }}</div>
+          </div>
+          <div style="font-size:12px; color:#7A7A7A;">{{ frameLabel }}</div>
+        </div>
+        <div style="height:{{ frameH }}; width:{{ frameW }};">
+          <div ref="{{ innerRef }}" style="width:{{ baseW }}; transform:scale({{ scale }}); transform-origin:top left; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 24px 60px -30px rgba(0,0,0,0.8);">
+            <dc-import name="A11yScreen" screen="{{ screen }}" device="{{ device }}" hint-size="100%,900px"></dc-import>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isGallery }}">
+      <div style="flex:1; overflow:auto; padding:22px; background:#101010;">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+          <div style="margin-bottom:26px;">
+            <div style="font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#5E5E5E; margin-bottom:12px;">{{ g.name }}</div>
+            <div style="display:flex; flex-wrap:wrap; gap:16px;">
+              <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="4">
+                <div onClick="{{ s.pick }}" style="width:{{ s.cardW }}; cursor:pointer;">
+                  <div style="height:{{ s.cardH }}; border:1px solid #2A2A2A; border-radius:10px; overflow:hidden; background:#fff; position:relative;">
+                    <div style="width:{{ s.baseW }}; transform:scale({{ s.thumbScale }}); transform-origin:top left;">
+                      <dc-import name="A11yScreen" screen="{{ s.id }}" device="{{ s.device }}" hint-size="100%,600px"></dc-import>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:baseline; gap:8px; margin-top:9px;">
+                    <div style="font-size:11px; font-family:ui-monospace,monospace; color:#5E5E5E;">{{ s.num }}</div>
+                    <div style="font-size:13px; color:#D4D4D4; font-weight:500;">{{ s.label }}</div>
+                  </div>
+                  <div style="font-size:11.5px; color:#6A6A6A; margin-top:2px; padding-left:26px;">{{ s.note }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;hub&quot;,&quot;contrast&quot;,&quot;contrast-palette&quot;,&quot;scan&quot;,&quot;scan-progress&quot;,&quot;gate&quot;,&quot;report&quot;,&quot;report-issue&quot;,&quot;report-pass&quot;,&quot;report-error&quot;,&quot;jurisdiction&quot;,&quot;statement&quot;,&quot;vpat&quot;,&quot;alt&quot;,&quot;monitor&quot;,&quot;monitor-alert&quot;],&quot;default&quot;:&quot;hub&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;prototype&quot;,&quot;gallery&quot;],&quot;default&quot;:&quot;prototype&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;device&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;desktop&quot;,&quot;mobile&quot;],&quot;default&quot;:&quot;desktop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;}}">
+class Component extends DCLogic {
+  state = { screen: null, device: null, view: null, scale: 1, innerH: 900 };
+
+  componentDidMount() {
+    this._m = () => this.measure();
+    window.addEventListener('resize', this._m);
+    if (window.ResizeObserver) {
+      this.ro = new ResizeObserver(this._m);
+      if (this.stage) this.ro.observe(this.stage);
+      if (this.inner) this.ro.observe(this.inner);
+    }
+    this._iv = setInterval(this._m, 700);
+    this.measure();
+  }
+  componentDidUpdate() {
+    if (this.ro) {
+      if (this.stage && this._stageObs !== this.stage) { this.ro.observe(this.stage); this._stageObs = this.stage; }
+      if (this.inner && this._innerObs !== this.inner) { this.ro.observe(this.inner); this._innerObs = this.inner; }
+    }
+    this.measure();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._m);
+    clearInterval(this._iv);
+    if (this.ro) this.ro.disconnect();
+  }
+  measure() {
+    if (!this.stage || !this.inner) return;
+    const device = this.state.device || this.props.device || 'desktop';
+    const base = device === 'mobile' ? 390 : 1440;
+    const avail = this.stage.clientWidth - 44;
+    const scale = Math.max(0.2, Math.min(1, avail / base));
+    const h = Math.ceil(this.inner.scrollHeight * scale) + 8;
+    if (Math.abs(scale - this.state.scale) > 0.002 || Math.abs(h - this.state.innerH) > 4) this.setState({ scale, innerH: h });
+  }
+
+  screens() {
+    return [
+      { g: 'Public entry', id: 'hub', label: 'Tool hub landing', note: '/tools/accessibility, full site chrome' },
+      { g: 'Public entry', id: 'contrast', label: 'Contrast checker, failing', note: 'Open, no email. Working colour inputs' },
+      { g: 'Public entry', id: 'contrast-pass', label: 'Contrast checker, passing', note: 'Same screen, pass state' },
+      { g: 'Public entry', id: 'contrast-palette', label: 'Palette sweep', note: 'Every pair in the brand system' },
+      { g: 'Scan flow', id: 'scan', label: 'Scanner, first run', note: 'Empty state with alternatives' },
+      { g: 'Scan flow', id: 'scan-progress', label: 'Scanning', note: 'Five-step progress, honesty note' },
+      { g: 'Scan flow', id: 'gate', label: 'Email gate', note: 'Blurred report behind one field' },
+      { g: 'Scan flow', id: 'report-skeleton', label: 'Report loading', note: 'Skeleton while the report renders' },
+      { g: 'Scan flow', id: 'report-error', label: 'Error states', note: '403, robots.txt, render timeout' },
+      { g: 'Report', id: 'report', label: 'Report, failing site', note: 'Score 61, 62 issues, 13 rules' },
+      { g: 'Report', id: 'report-issue', label: 'Issue detail', note: 'Before and after, Webflow steps' },
+      { g: 'Report', id: 'report-pass', label: 'Report, passing site', note: 'Score 94, with the caveat intact' },
+      { g: 'Modules', id: 'jurisdiction', label: 'Jurisdiction mapper', note: 'Markets in, regimes and deadlines out' },
+      { g: 'Modules', id: 'statement', label: 'Statement generator', note: 'Form left, live document right' },
+      { g: 'Modules', id: 'vpat', label: 'VPAT 2.5 draft', note: '11 criteria pre-filled, 51 flagged' },
+      { g: 'Modules', id: 'alt', label: 'Alt text auditor', note: 'Drafts with bulk CMS apply' },
+      { g: 'Modules', id: 'monitor', label: 'Monitoring', note: 'Trend, pages, activity, schedule' },
+      { g: 'Modules', id: 'monitor-alert', label: 'Regression alert', note: 'A publish broke three checks' },
+      { g: 'Mobile', id: 'hub', device: 'mobile', label: 'Hub, mobile', note: '390 wide' },
+      { g: 'Mobile', id: 'contrast', device: 'mobile', label: 'Contrast checker, mobile', note: '390 wide' },
+      { g: 'Mobile', id: 'gate', device: 'mobile', label: 'Email gate, mobile', note: '390 wide' },
+      { g: 'Mobile', id: 'report', device: 'mobile', label: 'Report, mobile', note: '390 wide' }
+    ];
+  }
+
+  renderVals() {
+    const view = this.state.view || this.props.view || 'prototype';
+    const device = this.state.device || this.props.device || 'desktop';
+    const screen = this.state.screen || this.props.startScreen || 'hub';
+    const all = this.screens();
+    const base = device === 'mobile' ? 390 : 1440;
+    const scale = this.state.scale;
+
+    const pick = (id, dev) => () => this.setState({ screen: id, device: dev || 'desktop', view: 'prototype' }, () => setTimeout(() => this.measure(), 60));
+
+    const names = [];
+    const groups = [];
+    all.forEach((s, i) => {
+      const dev = s.device || 'desktop';
+      const on = s.id === screen && dev === device;
+      const num = String(i + 1).padStart(2, '0');
+      const thumbW = dev === 'mobile' ? 240 : 330;
+      const thumbBase = dev === 'mobile' ? 390 : 1440;
+      const row = {
+        ...s, num, device: dev, pick: pick(s.id, dev),
+        rowBg: on ? '#FF4D00' : 'transparent',
+        fg: on ? '#fff' : '#B4B4B4',
+        numFg: on ? 'rgba(255,255,255,0.7)' : '#4E4E4E',
+        weight: on ? '600' : '400',
+        cardW: thumbW + 'px', cardH: (dev === 'mobile' ? 400 : 230) + 'px',
+        baseW: thumbBase + 'px', thumbScale: (thumbW / thumbBase).toFixed(4)
+      };
+      names.push(row);
+      let grp = groups.find(g => g.name === s.g);
+      if (!grp) { grp = { name: s.g, items: [] }; groups.push(grp); }
+      grp.items.push(row);
+    });
+    const current = names.find(n => n.id === screen && n.device === device) || names[0];
+
+    const tog = on => ({ bg: on ? '#FF4D00' : 'transparent', fg: on ? '#fff' : '#9A9A9A' });
+    const p = tog(view === 'prototype'), g = tog(view === 'gallery'), d = tog(device === 'desktop'), m = tog(device === 'mobile');
+
+    return {
+      groups, screen, device,
+      isProto: view === 'prototype', isGallery: view === 'gallery',
+      countLabel: all.length + ' screens and states',
+      currentLabel: current.label, currentId: current.id,
+      frameLabel: base + ' \u00d7 auto  \u00b7  ' + Math.round(scale * 100) + '%',
+      baseW: base + 'px',
+      frameW: Math.round(base * scale) + 'px',
+      frameH: this.state.innerH + 'px',
+      scale: String(scale),
+      protoBg: p.bg, protoFg: p.fg, galleryBg: g.bg, galleryFg: g.fg,
+      deskBg: d.bg, deskFg: d.fg, mobBg: m.bg, mobFg: m.fg,
+      setProto: () => this.setState({ view: 'prototype' }),
+      setGallery: () => this.setState({ view: 'gallery' }),
+      setDesktop: () => this.setState({ device: 'desktop' }, () => setTimeout(() => this.measure(), 60)),
+      setMobile: () => this.setState({ device: 'mobile' }, () => setTimeout(() => this.measure(), 60)),
+      stageRef: el => { this.stage = el; },
+      innerRef: el => { this.inner = el; }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

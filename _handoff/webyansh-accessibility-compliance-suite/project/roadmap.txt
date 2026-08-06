@@ -1,0 +1,368 @@
+WEBYANSH
+Five Tools, Twelve Services
+A Full-Spectrum Product Roadmap
+
+Five multi-module tools, each anchored to a distinct Webyansh service line, sized against live search demand and specified for build.
+
+Prepared for: Divyansh Agarwal, Founder and CEO
+Date: August 2026
+Combined addressable demand: 97,260 US searches per month across the five tested clusters
+Services covered: All 12 service lines plus the pricing and scoping funnel
+Existing stack: Next.js 14, Vercel, Claude API, URLBox, Brevo
+
+[Heading1] Contents
+
+
+
+[Heading1] 1. Mapping Tools to Services
+[Heading2] 1.1 What Webyansh actually sells
+Twelve service lines, eleven industries, twelve documented migration paths, and a pricing page with defined budget bands. The previous roadmap addressed one of those twelve. This one covers all of them.
+
+Service line
+Served by
+Web Design (UI/UX)
+Tool 1 (accessibility as a design constraint), Tool 3 (conversion and visual hierarchy)
+Branding
+Tool 3 (brand consistency and message clarity scoring)
+Webflow Development
+Tool 1, Tool 4, Tool 5
+Custom Web App Development
+Tool 4 (scoping and complexity assessment)
+Webflow Migration (12 paths)
+Tool 4 (primary)
+Webflow SEO
+Tool 2 (primary)
+AEO / AIO / LLM SEO
+Tool 2 (primary)
+SaaS SEO and SEO for US companies
+Tool 2
+International SEO
+Tool 2 (hreflang and locale validation)
+Conversion Rate Optimization
+Tool 3 (primary)
+Growth Marketing
+Tool 3 (revenue modelling and test design)
+Webflow Integration
+Tool 5 (integration health monitoring)
+Webflow Maintenance and Support
+Tool 5 (primary)
+Pricing and project scoping funnel
+Tool 4
+
+[Heading2] 1.2 Demand across the five clusters
+Live Google Ads data, United States, pulled 6 August 2026. This is what reordered the roadmap.
+
+Tool
+Cluster volume / mo
+Representative CPC range
+Verdict
+1. Accessibility and Compliance
+44,960
+$6.70 to $34.42
+Largest cluster found by a wide margin, and the only one with statutory deadlines behind it
+5. Site Health and Monitoring
+22,600
+$6.72 to $11.33
+High volume but commodity at the entry point. Wins on recurrence, not on the first search
+2. Search and AI Visibility
+14,120
+$16.57 to $66.62
+Highest CPCs on the board. Crowded at the generic end, wide open at the specific end
+3. Conversion and Revenue
+12,680
+$6.22 to $85.87
+Low competition on the head term, extreme CPC on the tail
+4. Scoping and Migration
+2,900
+$7.22 to $36.84
+Smallest volume, highest purchase intent. A sales asset first, a traffic asset second
+
+The finding that changed the ranking
+Accessibility is 46% of all demand found, larger than the Search, Conversion and Scoping clusters combined, and it is the only cluster driven by law rather than fashion.
+&apos;color contrast checker&apos; alone runs 12,100 searches per month at $13.08 CPC with a competition index of 2. That is the single best keyword opportunity found anywhere in this research.
+&apos;ada compliance checker&apos; is 8,100 per month, &apos;vpat&apos; 5,400, &apos;accessibility checker&apos; 4,400, &apos;wcag compliance&apos; 4,400, &apos;website accessibility checker&apos; 3,600, &apos;wcag 2.2&apos; 2,900, &apos;web accessibility&apos; 2,400.
+WebAIM&apos;s 2026 Million study found 95.9% of the top million homepages fail ADA standards, averaging 56.1 WCAG failures each. Almost every site that runs the tool will fail it, which makes qualification near-automatic.
+The deadlines run to 2028, so this is not a spike. DOJ extended ADA Title II to 26 April 2027 for large public entities and 26 April 2028 for smaller ones. The EAA has been in force since 28 June 2025 and binds any business selling to EU consumers regardless of where it is based.
+
+[Heading1] Tool 1: Accessibility and Compliance Suite
+Serves: Web Design (UI/UX), Webflow Development, Maintenance and Support. The largest demand cluster available to Webyansh at 44,960 searches per month.
+
+[Heading2] Modules
+Module
+What it does
+Anchor keyword
+Colour contrast checker
+Foreground and background contrast against WCAG AA and AAA, plus a palette-wide check that flags every failing pair in a brand system
+12,100 / mo, CPC $13.08, competition index 2
+WCAG 2.1 and 2.2 AA scanner
+Full page audit with issue severity, WCAG success criterion reference, and the specific element at fault
+&apos;accessibility checker&apos; 4,400; &apos;wcag compliance&apos; 4,400
+Webflow remediation steps
+Every issue mapped to the exact fix in Webflow Designer rather than generic axe-core output
+The differentiator. No general tool does this
+Jurisdiction mapper
+User selects markets served; tool returns which regimes apply (ADA Title II and III, EAA, EN 301 549, Section 508, HHS 504, AODA) and the deadline for each
+&apos;european accessibility act&apos; 480, CPC $12.63
+Accessibility statement generator
+Produces a compliant statement, which the EAA legally requires and most sites do not have
+110 / mo, CPC $15.53
+VPAT and ACR draft generator
+Populates a Voluntary Product Accessibility Template from scan results. Procurement teams demand these constantly
+&apos;vpat&apos; 5,400 / mo, CPC $29.92
+Alt text auditor
+Finds missing and unhelpful alt text, then drafts replacements for bulk application to a Webflow CMS collection
+&apos;alt text checker&apos; 110
+Continuous monitoring
+Scheduled re-scans with regression alerts when a publish breaks compliance
+The retainer hook
+
+[Heading2] Why this ranks first
+[ListParagraph] • It is the largest cluster by a wide margin at 44,960 monthly searches on the terms tested, which is 46% of all demand found across the five clusters and larger than Tools 2, 3 and 4 combined.
+[ListParagraph] • Demand is statutory, not discretionary. ADA Title II deadlines run to April 2027 and April 2028. The EAA has been enforceable since June 2025. A French court ordered Carrefour to reach full compliance in June 2026, explicitly rejecting a 71% score as insufficient, under a EUR 500 per day penalty. Partial compliance is not a legal position.
+[ListParagraph] • The failure rate makes qualification automatic. 95.9% of the top million homepages fail. The tool does not need to find a problem, it needs to quantify one that is already there.
+[ListParagraph] • Competition on the biggest keyword is close to zero. A 12,100-per-month term at competition index 2 is anomalous and will not stay that way.
+[ListParagraph] • It sells into UI/UX, Development, and Maintenance simultaneously. An accessibility finding is a design fix, a build fix, and an ongoing monitoring commitment all at once.
+[ListParagraph] • Webyansh already has topical seed content in the published WCAG 2.2 compliance guide, so the tool lands on an existing internal link surface rather than a cold one.
+[Heading2] Build notes
+Engine: axe-core (open source, Deque) as the scanning base, run headless in a Vercel function. Do not build a scanner from scratch.
+The value layer: axe output is generic and developer-facing. The product value is the translation layer: Webflow Designer steps, jurisdiction mapping, and the generated statement and VPAT. That layer is where the defensibility sits.
+Positioning warning: Do not sell or imply an overlay widget. Overlay vendors are being sued, and association would damage credibility with exactly the buyers who care. Position as audit and remediation, never as a one-line fix.
+Claim discipline: Never state that the tool guarantees compliance. Automated scanning catches roughly a third of WCAG criteria. Say so plainly on the results page. Honesty here is a differentiator, because competitors overclaim.
+Gate: Contrast checker fully open, no email. Full scan report gated. The contrast checker is the traffic engine and gating it would waste the opportunity.
+
+[Heading1] Tool 2: Search and AI Visibility Suite
+Serves: Webflow SEO, AEO / AIO / LLM SEO, SaaS SEO, International SEO. This is the consolidation of the five separate tools proposed previously.
+
+[Heading2] Modules
+Module
+What it does
+Anchor keyword
+Technical SEO audit
+Crawl, index, canonical, sitemap, robots, heading and metadata health
+&apos;seo audit tool&apos; 2,900, CPC $19.07; &apos;site audit&apos; 1,300
+AEO page grader
+Page-level citability score on the AICE framework: answer-first structure, chunk extractability, entity density, statistic density
+&apos;answer engine optimization&apos; 2,400, CPC $30.77; &apos;geo optimization&apos; 1,000
+Answer engine simulator
+Runs buyer-intent prompts across ChatGPT, Claude, Gemini, Perplexity and Google AI Mode, returns the verbatim answers and who was named
+&apos;ai visibility tools&apos; 1,600, CPC $49.25; &apos;ai search visibility tool&apos; 1,000, CPC $66.62
+Entity authority audit
+Knowledge Panel, Wikidata, sameAs coverage, and presence on the third-party surfaces answer engines actually cite
+&apos;ai brand visibility tools&apos; 590, CPC $49.39
+Schema generator
+Webflow-ready JSON-LD with CMS field bindings across 7 types
+&apos;schema markup generator&apos; 1,000, CPC $16.57, competition index 7
+International SEO validator
+hreflang correctness, locale mapping, duplicate and orphan locale detection
+&apos;hreflang tag generator&apos; 50; &apos;hreflang generator&apos; 40
+AI crawler access checker
+GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot and Bytespider against robots.txt
+Feature-level, supports the AEO service page
+AI Visibility Index
+The published data layer: a quarterly public benchmark across verticals, with a profile page per tracked company
+Original data, the strongest driver of LLM citation
+
+[Heading2] Why consolidation is the right call
+The previous roadmap split this into five products. That was a mistake for three reasons. They share almost all their infrastructure, being one crawler, one engine adapter layer, and one report renderer. They share one buyer, being the person responsible for search performance. And five thin tools dilute link equity and internal linking across five weak pages instead of concentrating it on one strong hub with module sub-pages.
+The correct structure is a hub at /tools/search-visibility with each module on its own indexable sub-page. That preserves the individual keyword targeting while consolidating authority.
+[Heading2] Why it still ranks second, not first
+[ListParagraph] • The CPCs are the highest anywhere in this document, at $30 to $67, which signals genuine commercial value.
+[ListParagraph] • But the generic end is crowded. HubSpot, Frase, Insites, SUSO and Pixelmojo all ship free AI visibility checkers, with Semrush, Ahrefs and Profound buying the ads above them. At DR 34 the head terms are not winnable head-on.
+[ListParagraph] • The winnable positions are the specific ones: page-level rather than domain-level grading, Claude and Google AI Mode inclusion, Webflow-native schema output, and the published Index where no competing dataset exists.
+[ListParagraph] • Accessibility outranks it because that cluster is more than three times larger and has almost no incumbent on its biggest keyword.
+[Heading2] Build notes
+The Index is the long pole: Roughly 400 companies across 5 verticals, 40 prompts each, 5 engines, is about 80,000 calls per quarter. Batch over 10 to 14 days. Budget this before committing.
+Claude inclusion: Non-negotiable. Claude carries roughly 18.5% of B2B AI referrals against a 2.66% global referral share, and several well-known free checkers skip it entirely.
+Google AI Mode: No official API. Route through the existing DataForSEO SERP access.
+Existing asset: Fold the current /tools/website-score tool into this hub or retire it. It is not surfacing in search and duplicates a saturated category.
+
+[Heading1] Tool 3: Conversion and Revenue Lab
+Serves: Conversion Rate Optimization, Growth Marketing, Web Design (UI/UX), Branding.
+
+[Heading2] Modules
+Module
+What it does
+Anchor keyword
+Landing page teardown
+Scores a page against CRO heuristics: value proposition clarity, above-the-fold comprehension, social proof placement, objection handling, CTA hierarchy
+&apos;landing page audit&apos; 20 / mo but CPC $85.87, the highest CPC in this document
+Form friction analyser
+Counts fields, flags unnecessary required fields, detects multi-step opportunities, estimates the abandonment cost of each additional field
+Feeds directly into the CRO service page
+Message clarity test
+Five-second-test simulation: shows the fold to a model and asks what the company does, who it is for, and what to do next
+Serves both CRO and Branding
+Revenue impact calculator
+Traffic multiplied by conversion rate multiplied by deal value. Shows what a one-point conversion lift is worth annually
+&apos;roi calculator&apos; 18,100 / mo as a broad entry point
+Test significance and sample size
+A/B significance calculator plus required sample size before a test is worth reading
+&apos;sample size calculator&apos; 8,100; &apos;ab test calculator&apos; 480
+Visual hierarchy score
+Absorbs the existing AI Design Scorer at /tools/website-score, which currently sits alone and unfound
+&apos;website analyzer&apos; 1,600, CPC $10.44
+Competitor page comparison
+Runs the same teardown against up to three competitor pages side by side
+Sales asset for growth marketing pitches
+
+[Heading2] Why it earns a place
+[ListParagraph] • &apos;conversion rate optimization&apos; runs 2,400 per month at $29.81 CPC with a competition index of 14. High value, low competition, and directly on a service page Webyansh already sells.
+[ListParagraph] • The calculators are the acquisition engine. &apos;sample size calculator&apos; at 8,100 and &apos;roi calculator&apos; at 18,100 are broad-intent terms that a small site can win with a genuinely good single-purpose calculator, because the SERP rewards utility over authority for tool queries.
+[ListParagraph] • It converts the case-study numbers into a live demonstration. The 27% and 17% conversion lifts already in the portfolio become something a prospect can model against their own traffic in thirty seconds.
+[ListParagraph] • It gives the existing website-score tool a home. Right now that tool is orphaned, duplicating a saturated category and surfacing for nothing.
+[ListParagraph] • Highest deal-value linkage in the roadmap. A conversion finding leads to a redesign conversation, which is the largest project band on the pricing page.
+[Heading2] Build notes
+Model use: Heuristic scoring should be deterministic where possible (field counts, CTA counts, contrast, fold height). Reserve Claude for the qualitative passes: value proposition clarity and the five-second test.
+Calculators first: Ship the sample size and significance calculators in week one. They are trivial to build, need no crawl, and start earning links immediately.
+Honesty constraint: A page teardown is a hypothesis, not evidence. Label predicted lifts as estimates with stated assumptions. Overclaiming here is easy to disprove and expensive to the brand.
+
+[Heading1] Tool 4: Project Scoping and Migration Assessor
+Serves: Webflow Migration (12 paths), Webflow Development, Custom Web App Development, and the pricing funnel.
+
+[Heading2] Modules
+Module
+What it does
+Anchor keyword
+Platform and stack detection
+Identifies the current CMS, framework, analytics, CRM, payment and marketing stack from the live site
+&apos;website analyzer&apos; 1,600
+Site inventory
+Page count, template count, likely CMS collections, forms, integrations, custom code blocks, media weight
+The scoping backbone
+Migration complexity score
+Grades the job from simple to complex with a risk register naming what typically breaks on that specific source platform
+&apos;wordpress to webflow migration&apos; 50 / mo but CPC $36.84
+Webflow CMS schema proposal
+Infers the collections and fields the site would need in Webflow and outputs a draft schema
+Genuinely useful and no competitor does it
+Redirect map generator
+Full URL inventory plus a proposed 301 map, which is the single largest SEO risk in any migration
+&apos;redirect map&apos; 70; &apos;301 redirect generator&apos; 10
+Cost band and timeline estimate
+Returns an effort estimate and a budget band matched to the existing contact form bands
+&apos;how much does a website cost&apos; 1,900, CPC $11.41; &apos;website redesign cost&apos; 260, CPC $23.39
+
+[Heading2] The honest case
+The migration keyword cluster is small. &apos;wordpress to webflow migration&apos; is 50 searches a month and &apos;webflow migration&apos; is 20. On volume alone this tool does not justify itself, and it should not be built as a traffic play.
+It justifies itself on four other grounds. The CPCs are $33 to $37, which means every one of those fifty searches is someone with budget and a decision to make. Webyansh already has twelve migration landing pages sitting static, and this tool makes every one of them interactive, which is the cheapest conversion-rate improvement available on the existing site. It captures the top-of-funnel scoping query at 1,900 a month, where the buyer has not chosen a platform yet. And it feeds the contact form&apos;s existing budget bands, so a prospect arrives pre-qualified rather than picking &apos;Not Sure&apos;.
+[Heading2] Build notes
+Detection: Wappalyzer-style fingerprinting on headers, script sources, meta generators and known asset paths. Well-trodden, low risk.
+Estimation discipline: Output a band, never a fixed price. Show the assumptions that produced the band and let the user adjust them. A wrong precise number destroys trust; a well-reasoned range builds it.
+Placement: Embed the assessor on all twelve migration pages with the source platform pre-selected, so /migrations/wordpress-to-webflow-migration opens the tool already configured.
+Sales use: The generated CMS schema and redirect map become the first deliverable of a paid discovery, which shortens the gap between enquiry and proposal.
+
+[Heading1] Tool 5: Site Health and Integration Monitor
+Serves: Webflow Maintenance and Support, Webflow Integration. The only tool in the roadmap that generates recurring revenue directly.
+
+[Heading2] Modules
+Module
+What it does
+Anchor keyword
+Speed and Core Web Vitals tracking
+LCP, INP and CLS over time from both lab and field data, not a single point-in-time score
+&apos;website speed test&apos; 14,800; &apos;page speed test&apos; 5,400; &apos;core web vitals&apos; 2,400
+Uptime, SSL and domain watch
+Availability checks plus certificate and domain expiry warnings
+Table stakes, but expected
+Link and redirect health
+Broken internal and external links, 404s, redirect chains and loops
+Supports the SEO service line
+Webflow publish diff
+Flags what changed between publishes and which pages regressed on performance, accessibility or schema
+No competitor offers this. Webflow-native and defensible
+Integration health checks
+Verifies GA4, GTM, HubSpot, Pipedrive, LeadSquared and form endpoints are actually firing, not just installed
+Directly serves the Webflow Integration service line
+Regression alerts
+Pulls thresholds from Tools 1 and 2 and alerts when a publish breaks accessibility or AEO compliance
+The cross-tool tie that makes the suite cohere
+Weekly digest
+One email per site per week with what changed and what needs attention
+Keeps the agency present between projects
+
+[Heading2] Why it ranks last but still gets built
+The entry keywords are large but commodity. &apos;website speed test&apos; at 14,800 a month is dominated by PageSpeed Insights, GTmetrix and Pingdom, and a new entrant will not displace them. Treat that volume as a bonus, not a plan.
+The reason to build it is different. It is the only tool that creates a standing relationship rather than a single interaction, it makes the Maintenance and Support service line demonstrable instead of abstract, and the publish-diff and integration-health modules are things no general monitoring tool does because they require Webflow-specific knowledge. It also turns every past client into a live account, which is the cheapest pipeline in the business.
+[Heading2] Build notes
+Free tier: One site, weekly checks. Enough to be useful, not enough to replace a retainer.
+Paid tier: Multi-site, daily checks, publish diffs, and integration monitoring. Price it as an add-on to the maintenance retainer rather than a separate product.
+Data sources: CrUX API for field data, Lighthouse for lab data, simple HTTP checks for uptime and certificates. Low technical risk throughout.
+Sequencing: Build last. It depends on scan logic from Tools 1 and 2, and building those first makes this mostly a scheduler and an alerting layer.
+
+[Heading1] 2. Build Sequence
+Strategic rank and build order differ, because effort, shared infrastructure and cash conversion do not follow demand.
+
+Phase
+Weeks
+Build
+Rationale
+1
+1 to 3
+Tool 1, contrast checker module only
+12,100 searches a month at competition index 2. Two weeks of work against the best single keyword in the research. Ship it alone and let it start ranking while the rest is built
+2
+3 to 9
+Tool 1, full accessibility suite
+Largest cluster, statutory deadlines, near-universal failure rate. Everything else waits
+3
+9 to 12
+Tool 3, calculators first, then teardown
+Calculators are trivial and earn links immediately. Teardown follows and absorbs the orphaned website-score tool
+4
+12 to 17
+Tool 4, scoping and migration assessor
+Makes twelve existing landing pages interactive. Highest purchase intent per visitor in the roadmap
+5
+17 to 28
+Tool 2, search and AI visibility suite
+Largest build. The Index needs a full quarter of data collection before it can launch, so start the collection early in this window
+6
+28 to 32
+Tool 5, health and integration monitor
+Depends on scan logic from Tools 1 and 2. Building it last makes it mostly scheduling and alerting
+
+[Heading2] Shared infrastructure to build once
+[ListParagraph] • Crawl and render service with a headless browser. Used by Tools 1, 2, 3, 4 and 5.
+[ListParagraph] • Report renderer producing a shareable public URL and a PDF export. Used by all five.
+[ListParagraph] • Scheduler and alerting layer. Built for Tool 5 but used by the monitoring modes of Tools 1 and 2.
+[ListParagraph] • Lead capture into Brevo, tagged with tool, module, input domain and score.
+[ListParagraph] • A single /tools hub page linking every tool and module, with a plain explanation of which question each one answers.
+
+[Heading2] Rules that apply to every tool
+[ListParagraph] • Each module gets its own indexable page under a tool hub. Modules carry the keywords; the hub carries the authority.
+[ListParagraph] • Every result page is public and shareable. A result trapped behind a form generates no search surface and no links.
+[ListParagraph] • Free tier ungated, export gated. Gate the download, never the answer.
+[ListParagraph] • Answer-first copy in the opening 200 words, data in HTML tables rather than images, and a visible last-updated date.
+[ListParagraph] • SoftwareApplication and FAQPage JSON-LD on every tool page, HowTo where a process is described.
+[ListParagraph] • A published methodology page per tool, which is what makes the numbers citable rather than merely available.
+[ListParagraph] • State the limits of each tool on the results page. Automated accessibility scanning catches roughly a third of WCAG criteria, and a conversion teardown is a hypothesis. Saying so is a differentiator, because the competition overclaims.
+
+[Heading1] 3. What Was Considered and Cut
+
+Candidate
+Why it was cut
+Standalone llms.txt generator
+590 searches a month and declining 18% year on year. Ahrefs found 97% of llms.txt files drew zero traffic in May 2026. Retained as a feature inside Tool 2.
+Standalone generic website grader
+Webyansh already runs one at /tools/website-score and it is not surfacing. The category is saturated by HubSpot Website Grader, GTmetrix and IONOS. Absorbed into Tool 3 rather than duplicated.
+Standalone AI visibility checker
+Crowded with free offerings from HubSpot, Frase, Insites, SUSO and Pixelmojo, with paid placements above them. Folded into Tool 2 as one module among eight.
+Accessibility overlay widget
+Overlay vendors are actively being sued. Building or reselling one would create legal exposure and destroy credibility with the buyers who care most about this.
+Standalone speed test
+&apos;website speed test&apos; is 14,800 a month but owned by PageSpeed Insights, GTmetrix and Pingdom. Only viable as the monitoring module inside Tool 5, where the value is the time series rather than the score.
+AI content or blog generator
+Infinite competition, no data moat, and it undercuts the positioning of an agency selling citation quality and design craft.
+Backlink or authority checker
+Requires an index at Ahrefs or Semrush scale. Not buildable.
+Standalone branding or logo tool
+Branding is a small service line with no meaningful tool-intent search demand. Served adequately by the message clarity module in Tool 3.
+
+[Heading1] 4. Assumptions
+[ListParagraph] • All volumes and CPCs are DataForSEO and Google Ads figures for the United States, pulled 6 August 2026. Global English volume is materially higher and India-specific volume is lower.
+[ListParagraph] • Cluster volumes are the sum of head and near-head terms tested, not exhaustive cluster totals. Real addressable demand including long tail is higher in every case.
+[ListParagraph] • &apos;ada compliance checker&apos; shows 8,100 as a rolling annual average but has fallen from a July 2025 peak of 40,500 to roughly 1,600 in recent months, following the DOJ deadline extension. Treat the annual figure with caution and the underlying trend as deadline-linked rather than permanently declining, since the 2027 and 2028 dates will drive it back up.
+[ListParagraph] • Build estimates assume one full-time developer familiar with the existing Next.js and Vercel stack.
+[ListParagraph] • Engine API costs for the AI Visibility Index module are not modelled. At roughly 80,000 calls per quarter this is the main cost centre in the roadmap.
+[ListParagraph] • axe-core is licensed under MPL 2.0. Verify the licence terms suit a commercial hosted tool before shipping Tool 1.
+[ListParagraph] • Nothing here constitutes legal advice on accessibility compliance. If Tool 1 outputs jurisdiction guidance, have the wording reviewed before launch.

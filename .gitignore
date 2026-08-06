@@ -1,0 +1,65 @@
+# --- Secrets: never commit. See guardrail 4. ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.dev.vars
+.dev.vars.*
+.webflow-auth
+.wrangler/
+
+# --- Dependencies ---
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/versions
+
+# --- Build output ---
+.next/
+.open-next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+worker-configuration.d.ts
+
+# --- Test / coverage ---
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+blob-report/
+
+# --- Local scratch ---
+*.local
+.cache/
+tmp/
+scratch/
+
+# --- Editor / OS ---
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+
+# --- Logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- Design handoff bundle ---
+# Large binaries (PDF/PNG/DOCX) in uploads/ and screenshots/ are not needed to build.
+# The HTML prototypes and roadmap ARE tracked — they are the source of truth for the design.
+_handoff/**/uploads/
+_handoff/**/screenshots/
+_handoff/**/.thumbnail
