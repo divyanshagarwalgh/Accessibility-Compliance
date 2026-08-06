@@ -1,0 +1,6 @@
+{
+  "library": {
+    "name": "Webyansh Accessibility",
+    "components": ["./src/**/*.webflow.@(js|jsx|mjs|ts|tsx)"]
+  }
+}
