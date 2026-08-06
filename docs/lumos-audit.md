@@ -340,11 +340,21 @@ Components panel, the API returned 204 site components and zero matches for ever
 `isCodeComponent: true`, `isLibrary: true`, `keywords: ["contrast"]`, `["Accessibility"]`,
 `["Webyansh"]`, and `get_component({name: "Contrast Checker"})`.
 
-**Consequence for the remaining five pages:** everything except placing the code component can be
-automated. Dropping each widget onto its page is a manual Designer step. Budget one drag per page.
+**The component id is only discoverable once an instance exists.** After placing one by hand, the
+API reports the instance and its `instanceDetails.id` — for Contrast Checker that is
+`f0ded0fc-d582-657b-ec83-bb23d10f525d`. `insert_component_instance` takes a `component_id`
+directly, so subsequent placements should be scriptable with that id even though *lookup* by name
+still fails.
 
-Mitigation in use: the target element is named **"DROP CONTRAST CHECKER HERE"** in the Navigator so
-the placement is unambiguous.
+**Practical rule:** place each new code component by hand once, record its id here, then automate
+every later placement.
+
+| Code component | Component id |
+|---|---|
+| Contrast Checker | `f0ded0fc-d582-657b-ec83-bb23d10f525d` |
+
+Prop ids follow `w-prop--<propName>--<Type>`, e.g. `w-prop--foreground--Text`,
+`w-prop--mode--Variant`. Set them with `data_component_props_tool`.
 
 ## 8. Carried to Checkpoint 0/1
 
