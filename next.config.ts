@@ -2,12 +2,12 @@ import type { NextConfig } from "next";
 
 /**
  * basePath and assetPrefix MUST match the Webflow Cloud environment's mount path
- * exactly, or routing and asset loading break. Mount path confirmed at Checkpoint 1: /a11y
+ * exactly, or routing and asset loading break. Mount path: /app
  *
- * /a11y is deliberately kept clear of /tools/*, so the native Webflow SEO pages can
- * never be shadowed by this app.
+ * Kept clear of /tools/*, so the native Webflow SEO pages can never be shadowed
+ * by this app.
  */
-const MOUNT_PATH = "/a11y";
+const MOUNT_PATH = "/app";
 
 const nextConfig: NextConfig = {
   basePath: MOUNT_PATH,

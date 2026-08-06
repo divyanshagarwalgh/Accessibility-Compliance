@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./page.module.css";
 
 export const metadata = { title: "Foundation check" };
@@ -21,7 +22,7 @@ export default function Page() {
 
         <p className={styles.lede}>
           This page exists to prove three things: the app is mounted at{" "}
-          <code className={styles.code}>/a11y</code>, it inherits the site&rsquo;s Lumos
+          <code className={styles.code}>/app</code>, it inherits the site&rsquo;s Lumos
           design tokens, and a push to GitHub rebuilds it. Nothing here ships to users.
         </p>
 
@@ -29,7 +30,7 @@ export default function Page() {
         <ul className={styles.list}>
           <li>
             <strong>Mount path</strong> — you are reading this at{" "}
-            <code className={styles.code}>/a11y</code>, so{" "}
+            <code className={styles.code}>/app</code>, so{" "}
             <code className={styles.code}>basePath</code> and{" "}
             <code className={styles.code}>assetPrefix</code> resolve correctly.
           </li>
@@ -41,8 +42,10 @@ export default function Page() {
             DevLink cannot export site-wide custom code.
           </li>
           <li>
+            {/* next/link applies basePath automatically, so the mount path is
+                configured in exactly one place. */}
             <strong>Storage bindings</strong> — D1, KV and R2 reachability is reported by{" "}
-            <a href="/a11y/api/health">the health endpoint</a>.
+            <Link href="/api/health">the health endpoint</Link>.
           </li>
         </ul>
 

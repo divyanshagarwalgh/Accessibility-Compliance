@@ -54,7 +54,7 @@ export async function GET() {
   return json(
     {
       status: healthy ? "ok" : "degraded",
-      mountPath: env?.BASE_URL ?? "/a11y",
+      mountPath: env?.BASE_URL ?? "/app",
       checks,
     },
     healthy ? 200 : 503,

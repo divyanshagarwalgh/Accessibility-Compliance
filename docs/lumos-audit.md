@@ -315,9 +315,12 @@ Eyebrow pattern already exists as `.g_eyebrow_wrap` / `.g_eyebrow_layout` / `.g_
 | `/tools/vpat-generator` | 404 | Free |
 | `/tools/accessibility-statement-generator` | 404 | Free |
 | `/tools/accessibility-laws` | 404 | Free |
-| `/a11y` | **404** | **Free — mount path is clear** |
+| `/app` | **404** | **Free — chosen mount path** |
+| `/a11y` | **404** | Free (considered, not used) |
 
-All six proposed native slugs are unoccupied, and `/a11y` does not collide with anything.
+All six proposed native slugs are unoccupied, and `/app` does not collide with anything. The mount
+path is set in one place — `MOUNT_PATH` in `next.config.ts` — and internal links use `next/link`,
+which applies `basePath` automatically.
 
 ## 8. Carried to Checkpoint 0/1
 
