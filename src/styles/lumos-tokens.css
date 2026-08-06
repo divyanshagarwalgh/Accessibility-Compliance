@@ -14,6 +14,41 @@
  * Re-derive with: curl -s https://webyansh.com/contact | grep -o ':root {--site--margin: clamp[^<]*'
  * ========================================================================== */
 
+/* -----------------------------------------------------------------------------
+ * Typefaces
+ * -----------------------------------------------------------------------------
+ * The type tokens name "Inter Variable Latin" and "Inter tight Variable Latin",
+ * which are Webflow-hosted uploads, not the Google Fonts "Inter". Without these
+ * @font-face rules the app silently falls back to Arial and looks nothing like the
+ * rest of the site.
+ *
+ * Pointing at the same CDN files the live site uses guarantees an identical
+ * rendering and a warm cache for anyone who has already browsed webyansh.com.
+ * Both send Access-Control-Allow-Origin: * and Cache-Control: max-age=31536000.
+ *
+ * THE URL HASHES CHANGE IF THE FONTS ARE RE-UPLOADED IN WEBFLOW.
+ * Re-derive with:
+ *   curl -s <site-css-url> | grep -o '@font-face{font-family:Inter[^}]*}'
+ * -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Inter Variable Latin";
+  src: url("https://cdn.prod.website-files.com/67fb46459daf80597440ed56/6a52fa6d9db2a8e14cb0d594_Inter-Variable-latin.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter tight Variable Latin";
+  src: url("https://cdn.prod.website-files.com/67fb46459daf80597440ed56/6a52fa6de80b79d5421860d9_InterTight-Variable-latin.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* --- Primitive swatches (live Lumos) --------------------------------- */
   --swatch--brand: #ff4d00;
