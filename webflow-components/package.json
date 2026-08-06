@@ -26,8 +26,8 @@
   "devDependencies": {
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.1",
-    "@webflow/data-types": "^1.0.0",
-    "@webflow/react": "^1.0.0",
+    "@webflow/data-types": "^2.1.0",
+    "@webflow/react": "^2.1.0",
     "@webflow/webflow-cli": "^2.3.0",
     "typescript": "5.9.3",
     "vitest": "^3.2.4"

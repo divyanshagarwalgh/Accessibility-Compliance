@@ -1,6 +1,15 @@
 {
   "library": {
     "name": "Webyansh Accessibility",
-    "components": ["./src/**/*.webflow.@(js|jsx|mjs|ts|tsx)"]
+    "components": [
+      "./src/**/*.webflow.@(js|jsx|mjs|ts|tsx)"
+    ]
+  },
+  "telemetry": {
+    "global": {
+      "allowTelemetry": true,
+      "lastPrompted": 1786047409524,
+      "version": "2.3.0"
+    }
   }
 }
