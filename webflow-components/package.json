@@ -7,11 +7,17 @@
   "engines": {
     "node": ">=22.13.0"
   },
+  "//scripts": [
+    "Invoked via `node ./node_modules/...` rather than bare binary names.",
+    "npm's Windows shims mis-parse the '&' in this project's path, so `npx <bin>`",
+    "and `npm run <script>` both fail with a truncated MODULE_NOT_FOUND.",
+    "Direct node paths work everywhere and cost nothing on other machines."
+  ],
   "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
-    "import": "webflow devlink import"
+    "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:watch": "node ./node_modules/vitest/vitest.mjs",
+    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
+    "import": "node ./node_modules/@webflow/webflow-cli/dist/index.js devlink import"
   },
   "dependencies": {
     "react": "19.2.0",
