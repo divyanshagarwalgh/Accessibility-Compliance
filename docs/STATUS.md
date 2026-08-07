@@ -225,7 +225,34 @@ No separate provider needed. Brevo's SMTP relay is enabled on the account and th
 free tier allows 300 sends a day, far more than a regression-only alert policy
 uses. Blocked only by the same missing REST key as item 1.
 
-### 4. Applying the `/tools/*` page bodies — THE launch blocker
+### 4. Applying the `/tools/*` page bodies — DONE, 7 August
+
+**All six `/tools/*` pages are live on staging with content, and all four new ones
+audit clean at 1280px and 375px: zero axe violations at wcag2a/2aa/21a/21aa/22aa.**
+
+Applied with a **Designer Extension** (`page-builder/`), because every route from
+outside the Designer is closed — see below, all three re-tested that day. The
+extension creates the 26 shared classes, resolves the site's own Lumos utilities,
+and builds each body as native elements. `insertElementFromWHTML` turned out to be
+absent from this Designer build, so it falls back to `elementBuilder`.
+
+Four defects were found and fixed after the first successful build, three of them
+only visible once the pages were real:
+
+| Defect | Detail |
+|---|---|
+| `u-mb-16` / `u-mb-24` do not exist | Lumos names margin utilities by step, not pixels. The live stylesheet has `u-mb-0`–`u-mb-8`; `u-mb-3` is 1rem and `u-mb-4` is 1.5rem. 43 elements had no margin. |
+| `&middot;` rendered literally | Missing from the entity table, which passed unknown entities through. It now throws and names the file. |
+| Scrolling tables not keyboard reachable | 2.1.1 / `scrollable-region-focusable`, at 375px only. All five wrappers are now focusable named regions, each labelled from its own heading so no two share a name. |
+| Classes silently dropped | The builder only knew classes it had created, so the site's own Lumos utilities were being lost. Caught by a mock-Designer harness before it shipped. |
+
+Remaining, and **not** blocking staging: the four new pages are `index, follow`
+and nothing is on production. Have the jurisdiction copy reviewed by counsel
+before publishing `accessibility-laws` — `src/lib/jurisdiction.ts` says so in its
+own header.
+
+<details>
+<summary>Why it needed a Designer Extension — all three routes re-tested 7 Aug</summary>
 
 The four bodies are written, and now **validated**: `node webflow-pages/validate.mjs`
 checks every constraint the Designer enforces and all four pass. They will paste
@@ -247,14 +274,11 @@ diagnosed precisely rather than guessed at:
   Data API has no create-element endpoint at all, only static-content rewriting
   of existing text nodes.
 
-**This needs a human in the Webflow Designer**, and it is the only thing standing
-between the build and a public surface. Instructions, the load-bearing page
-skeleton and the staging-publish dance for draft pages are in
-[`webflow-pages/README.md`](../webflow-pages/README.md).
+So it needed the Designer's own API, which only a Designer Extension can reach.
+That is `page-builder/` — see its README for how to run it and re-apply after the
+bodies change.
 
-Note also that of the six planned `/tools/*` pages only
-`/tools/color-contrast-checker` is published on staging; `/tools/accessibility`
-is still a **draft** and returns 404. Nothing is on the production domain.
+</details>
 
 ### Browser Rendering throughput
 
@@ -270,18 +294,16 @@ for launch and will throttle immediately under the traffic
 Phases 0–7 are complete and the app passes its own audit. Everything left needs a
 human, in this order:
 
-1. **Apply the four `/tools/*` page bodies in the Designer**, then un-draft
-   `/tools/accessibility` too. Run `node webflow-pages/validate.mjs` first — all
-   four pass today. See item 4 under Blocked for why this cannot be automated.
-   **This is the only thing between the build and a public surface, and it is
-   where the SEO lives.**
-2. **Publish.** Staging is fine to publish freely. Production needs an explicit
-   go-ahead and has never been touched — `webyansh.com/tools/*` is 404 today.
-3. **Have the jurisdiction copy reviewed by counsel.** `src/lib/jurisdiction.ts`
-   says so in its own header; the module tells businesses which laws bind them.
-4. **Create the four Brevo contact attributes**, item 1 under Blocked. Leads sync
+1. **Have the jurisdiction copy reviewed by counsel** before anything reaches
+   production. `/tools/accessibility-laws` tells businesses which laws bind them,
+   and `src/lib/jurisdiction.ts` says in its own header that the wording needs
+   review. This is the gate on item 2, not a nice-to-have.
+2. **Publish to production.** Staging carries all six `/tools/*` pages and the
+   app, all auditing clean. `webyansh.com/tools/*` is still 404 and has never
+   been touched; it needs an explicit go-ahead.
+3. **Create the four Brevo contact attributes**, item 1 under Blocked. Leads sync
    but arrive bare.
-5. **PDF export.** `.docx` covers the procurement case, which was the one that
+4. **PDF export.** `.docx` covers the procurement case, which was the one that
    mattered.
 
 Diagnose credential problems with `GET /app/api/health`, which reports a `configured` object of
