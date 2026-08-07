@@ -23,8 +23,9 @@ Written so the next session — or the next person — does not have to guess.
 | 5 | Accessibility statement generator | 21 tests; verified live against a real scan |
 | 5 | VPAT 2.5 / ACR generator, all 55 criteria | 16 tests; verified live against a real scan |
 | 5 | Alt-text auditor: classification + Claude drafting | 36 tests; classification verified live, drafting verified against the API |
+| 6 | Monitoring: hourly cron, regression detection, Brevo alerts | 19 tests; **cron fired live and recorded a baseline run** — see below |
 
-**Test totals:** 193 — 132 app + 56 component + 5 scan worker. Typecheck clean in
+**Test totals:** 212 — 151 app + 56 component + 5 scan worker. Typecheck clean in
 all three packages. `npm audit`: 0 in the app, 0 in the scan worker, 6 low in
 `webflow-components` (`elliptic`, which has no patched release at any version).
 
@@ -55,14 +56,42 @@ remediation stays behind the email.
 
 ---
 
+### Monitoring runs end to end
+
+Verified on 7 August at 05:00 UTC. The scan worker's cron fired, the app
+reported `{"due":1,"dispatched":1,"skipped":[]}`, the scan completed at score
+100, and the run was recorded with `delta: null` and `alertSent: false` — the
+designed behaviour, because a monitor's first run establishes the baseline and
+never alerts. `next_run_at` advanced exactly one week.
+
+The clock lives in the scan worker because Webflow Cloud provisions D1/KV/R2 but
+exposes no cron trigger. The worker holds no monitor state; it is a doorbell
+carrying the shared secret, and the app decides what is due. `run-due` rejects
+both an absent and a wrong secret with 401 (verified).
+
+---
+
 ## Blocked — needs a credential I do not have
 
-### 1. Brevo list id
+### 1. Brevo — needs a REST API key, not the MCP key
 
-`BREVO_API_KEY` and `BREVO_LIST_ID` are read from the environment. The roadmap
-requires a **new** list for accessibility leads, not the existing list 3. Lead
-capture works without them — the lead is stored in D1 with `brevo_synced = 0` and
-can be replayed — but nothing reaches Brevo until they are set.
+The list exists: **"Claude Tools Webyansh", id 4**, created 7 August. That is the
+value for `BREVO_LIST_ID` in `.env.local` (already set) and Webflow Cloud
+(**still to add**).
+
+`BREVO_API_KEY` is **not yet usable**. The key in `.env.local` is
+`BREVO_MCP_API_KEY`, which Brevo issues for its MCP connector: a 140-character
+base64 blob wrapping a REST-shaped value. Neither the wrapper nor the wrapped
+value authenticates against `api.brevo.com/v3` — both return `401 Key not
+found`. The MCP connector authenticates through its own server-side channel,
+which a deployed Worker cannot use.
+
+Generate a standard v3 key at **Brevo → SMTP & API → API Keys** and set it as
+`BREVO_API_KEY` in `.env.local` and in Webflow Cloud.
+
+Until then lead capture still records to D1 with `brevo_synced = 0` and is
+replayable, and monitoring still records runs and regressions — only the alert
+email is suppressed, recorded as `alert_sent = 0`.
 
 ### 2. Anthropic API key — set it in Webflow Cloud
 
@@ -81,9 +110,11 @@ Setting the variable does nothing until the environment redeploys; pushing to
 The request shape is verified against the live API (`claude-opus-5`, structured
 outputs, vision by URL).
 
-### 3. Transactional email
+### 3. Transactional email — resolved, uses Brevo
 
-Needed for Phase 6 monitoring alerts. No provider chosen yet.
+No separate provider needed. Brevo's SMTP relay is enabled on the account and the
+free tier allows 300 sends a day, far more than a regression-only alert policy
+uses. Blocked only by the same missing REST key as item 1.
 
 ### 4. Applying the `/tools/*` page bodies
 
@@ -120,7 +151,7 @@ for launch and will throttle immediately under the traffic
 | Statement / VPAT UI | Generators and API routes exist; no screen yet. Documents are returned as HTML + text and stored in `documents`. |
 | `.docx` export | Not written. The roadmap gates the export, never the answer. |
 | Alt-text UI | Auditor and API route exist; no screen yet. |
-| Monitoring (Phase 6) | Schema exists (`monitors`, `monitor_runs`). No cron, no dashboard, no alerting. |
+| Monitoring dashboard UI | Cron, regression detection and alerting all work; no screen yet. |
 
 ---
 
