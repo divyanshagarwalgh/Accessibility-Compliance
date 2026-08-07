@@ -1,0 +1,36 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "webyansh-a11y-scan",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+
+  "browser": {
+    "binding": "BROWSER"
+  },
+
+  // Workers Paid only — the Free plan rejects this key outright, which makes it
+  // a reliable plan check. Most of a scan is I/O wait on Browser Rendering, so
+  // the worker's own CPU use is modest; the headroom is for mapping the axe
+  // payload on pages with thousands of violations.
+  "limits": {
+    "cpu_ms": 60000
+  },
+
+  // Hourly. Webflow Cloud provisions D1/KV/R2 but exposes no cron trigger, so
+  // the clock lives in this worker and the monitor data lives in the app. Hourly
+  // is finer than any schedule needs (the shortest is daily) and means a monitor
+  // that comes due is picked up within the hour rather than waiting for a fixed
+  // daily tick.
+  "triggers": {
+    "crons": ["0 * * * *"]
+  },
+
+  // Not a secret — it is a public staging URL, so it lives in versioned config
+  // rather than in `wrangler secret`, where nobody could see what it was set to.
+  // The shared secret that authenticates the call is still a secret.
+  "vars": {
+    "MONITOR_CRON_URL": "https://webyansh-webflow-agency.webflow.io/app/api/monitors/run-due"
+  }
+}

@@ -5,15 +5,19 @@
   "description": "Cloudflare Worker that renders a page with Browser Rendering, runs axe-core against it, and posts the findings back to the Webflow Cloud app.",
   "type": "module",
   "//scripts": [
-    "Direct node paths — npm's Windows shims break on the '&' in this project's path."
+    "Direct node paths — npm's Windows shims break on the '&' in this project's path.",
+    "--config is explicit and load-bearing: wrangler 4.119 does not auto-discover",
+    "wrangler.jsonc, so a bare `wrangler deploy` here walks UP to the repo root and",
+    "picks up the Webflow Cloud app's wrangler.json instead — deploying the wrong",
+    "worker with the wrong entry point. Never drop the flag."
   ],
   "scripts": {
     "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
     "test": "node ./node_modules/vitest/vitest.mjs run",
     "test:watch": "node ./node_modules/vitest/vitest.mjs",
-    "dev": "node ./node_modules/wrangler/bin/wrangler.js dev",
-    "deploy": "node ./node_modules/wrangler/bin/wrangler.js deploy",
-    "secret:callback": "node ./node_modules/wrangler/bin/wrangler.js secret put SHARED_SECRET"
+    "dev": "node ./node_modules/wrangler/bin/wrangler.js dev --config wrangler.jsonc",
+    "deploy": "node ./node_modules/wrangler/bin/wrangler.js deploy --config wrangler.jsonc",
+    "secret:callback": "node ./node_modules/wrangler/bin/wrangler.js secret put SHARED_SECRET --config wrangler.jsonc"
   },
   "dependencies": {
     "@cloudflare/puppeteer": "^1.0.4",
