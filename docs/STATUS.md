@@ -15,53 +15,70 @@ Written so the next session — or the next person — does not have to guess.
 | 1 | Webflow Cloud app at `/app`, D1 + KV + R2 bound | `GET /app/api/health` returns `ok` with all three reachable, live on staging |
 | 2 | Contrast maths + `ContrastChecker` code component | 56 tests; published to Workspace, installed on site, placed on the page |
 | 2 | `/tools/color-contrast-checker` native page | Verified on staging: SSR emits the real `2.59:1`, heading order has 0 skips |
-| 3 | Rule engine: 13 rules, axe mapping, CMS detection, scoring | 47 tests |
-| 3 | Scan pipeline: enqueue, poll, callback, lead capture, jurisdiction | Builds clean; routes present in the build manifest |
+| 3 | Rule engine: 13 rules, axe mapping, CMS detection, scoring | 96 app tests |
+| 3 | Scan worker deployed and running | Live at `webyansh-a11y-scan.divyanshgraphic.workers.dev`, startup 43 ms |
+| 3 | **End-to-end scan, verified live** | See below |
 | 3 | SSRF protection on the scan endpoint | 15 tests covering loopback, RFC1918, link-local, cloud metadata |
 | 4 | `/report/[scanId]`: progress, gate, all error states | Builds clean; worker 901.91 KiB gzipped (9% of the 10 MB ceiling) |
+| 5 | Accessibility statement generator | 21 tests; verified live against a real scan |
+| 5 | VPAT 2.5 / ACR generator, all 55 criteria | 16 tests; verified live against a real scan |
 
-**Test totals:** 103 (47 app + 56 component). Typecheck clean in all three packages.
-`npm audit`: 0 in the app, 0 in the scan worker, 6 low in `webflow-components`
-(`elliptic`, which has no patched release at any version).
+**Test totals:** 157 — 96 app + 56 component + 5 scan worker. Typecheck clean in
+all three packages. `npm audit`: 0 in the app, 0 in the scan worker, 6 low in
+`webflow-components` (`elliptic`, which has no patched release at any version).
+
+### The end-to-end scan now passes
+
+It never had until 7 August. Every scan died with
+`render_crash: ReferenceError: __name is not defined`.
+
+Wrangler bundles the scan worker with esbuild and `keepNames` enabled, and
+exposes no way to turn it off. axe-core's dist is itself an esbuild build, so our
+bundler re-prints it rather than passing it through, wrapping every named
+function with esbuild's `__name` helper. `axe.source` — the string injected into
+the scanned page — therefore carried 1,815 calls to a helper declared only in the
+worker's module scope. Fixed in `scan-worker/src/inject.ts` by shipping esbuild's
+helper alongside the code that expects it; five regression tests pin it.
+
+Verified live:
+
+| URL | Result |
+|---|---|
+| `example.com` | score 100, 0 issues, `axe-core@4.13.0` |
+| W3C's inaccessible demo | 62 issues across 8 rules — 36 critical, 23 serious, 3 moderate |
+
+The custom checks fire (`wy-focus-visible` found 14 nodes), several axe rules
+merge into one of ours (33 nodes under a single `alt`), every rule carries
+Webflow steps, and gating holds: score, severity and rule names are public while
+remediation stays behind the email.
 
 ---
 
 ## Blocked — needs a credential I do not have
 
-### 1. Scan worker is not deployed
-
-`scan-worker/` is written, typechecks, and has zero advisories. It is **not live**.
-
-The connected Cloudflare account is reachable (0 workers, empty) but the MCP is
-**read-only for Workers** — it can create D1, KV and R2, but has no deploy action.
-
-To deploy:
-
-```bash
-cd scan-worker
-npx wrangler login          # or set CLOUDFLARE_API_TOKEN
-npm run deploy
-npm run secret:callback     # paste the shared secret
-```
-
-Then set `SCAN_SERVICE_URL` and `SCAN_CALLBACK_SECRET` in the Webflow Cloud
-environment. Until that happens `POST /api/scan` returns `503
-scan_service_unconfigured` — deliberately, rather than pretending to queue work.
-
-**Browser Rendering needs Workers Paid** for meaningful throughput: Free allows 3
-concurrent browsers, Paid allows 120. Three is survivable for launch and will
-throttle immediately under the traffic `/tools/color-contrast-checker` is aimed at.
-
-### 2. Brevo list id
+### 1. Brevo list id
 
 `BREVO_API_KEY` and `BREVO_LIST_ID` are read from the environment. The roadmap
 requires a **new** list for accessibility leads, not the existing list 3. Lead
 capture works without them — the lead is stored in D1 with `brevo_synced = 0` and
 can be replayed — but nothing reaches Brevo until they are set.
 
-### 3. Anthropic API key
+### 2. Anthropic API key
 
-Needed for alt-text drafting (Phase 5). Not yet required by any shipped surface.
+`ANTHROPIC_API_KEY` is needed for the alt-text auditor (Phase 5). Detection is
+already covered by the `alt` rule in the scanner; what needs the key is drafting
+the replacement text, which is the module's entire value.
+
+### 3. Transactional email
+
+Needed for Phase 6 monitoring alerts. No provider chosen yet.
+
+### Browser Rendering throughput
+
+Not blocking, but load-bearing at launch. The account is on **Workers Free**,
+which allows **3 concurrent browsers** against Paid's 120. Three is survivable
+for launch and will throttle immediately under the traffic
+`/tools/color-contrast-checker` is aimed at.
 
 ---
 
@@ -74,10 +91,10 @@ Needed for alt-text drafting (Phase 5). Not yet required by any shipped surface.
 | `/tools/vpat-generator` | Page + SEO + JSON-LD. **Body is empty.** |
 | `/tools/accessibility-statement-generator` | Page + SEO + JSON-LD. **Body is empty.** |
 | `/tools/accessibility-laws` | Page + SEO + JSON-LD. **Body is empty.** |
-| Statement generator (Phase 5) | Jurisdiction logic done and tested. Document generation not written. |
-| VPAT generator (Phase 5) | Not written. |
+| Statement / VPAT UI | Generators and API routes exist; no screen yet. Documents are returned as HTML + text and stored in `documents`. |
+| `.docx` export | Not written. The roadmap gates the export, never the answer. |
 | Alt-text auditor (Phase 5) | Not written. Needs the Anthropic key. |
-| Monitoring (Phase 6) | Schema exists (`monitors`, `monitor_runs`). No cron, no dashboard. |
+| Monitoring (Phase 6) | Schema exists (`monitors`, `monitor_runs`). No cron, no dashboard, no alerting. |
 
 ---
 
@@ -106,8 +123,11 @@ All seven held.
 - Published to `.webflow.io` only, `customDomains: []`. **Production untouched.**
 - No secrets committed. `.gitignore` covers `.env*`, `.dev.vars`, `.wrangler/`.
 - The coverage caveat is generated by one function (`coverageCaveat`) and renders
-  on every report, gated or not, including a zero-issue result.
+  on every report, gated or not, including a zero-issue result. The statement
+  generator will not emit "fully conformant" from a scan, and the VPAT marks all
+  43 criteria it cannot reach as `Not evaluated` rather than omitting them.
 - No overlay widget, and the hub page says explicitly that we will not build one.
 - Facts about Webflow Cloud, DevLink and Lumos were read from current docs and
-  verified against the live site rather than recalled. Two Phase 0 claims were
-  corrected this way — see `lumos-audit.md` §2 and §7a.
+  verified against the live site rather than recalled. The WCAG 2.2 criteria list
+  was verified the same way — the first list fetched wrongly had 2.5.5 Target Size
+  (Enhanced) at Level AA when it is AAA, which a test now pins.
