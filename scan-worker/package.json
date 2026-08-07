@@ -9,6 +9,8 @@
   ],
   "scripts": {
     "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
+    "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:watch": "node ./node_modules/vitest/vitest.mjs",
     "dev": "node ./node_modules/wrangler/bin/wrangler.js dev",
     "deploy": "node ./node_modules/wrangler/bin/wrangler.js deploy",
     "secret:callback": "node ./node_modules/wrangler/bin/wrangler.js secret put SHARED_SECRET"
@@ -20,6 +22,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260804.1",
     "typescript": "5.9.3",
+    "vitest": "^3.2.7",
     "wrangler": "4.119.0"
   },
   "overrides": {

@@ -1,6 +1,7 @@
 import { source as axeSource } from "axe-core";
 import type { Env } from "./index";
 import { customChecks } from "./custom-checks";
+import { injectable } from "./inject";
 
 /** The user agent the product commits to in its own error copy. */
 export const USER_AGENT =
@@ -162,7 +163,9 @@ export async function runScan(
 
     // axe-core is injected as source rather than added as a script tag so it
     // works on pages with a restrictive Content-Security-Policy.
-    await page.evaluate(axeSource);
+    // `injectable` prepends esbuild's `__name` helper, which our own bundler
+    // leaves dangling in this string — see inject.ts for the full account.
+    await page.evaluate(injectable(axeSource));
 
     const axeResults = (await page.evaluate(
       `(async () => {
@@ -193,6 +196,18 @@ export async function runScan(
   } catch (err) {
     const message = String(err);
     const timedOut = /timeout|timed out/i.test(message);
+    // The user-facing errorDetail stays readable, so the stack goes to the
+    // Workers log instead. Without it a render_crash is undiagnosable: the
+    // message alone does not say which call threw.
+    console.error(
+      "scan_failed",
+      JSON.stringify({
+        scanId: job.scanId,
+        url: job.url,
+        message,
+        stack: err instanceof Error ? err.stack : undefined,
+      }),
+    );
     await report(job, secret, {
       status: "failed",
       errorCode: timedOut ? "render_timeout" : "render_crash",
