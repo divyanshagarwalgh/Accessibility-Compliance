@@ -73,6 +73,20 @@ the replacement text, which is the module's entire value.
 
 Needed for Phase 6 monitoring alerts. No provider chosen yet.
 
+### 4. Applying the `/tools/*` page bodies
+
+The four bodies are written and verified in `webflow-pages/`. They could not be
+applied from Claude Code: every page-building Webflow MCP tool takes an
+`actions[]` array while the server advertises an empty input schema, so the
+client sends a string and the call is rejected — `expected array, received
+string`, and even `actions: []` fails. The Data API is not a fallback; the local
+CLI token has no `pages` scope, and its static-content endpoint only rewrites
+existing text nodes rather than creating elements.
+
+Apply them from an interactive session or the Designer extension. Full
+instructions, including the load-bearing page skeleton and the staging-publish
+dance for draft pages, are in [`webflow-pages/README.md`](../webflow-pages/README.md).
+
 ### Browser Rendering throughput
 
 Not blocking, but load-bearing at launch. The account is on **Workers Free**,
@@ -87,10 +101,10 @@ for launch and will throttle immediately under the traffic
 | Item | State |
 |---|---|
 | `/tools/accessibility` | Full content, chrome, JSON-LD. **Draft.** |
-| `/tools/wcag-compliance-checker` | Page + SEO + JSON-LD. **Body is empty.** |
-| `/tools/vpat-generator` | Page + SEO + JSON-LD. **Body is empty.** |
-| `/tools/accessibility-statement-generator` | Page + SEO + JSON-LD. **Body is empty.** |
-| `/tools/accessibility-laws` | Page + SEO + JSON-LD. **Body is empty.** |
+| `/tools/wcag-compliance-checker` | Body **written** in `webflow-pages/`, not yet applied. |
+| `/tools/vpat-generator` | Body **written** in `webflow-pages/`, not yet applied. |
+| `/tools/accessibility-statement-generator` | Body **written** in `webflow-pages/`, not yet applied. |
+| `/tools/accessibility-laws` | Body **written** in `webflow-pages/`, not yet applied. |
 | Statement / VPAT UI | Generators and API routes exist; no screen yet. Documents are returned as HTML + text and stored in `documents`. |
 | `.docx` export | Not written. The roadmap gates the export, never the answer. |
 | Alt-text auditor (Phase 5) | Not written. Needs the Anthropic key. |
