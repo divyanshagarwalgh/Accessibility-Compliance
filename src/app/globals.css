@@ -82,6 +82,14 @@ a:where(:not([class])) {
 
 /* --- App chrome (design-inventory §1.1) ---------------------------------- */
 
+/* Fixed, not a Lumos size token. The whole scale is fluid clamp() — even
+ * --size--5rem bottoms out at 3rem (48px) on a narrow viewport — so anything
+ * that has to clear a fixed-height header must be expressed in fixed units.
+ * scroll-margin-top below derives from this. */
+:root {
+  --app--header-height: 68px;
+}
+
 .a11y_header {
   position: sticky;
   top: 0;
@@ -94,7 +102,7 @@ a:where(:not([class])) {
 .a11y_header_inner {
   max-width: var(--container--main);
   margin-inline: auto;
-  min-height: 68px;
+  min-height: var(--app--header-height);
   padding: 0 var(--site--margin);
   display: flex;
   align-items: center;
@@ -133,21 +141,23 @@ a:where(:not([class])) {
 }
 
 @media (max-width: 479px) {
-  .a11y_header_inner {
-    min-height: 60px;
+  :root {
+    --app--header-height: 60px;
   }
 }
 
-/* Rule 13 (2.4.11 Focus Not Obscured, WCAG 2.2). Anchor targets must clear any
- * sticky chrome when focused.
+/* Rule 13 (2.4.11 Focus Not Obscured, WCAG 2.2). Anchor targets must clear the
+ * sticky header when focused.
  *
- * space--8 is 4rem = 64px, which was correct while the app had no header. The
- * header added above is 68px, so 64px leaves a focused target 4px underneath it
- * — the exact failure this tool reports as wy-focus-obscured. space--10 is 5rem
- * = 80px and clears it. */
+ * Derived from the header's own height rather than from a spacing token. The
+ * first attempt used --_spacing---space--10 on the assumption it was 5rem; the
+ * Lumos scale is fluid, so it measured 68.46px against a 68.8px header and was
+ * still short — and it would have been 48px on a phone. Reading the computed
+ * value is what caught it. The extra 1rem covers the border and leaves the
+ * target visibly clear rather than flush. */
 :target,
 [id] {
-  scroll-margin-top: var(--_spacing---space--10);
+  scroll-margin-top: calc(var(--app--header-height) + 1rem);
 }
 
 .u-sr-only {
