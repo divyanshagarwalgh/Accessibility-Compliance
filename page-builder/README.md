@@ -36,14 +36,31 @@ creating them first is what makes the pages arrive styled.
 ## Running it
 
 ```bash
-cd page-builder
-npm install
-node generate-data.mjs        # re-bake webflow-pages/* into src/pages-data.ts
-npm run dev                   # tsc --watch + webflow extension serve
+node run.mjs
 ```
 
+That is the whole thing: generate, compile, serve. Leave the window open; Ctrl+C
+when done.
+
+**Do not use `npm run`.** Two separate things break it on this machine, and
+`run.mjs` exists to sidestep both:
+
+1. **PowerShell's execution policy blocks `npm.ps1`** — *"running scripts is
+   disabled on this system"*. Fixing that means changing a system security
+   setting, which this project should not require.
+2. **The `&` in this project's path truncates npm's Windows shims**, so even
+   where npm runs, a bare `tsc` fails with `MODULE_NOT_FOUND`.
+
+`node.exe` is a real executable, so neither applies to it. Every step in
+`run.mjs` is a direct `node` invocation for that reason. The `npm run *` scripts
+in `package.json` are kept for CI and non-Windows use.
+
+PowerShell will print a red `NativeCommandError` block around the CLI's
+update-check line. That is PowerShell 5.1 wrapping a native command's stderr, not
+a failure — the server is running if you see the localhost URL.
+
 Then in the Designer: **Apps** → this app → **Launch development app**, pointing
-at the URL `webflow extension serve` prints (usually `http://localhost:1337`).
+at the URL it prints (usually `http://localhost:1337`).
 
 Registering the app once, in Workspace settings → **Apps & integrations** →
 **Create new app**, with the *Designer extension* capability, is the only step
