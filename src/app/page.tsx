@@ -16,6 +16,13 @@ export const metadata = { title: "Accessibility workspace" };
 
 const MODULES: Array<{ href: string; name: string; description: string; tag: string }> = [
   {
+    href: "/jurisdiction",
+    name: "Jurisdiction mapper",
+    description:
+      "Pick the markets you sell into and see which regimes bind you, with the deadline for each.",
+    tag: "ADA, EAA, EN 301 549",
+  },
+  {
     href: "/statement",
     name: "Accessibility statement",
     description:

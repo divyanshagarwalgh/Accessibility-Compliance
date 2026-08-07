@@ -82,7 +82,8 @@ Five routes, all building on the same shared stylesheet
 
 | Route | What |
 |---|---|
-| `/` | App index: a scan form and the four modules. Replaces the Phase 1 hello-world |
+| `/` | App index: a scan form and the five modules. Replaces the Phase 1 hello-world |
+| `/jurisdiction` | Markets and business traits in, regimes out; recomputes on every tick |
 | `/statement` | Form → generated statement, Rendered / HTML preview, copy, `.html`, `.txt`, `.docx` |
 | `/vpat` | Edition toggles, counts, the 55-row table with a filter, `.csv` and `.docx` |
 | `/alt-text` | Audit from a scan or a pasted list, four stat cards, editable drafts |
@@ -215,10 +216,7 @@ Phases 0–7 are complete. In priority order:
 2. **Exercise the new screens against the live deploy.** They build clean and the documents were
    validated locally, but nothing has been driven through a real scan on staging yet.
 3. **Create the four Brevo contact attributes**, item 1 under Blocked. Leads sync but arrive bare.
-4. **A jurisdiction mapper screen.** `POST /api/jurisdiction` exists and is tested; the design puts
-   that surface on the native `/tools/accessibility-laws` page rather than in the app, so this is
-   only worth building if that page slips.
-5. **PDF export.** `.docx` covers the procurement case, which was the one that mattered.
+4. **PDF export.** `.docx` covers the procurement case, which was the one that mattered.
 
 Diagnose credential problems with `GET /app/api/health`, which reports a `configured` object of
 booleans for what the *running* worker can see. Webflow Cloud reads environment variables at deploy
@@ -235,7 +233,6 @@ time only, so "set in the dashboard" and "visible to the worker" are different f
 | `/tools/vpat-generator` | Body **written** in `webflow-pages/`, not yet applied. |
 | `/tools/accessibility-statement-generator` | Body **written** in `webflow-pages/`, not yet applied. |
 | `/tools/accessibility-laws` | Body **written** in `webflow-pages/`, not yet applied. |
-| Jurisdiction mapper UI | `POST /api/jurisdiction` exists and is tested; the surface belongs on the native `/tools/accessibility-laws` page, which is not applied. |
 | PDF export | Not written. `.docx` and `.csv` cover the cases that were asked for. |
 | Bulk "apply to Webflow CMS" from the alt-text screen | Not built, and deliberately not: the Data API writes a CMS field, but applying drafted alt text without a person reading each line is the failure mode that module exists to prevent. |
 
