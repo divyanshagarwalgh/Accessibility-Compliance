@@ -29,7 +29,7 @@ Written so the next session — or the next person — does not have to guess.
 | — | Lead capture → Brevo list 4 | Verified live: `sync: {attempted: true, synced: true}`, contact lands with `listIds: [4]` |
 | — | Cloudflare **Workers Paid** | Confirmed by a deploy accepting `limits.cpu_ms`, which Free rejects. Browser Rendering now 120 concurrent, not 3 |
 
-**Test totals:** 253 — 192 app + 56 component + 5 scan worker. Typecheck clean in
+**Test totals:** 257 — 196 app + 56 component + 5 scan worker. Typecheck clean in
 all three packages. `npm audit`: 0 in the app, 0 in the scan worker, 6 low in
 `webflow-components` (`elliptic`, which has no patched release at any version).
 
