@@ -1,0 +1,22 @@
+<link href="styles.css" rel="stylesheet" />
+
+<h1>Build the /tools pages</h1>
+
+<p class="lede">
+  Creates the shared classes, then inserts each page body into that page&rsquo;s
+  <code>page_main</code> as native Webflow elements.
+</p>
+
+<button id="build" type="button">Build all four pages</button>
+
+<p class="hint">Or build one at a time:</p>
+<ul id="pages" class="pages"></ul>
+
+<p class="hint">
+  A page whose <code>page_main</code> already has children is skipped rather than
+  appended to, so running this twice will not duplicate anything.
+</p>
+
+<ul id="log" class="log" aria-live="polite"></ul>
+
+<script type="module" src="index.js"></script>

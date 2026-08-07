@@ -63,3 +63,10 @@ yarn-error.log*
 _handoff/**/uploads/
 _handoff/**/screenshots/
 _handoff/**/.thumbnail
+
+# Playwright MCP scratch snapshots
+.playwright-mcp/
+
+# Designer Extension build output — regenerate with `npm run dev` in page-builder/
+page-builder/public/index.js
+page-builder/public/pages-data.js

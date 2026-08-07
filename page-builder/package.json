@@ -1,0 +1,22 @@
+{
+  "name": "page-builder",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "//": "generate runs first everywhere, so src/pages-data.ts can never drift from webflow-pages/",
+    "generate": "node generate-data.mjs",
+    "build": "npm install && node generate-data.mjs && tsc -p tsconfig.json && webflow extension bundle",
+    "dev": "npm install && node generate-data.mjs && concurrently -r \"webflow extension serve\" \"tsc -p tsconfig.json --watch --preserveWatchOutput\"",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@webflow/designer-extension-typings": "^2.0.2",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.21.0",
+    "eslint-plugin-promise": "^7.2.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.24.0"
+  }
+}

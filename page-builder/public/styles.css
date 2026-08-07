@@ -1,0 +1,109 @@
+/* The extension panel is narrow and lives inside the Designer, which is dark.
+   Colours are its own — this UI never ships to the site. */
+
+:root {
+  color-scheme: dark;
+  --bg: #1e1e1e;
+  --fg: #ededed;
+  --muted: #a8a8a8;
+  --line: #3a3a3a;
+  --accent: #146ef5;
+  --ok: #4ade80;
+  --warn: #fbbf24;
+  --fail: #f87171;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.lede {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.hint {
+  margin: 14px 0 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+code {
+  font-family: ui-monospace, "Roboto Mono", monospace;
+  font-size: 0.9em;
+  color: var(--fg);
+}
+
+button {
+  appearance: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  width: 100%;
+  padding: 9px 12px;
+  min-height: 34px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  text-align: left;
+}
+
+button.secondary {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--fg);
+  font-weight: 500;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.pages,
+.log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.log {
+  margin-top: 14px;
+  gap: 3px;
+  max-height: 320px;
+  overflow-y: auto;
+  font-family: ui-monospace, "Roboto Mono", monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.log li[data-tone="ok"] {
+  color: var(--ok);
+}
+.log li[data-tone="warn"] {
+  color: var(--warn);
+}
+.log li[data-tone="fail"] {
+  color: var(--fail);
+}
