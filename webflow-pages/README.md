@@ -3,19 +3,44 @@
 These four pages exist in Webflow with SEO metadata and JSON-LD already set, and
 **empty bodies**. The markup here is what goes in them.
 
-It could not be applied from the session that wrote it. Both routes were blocked:
+## Validate before pasting
+
+```bash
+node webflow-pages/validate.mjs
+```
+
+Checks every constraint the Designer and `data_whtml_builder` enforce — single
+root element, no `<style>` tags, well-formedness, no descendant selectors, only
+Webflow's three breakpoints, no `--_spacing---*` variables — plus the project's
+own rules on heading order and the colours that fail AA. **All four files pass as
+of 7 August 2026.** If you edit one before pasting, re-run this first; a failure
+here is a paste that breaks in the Designer.
+
+## Why this is still a manual step
+
+It could not be applied from the sessions that wrote it. Re-tested 7 August 2026
+against Webflow MCP **2.0.1** — still blocked, for the same reason. Both routes:
 
 - **Webflow MCP** — every page-building tool (`data_whtml_builder`, `data_pages_tool`,
   `data_element_tool`) takes an `actions[]` array, and the server advertises an empty
-  input schema (`{"type":"object"}` with no `properties`). The client therefore sends
-  `actions` as a string and the server rejects it: `expected array, received string`.
-  Even `actions: []` fails. Retry from a client that marshals arrays for
-  untyped MCP schemas — the Webflow Designer extension or an interactive session.
-- **Webflow Data API** — the local CLI token in `%APPDATA%\webflow\auth.json` carries
-  `sites:read/write`, `cms:*`, `assets:*`, `code_components:*` but **no `pages` scope**,
-  so `GET /v2/sites/{id}/pages` returns 403. Even with the scope, the Data API's
-  "update static content" endpoint only rewrites existing text nodes and image alt
-  text — it cannot create elements, so it could never have built these bodies.
+  input schema (`{"type":"object"}` with no `properties`). With no type information,
+  the client serialises the array as a string and the server rejects its own request:
+  `expected array, received string`. Even `actions: []` fails.
+  **Scalar parameters do pass through** — `webflow_guide_tool` returns fine, and
+  `data_pages_tool` with only `site_id` reaches the server and complains that
+  `actions` is missing. So the failure is specifically array marshalling, and it
+  cannot be worked around from the calling side.
+  `ask_webflow_ai` takes a plain `message` string and therefore *does* marshal, but
+  the service behind it returns `Failed to fetch from FAI chat service`.
+  `get_more_tools` reports no additional tools.
+  Retry from a client that marshals arrays for untyped MCP schemas — the Webflow
+  Designer extension, or an interactive session with a different MCP client.
+- **Webflow Data API** — the local CLI token in `%APPDATA%\webflow\auth.json`
+  authenticates fine (`GET /v2/sites/{id}` → 200, `/v2/token/authorized_by` resolves
+  the account) but carries **no `pages` scope**, so `GET /v2/sites/{id}/pages`
+  returns 403. Granting the scope would not help: the Data API's "update static
+  content" endpoint only rewrites existing text nodes and image alt text. There is
+  no create-element endpoint, so this route could never have built these bodies.
 
 ## How to apply
 
