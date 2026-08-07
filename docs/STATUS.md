@@ -24,6 +24,8 @@ Written so the next session — or the next person — does not have to guess.
 | 5 | VPAT 2.5 / ACR generator, all 55 criteria | 16 tests; verified live against a real scan |
 | 5 | Alt-text auditor: classification + Claude drafting | 36 tests; classification verified live, drafting verified against the API |
 | 6 | Monitoring: hourly cron, regression detection, Brevo alerts | 19 tests; **cron fired live and recorded a baseline run** — see below |
+| — | Lead capture → Brevo list 4 | Verified live: `sync: {attempted: true, synced: true}`, contact lands with `listIds: [4]` |
+| — | Cloudflare **Workers Paid** | Confirmed by a deploy accepting `limits.cpu_ms`, which Free rejects. Browser Rendering now 120 concurrent, not 3 |
 
 **Test totals:** 212 — 151 app + 56 component + 5 scan worker. Typecheck clean in
 all three packages. `npm audit`: 0 in the app, 0 in the scan worker, 6 low in
@@ -73,7 +75,28 @@ both an absent and a wrong secret with 401 (verified).
 
 ## Blocked — needs a credential I do not have
 
-### 1. Brevo — needs a REST API key, not the MCP key
+### 1. Brevo — working, but leads arrive without their attributes
+
+**Resolved since the last update.** `BREVO_API_KEY` and `BREVO_LIST_ID` (= 4, "Claude Tools
+Webyansh") are set in both `.env.local` and Webflow Cloud, and lead sync is verified live: the app
+returns `sync: {attempted: true, synced: true}` and the contact lands with `listIds: [4]`.
+
+Three things had to be untangled, all recorded in the `webyansh-brevo-integration` memory:
+the Brevo **MCP** key is not a REST key (both it and the `xkeysib-` value it wraps 401);
+Brevo's *"Blocking unauthorized IP addresses"* panel reads backwards, where `Activated` means the
+block is on; and the actual cause of the empty list was a missing `BREVO_LIST_ID` in Webflow Cloud,
+which made the app skip the sync entirely without erroring.
+
+**What is still outstanding: the four contact attributes do not exist**, and Brevo silently
+discards attributes it does not know. Leads therefore arrive bare — `attributes: {}` — and the list
+is not segmentable, which the roadmap requires ("tagged with tool, module, input domain and
+score"). Create at **Contacts → Settings → Contact attributes**: `SCAN_DOMAIN` (text),
+`SCAN_SCORE` (number), `SOURCE_TOOL` (text), `WANTS_RESCAN` (boolean).
+
+A test contact `a11y-verify-final@webyansh.com` sits in list 4 and can be deleted.
+
+<details>
+<summary>Superseded: the original "needs a REST API key" note</summary>
 
 The list exists: **"Claude Tools Webyansh", id 4**, created 7 August. That is the
 value for `BREVO_LIST_ID` in `.env.local` (already set) and Webflow Cloud
@@ -92,6 +115,8 @@ Generate a standard v3 key at **Brevo → SMTP & API → API Keys** and set it a
 Until then lead capture still records to D1 with `brevo_synced = 0` and is
 replayable, and monitoring still records runs and regressions — only the alert
 email is suppressed, recorded as `alert_sent = 0`.
+
+</details>
 
 ### 2. Anthropic API key — set it in Webflow Cloud
 
@@ -136,6 +161,24 @@ Not blocking, but load-bearing at launch. The account is on **Workers Free**,
 which allows **3 concurrent browsers** against Paid's 120. Three is survivable
 for launch and will throttle immediately under the traffic
 `/tools/color-contrast-checker` is aimed at.
+
+---
+
+## Where to pick up
+
+Phases 0–6 are complete. In priority order, all unblocked:
+
+1. **UI screens** — statement, VPAT, alt-text and the monitoring dashboard. Every generator and API
+   route exists and is verified; there is simply no screen. Specs are in
+   `docs/design-inventory.md` §4.9–4.12. **This is what was in progress when the session ended.**
+2. **`.docx` / PDF export** for the statement and VPAT. The roadmap gates the export, never the
+   answer.
+3. **Apply the four `/tools/*` page bodies** — needs a human in the Webflow Designer, see item 4
+   under Blocked.
+
+Diagnose credential problems with `GET /app/api/health`, which reports a `configured` object of
+booleans for what the *running* worker can see. Webflow Cloud reads environment variables at deploy
+time only, so "set in the dashboard" and "visible to the worker" are different facts.
 
 ---
 
