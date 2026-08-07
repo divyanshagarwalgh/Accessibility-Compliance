@@ -57,9 +57,7 @@ export function StatementBuilder({ initialScanId }: { initialScanId: string }) {
           organisation,
           domain: domain.trim() || undefined,
           contactEmail,
-          // A date input gives a local calendar day; the generator formats in UTC,
-          // so midday avoids the document dating itself a day early west of GMT.
-          reviewedAt: new Date(`${reviewedOn}T12:00:00Z`).getTime(),
+          reviewedAt: reviewedAtMs(reviewedOn),
           wcagVersion,
           wcagLevel,
           manualReviewCompleted,
@@ -370,6 +368,22 @@ export function StatementBuilder({ initialScanId }: { initialScanId: string }) {
       </div>
     </div>
   );
+}
+
+/**
+ * Turns the date input's value into a timestamp.
+ *
+ * A date input gives a local calendar day; the generator formats in UTC, so
+ * midday keeps the document from dating itself a day early west of Greenwich.
+ *
+ * Returns `undefined` rather than `NaN` for an empty or unparseable field. The
+ * route checks `typeof reviewedAt === "number"` before falling back to now —
+ * and `NaN` passes that check, which would put "NaN undefined NaN" on the face
+ * of a legal document.
+ */
+function reviewedAtMs(day: string): number | undefined {
+  const ms = new Date(`${day}T12:00:00Z`).getTime();
+  return Number.isFinite(ms) ? ms : undefined;
 }
 
 function slug(value: string): string {

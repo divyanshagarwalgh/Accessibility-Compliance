@@ -98,8 +98,41 @@ export async function POST(request: Request): Promise<Response> {
         draftMessage: err.message,
       });
     }
-    throw err;
+
+    // Anything else — most often one image URL the model could not fetch, which
+    // fails the whole batch because the images go up as URLs and the API has no
+    // partial success. Returning a 500 here would throw away the classification
+    // too, and the classification is the half that needed no model and did not
+    // fail. So the audit comes back either way and the drafting is reported as
+    // the thing that broke.
+    return Response.json({
+      ...audit,
+      drafted: false,
+      draftError: "failed",
+      draftMessage: draftFailureMessage(err),
+    });
   }
+}
+
+/**
+ * Turns a drafting failure into something the user can act on.
+ *
+ * The unreachable-image case is worth calling out by name because it is both
+ * the most common and the only one the user can fix. Matching on the message is
+ * a heuristic, so the fallback stays honest rather than guessing.
+ */
+function draftFailureMessage(err: unknown): string {
+  const message = err instanceof Error ? err.message : String(err);
+
+  if (/image|url|fetch|download/i.test(message)) {
+    return (
+      "Drafting failed, most likely because one of the images could not be " +
+      "fetched from its URL. Check that every image is reachable without a login " +
+      "and try again. The classification below is unaffected."
+    );
+  }
+
+  return "Drafting failed. The classification below is unaffected — it needs no model.";
 }
 
 /**

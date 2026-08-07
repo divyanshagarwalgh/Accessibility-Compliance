@@ -11,7 +11,7 @@ type Draft = AltDraft & { src?: string };
 type Result = AltAudit & {
   drafted: boolean;
   drafts?: Draft[];
-  draftError?: "not_configured" | "refused";
+  draftError?: "not_configured" | "refused" | "failed";
   draftMessage?: string;
 };
 
@@ -256,8 +256,8 @@ export function AltTextAuditor({ initialScanId }: { initialScanId: string }) {
             </p>
           ) : null}
 
-          {result.draftError === "refused" ? (
-            <p className={`${styles.warnNote} ${styles.spaceBottom2}`}>
+          {result.draftError === "refused" || result.draftError === "failed" ? (
+            <p className={`${styles.warnNote} ${styles.spaceBottom2}`} role="alert">
               {result.draftMessage ??
                 "The model declined to draft text for this batch. The classification below still stands."}
             </p>

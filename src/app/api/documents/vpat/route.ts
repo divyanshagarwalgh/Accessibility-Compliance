@@ -63,7 +63,9 @@ export async function POST(request: Request): Promise<Response> {
     );
   }
 
-  const evaluatedAt = typeof body.evaluatedAt === "number" ? body.evaluatedAt : Date.now();
+  // `Number.isFinite`, not `typeof === "number"`: NaN satisfies the latter and
+  // formats as "NaN undefined NaN" in the document header.
+  const evaluatedAt = Number.isFinite(body.evaluatedAt) ? body.evaluatedAt! : Date.now();
 
   const vpat = generateVpat(
     { productName, evaluatedAt, edition, evaluatedOn: formatReviewDate(evaluatedAt) },

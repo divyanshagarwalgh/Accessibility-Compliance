@@ -83,7 +83,9 @@ export async function POST(request: Request): Promise<Response> {
     );
   }
 
-  const reviewedAt = typeof body.reviewedAt === "number" ? body.reviewedAt : Date.now();
+  // `Number.isFinite`, not `typeof === "number"`: NaN satisfies the latter and
+  // formats as "NaN undefined NaN" on the face of the document.
+  const reviewedAt = Number.isFinite(body.reviewedAt) ? body.reviewedAt! : Date.now();
 
   const statement = generateStatement(
     {
