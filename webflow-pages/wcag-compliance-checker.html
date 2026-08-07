@@ -1,0 +1,241 @@
+<div>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h1 class="u-mb-16">WCAG compliance checker</h1>
+      <p class="a11yp_lede u-mb-24">
+        Enter a URL and get every WCAG 2.2 Level A and AA failure a machine can find, each one
+        mapped to the exact fix in Webflow Designer rather than to a line of HTML you cannot
+        edit. Free, no account, and the score is public so you can share it.
+      </p>
+      <a href="/app" class="a11yp_cta">Scan a page</a>
+      <div class="g_section_space"></div>
+      <p class="a11yp_updated">Last updated 7 August 2026 &middot; axe-core 4.13 &middot; WCAG 2.2 Level A and AA</p>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">What gets checked</h2>
+      <p class="a11yp_prose u-mb-24">
+        Thirteen rules across twelve success criteria. Three of them have no equivalent in any
+        open-source engine and are ours, because the criteria they cover need a rendered page
+        with real computed styles rather than static HTML.
+      </p>
+      <div class="a11yp_tablewrap u-mb-24">
+        <table class="a11yp_table">
+          <thead>
+            <tr>
+              <th class="a11yp_th">Criterion</th>
+              <th class="a11yp_th">What we look for</th>
+              <th class="a11yp_th">Level</th>
+              <th class="a11yp_th">Severity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="a11yp_td_num">1.4.3</td>
+              <td class="a11yp_td">Text below 4.5:1 against its real background, measured on every text node</td>
+              <td class="a11yp_td_num">AA</td>
+              <td class="a11yp_td">Critical</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">1.1.1</td>
+              <td class="a11yp_td">Images with no alternative text, including CMS-bound ones</td>
+              <td class="a11yp_td_num">A</td>
+              <td class="a11yp_td">Critical</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">3.3.2</td>
+              <td class="a11yp_td">Form inputs relying on placeholder text instead of a label</td>
+              <td class="a11yp_td_num">A</td>
+              <td class="a11yp_td">Critical</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">2.1.1</td>
+              <td class="a11yp_td">Controls built as divs that a keyboard cannot reach</td>
+              <td class="a11yp_td_num">A</td>
+              <td class="a11yp_td">Critical</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">1.2.2</td>
+              <td class="a11yp_td">Video with no caption track</td>
+              <td class="a11yp_td_num">A</td>
+              <td class="a11yp_td">Critical</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">2.4.4</td>
+              <td class="a11yp_td">Links whose text does not describe where they go</td>
+              <td class="a11yp_td_num">A</td>
+              <td class="a11yp_td">Serious</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">2.4.7</td>
+              <td class="a11yp_td">Focus indicators removed by a global reset &mdash; our own check</td>
+              <td class="a11yp_td_num">AA</td>
+              <td class="a11yp_td">Serious</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">2.5.8</td>
+              <td class="a11yp_td">Targets under 24 by 24 CSS pixels, new in WCAG 2.2</td>
+              <td class="a11yp_td_num">AA</td>
+              <td class="a11yp_td">Serious</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">1.3.1</td>
+              <td class="a11yp_td">Skipped heading levels, and pages with no main landmark</td>
+              <td class="a11yp_td_num">A</td>
+              <td class="a11yp_td">Serious</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">1.4.4</td>
+              <td class="a11yp_td">Content clipped at 200% zoom &mdash; our own check, measured at 640px</td>
+              <td class="a11yp_td_num">AA</td>
+              <td class="a11yp_td">Moderate</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">3.1.1</td>
+              <td class="a11yp_td">A missing lang attribute on the html element</td>
+              <td class="a11yp_td_num">A</td>
+              <td class="a11yp_td">Moderate</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td_num">2.4.11</td>
+              <td class="a11yp_td">Anchor targets hidden behind a sticky header &mdash; our own check, new in 2.2</td>
+              <td class="a11yp_td_num">AA</td>
+              <td class="a11yp_td">Minor</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">Why the fixes are Webflow-specific</h2>
+      <div class="a11yp_prose u-mb-24">
+        <p>
+          Generic scanners tell you that an element fails and hand you a CSS selector. On
+          Webflow that is the least useful half of the answer, because you do not edit
+          selectors &mdash; you edit classes, elements and CMS fields in Designer, and the
+          markup is generated for you.
+        </p>
+        <p>
+          So every issue we report names the panel to open and the control to change. Where a
+          failing element sits inside a Collection List, we say so, because fixing the element
+          only fixes the first item and the next publish overwrites it. The fix belongs on the
+          CMS field.
+        </p>
+      </div>
+      <div class="a11yp_grid">
+        <div class="a11yp_card">
+          <h3 class="a11yp_card_title">One class, not 200 elements</h3>
+          <p class="a11yp_card_body">
+            Contrast failures usually trace to a single class used everywhere. We group by
+            class so you fix it once, and the score is weighted to reflect that rather than
+            punishing you 200 times for one mistake.
+          </p>
+        </div>
+        <div class="a11yp_card">
+          <h3 class="a11yp_card_title">CMS-bound issues are flagged</h3>
+          <p class="a11yp_card_body">
+            An image inside a Collection List needs its alt text bound to a field. We name the
+            collection so the fix survives the next publish.
+          </p>
+        </div>
+        <div class="a11yp_card">
+          <h3 class="a11yp_card_title">Gaps are visible</h3>
+          <p class="a11yp_card_body">
+            Where we have no Webflow-specific guidance for a rule, the report says so rather
+            than quietly showing generic output as though it were tailored.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">How the score works</h2>
+      <p class="a11yp_prose u-mb-24">
+        The score is a triage aid, not a compliance percentage, and the method is published so
+        you can argue with it. Each failing rule contributes a penalty weighted by severity
+        &mdash; Critical 12, Serious 7, Moderate 3, Minor 1 &mdash; scaled by the base-ten
+        logarithm of how many elements it affects.
+      </p>
+      <p class="a11yp_prose u-mb-24">
+        The logarithm is deliberate. Two hundred contrast failures is usually one class fixed
+        in one place; straight multiplication would drive any site with a repeated component to
+        zero and tell you nothing. Breadth costs more than depth, but not linearly.
+      </p>
+      <div class="a11yp_caveat">
+        <h3 class="a11yp_caveat_title">A score of 100 is not compliance</h3>
+        <p class="a11yp_caveat_body">
+          This scan evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, about 22%.
+          A clean result means we found nothing, not that there is nothing. Whether alternative
+          text is meaningful, whether reading order makes sense, whether a keyboard user can
+          complete a purchase &mdash; none of that is machine-decidable, and all of it is where
+          real barriers live. In June 2026 a French court ordered Carrefour to reach full
+          compliance under a EUR 500 per day penalty and explicitly rejected a 71% conformance
+          score as insufficient. Partial compliance is not a legal position, and neither is a
+          good score.
+        </p>
+      </div>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">Questions</h2>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">Is WCAG 2.2 AA the standard I need?</h3>
+        <p class="a11yp_faq_a">
+          For most businesses, yes. The European Accessibility Act is measured against EN 301
+          549, which incorporates WCAG at AA. ADA Title II names WCAG 2.1 AA explicitly. Section
+          508 still references WCAG 2.0 AA. Meeting 2.2 AA satisfies all of them, because each
+          version is a superset of the last apart from one criterion that WCAG 2.2 withdrew.
+        </p>
+      </div>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">Will you build me an accessibility overlay?</h3>
+        <p class="a11yp_faq_a">
+          No, and we would advise against buying one. Overlay vendors are being sued, the
+          products are widely rejected by the disabled users they claim to help, and installing
+          one is a matter of public record that plaintiffs' lawyers search for. We fix the
+          underlying markup instead. There is no one-line version of this.
+        </p>
+      </div>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">Do you scan the whole site?</h3>
+        <p class="a11yp_faq_a">
+          One page at a time today. In practice a Webflow site is a handful of templates, so
+          scanning one page per template finds nearly everything &mdash; the failures live in
+          shared classes and components, not in individual pages.
+        </p>
+      </div>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">Do you respect robots.txt?</h3>
+        <p class="a11yp_faq_a">
+          Yes. We check it before rendering and honour a disallow for our user agent. The
+          crawler identifies itself as WebyanshBot.
+        </p>
+      </div>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+</div>

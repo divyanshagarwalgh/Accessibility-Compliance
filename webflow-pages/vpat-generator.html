@@ -1,0 +1,238 @@
+<div>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h1 class="u-mb-16">VPAT generator for Webflow sites</h1>
+      <p class="a11yp_lede u-mb-24">
+        A VPAT is the accessibility conformance report procurement teams ask for before they
+        sign. Scan your site and we pre-fill the WCAG 2.2 rows we can evidence, mark the rest
+        Not evaluated, and leave every row for a human to confirm. It is a draft that saves
+        you a day, not a certificate.
+      </p>
+      <a href="/app" class="a11yp_cta">Scan a page to start a draft</a>
+      <div class="g_section_space"></div>
+      <p class="a11yp_updated">Last updated 7 August 2026 &middot; VPAT 2.5 &middot; WCAG 2.2 Level A and AA</p>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">What a VPAT actually is</h2>
+      <div class="a11yp_prose u-mb-24">
+        <p>
+          The Voluntary Product Accessibility Template is a document published by the
+          Information Technology Industry Council. Filling one in produces an Accessibility
+          Conformance Report &mdash; an ACR. In practice the two words are used
+          interchangeably, and a buyer asking for &ldquo;your VPAT&rdquo; means the completed report.
+        </p>
+        <p>
+          It is voluntary in the sense that nobody forces you to publish one. It stops feeling
+          voluntary the moment a public university, a hospital group or a federal contractor
+          puts it in a procurement checklist, which is where most requests come from.
+        </p>
+      </div>
+
+      <div class="a11yp_grid u-mb-24">
+        <div class="a11yp_card">
+          <h3 class="a11yp_card_title">WCAG edition</h3>
+          <p class="a11yp_card_body">
+            The WCAG 2.2 success criteria on their own. The right choice when a private buyer
+            asks for conformance evidence and names no regulation.
+          </p>
+        </div>
+        <div class="a11yp_card">
+          <h3 class="a11yp_card_title">Section 508 edition</h3>
+          <p class="a11yp_card_body">
+            Adds the US federal chapters. Ask for this one if you sell to a federal agency or
+            to anyone spending federal money.
+          </p>
+        </div>
+        <div class="a11yp_card">
+          <h3 class="a11yp_card_title">EU edition</h3>
+          <p class="a11yp_card_body">
+            Maps to EN 301 549, the harmonised standard behind the European Accessibility Act.
+            Needed for EU public-sector procurement.
+          </p>
+        </div>
+        <div class="a11yp_card">
+          <h3 class="a11yp_card_title">INT edition</h3>
+          <p class="a11yp_card_body">
+            All three at once. Longest to complete, and the one to pick if you sell into every
+            market and would rather maintain a single document.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">The conformance vocabulary is fixed</h2>
+      <p class="a11yp_prose u-mb-24">
+        A VPAT has four permitted answers per criterion. Using anything else &mdash; &ldquo;mostly&rdquo;,
+        &ldquo;in progress&rdquo;, &ldquo;95%&rdquo; &mdash; marks the document as amateur to anyone who
+        reads these for a living.
+      </p>
+      <div class="a11yp_tablewrap u-mb-24">
+        <table class="a11yp_table">
+          <thead>
+            <tr>
+              <th class="a11yp_th">Term</th>
+              <th class="a11yp_th">What it means</th>
+              <th class="a11yp_th">What we fill in</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="a11yp_td">Supports</td>
+              <td class="a11yp_td">The functionality meets the criterion.</td>
+              <td class="a11yp_td">Only where we tested and found nothing, with a remark naming what was checked.</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td">Partially supports</td>
+              <td class="a11yp_td">Some functionality does not meet the criterion.</td>
+              <td class="a11yp_td">Where we found element-level failures. We see failures, never passes, so we cannot claim a majority either way.</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td">Does not support</td>
+              <td class="a11yp_td">The majority of functionality does not meet the criterion.</td>
+              <td class="a11yp_td">Where the failure is page-wide. A missing lang attribute is not partially missing.</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td">Not evaluated</td>
+              <td class="a11yp_td">The criterion has not been assessed.</td>
+              <td class="a11yp_td">The 43 criteria no scanner can reach. They appear in the table rather than being dropped from it.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="a11yp_prose">
+        There is a fifth value, Not applicable, for criteria that cannot arise in your product
+        &mdash; captions for a site with no video, for instance. We never fill that in
+        automatically, because whether your product has video is not something a single page
+        scan can establish.
+      </p>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">What the scan can and cannot fill in</h2>
+      <div class="a11yp_tablewrap u-mb-24">
+        <table class="a11yp_table">
+          <thead>
+            <tr>
+              <th class="a11yp_th">&nbsp;</th>
+              <th class="a11yp_th">Criteria</th>
+              <th class="a11yp_th">How they are filled</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="a11yp_td">Evidenced by the scan</td>
+              <td class="a11yp_td_num">12</td>
+              <td class="a11yp_td">Pre-filled with a conformance value and a remark naming the failing elements and their count.</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td">Not evaluated</td>
+              <td class="a11yp_td_num">43</td>
+              <td class="a11yp_td">Listed with the criterion number and name, marked Not evaluated, waiting for a human.</td>
+            </tr>
+            <tr>
+              <td class="a11yp_td">Total, WCAG 2.2 A and AA</td>
+              <td class="a11yp_td_num">55</td>
+              <td class="a11yp_td">Every one appears. None is omitted.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="a11yp_prose">
+        Leaving the untested rows out would be the easier document to produce and the more
+        dangerous one to send. A table containing only the criteria we happen to check reads,
+        to someone working through their own checklist, as a table where everything passed.
+      </p>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">How to finish the draft</h2>
+      <ol class="a11yp_steps u-mb-24">
+        <li class="a11yp_step">Scan the pages that represent your product &mdash; a template each, not every URL.</li>
+        <li class="a11yp_step">Generate the draft and pick the edition your buyer asked for.</li>
+        <li class="a11yp_step">Work through the 43 Not evaluated rows. Most need a keyboard, a screen reader and twenty minutes each.</li>
+        <li class="a11yp_step">Rewrite our remarks in your own voice. They are accurate, not diplomatic.</li>
+        <li class="a11yp_step">Have someone who did not write it read it against the criteria.</li>
+        <li class="a11yp_step">Date it, version it, and re-issue when the product changes.</li>
+      </ol>
+      <div class="a11yp_caveat">
+        <h3 class="a11yp_caveat_title">What this does not do</h3>
+        <p class="a11yp_caveat_body">
+          Automated testing evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria,
+          about 22%. The rest need a person: whether alternative text is meaningful, whether
+          reading order makes sense, whether a keyboard user can finish the task. We will not
+          tell you that you are compliant, and a VPAT produced from a scan alone is not one you
+          should send. This is a starting draft that removes the mechanical half of the work.
+        </p>
+      </div>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+  <section class="g_section_wrap u-theme-light">
+    <div class="g_section_space"></div>
+    <div class="u-container">
+      <h2 class="u-mb-16">Questions</h2>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">Is a VPAT legally required?</h3>
+        <p class="a11yp_faq_a">
+          No. It is a voluntary disclosure. What is required is the underlying accessibility,
+          under the ADA, Section 508, the European Accessibility Act and others depending on
+          where you sell. The VPAT is how a buyer checks before committing, so in procurement
+          it behaves like a requirement even though no statute names it.
+        </p>
+      </div>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">Can I publish a VPAT that admits failures?</h3>
+        <p class="a11yp_faq_a">
+          Yes, and it is usually the better document. Buyers expect Partially supports rows;
+          what loses deals is a report that claims full support and falls apart when their own
+          team tests it. A candid report with a remediation date attached is a stronger
+          position than an optimistic one.
+        </p>
+      </div>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">How often should it be re-issued?</h3>
+        <p class="a11yp_faq_a">
+          Whenever the product changes materially, and at least annually. A VPAT carries a date
+          and a version for that reason. On Webflow, a publish can change the rendered markup
+          without anyone editing a template, so tie the review to your release cadence rather
+          than the calendar.
+        </p>
+      </div>
+
+      <div class="a11yp_faq_item">
+        <h3 class="a11yp_faq_q">Do you complete VPATs for clients?</h3>
+        <p class="a11yp_faq_a">
+          Yes. The generator handles the mechanical rows; the manual criteria need a person
+          testing with a keyboard and a screen reader. If you would rather not do that in
+          house, we do the review, complete the document and hand back something you can send.
+        </p>
+      </div>
+    </div>
+    <div class="g_section_space"></div>
+  </section>
+
+</div>
