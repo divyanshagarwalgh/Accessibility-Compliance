@@ -22,8 +22,9 @@ Written so the next session — or the next person — does not have to guess.
 | 4 | `/report/[scanId]`: progress, gate, all error states | Builds clean; worker 901.91 KiB gzipped (9% of the 10 MB ceiling) |
 | 5 | Accessibility statement generator | 21 tests; verified live against a real scan |
 | 5 | VPAT 2.5 / ACR generator, all 55 criteria | 16 tests; verified live against a real scan |
+| 5 | Alt-text auditor: classification + Claude drafting | 36 tests; classification verified live, drafting verified against the API |
 
-**Test totals:** 157 — 96 app + 56 component + 5 scan worker. Typecheck clean in
+**Test totals:** 193 — 132 app + 56 component + 5 scan worker. Typecheck clean in
 all three packages. `npm audit`: 0 in the app, 0 in the scan worker, 6 low in
 `webflow-components` (`elliptic`, which has no patched release at any version).
 
@@ -63,11 +64,22 @@ requires a **new** list for accessibility leads, not the existing list 3. Lead
 capture works without them — the lead is stored in D1 with `brevo_synced = 0` and
 can be replayed — but nothing reaches Brevo until they are set.
 
-### 2. Anthropic API key
+### 2. Anthropic API key — set it in Webflow Cloud
 
-`ANTHROPIC_API_KEY` is needed for the alt-text auditor (Phase 5). Detection is
-already covered by the `alt` rule in the scanner; what needs the key is drafting
-the replacement text, which is the module's entire value.
+The alt-text auditor is **built and deployed**. Classification runs today with
+no key. Drafting needs `ANTHROPIC_API_KEY` set in **Webflow Cloud → environment
+→ environment variables**, which is a dashboard action.
+
+Until it is set, `POST /api/alt-text` with `draft: true` returns the full
+classification plus `draftError: "not_configured"` rather than failing — knowing
+which images are wrong is most of the value and needs no model.
+
+Remember that Webflow Cloud reads environment variables **at deploy time only**.
+Setting the variable does nothing until the environment redeploys; pushing to
+`phase-1-foundation` triggers that.
+
+The request shape is verified against the live API (`claude-opus-5`, structured
+outputs, vision by URL).
 
 ### 3. Transactional email
 
@@ -107,7 +119,7 @@ for launch and will throttle immediately under the traffic
 | `/tools/accessibility-laws` | Body **written** in `webflow-pages/`, not yet applied. |
 | Statement / VPAT UI | Generators and API routes exist; no screen yet. Documents are returned as HTML + text and stored in `documents`. |
 | `.docx` export | Not written. The roadmap gates the export, never the answer. |
-| Alt-text auditor (Phase 5) | Not written. Needs the Anthropic key. |
+| Alt-text UI | Auditor and API route exist; no screen yet. |
 | Monitoring (Phase 6) | Schema exists (`monitors`, `monitor_runs`). No cron, no dashboard, no alerting. |
 
 ---
