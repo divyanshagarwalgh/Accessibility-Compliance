@@ -55,6 +55,17 @@ export async function POST(request: Request): Promise<Response> {
   if (scan) await attachEmail(scan.id, email);
 
   const env = await getEnv();
+
+  // The sync outcome is reported back, not only written to `leads.brevo_error`.
+  // A silent failure here looks identical to success from outside, and the row
+  // it writes is only readable with database access — which cost a round of
+  // guesswork when the list stayed empty and nothing said why.
+  let sync: { attempted: boolean; synced: boolean; reason?: string } = {
+    attempted: false,
+    synced: false,
+    reason: "not_configured",
+  };
+
   if (env.BREVO_API_KEY && env.BREVO_LIST_ID) {
     try {
       const res = await fetch("https://api.brevo.com/v3/contacts", {
@@ -76,11 +87,19 @@ export async function POST(request: Request): Promise<Response> {
         }),
         signal: AbortSignal.timeout(5000),
       });
-      await markLeadSynced(leadId, res.ok ? undefined : `brevo_${res.status}`);
+      // Brevo's message explains *why* on a 4xx — an IP block and a bad key
+      // both return 401 and are indistinguishable without it.
+      const reason = res.ok
+        ? undefined
+        : `brevo_${res.status}: ${(await res.text()).slice(0, 200)}`;
+      await markLeadSynced(leadId, reason);
+      sync = { attempted: true, synced: res.ok, reason };
     } catch (err) {
-      await markLeadSynced(leadId, err instanceof Error ? err.message : "brevo_failed");
+      const reason = err instanceof Error ? err.message : "brevo_failed";
+      await markLeadSynced(leadId, reason);
+      sync = { attempted: true, synced: false, reason };
     }
   }
 
-  return Response.json({ ok: true, unlocked: Boolean(scan) });
+  return Response.json({ ok: true, unlocked: Boolean(scan), sync });
 }

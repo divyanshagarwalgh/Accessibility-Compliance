@@ -51,11 +51,27 @@ export async function GET() {
 
   const healthy = Object.values(checks).every((c) => c.ok);
 
+  // Which optional integrations are configured. Booleans only — never a value,
+  // never a prefix, never a length. Webflow Cloud reads environment variables
+  // at DEPLOY time, so "I set it in the dashboard" and "the running worker can
+  // see it" are different facts, and without this there is no way to tell them
+  // apart from outside. Diagnosing a silent Brevo failure cost a round of
+  // guesswork that this would have answered immediately.
+  const e = env as unknown as Record<string, string | undefined>;
+  const configured = {
+    scanService: Boolean(e?.SCAN_SERVICE_URL),
+    scanCallbackSecret: Boolean(e?.SCAN_CALLBACK_SECRET),
+    brevoApiKey: Boolean(e?.BREVO_API_KEY),
+    brevoListId: Boolean(e?.BREVO_LIST_ID),
+    anthropicApiKey: Boolean(e?.ANTHROPIC_API_KEY),
+  };
+
   return json(
     {
       status: healthy ? "ok" : "degraded",
       mountPath: env?.BASE_URL ?? "/app",
       checks,
+      configured,
     },
     healthy ? 200 : 503,
   );
