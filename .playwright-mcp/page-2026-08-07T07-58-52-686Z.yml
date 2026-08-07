@@ -1,0 +1,100 @@
+- generic [ref=f19e2]:
+  - generic [ref=f19e4]:
+    - heading "VPAT generator for Webflow sites" [level=1] [ref=f19e5]
+    - paragraph [ref=f19e6]: A VPAT is the accessibility conformance report procurement teams ask for before they sign. Scan your site and we pre-fill the WCAG 2.2 rows we can evidence, mark the rest Not evaluated, and leave every row for a human to confirm. It is a draft that saves you a day, not a certificate.
+    - link "Scan a page to start a draft" [ref=f19e7] [cursor=pointer]:
+      - /url: /app
+    - paragraph [ref=f19e8]: Last updated 7 August 2026 · VPAT 2.5 · WCAG 2.2 Level A and AA
+  - generic [ref=f19e10]:
+    - heading "What a VPAT actually is" [level=2] [ref=f19e11]
+    - generic [ref=f19e12]:
+      - paragraph [ref=f19e13]: The Voluntary Product Accessibility Template is a document published by the Information Technology Industry Council. Filling one in produces an Accessibility Conformance Report — an ACR. In practice the two words are used interchangeably, and a buyer asking for “your VPAT” means the completed report.
+      - paragraph [ref=f19e14]: It is voluntary in the sense that nobody forces you to publish one. It stops feeling voluntary the moment a public university, a hospital group or a federal contractor puts it in a procurement checklist, which is where most requests come from.
+    - generic [ref=f19e15]:
+      - generic [ref=f19e16]:
+        - heading "WCAG edition" [level=3] [ref=f19e17]
+        - paragraph [ref=f19e18]: The WCAG 2.2 success criteria on their own. The right choice when a private buyer asks for conformance evidence and names no regulation.
+      - generic [ref=f19e19]:
+        - heading "Section 508 edition" [level=3] [ref=f19e20]
+        - paragraph [ref=f19e21]: Adds the US federal chapters. Ask for this one if you sell to a federal agency or to anyone spending federal money.
+      - generic [ref=f19e22]:
+        - heading "EU edition" [level=3] [ref=f19e23]
+        - paragraph [ref=f19e24]: Maps to EN 301 549, the harmonised standard behind the European Accessibility Act. Needed for EU public-sector procurement.
+      - generic [ref=f19e25]:
+        - heading "INT edition" [level=3] [ref=f19e26]
+        - paragraph [ref=f19e27]: All three at once. Longest to complete, and the one to pick if you sell into every market and would rather maintain a single document.
+  - generic [ref=f19e29]:
+    - heading "The conformance vocabulary is fixed" [level=2] [ref=f19e30]
+    - paragraph [ref=f19e31]: A VPAT has four permitted answers per criterion. Using anything else — “mostly”, “in progress”, “95%” — marks the document as amateur to anyone who reads these for a living.
+    - table [ref=f19e33]:
+      - rowgroup [ref=f19e34]:
+        - row [ref=f19e35]:
+          - columnheader "Term" [ref=f19e36]
+          - columnheader "What it means" [ref=f19e37]
+          - columnheader "What we fill in" [ref=f19e38]
+      - rowgroup [ref=f19e39]:
+        - row [ref=f19e40]:
+          - cell "Supports" [ref=f19e41]
+          - cell "The functionality meets the criterion." [ref=f19e42]
+          - cell "Only where we tested and found nothing, with a remark naming what was checked." [ref=f19e43]
+        - row [ref=f19e44]:
+          - cell "Partially supports" [ref=f19e45]
+          - cell "Some functionality does not meet the criterion." [ref=f19e46]
+          - cell "Where we found element-level failures. We see failures, never passes, so we cannot claim a majority either way." [ref=f19e47]
+        - row [ref=f19e48]:
+          - cell "Does not support" [ref=f19e49]
+          - cell "The majority of functionality does not meet the criterion." [ref=f19e50]
+          - cell "Where the failure is page-wide. A missing lang attribute is not partially missing." [ref=f19e51]
+        - row [ref=f19e52]:
+          - cell "Not evaluated" [ref=f19e53]
+          - cell "The criterion has not been assessed." [ref=f19e54]
+          - cell "The 43 criteria no scanner can reach. They appear in the table rather than being dropped from it." [ref=f19e55]
+    - paragraph [ref=f19e56]: There is a fifth value, Not applicable, for criteria that cannot arise in your product — captions for a site with no video, for instance. We never fill that in automatically, because whether your product has video is not something a single page scan can establish.
+  - generic [ref=f19e58]:
+    - heading "What the scan can and cannot fill in" [level=2] [ref=f19e59]
+    - table [ref=f19e61]:
+      - rowgroup [ref=f19e62]:
+        - row [ref=f19e63]:
+          - columnheader [ref=f19e64]
+          - columnheader "Criteria" [ref=f19e65]
+          - columnheader "How they are filled" [ref=f19e66]
+      - rowgroup [ref=f19e67]:
+        - row [ref=f19e68]:
+          - cell "Evidenced by the scan" [ref=f19e69]
+          - cell "12" [ref=f19e70]
+          - cell "Pre-filled with a conformance value and a remark naming the failing elements and their count." [ref=f19e71]
+        - row [ref=f19e72]:
+          - cell "Not evaluated" [ref=f19e73]
+          - cell "43" [ref=f19e74]
+          - cell "Listed with the criterion number and name, marked Not evaluated, waiting for a human." [ref=f19e75]
+        - row [ref=f19e76]:
+          - cell "Total, WCAG 2.2 A and AA" [ref=f19e77]
+          - cell "55" [ref=f19e78]
+          - cell "Every one appears. None is omitted." [ref=f19e79]
+    - paragraph [ref=f19e80]: Leaving the untested rows out would be the easier document to produce and the more dangerous one to send. A table containing only the criteria we happen to check reads, to someone working through their own checklist, as a table where everything passed.
+  - generic [ref=f19e82]:
+    - heading "How to finish the draft" [level=2] [ref=f19e83]
+    - list [ref=f19e84]:
+      - listitem [ref=f19e85]: Scan the pages that represent your product — a template each, not every URL.
+      - listitem [ref=f19e86]: Generate the draft and pick the edition your buyer asked for.
+      - listitem [ref=f19e87]: Work through the 43 Not evaluated rows. Most need a keyboard, a screen reader and twenty minutes each.
+      - listitem [ref=f19e88]: Rewrite our remarks in your own voice. They are accurate, not diplomatic.
+      - listitem [ref=f19e89]: Have someone who did not write it read it against the criteria.
+      - listitem [ref=f19e90]: Date it, version it, and re-issue when the product changes.
+    - generic [ref=f19e91]:
+      - heading "What this does not do" [level=3] [ref=f19e92]
+      - paragraph [ref=f19e93]: "Automated testing evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, about 22%. The rest need a person: whether alternative text is meaningful, whether reading order makes sense, whether a keyboard user can finish the task. We will not tell you that you are compliant, and a VPAT produced from a scan alone is not one you should send. This is a starting draft that removes the mechanical half of the work."
+  - generic [ref=f19e95]:
+    - heading "Questions" [level=2] [ref=f19e96]
+    - generic [ref=f19e97]:
+      - heading "Is a VPAT legally required?" [level=3] [ref=f19e98] [cursor=pointer]
+      - paragraph [ref=f19e99]: No. It is a voluntary disclosure. What is required is the underlying accessibility, under the ADA, Section 508, the European Accessibility Act and others depending on where you sell. The VPAT is how a buyer checks before committing, so in procurement it behaves like a requirement even though no statute names it.
+    - generic [ref=f19e100]:
+      - heading "Can I publish a VPAT that admits failures?" [level=3] [ref=f19e101] [cursor=pointer]
+      - paragraph [ref=f19e102]: Yes, and it is usually the better document. Buyers expect Partially supports rows; what loses deals is a report that claims full support and falls apart when their own team tests it. A candid report with a remediation date attached is a stronger position than an optimistic one.
+    - generic [ref=f19e103]:
+      - heading "How often should it be re-issued?" [level=3] [ref=f19e104] [cursor=pointer]
+      - paragraph [ref=f19e105]: Whenever the product changes materially, and at least annually. A VPAT carries a date and a version for that reason. On Webflow, a publish can change the rendered markup without anyone editing a template, so tie the review to your release cadence rather than the calendar.
+    - generic [ref=f19e106]:
+      - heading "Do you complete VPATs for clients?" [level=3] [ref=f19e107] [cursor=pointer]
+      - paragraph [ref=f19e108]: Yes. The generator handles the mechanical rows; the manual criteria need a person testing with a keyboard and a screen reader. If you would rather not do that in house, we do the review, complete the document and hand back something you can send.

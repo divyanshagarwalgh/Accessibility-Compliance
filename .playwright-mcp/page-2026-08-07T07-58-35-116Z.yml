@@ -1,0 +1,114 @@
+- generic [ref=f18e2]:
+  - generic [ref=f18e4]:
+    - heading "WCAG compliance checker" [level=1] [ref=f18e5]
+    - paragraph [ref=f18e6]: Enter a URL and get every WCAG 2.2 Level A and AA failure a machine can find, each one mapped to the exact fix in Webflow Designer rather than to a line of HTML you cannot edit. Free, no account, and the score is public so you can share it.
+    - link "Scan a page" [ref=f18e7] [cursor=pointer]:
+      - /url: /app
+    - paragraph [ref=f18e8]: Last updated 7 August 2026 · axe-core 4.13 · WCAG 2.2 Level A and AA
+  - generic [ref=f18e10]:
+    - heading "What gets checked" [level=2] [ref=f18e11]
+    - paragraph [ref=f18e12]: Thirteen rules across twelve success criteria. Three of them have no equivalent in any open-source engine and are ours, because the criteria they cover need a rendered page with real computed styles rather than static HTML.
+    - table [ref=f18e14]:
+      - rowgroup [ref=f18e15]:
+        - row [ref=f18e16]:
+          - columnheader "Criterion" [ref=f18e17]
+          - columnheader "What we look for" [ref=f18e18]
+          - columnheader "Level" [ref=f18e19]
+          - columnheader "Severity" [ref=f18e20]
+      - rowgroup [ref=f18e21]:
+        - row [ref=f18e22]:
+          - cell "1.4.3" [ref=f18e23]
+          - cell "Text below 4.5:1 against its real background, measured on every text node" [ref=f18e24]
+          - cell "AA" [ref=f18e25]
+          - cell "Critical" [ref=f18e26]
+        - row [ref=f18e27]:
+          - cell "1.1.1" [ref=f18e28]
+          - cell "Images with no alternative text, including CMS-bound ones" [ref=f18e29]
+          - cell "A" [ref=f18e30]
+          - cell "Critical" [ref=f18e31]
+        - row [ref=f18e32]:
+          - cell "3.3.2" [ref=f18e33]
+          - cell "Form inputs relying on placeholder text instead of a label" [ref=f18e34]
+          - cell "A" [ref=f18e35]
+          - cell "Critical" [ref=f18e36]
+        - row [ref=f18e37]:
+          - cell "2.1.1" [ref=f18e38]
+          - cell "Controls built as divs that a keyboard cannot reach" [ref=f18e39]
+          - cell "A" [ref=f18e40]
+          - cell "Critical" [ref=f18e41]
+        - row [ref=f18e42]:
+          - cell "1.2.2" [ref=f18e43]
+          - cell "Video with no caption track" [ref=f18e44]
+          - cell "A" [ref=f18e45]
+          - cell "Critical" [ref=f18e46]
+        - row [ref=f18e47]:
+          - cell "2.4.4" [ref=f18e48]
+          - cell "Links whose text does not describe where they go" [ref=f18e49]
+          - cell "A" [ref=f18e50]
+          - cell "Serious" [ref=f18e51]
+        - row [ref=f18e52]:
+          - cell "2.4.7" [ref=f18e53]
+          - cell "Focus indicators removed by a global reset — our own check" [ref=f18e54]
+          - cell "AA" [ref=f18e55]
+          - cell "Serious" [ref=f18e56]
+        - row [ref=f18e57]:
+          - cell "2.5.8" [ref=f18e58]
+          - cell "Targets under 24 by 24 CSS pixels, new in WCAG 2.2" [ref=f18e59]
+          - cell "AA" [ref=f18e60]
+          - cell "Serious" [ref=f18e61]
+        - row [ref=f18e62]:
+          - cell "1.3.1" [ref=f18e63]
+          - cell "Skipped heading levels, and pages with no main landmark" [ref=f18e64]
+          - cell "A" [ref=f18e65]
+          - cell "Serious" [ref=f18e66]
+        - row [ref=f18e67]:
+          - cell "1.4.4" [ref=f18e68]
+          - cell "Content clipped at 200% zoom — our own check, measured at 640px" [ref=f18e69]
+          - cell "AA" [ref=f18e70]
+          - cell "Moderate" [ref=f18e71]
+        - row [ref=f18e72]:
+          - cell "3.1.1" [ref=f18e73]
+          - cell "A missing lang attribute on the html element" [ref=f18e74]
+          - cell "A" [ref=f18e75]
+          - cell "Moderate" [ref=f18e76]
+        - row [ref=f18e77]:
+          - cell "2.4.11" [ref=f18e78]
+          - cell "Anchor targets hidden behind a sticky header — our own check, new in 2.2" [ref=f18e79]
+          - cell "AA" [ref=f18e80]
+          - cell "Minor" [ref=f18e81]
+  - generic [ref=f18e83]:
+    - heading "Why the fixes are Webflow-specific" [level=2] [ref=f18e84]
+    - generic [ref=f18e85]:
+      - paragraph [ref=f18e86]: Generic scanners tell you that an element fails and hand you a CSS selector. On Webflow that is the least useful half of the answer, because you do not edit selectors — you edit classes, elements and CMS fields in Designer, and the markup is generated for you.
+      - paragraph [ref=f18e87]: So every issue we report names the panel to open and the control to change. Where a failing element sits inside a Collection List, we say so, because fixing the element only fixes the first item and the next publish overwrites it. The fix belongs on the CMS field.
+    - generic [ref=f18e88]:
+      - generic [ref=f18e89]:
+        - heading "One class, not 200 elements" [level=3] [ref=f18e90]
+        - paragraph [ref=f18e91]: Contrast failures usually trace to a single class used everywhere. We group by class so you fix it once, and the score is weighted to reflect that rather than punishing you 200 times for one mistake.
+      - generic [ref=f18e92]:
+        - heading "CMS-bound issues are flagged" [level=3] [ref=f18e93]
+        - paragraph [ref=f18e94]: An image inside a Collection List needs its alt text bound to a field. We name the collection so the fix survives the next publish.
+      - generic [ref=f18e95]:
+        - heading "Gaps are visible" [level=3] [ref=f18e96]
+        - paragraph [ref=f18e97]: Where we have no Webflow-specific guidance for a rule, the report says so rather than quietly showing generic output as though it were tailored.
+  - generic [ref=f18e99]:
+    - heading "How the score works" [level=2] [ref=f18e100]
+    - paragraph [ref=f18e101]: The score is a triage aid, not a compliance percentage, and the method is published so you can argue with it. Each failing rule contributes a penalty weighted by severity — Critical 12, Serious 7, Moderate 3, Minor 1 — scaled by the base-ten logarithm of how many elements it affects.
+    - paragraph [ref=f18e102]: The logarithm is deliberate. Two hundred contrast failures is usually one class fixed in one place; straight multiplication would drive any site with a repeated component to zero and tell you nothing. Breadth costs more than depth, but not linearly.
+    - generic [ref=f18e103]:
+      - heading "A score of 100 is not compliance" [level=3] [ref=f18e104]
+      - paragraph [ref=f18e105]: This scan evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, about 22%. A clean result means we found nothing, not that there is nothing. Whether alternative text is meaningful, whether reading order makes sense, whether a keyboard user can complete a purchase — none of that is machine-decidable, and all of it is where real barriers live. In June 2026 a French court ordered Carrefour to reach full compliance under a EUR 500 per day penalty and explicitly rejected a 71% conformance score as insufficient. Partial compliance is not a legal position, and neither is a good score.
+  - generic [ref=f18e107]:
+    - heading "Questions" [level=2] [ref=f18e108]
+    - generic [ref=f18e109]:
+      - heading "Is WCAG 2.2 AA the standard I need?" [level=3] [ref=f18e110] [cursor=pointer]
+      - paragraph [ref=f18e111]: For most businesses, yes. The European Accessibility Act is measured against EN 301 549, which incorporates WCAG at AA. ADA Title II names WCAG 2.1 AA explicitly. Section 508 still references WCAG 2.0 AA. Meeting 2.2 AA satisfies all of them, because each version is a superset of the last apart from one criterion that WCAG 2.2 withdrew.
+    - generic [ref=f18e112]:
+      - heading "Will you build me an accessibility overlay?" [level=3] [ref=f18e113] [cursor=pointer]
+      - paragraph [ref=f18e114]: No, and we would advise against buying one. Overlay vendors are being sued, the products are widely rejected by the disabled users they claim to help, and installing one is a matter of public record that plaintiffs' lawyers search for. We fix the underlying markup instead. There is no one-line version of this.
+    - generic [ref=f18e115]:
+      - heading "Do you scan the whole site?" [level=3] [ref=f18e116] [cursor=pointer]
+      - paragraph [ref=f18e117]: One page at a time today. In practice a Webflow site is a handful of templates, so scanning one page per template finds nearly everything — the failures live in shared classes and components, not in individual pages.
+    - generic [ref=f18e118]:
+      - heading "Do you respect robots.txt?" [level=3] [ref=f18e119] [cursor=pointer]
+      - paragraph [ref=f18e120]: Yes. We check it before rendering and honour a disallow for our user agent. The crawler identifies itself as WebyanshBot.

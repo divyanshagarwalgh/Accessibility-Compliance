@@ -1,3 +1,249 @@
+<style>
+/* Shared classes for the four /tools/* page bodies.
+   Pass this in the `css` param of the FIRST data_whtml_builder action per page.
+
+   Every rule is a single class selector. data_whtml_builder rejects descendant
+   selectors ("Nested selectors are not allowed"), so structure is carried by
+   class names rather than by nesting.
+
+   Colours come from the live Lumos registry via var(--swatch--*, fallback). The
+   fallbacks match the site today, so the pages keep working if a variable is
+   ever renamed, and follow the theme automatically if one is retuned. */
+
+/* ---- Layout ------------------------------------------------------------- */
+
+.a11yp_lede {
+  font-size: var(--size--font-lg, 1.25rem);
+  line-height: 1.5;
+  max-width: 46ch;
+}
+
+.a11yp_prose {
+  max-width: 68ch;
+  line-height: 1.6;
+}
+
+.a11yp_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.a11yp_card {
+  border: 1px solid var(--swatch--gray-200, #e6e6e6);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: var(--swatch--gray-25, #fcfcfc);
+}
+
+.a11yp_card_title {
+  font-size: var(--size--font-md, 1.125rem);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.a11yp_card_body {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--swatch--dark, #1a1a1a);
+}
+
+/* ---- Tables -------------------------------------------------------------
+   Data goes in real HTML tables, never images — the roadmap requires it and
+   a screen reader cannot read a screenshot. Wrapper scrolls on narrow
+   viewports so the page body never scrolls horizontally. */
+
+.a11yp_tablewrap {
+  overflow-x: auto;
+  border: 1px solid var(--swatch--gray-200, #e6e6e6);
+  border-radius: 12px;
+}
+
+.a11yp_table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size--font-sm, 0.9375rem);
+}
+
+.a11yp_th {
+  text-align: left;
+  font-weight: 600;
+  padding: 0.875rem 1rem;
+  background: var(--swatch--light, #f6f6f6);
+  border-bottom: 1px solid var(--swatch--gray-200, #e6e6e6);
+}
+
+.a11yp_td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--swatch--gray-200, #e6e6e6);
+  vertical-align: top;
+}
+
+.a11yp_td_num {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--swatch--gray-200, #e6e6e6);
+  vertical-align: top;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Status chips -------------------------------------------------------
+   The live system has no semantic status colours at all, so these are new.
+   Each is measured against its own background rather than assumed: amber
+   #7a4a00 on #fff6e6 is 6.97:1, red #a11b1b on #fdecec is 6.84:1, green
+   #1b5e2b on #e8f5ec is 6.97:1. All clear AA for body-size text, because
+   these pages have to pass the audit this product sells. */
+
+.a11yp_chip {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.a11yp_chip_now {
+  background: #fdecec;
+  color: #a11b1b;
+}
+
+.a11yp_chip_soon {
+  background: #fff6e6;
+  color: #7a4a00;
+}
+
+.a11yp_chip_ok {
+  background: #e8f5ec;
+  color: #1b5e2b;
+}
+
+/* ---- The honesty panel --------------------------------------------------
+   Guardrail 5. This renders on every one of the four pages. It is the
+   differentiator, not a legal footnote: competitors overclaim. */
+
+.a11yp_caveat {
+  border-left: 4px solid var(--swatch--brand, #ff4d00);
+  background: var(--swatch--light, #f6f6f6);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 12px 12px 0;
+}
+
+.a11yp_caveat_title {
+  font-size: var(--size--font-md, 1.125rem);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.a11yp_caveat_body {
+  margin: 0;
+  line-height: 1.6;
+  max-width: 68ch;
+}
+
+/* ---- Call to action -----------------------------------------------------
+   Brand orange is the fill and the text on it is DARK, not white.
+
+   White on #FF4D00 measures 3.33:1, which fails AA for body-size text — the
+   obvious button styling is the one that breaks. #1a1a1a on #FF4D00 is 5.23:1
+   and keeps the site's actual brand colour, so the button stays on-brand and
+   passes. Hover lightens rather than darkens: #E04400 with white was 4.20:1 and
+   with dark text 4.14:1, so both directions of the obvious hover fail, while a
+   lighter tint strictly raises contrast against dark text. */
+
+.a11yp_cta {
+  display: inline-block;
+  background: var(--swatch--brand, #ff4d00);
+  color: var(--swatch--dark, #1a1a1a);
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.a11yp_cta:hover {
+  background: #ff6a26;
+}
+
+/* Body-size links use #B23600 — 5.68:1 on --swatch--light, 6.14:1 on white —
+   never raw brand orange, which is 3.08-3.33:1 on light surfaces. #B23600 is
+   the exact colour our own remediation copy recommends for this. */
+.a11yp_link {
+  color: #b23600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---- Focus -------------------------------------------------------------
+   No :focus-visible rule exists anywhere in the live CSS. It declares
+   --focus--* variables and never consumes them. Rule 9 of our own catalogue
+   flags exactly this, so these pages ship a real ring. */
+
+.a11yp_cta:focus-visible {
+  outline: 3px solid var(--swatch--dark, #1a1a1a);
+  outline-offset: 2px;
+}
+
+.a11yp_link:focus-visible {
+  outline: 3px solid var(--swatch--dark, #1a1a1a);
+  outline-offset: 2px;
+}
+
+.a11yp_faq_q:focus-visible {
+  outline: 3px solid var(--swatch--dark, #1a1a1a);
+  outline-offset: 2px;
+}
+
+/* ---- FAQ ---------------------------------------------------------------- */
+
+.a11yp_faq_item {
+  border-bottom: 1px solid var(--swatch--gray-200, #e6e6e6);
+  padding: 1.25rem 0;
+}
+
+.a11yp_faq_q {
+  font-size: var(--size--font-md, 1.125rem);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  cursor: pointer;
+}
+
+.a11yp_faq_a {
+  margin: 0;
+  line-height: 1.6;
+  max-width: 68ch;
+}
+
+/* ---- Meta --------------------------------------------------------------
+   A visible last-updated date is a roadmap requirement on every tool page. */
+
+.a11yp_updated {
+  font-size: 0.875rem;
+  color: var(--swatch--gray-600, #5c5c5c);
+  margin: 0;
+}
+
+.a11yp_steps {
+  padding-left: 1.25rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+
+.a11yp_step {
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  .a11yp_card {
+    padding: 1.25rem;
+  }
+
+  .a11yp_caveat {
+    padding: 1rem 1.125rem;
+  }
+}
+</style>
+
 <div>
 
   <section class="g_section_wrap u-theme-light">

@@ -1,0 +1,86 @@
+- generic [ref=f20e2]:
+  - generic [ref=f20e4]:
+    - heading "Accessibility statement generator" [level=1] [ref=f20e5]
+    - paragraph [ref=f20e6]: The European Accessibility Act requires a published accessibility statement with a working feedback channel. Most sites selling into the EU do not have one. This generates a complete statement in the EU model structure, populated from your latest scan so the known-limitations section stays honest.
+    - link "Generate a statement" [ref=f20e7] [cursor=pointer]:
+      - /url: /app
+    - paragraph [ref=f20e8]: Last updated 7 August 2026 · EU model statement structure · WCAG 2.2 AA
+  - generic [ref=f20e10]:
+    - heading "Who needs one" [level=2] [ref=f20e11]
+    - table [ref=f20e13]:
+      - rowgroup [ref=f20e14]:
+        - row [ref=f20e15]:
+          - columnheader "If you" [ref=f20e16]
+          - columnheader "Statement" [ref=f20e17]
+          - columnheader "Under" [ref=f20e18]
+      - rowgroup [ref=f20e19]:
+        - row [ref=f20e20]:
+          - cell "Sell to consumers in the EU, wherever you are based" [ref=f20e21]
+          - cell "Mandatory" [ref=f20e22]
+          - cell "European Accessibility Act, in force since 28 June 2025" [ref=f20e24]
+        - row [ref=f20e25]:
+          - cell "Are an EU public-sector body" [ref=f20e26]
+          - cell "Mandatory" [ref=f20e27]
+          - cell "Web Accessibility Directive" [ref=f20e29]
+        - row [ref=f20e30]:
+          - cell "Are a US public entity" [ref=f20e31]
+          - cell "Expected" [ref=f20e32]
+          - cell "ADA Title II — not named in the rule, but standard practice" [ref=f20e34]
+        - row [ref=f20e35]:
+          - cell "Are a US private business" [ref=f20e36]
+          - cell "Optional" [ref=f20e37]
+          - cell "ADA Title III — no statutory requirement, but it demonstrates good faith" [ref=f20e39]
+    - paragraph [ref=f20e40]: Optional is not the same as pointless. A dated statement naming known issues and a remediation plan is evidence of good-faith effort, which matters when the enforcement mechanism is private litigation and there is no certification to hold up.
+  - generic [ref=f20e42]:
+    - heading "What goes in it" [level=2] [ref=f20e43]
+    - generic [ref=f20e44]:
+      - generic [ref=f20e45]:
+        - heading "Commitment" [level=3] [ref=f20e46]
+        - paragraph [ref=f20e47]: Who you are, which site this covers, and the standard you are working towards — normally WCAG 2.2 level AA.
+      - generic [ref=f20e48]:
+        - heading "Conformance status" [level=3] [ref=f20e49]
+        - paragraph [ref=f20e50]: Fully, partially or not conformant. The wording is prescribed; the choice is yours and it is a legal claim.
+      - generic [ref=f20e51]:
+        - heading "Known limitations" [level=3] [ref=f20e52]
+        - paragraph [ref=f20e53]: What currently fails, in plain language, with a fix date where you have one. Filled in from your scan.
+      - generic [ref=f20e54]:
+        - heading "Feedback channel" [level=3] [ref=f20e55]
+        - paragraph [ref=f20e56]: A monitored address and a response time you will actually meet. The EAA requires the channel to be real.
+      - generic [ref=f20e57]:
+        - heading "Assessment approach" [level=3] [ref=f20e58]
+        - paragraph [ref=f20e59]: How you evaluated the site, and how much of that was automated. We state the real coverage figure.
+      - generic [ref=f20e60]:
+        - heading "Date" [level=3] [ref=f20e61]
+        - paragraph [ref=f20e62]: When it was last reviewed. An undated statement, or a three-year-old one, is worse than none.
+  - generic [ref=f20e64]:
+    - heading "We will not write “fully conformant” for you" [level=2] [ref=f20e65]
+    - generic [ref=f20e66]:
+      - paragraph [ref=f20e67]: A statement is your legal claim about your own site, not ours about it. So the generator will not put full conformance in your mouth on the strength of a scan.
+      - paragraph [ref=f20e68]: A clean automated result means we found nothing. It does not mean there is nothing. Those are different sentences and only one of them is supportable, because the scan reaches 12 of the 55 Level A and AA criteria and the other 43 need a person.
+      - paragraph [ref=f20e69]: Full conformance is available — some sites genuinely are conformant and are entitled to say so — but only once you confirm that the criteria a machine cannot reach were reviewed by hand. Ask for that confirmation and the claim belongs to whoever made it. Infer it from a green scan and it would belong to us, and it would be false.
+    - generic [ref=f20e70]:
+      - heading "Partial compliance is not a legal position" [level=3] [ref=f20e71]
+      - paragraph [ref=f20e72]: In June 2026 a French court ordered Carrefour to reach full compliance under a EUR 500 per day penalty, explicitly rejecting a 71% conformance score as insufficient. A statement that overclaims is worse than one that admits gaps, because the overclaim is the thing that gets quoted back at you. Nothing here is legal advice — have the wording reviewed by counsel before you rely on it.
+  - generic [ref=f20e74]:
+    - heading "Publishing it on Webflow" [level=2] [ref=f20e75]
+    - list [ref=f20e76]:
+      - listitem [ref=f20e77]:
+        - text: Create a page at
+        - strong [ref=f20e78]: /accessibility
+        - text: . It is the path people and regulators look for first.
+      - listitem [ref=f20e79]: Paste the generated HTML into an Embed element, or rebuild it with real Webflow elements if you want it editable in Designer.
+      - listitem [ref=f20e80]: Link it from the footer on every page. A statement nobody can find does not satisfy the requirement.
+      - listitem [ref=f20e81]: Point the feedback address at an inbox somebody reads.
+      - listitem [ref=f20e82]: Re-generate after each remediation round so the limitations stay true.
+    - paragraph [ref=f20e83]: Keep the review date current. The single most common failure with accessibility statements is not a wrong claim — it is a correct claim that stopped being true eighteen months ago and was never revisited.
+  - generic [ref=f20e85]:
+    - heading "Questions" [level=2] [ref=f20e86]
+    - generic [ref=f20e87]:
+      - heading "Does the EAA apply to me if I am not in the EU?" [level=3] [ref=f20e88] [cursor=pointer]
+      - paragraph [ref=f20e89]: If you sell to consumers in the EU, yes. The Act binds the offering, not the business's address. A US or Indian company selling into the EU market is in scope on the same terms as a company in Berlin.
+    - generic [ref=f20e90]:
+      - heading "Can I say partially conformant while I fix things?" [level=3] [ref=f20e91] [cursor=pointer]
+      - paragraph [ref=f20e92]: Yes, and for most sites it is the accurate answer. Partially conformant with named limitations and dated commitments is a defensible position. It is the claim of full conformance that has to be earned.
+    - generic [ref=f20e93]:
+      - heading "Is the generated statement legal advice?" [level=3] [ref=f20e94] [cursor=pointer]
+      - paragraph [ref=f20e95]: No. It follows the EU model structure and uses the prescribed wording, which is a sound starting point, but jurisdictions differ and your circumstances are yours. Have it reviewed before you publish it.
