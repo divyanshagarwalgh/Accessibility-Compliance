@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
   assetPrefix: MOUNT_PATH,
   reactStrictMode: true,
 
+  // next/link applies basePath on its own, but `fetch` does not. Inlining the
+  // mount path at build time lets src/lib/api-path.ts build absolute API URLs
+  // from client components without a second copy of the value to keep in sync.
+  env: { NEXT_PUBLIC_BASE_PATH: MOUNT_PATH },
+
   // Webflow Cloud always replaces Cache-Control with `private, no-cache`, so there is
   // no point designing around HTTP caching. Hot state lives in KV, artifacts in R2.
   poweredByHeader: false,

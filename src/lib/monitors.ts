@@ -181,6 +181,22 @@ export function snapshotOf(run: MonitorRunRow): RuleSnapshot[] {
   }
 }
 
+/**
+ * Reads the regressions back out of a stored run.
+ *
+ * The column holds `{regressions, snapshot}` rather than a bare array, so
+ * reading it straight as one yields `undefined` and a dashboard that silently
+ * reports no regressions when there were several.
+ */
+export function regressionsOf(run: MonitorRunRow): Regression[] {
+  try {
+    const parsed = JSON.parse(run.regressions) as { regressions?: Regression[] };
+    return parsed.regressions ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function listRuns(monitorId: string, limit = 30): Promise<MonitorRunRow[]> {
   const db = await getDb();
   const { results } = await db

@@ -1,77 +1,103 @@
 import Link from "next/link";
-import styles from "./page.module.css";
+import { ScanForm } from "./ScanForm";
+import styles from "@/styles/modules.module.css";
 
-export const metadata = { title: "Foundation check" };
+export const metadata = { title: "Accessibility workspace" };
 
 /**
- * Phase 1 hello-world.
+ * The app index.
  *
- * Its only job is to prove the app renders at the Webflow Cloud mount path, inherits
- * the Lumos token bridge, and that the GitHub → Webflow Cloud build fires on push.
- * Replaced by real surfaces in Phase 4.
+ * Surface A (/tools/*) carries the marketing and the SEO. This is the workspace
+ * behind it: start a scan, then take the result into whichever module you need.
+ * Copy for the module names and descriptions is quoted from
+ * docs/design-inventory.md §4.1 rather than rewritten — it carries the honesty
+ * constraints deliberately.
  */
+
+const MODULES: Array<{ href: string; name: string; description: string; tag: string }> = [
+  {
+    href: "/statement",
+    name: "Accessibility statement",
+    description:
+      "Generates the statement the EAA requires, populated from your own scan results.",
+    tag: "Required by law in the EU",
+  },
+  {
+    href: "/vpat",
+    name: "VPAT and ACR draft",
+    description:
+      "Fills a Voluntary Product Accessibility Template so procurement stops blocking the deal.",
+    tag: "Section 508 ready",
+  },
+  {
+    href: "/alt-text",
+    name: "Alt text auditor",
+    description:
+      "Finds missing and unhelpful alt text and drafts replacements for review.",
+    tag: "Review every line",
+  },
+  {
+    href: "/monitoring",
+    name: "Continuous monitoring",
+    description:
+      "Scheduled re-scans with an alert the moment a publish breaks something that used to pass.",
+    tag: "Retainer clients",
+  },
+];
+
 export default function Page() {
   return (
     <div className={styles.wrap}>
-      <section className={styles.card} aria-labelledby="status-heading">
-        <p className={styles.eyebrow}>Webyansh · Accessibility &amp; Compliance Suite</p>
-
-        <h1 id="status-heading" className={styles.h1}>
-          Foundation is live.
-        </h1>
-
+      <header className={styles.head}>
+        <p className={styles.eyebrow}>Accessibility &amp; compliance suite</p>
+        <h1 className={styles.h1}>Scan a page, then take the result anywhere.</h1>
         <p className={styles.lede}>
-          This page exists to prove three things: the app is mounted at{" "}
-          <code className={styles.code}>/app</code>, it inherits the site&rsquo;s Lumos
-          design tokens, and a push to GitHub rebuilds it. Nothing here ships to users.
+          Scan any page against WCAG 2.1 and 2.2 AA, and get the exact fix for each
+          issue in Webflow Designer. Every module below runs on the same scan, so the
+          results carry across.
         </p>
+      </header>
 
-        <h2 className={styles.h2}>Checks</h2>
-        <ul className={styles.list}>
-          <li>
-            <strong>Mount path</strong> — you are reading this at{" "}
-            <code className={styles.code}>/app</code>, so{" "}
-            <code className={styles.code}>basePath</code> and{" "}
-            <code className={styles.code}>assetPrefix</code> resolve correctly.
-          </li>
-          <li>
-            <strong>Design tokens</strong> — the heading above scales fluidly with the
-            viewport. That spacing comes from the live site&rsquo;s{" "}
-            <code className={styles.code}>clamp()</code> scale, replicated in{" "}
-            <code className={styles.code}>src/styles/lumos-tokens.css</code> because
-            DevLink cannot export site-wide custom code.
-          </li>
-          <li>
-            {/* next/link applies basePath automatically, so the mount path is
-                configured in exactly one place. */}
-            <strong>Storage bindings</strong> — D1, KV and R2 reachability is reported by{" "}
-            <Link href="/api/health">the health endpoint</Link>.
-          </li>
-        </ul>
+      <section className={styles.card} aria-labelledby="scan-h">
+        <h2 className={styles.h3} id="scan-h">
+          Run a scan
+        </h2>
+        <ScanForm />
+      </section>
 
-        <h2 className={styles.h2}>Severity scale</h2>
-        <p className={styles.note}>
-          The only new tokens this build introduces. Every pairing below clears 4.5:1.
+      <h2 className={styles.h2} id="modules-h">
+        Modules
+      </h2>
+      <ul className={styles.moduleGrid} aria-labelledby="modules-h">
+        {MODULES.map((m) => (
+          <li key={m.href}>
+            <Link className={styles.moduleCard} href={m.href}>
+              <p className={styles.moduleName}>{m.name}</p>
+              <p className={styles.note}>{m.description}</p>
+              <span className={styles.chip} data-tone="neutral">
+                {m.tag}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <p className={styles.note} style={{ marginTop: "var(--_spacing---space--3)" }}>
+        The colour contrast checker needs no scan and no email — it lives on the main
+        site at <code className={styles.mono}>/tools/color-contrast-checker</code>.
+      </p>
+
+      {/* Guardrail 5. Present on every surface, never softened. */}
+      <section className={styles.caveat} aria-label="What automated scanning cannot do">
+        <p className={styles.caveatTitle}>
+          Automated scanning catches about a third of WCAG.
         </p>
-        <ul className={styles.chips}>
-          {(
-            [
-              ["Critical", "critical"],
-              ["Serious", "serious"],
-              ["Moderate", "moderate"],
-              ["Minor", "minor"],
-              ["Pass", "pass"],
-            ] as const
-          ).map(([label, tone]) => (
-            <li key={tone} className={styles.chip} data-tone={tone}>
-              {label}
-            </li>
-          ))}
-        </ul>
-
-        <p className={styles.caveat}>
-          Automated scanning catches roughly a third of WCAG success criteria. No scanner
-          can confirm that a page is compliant, and this tool will never claim otherwise.
+        <p className={styles.caveatBody}>
+          No scanner can confirm that a page is compliant, and any tool that says
+          otherwise is selling you something. Roughly two thirds of the success criteria
+          need a human to judge them: reading order, meaningful alt text, error recovery,
+          and whether a keyboard user can actually finish the task. Every report here
+          tells you which criteria were tested and which were not.
         </p>
       </section>
     </div>

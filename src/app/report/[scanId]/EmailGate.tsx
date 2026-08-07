@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { apiPath } from "@/lib/api-path";
 import styles from "./report.module.css";
 
 /**
@@ -32,7 +33,7 @@ export function EmailGate({
     setState("sending");
     setMessage("");
     try {
-      const res = await fetch("../../api/lead", {
+      const res = await fetch(apiPath("lead"), {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ email, scanId, source: "scanner", wantsRescan }),

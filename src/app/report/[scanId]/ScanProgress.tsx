@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiPath } from "@/lib/api-path";
 import styles from "./report.module.css";
 
 type StepState = { label: string; state: "done" | "active" | "idle" };
@@ -23,7 +24,7 @@ export function ScanProgress({ scanId, url }: { scanId: string; url: string }) {
 
     async function poll() {
       try {
-        const res = await fetch(`./${scanId}/../../api/scan/${scanId}/status`, {
+        const res = await fetch(apiPath(`scan/${scanId}/status`), {
           cache: "no-store",
         });
         if (!res.ok) throw new Error(String(res.status));

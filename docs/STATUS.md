@@ -24,10 +24,12 @@ Written so the next session — or the next person — does not have to guess.
 | 5 | VPAT 2.5 / ACR generator, all 55 criteria | 16 tests; verified live against a real scan |
 | 5 | Alt-text auditor: classification + Claude drafting | 36 tests; classification verified live, drafting verified against the API |
 | 6 | Monitoring: hourly cron, regression detection, Brevo alerts | 19 tests; **cron fired live and recorded a baseline run** — see below |
+| 7 | Module screens: statement, VPAT, alt text, monitoring dashboard, app index | `next build` emits all five routes; see below |
+| 7 | `.docx` export for the statement and the VPAT | 25 tests; **both packages validated with a ZIP and OPC reader that is not ours** — see below |
 | — | Lead capture → Brevo list 4 | Verified live: `sync: {attempted: true, synced: true}`, contact lands with `listIds: [4]` |
 | — | Cloudflare **Workers Paid** | Confirmed by a deploy accepting `limits.cpu_ms`, which Free rejects. Browser Rendering now 120 concurrent, not 3 |
 
-**Test totals:** 212 — 151 app + 56 component + 5 scan worker. Typecheck clean in
+**Test totals:** 253 — 192 app + 56 component + 5 scan worker. Typecheck clean in
 all three packages. `npm audit`: 0 in the app, 0 in the scan worker, 6 low in
 `webflow-components` (`elliptic`, which has no patched release at any version).
 
@@ -70,6 +72,45 @@ The clock lives in the scan worker because Webflow Cloud provisions D1/KV/R2 but
 exposes no cron trigger. The worker holds no monitor state; it is a doorbell
 carrying the shared secret, and the app decides what is due. `run-due` rejects
 both an absent and a wrong secret with 401 (verified).
+
+---
+
+### The module screens
+
+Five routes, all building on the same shared stylesheet
+(`src/styles/modules.module.css`) and the Lumos token bridge:
+
+| Route | What |
+|---|---|
+| `/` | App index: a scan form and the four modules. Replaces the Phase 1 hello-world |
+| `/statement` | Form → generated statement, Rendered / HTML preview, copy, `.html`, `.txt`, `.docx` |
+| `/vpat` | Edition toggles, counts, the 55-row table with a filter, `.csv` and `.docx` |
+| `/alt-text` | Audit from a scan or a pasted list, four stat cards, editable drafts |
+| `/monitoring` + `/monitoring/[id]` | Create a monitor; trend chart, run history, activity, schedule |
+
+The dashboard reads D1 directly rather than calling `GET /api/monitors` — it is a
+server component in the same worker, so a fetch would be a round trip to itself.
+
+`src/lib/api-path.ts` replaced the relative-path `fetch` calls in `EmailGate` and
+`ScanProgress`. Those resolved correctly only from the depth their `..` count
+assumed; the mount path is now inlined from `next.config.ts` at build time and
+still lives in exactly one place.
+
+### The `.docx` export is real OOXML, and was checked as such
+
+`src/lib/zip.ts` is a hand-written store-only ZIP writer — the Workers runtime
+has no `fs`, no `Buffer` and no `zlib`, and the alternative was tens of
+kilobytes of dependency against a 10 MB ceiling. `src/documents/docx.ts` builds
+the five package parts on top of it.
+
+The verification is the point here. The unit tests substring-matched, passed,
+and were **wrong**: the first version of the table emitted border attributes as
+child elements — `<w:top w:val="single" <w:sz w:val="4"/>/>` — which is not XML.
+Extracting the file with .NET's `ZipFile` and `System.IO.Packaging.Package`
+caught it immediately. Both documents now parse in every part and the OPC
+package opens; the VPAT is 56 rows in one table across 288 paragraphs. A
+well-formedness check is now a test, so that class of bug fails here rather than
+on a procurement team's desk.
 
 ---
 
@@ -166,15 +207,18 @@ for launch and will throttle immediately under the traffic
 
 ## Where to pick up
 
-Phases 0–6 are complete. In priority order, all unblocked:
+Phases 0–7 are complete. In priority order:
 
-1. **UI screens** — statement, VPAT, alt-text and the monitoring dashboard. Every generator and API
-   route exists and is verified; there is simply no screen. Specs are in
-   `docs/design-inventory.md` §4.9–4.12. **This is what was in progress when the session ended.**
-2. **`.docx` / PDF export** for the statement and VPAT. The roadmap gates the export, never the
-   answer.
-3. **Apply the four `/tools/*` page bodies** — needs a human in the Webflow Designer, see item 4
-   under Blocked.
+1. **Apply the four `/tools/*` page bodies** — needs a human in the Webflow Designer, see item 4
+   under Blocked. It is the only thing between this build and a public surface, and it is where
+   the SEO lives.
+2. **Exercise the new screens against the live deploy.** They build clean and the documents were
+   validated locally, but nothing has been driven through a real scan on staging yet.
+3. **Create the four Brevo contact attributes**, item 1 under Blocked. Leads sync but arrive bare.
+4. **A jurisdiction mapper screen.** `POST /api/jurisdiction` exists and is tested; the design puts
+   that surface on the native `/tools/accessibility-laws` page rather than in the app, so this is
+   only worth building if that page slips.
+5. **PDF export.** `.docx` covers the procurement case, which was the one that mattered.
 
 Diagnose credential problems with `GET /app/api/health`, which reports a `configured` object of
 booleans for what the *running* worker can see. Webflow Cloud reads environment variables at deploy
@@ -191,10 +235,9 @@ time only, so "set in the dashboard" and "visible to the worker" are different f
 | `/tools/vpat-generator` | Body **written** in `webflow-pages/`, not yet applied. |
 | `/tools/accessibility-statement-generator` | Body **written** in `webflow-pages/`, not yet applied. |
 | `/tools/accessibility-laws` | Body **written** in `webflow-pages/`, not yet applied. |
-| Statement / VPAT UI | Generators and API routes exist; no screen yet. Documents are returned as HTML + text and stored in `documents`. |
-| `.docx` export | Not written. The roadmap gates the export, never the answer. |
-| Alt-text UI | Auditor and API route exist; no screen yet. |
-| Monitoring dashboard UI | Cron, regression detection and alerting all work; no screen yet. |
+| Jurisdiction mapper UI | `POST /api/jurisdiction` exists and is tested; the surface belongs on the native `/tools/accessibility-laws` page, which is not applied. |
+| PDF export | Not written. `.docx` and `.csv` cover the cases that were asked for. |
+| Bulk "apply to Webflow CMS" from the alt-text screen | Not built, and deliberately not: the Data API writes a CMS field, but applying drafted alt text without a person reading each line is the failure mode that module exists to prevent. |
 
 ---
 
