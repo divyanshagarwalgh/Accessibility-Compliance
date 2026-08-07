@@ -27,6 +27,7 @@
     "test:watch": "node ./node_modules/vitest/vitest.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
     "next": "15.5.22",
     "react": "19.2.0",
     "react-dom": "19.2.0"
