@@ -40,6 +40,16 @@ import {
 
 type Logger = (message: string, tone?: "ok" | "warn" | "fail") => void;
 
+/**
+ * Whether to clear `page_main` before building.
+ *
+ * Off by default and re-read at build time rather than captured, because it is
+ * destructive: it deletes whatever is on the page. Needed when a page was built
+ * from an earlier version of the bodies and has to be rebuilt.
+ */
+const replaceExisting = (): boolean =>
+  (document.getElementById("replace") as HTMLInputElement | null)?.checked === true;
+
 const log: Logger = (message, tone) => {
   const list = document.getElementById("log");
   if (!list) return;
@@ -250,11 +260,17 @@ async function buildPage(
   // otherwise silently produce the body twice, and there is no undo here.
   const children = await (main as { getChildren: () => Promise<unknown[]> }).getChildren();
   if (children.length > 0) {
-    log(
-      `  page_main already has ${children.length} child element(s). Skipped — clear it first if you meant to rebuild.`,
-      "warn",
-    );
-    return false;
+    if (!replaceExisting()) {
+      log(
+        `  page_main already has ${children.length} child element(s). Skipped — tick "Replace existing content" to rebuild.`,
+        "warn",
+      );
+      return false;
+    }
+    for (const child of children) {
+      await (child as { remove: () => Promise<null> }).remove();
+    }
+    log(`  Removed ${children.length} existing child element(s).`, "warn");
   }
 
   if (typeof webflow.insertElementFromWHTML === "function") {

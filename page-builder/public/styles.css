@@ -78,6 +78,31 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 10px 0 4px;
+  padding: 9px 10px;
+  border: 1px solid var(--warn);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.check input {
+  flex-shrink: 0;
+  inline-size: 16px;
+  block-size: 16px;
+  margin-block-start: 1px;
+}
+
+.check strong {
+  color: var(--warn);
+}
+
 .pages,
 .log {
   list-style: none;

@@ -114,18 +114,39 @@ if (skipped.length) {
 const VOID_TAGS = new Set(["br", "hr", "img", "input", "meta", "link"]);
 
 const ENTITIES = {
-  amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ",
-  rsquo: "’", lsquo: "‘", rdquo: "”", ldquo: "“",
-  mdash: "—", ndash: "–", hellip: "…", times: "×",
-  deg: "°", pound: "£", euro: "€", copy: "©",
+  amp: "&", lt: "<", gt: ">", quot: '"', apos: "'",
+  nbsp: "\u00a0",
+  rsquo: "\u2019", lsquo: "\u2018", rdquo: "\u201d", ldquo: "\u201c",
+  mdash: "\u2014", ndash: "\u2013", hellip: "\u2026", times: "\u00d7",
+  middot: "\u00b7", bull: "\u2022", deg: "\u00b0", pound: "\u00a3",
+  euro: "\u20ac", copy: "\u00a9", reg: "\u00ae", trade: "\u2122",
+  laquo: "\u00ab", raquo: "\u00bb", larr: "\u2190", rarr: "\u2192",
+  ne: "\u2260", le: "\u2264", ge: "\u2265",
 };
 
-/** setTextContent takes plain text, so entities must be resolved here. */
-function decodeEntities(text) {
+/**
+ * setTextContent takes plain text, so entities must be resolved here.
+ *
+ * An unknown named entity is a hard error rather than a passthrough. The first
+ * version left anything it did not recognise alone, and `&middot;` — used
+ * seven times — was missing from the table, so the literal string "&middot;"
+ * rendered on four live pages. Failing loudly is the point: this runs at the
+ * command line, where the message is readable.
+ */
+function decodeEntities(text, where = "") {
   return text
     .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
-    .replace(/&([a-z]+);/gi, (m, name) => ENTITIES[name] ?? m);
+    .replace(/&([a-zA-Z][a-zA-Z0-9]*);/g, (m, name) => {
+      const value = ENTITIES[name];
+      if (value === undefined) {
+        throw new Error(
+          `${where}unknown HTML entity "${m}". Add it to ENTITIES in ` +
+            `generate-data.mjs — leaving it undecoded renders it literally.`,
+        );
+      }
+      return value;
+    });
 }
 
 function parseHtml(html, file) {
@@ -134,7 +155,7 @@ function parseHtml(html, file) {
   let i = 0;
 
   const pushText = (raw) => {
-    const text = decodeEntities(raw).replace(/\s+/g, " ");
+    const text = decodeEntities(raw, `${file}: `).replace(/\s+/g, " ");
     if (!text.trim()) return;
     stack[stack.length - 1].children.push({ text });
   };
@@ -172,7 +193,7 @@ function parseHtml(html, file) {
     for (const m of raw.matchAll(/([a-zA-Z-]+)\s*=\s*"([^"]*)"/g)) {
       const [, name, value] = m;
       if (name === "class") node.classes = value.split(/\s+/).filter(Boolean);
-      else node.attrs[name] = decodeEntities(value);
+      else node.attrs[name] = decodeEntities(value, `${file}: `);
     }
 
     stack[stack.length - 1].children.push(node);

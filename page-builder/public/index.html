@@ -17,6 +17,15 @@
   appended to, so running this twice will not duplicate anything.
 </p>
 
+<label class="check">
+  <input id="replace" type="checkbox" />
+  <span>
+    <strong>Replace existing content.</strong>
+    Deletes whatever is already in <code>page_main</code> first, then rebuilds.
+    Use this to re-apply after the page bodies change. There is no undo.
+  </span>
+</label>
+
 <ul id="log" class="log" aria-live="polite"></ul>
 
 <script type="module" src="index.js"></script>
