@@ -125,15 +125,24 @@ surfaced a fourth:
 | White on brand orange | every primary button, incl. the report screen since Phase 4 | 3.32:1 |
 | Caveat body on the dark slab | `--swatch--light-faded` is `#e9eaeb26`, a 15% alpha overlay meant for borders; over `--swatch--dark` it composites to `#393939` | 1.5:1 |
 | Two region landmarks named "Run history" | monitoring dashboard: the section and the scroll region inside it | 1.3.1 |
-| Focused anchor targets 4px under the new header | `scroll-margin-top` was 64px against a 68px header | 2.4.11 |
+| Focused anchor targets under the new header | `scroll-margin-top` was 64px against a 68px header | 2.4.11 |
 
-All four are fixed. The lesson worth keeping: **the alpha overlay tokens
-(`--swatch--light-faded`, `--swatch--dark-faded`) are for borders, never text.**
-`--swatch--muted-on-dark` (`#a8a8a8`, 7.32:1) was added for body copy on a dark
-slab.
+All four are fixed, and two lessons are worth keeping:
 
-Every screen now reports zero axe violations at the wcag2a/2aa/21a/21aa/22aa and
-best-practice tags.
+- **The alpha overlay tokens (`--swatch--light-faded`, `--swatch--dark-faded`)
+  are for borders, never text.** `--swatch--muted-on-dark` (`#a8a8a8`, 7.32:1)
+  was added for body copy on a dark slab.
+- **The whole Lumos size scale is fluid `clamp()`, so a token named `5rem` is
+  not 5rem.** The first attempt at the scroll-margin fix used
+  `--_spacing---space--10` on that assumption and measured **68.46px against a
+  68.8px header** — still short, and 48px on a phone. `--app--header-height` is
+  now a fixed variable and the scroll margin derives from it. Reading the
+  computed value in the browser is what caught this; the token name did not.
+
+Every screen reports **zero axe violations** at the wcag2a/2aa/21a/21aa/22aa and
+best-practice tags, on desktop and at 375px. At mobile width the page never
+scrolls horizontally and the 55-row VPAT table scrolls inside its own box and is
+reachable by keyboard.
 
 ### Chrome and monitor controls
 
@@ -258,15 +267,22 @@ for launch and will throttle immediately under the traffic
 
 ## Where to pick up
 
-Phases 0–7 are complete. In priority order:
+Phases 0–7 are complete and the app passes its own audit. Everything left needs a
+human, in this order:
 
-1. **Apply the four `/tools/*` page bodies** — needs a human in the Webflow Designer, see item 4
-   under Blocked. It is the only thing between this build and a public surface, and it is where
-   the SEO lives.
-2. **Exercise the new screens against the live deploy.** They build clean and the documents were
-   validated locally, but nothing has been driven through a real scan on staging yet.
-3. **Create the four Brevo contact attributes**, item 1 under Blocked. Leads sync but arrive bare.
-4. **PDF export.** `.docx` covers the procurement case, which was the one that mattered.
+1. **Apply the four `/tools/*` page bodies in the Designer**, then un-draft
+   `/tools/accessibility` too. Run `node webflow-pages/validate.mjs` first — all
+   four pass today. See item 4 under Blocked for why this cannot be automated.
+   **This is the only thing between the build and a public surface, and it is
+   where the SEO lives.**
+2. **Publish.** Staging is fine to publish freely. Production needs an explicit
+   go-ahead and has never been touched — `webyansh.com/tools/*` is 404 today.
+3. **Have the jurisdiction copy reviewed by counsel.** `src/lib/jurisdiction.ts`
+   says so in its own header; the module tells businesses which laws bind them.
+4. **Create the four Brevo contact attributes**, item 1 under Blocked. Leads sync
+   but arrive bare.
+5. **PDF export.** `.docx` covers the procurement case, which was the one that
+   mattered.
 
 Diagnose credential problems with `GET /app/api/health`, which reports a `configured` object of
 booleans for what the *running* worker can see. Webflow Cloud reads environment variables at deploy
