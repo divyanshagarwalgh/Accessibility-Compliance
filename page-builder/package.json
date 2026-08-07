@@ -4,11 +4,22 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "//": "generate runs first everywhere, so src/pages-data.ts can never drift from webflow-pages/",
+    "//scripts": [
+      "Bare binary names (tsc, webflow, concurrently) DO NOT WORK here: this",
+      "project's path contains an '&', which truncates npm's Windows shims and",
+      "fails with MODULE_NOT_FOUND. Every script calls node with an explicit",
+      "path, matching the other three packages in this repo.",
+      "The Webflow CLI is not a dependency of this package — it already lives in",
+      "webflow-components/, so it is referenced there rather than installed twice.",
+      "generate runs before every build so src/pages-data.ts cannot drift from",
+      "webflow-pages/."
+    ],
     "generate": "node generate-data.mjs",
-    "build": "npm install && node generate-data.mjs && tsc -p tsconfig.json && webflow extension bundle",
-    "dev": "npm install && node generate-data.mjs && concurrently -r \"webflow extension serve\" \"tsc -p tsconfig.json --watch --preserveWatchOutput\"",
-    "lint": "eslint ."
+    "compile": "node ./node_modules/typescript/bin/tsc -p tsconfig.json",
+    "serve": "node ../webflow-components/node_modules/@webflow/webflow-cli/dist/index.js extension serve",
+    "dev": "npm run generate && npm run compile && npm run serve",
+    "build": "npm run generate && npm run compile && node ../webflow-components/node_modules/@webflow/webflow-cli/dist/index.js extension bundle",
+    "lint": "node ./node_modules/eslint/bin/eslint.js ."
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

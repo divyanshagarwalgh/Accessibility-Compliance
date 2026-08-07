@@ -1,6 +1,13 @@
 {
-    "name": "page-builder",
-    "publicDir": "public",
-    "size": "comfortable",
-    "apiVersion": "2"
+  "name": "page-builder",
+  "publicDir": "public",
+  "size": "comfortable",
+  "apiVersion": "2",
+  "telemetry": {
+    "global": {
+      "allowTelemetry": true,
+      "lastPrompted": 1786107659519,
+      "version": "2.3.0"
+    }
+  }
 }
