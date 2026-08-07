@@ -1,7 +1,7 @@
 import { getIssues, getScan } from "@/lib/db";
+import { issuesFromRows } from "@/lib/issues";
 import { coverageCaveat, scoreScan } from "@/rules/score";
 import { RULES_BY_ID } from "@/rules/catalogue";
-import type { Issue } from "@/rules/types";
 
 export const dynamic = "force-dynamic";
 
@@ -36,31 +36,9 @@ export async function GET(
   const unlocked = Boolean(scan.email);
 
   // Rebuild the score object so the caveat text is generated from one place.
-  const issues: Issue[] = rows.map((r) => ({
-    ruleId: r.rule_id,
-    rule:
-      RULES_BY_ID.get(r.rule_id) ??
-      ({
-        id: r.rule_id,
-        name: r.rule_id,
-        sc: r.wcag_sc,
-        level: r.level as "A" | "AA",
-        severity: r.severity as Issue["rule"]["severity"],
-        introducedIn: "2.0",
-        why: r.why,
-        webflowSteps: JSON.parse(r.webflow_steps) as string[],
-        fixSurface: "designer",
-        effort: "Unknown",
-        axeRuleIds: [],
-        requiresLayout: false,
-      } as Issue["rule"]),
-    nodes: [],
-    nodeCount: r.node_count,
-    isCmsBound: r.is_cms_bound === 1,
-    hasWebflowSteps: r.has_webflow_steps === 1,
-  }));
-
-  const score = scoreScan(issues);
+  // The mapping is shared with the statement and VPAT generators — if they
+  // disagreed, a customer's compliance document would contradict their report.
+  const score = scoreScan(issuesFromRows(rows));
 
   return Response.json({
     scanId: scan.id,

@@ -209,6 +209,47 @@ export async function createLead(params: {
   return id;
 }
 
+export type DocumentRow = {
+  id: string;
+  type: "statement" | "vpat";
+  scan_id: string | null;
+  payload: string;
+  export_key: string | null;
+  created_at: number;
+  updated_at: number;
+};
+
+/**
+ * Stores a generated statement or VPAT.
+ *
+ * Kept because these documents are edited over time — a customer revises the
+ * planned fix dates on a statement, or confirms VPAT rows by hand — and because
+ * a document that was published on a customer's site needs to stay retrievable
+ * at the URL it was issued from, whatever the catalogue does later.
+ */
+export async function saveDocument(params: {
+  type: DocumentRow["type"];
+  scanId: string | null;
+  payload: unknown;
+}): Promise<string> {
+  const db = await getDb();
+  const id = newId();
+  const now = Date.now();
+  await db
+    .prepare(
+      `insert into documents (id, type, scan_id, payload, created_at, updated_at)
+       values (?, ?, ?, ?, ?, ?)`,
+    )
+    .bind(id, params.type, params.scanId, JSON.stringify(params.payload), now, now)
+    .run();
+  return id;
+}
+
+export async function getDocument(id: string): Promise<DocumentRow | null> {
+  const db = await getDb();
+  return db.prepare("select * from documents where id = ?").bind(id).first<DocumentRow>();
+}
+
 export async function markLeadSynced(id: string, error?: string): Promise<void> {
   const db = await getDb();
   await db
