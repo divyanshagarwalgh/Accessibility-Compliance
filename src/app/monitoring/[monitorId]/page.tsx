@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMonitor, listRuns, regressionsOf, type MonitorRunRow } from "@/lib/monitors";
 import { DEFAULT_THRESHOLDS, type MonitorThresholds } from "@/rules/regression";
+import { MonitorControls } from "./MonitorControls";
 import styles from "@/styles/modules.module.css";
 
 export const dynamic = "force-dynamic";
@@ -144,7 +145,13 @@ export default async function MonitorDashboard({
             )}
           </section>
 
-          <section aria-labelledby="runs-h">
+          {/* Deliberately NOT aria-labelledby. Naming this section makes it a
+              region landmark called "Run history", and the scrollable table
+              inside it is a region with the same name — two landmarks, one name,
+              which is a 1.3.1 failure our own scanner flagged here. The heading
+              still structures the page; the labelled region is the scroll
+              container, which is the part a keyboard user has to find. */}
+          <section>
             <h2 className={styles.h3} id="runs-h">
               Run history
             </h2>
@@ -264,6 +271,13 @@ export default async function MonitorDashboard({
               Monitor ID <span className={styles.mono}>{monitor.id}</span>. Keep it — it
               is the only way back to this dashboard.
             </p>
+          </section>
+
+          <section className={styles.cardTight} aria-labelledby="controls-h">
+            <h2 className={styles.h3} id="controls-h">
+              Stop or remove
+            </h2>
+            <MonitorControls monitorId={monitor.id} isActive={monitor.is_active === 1} />
           </section>
         </div>
       </div>

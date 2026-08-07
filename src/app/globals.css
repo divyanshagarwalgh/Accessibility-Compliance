@@ -80,11 +80,74 @@ a:where(:not([class])) {
   transform: translateY(0);
 }
 
+/* --- App chrome (design-inventory §1.1) ---------------------------------- */
+
+.a11y_header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgb(255 255 255 / 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--swatch--gray-200);
+}
+
+.a11y_header_inner {
+  max-width: var(--container--main);
+  margin-inline: auto;
+  min-height: 68px;
+  padding: 0 var(--site--margin);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--_spacing---space--4);
+}
+
+.a11y_header_brand {
+  font-family: var(--_typography---font--secondary-family);
+  font-weight: 600;
+  font-size: var(--_typography---font-size--text-large);
+  color: var(--swatch--dark);
+  text-decoration: none;
+}
+
+.a11y_header_nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--_spacing---space--4);
+}
+
+.a11y_header_nav a {
+  /* The live site's nav grey is #4A4A4A. Kept, because it clears AA on white. */
+  color: #4a4a4a;
+  font-size: var(--_typography---font-size--text-small);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.a11y_header_nav a:hover {
+  color: var(--swatch--dark);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 479px) {
+  .a11y_header_inner {
+    min-height: 60px;
+  }
+}
+
 /* Rule 13 (2.4.11 Focus Not Obscured, WCAG 2.2). Anchor targets must clear any
- * sticky chrome when focused. */
+ * sticky chrome when focused.
+ *
+ * space--8 is 4rem = 64px, which was correct while the app had no header. The
+ * header added above is 68px, so 64px leaves a focused target 4px underneath it
+ * — the exact failure this tool reports as wy-focus-obscured. space--10 is 5rem
+ * = 80px and clears it. */
 :target,
 [id] {
-  scroll-margin-top: var(--_spacing---space--8);
+  scroll-margin-top: var(--_spacing---space--10);
 }
 
 .u-sr-only {

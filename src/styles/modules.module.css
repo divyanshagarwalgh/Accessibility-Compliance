@@ -266,9 +266,13 @@
   gap: 0.5rem;
 }
 
+/* Not --swatch--brand. White on #ff4d00 is 3.32:1 and fails AA for button-size
+ * text — our own scanner flagged it here. The brand orange stays correct for
+ * fills, borders and large display type; button labels use the accessible tone,
+ * which is 6.14:1 on white. */
 .btn {
-  border: 1px solid var(--swatch--brand);
-  background: var(--swatch--brand);
+  border: 1px solid var(--swatch--brand-accessible);
+  background: var(--swatch--brand-accessible);
   color: var(--swatch--white);
 }
 
@@ -477,7 +481,7 @@
   margin: 0;
   font-size: var(--_typography---font-size--text-small);
   line-height: 1.6;
-  color: var(--swatch--light-faded);
+  color: var(--swatch--muted-on-dark);
 }
 
 .warnNote {

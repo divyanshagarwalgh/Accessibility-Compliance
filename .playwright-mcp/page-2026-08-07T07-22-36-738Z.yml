@@ -1,0 +1,30 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to main content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - generic [ref=f1e5]:
+        - paragraph [ref=f1e6]:
+          - link "Accessibility workspace" [ref=f1e7] [cursor=pointer]:
+            - /url: /app
+          - text: · VPAT
+        - heading "VPAT 2.5 draft" [level=1] [ref=f1e8]
+        - paragraph [ref=f1e9]: Pre-filled from the scan. Every row still needs a human to confirm it before you send this to a procurement team.
+      - generic [ref=f1e10]:
+        - generic [ref=f1e11]:
+          - generic [ref=f1e12]:
+            - generic [ref=f1e13]: Product name
+            - textbox "Product name" [ref=f1e14]
+            - generic [ref=f1e15]: What procurement will see in the header. Filled from the scan domain if you leave it blank.
+          - generic [ref=f1e16]:
+            - generic [ref=f1e17]: Scan ID (optional)
+            - textbox "Scan ID (optional)" [ref=f1e18]
+            - generic [ref=f1e19]: Without a scan you get the blank template with the untestable criteria already marked, which is still a day of work saved.
+        - group "Edition" [ref=f1e20]:
+          - generic [ref=f1e22]:
+            - button "WCAG edition" [pressed] [ref=f1e23] [cursor=pointer]
+            - button "Section 508 edition" [ref=f1e24] [cursor=pointer]
+            - button "EU edition (EN 301 549)" [ref=f1e25] [cursor=pointer]
+          - paragraph [ref=f1e26]: "All three carry the same criteria table — 508 and EN 301 549 both incorporate WCAG by reference — and differ in the scope note. The INT edition is not generated here: it covers non-web software and hardware chapters this tool never sees."
+        - button "Generate VPAT draft" [ref=f1e28] [cursor=pointer]
+  - alert [ref=f1e29]

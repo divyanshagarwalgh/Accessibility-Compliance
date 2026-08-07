@@ -1,0 +1,95 @@
+- generic [active] [ref=f4e1]:
+  - link "Skip to main content" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - generic [ref=f4e5]:
+        - paragraph [ref=f4e6]: Accessibility report
+        - heading "https://www.w3.org/WAI/demos/bad/before/home.html" [level=1] [ref=f4e7]
+        - paragraph [ref=f4e8]: Scanned 2026-08-07 06:27 UTC · axe-core@4.13.0 · WCAG 2.2 AA
+      - region [ref=f4e9]:
+        - generic [ref=f4e10]:
+          - paragraph [ref=f4e11]: Automated score
+          - paragraph [ref=f4e12]: "0"
+          - paragraph [ref=f4e13]: out of 100
+        - generic [ref=f4e14]:
+          - paragraph [ref=f4e15]: 62 issues across 8 rules
+          - list [ref=f4e16]:
+            - listitem [ref=f4e17]:
+              - generic [ref=f4e18]: Critical
+              - generic [ref=f4e19]: "36"
+              - generic [ref=f4e20]: across 3 rules
+            - listitem [ref=f4e21]:
+              - generic [ref=f4e22]: Serious
+              - generic [ref=f4e23]: "23"
+              - generic [ref=f4e24]: across 3 rules
+            - listitem [ref=f4e25]:
+              - generic [ref=f4e26]: Moderate
+              - generic [ref=f4e27]: "3"
+              - generic [ref=f4e28]: across 2 rules
+            - listitem [ref=f4e29]:
+              - generic [ref=f4e30]: Minor
+              - generic [ref=f4e31]: "0"
+              - generic [ref=f4e32]: across 0 rules
+      - region "Scan coverage" [ref=f4e33]:
+        - paragraph [ref=f4e34]: This scan covers 22% of WCAG 2.2 AA
+        - paragraph [ref=f4e35]: "This scan evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria — about 22%. The rest need a person: reading order, whether alt text is meaningful, whether a keyboard user can finish the task. We will not tell you that you are compliant, because no scanner can."
+      - region [ref=f4e36]:
+        - heading "What we found" [level=2] [ref=f4e37]
+        - list [ref=f4e38]:
+          - listitem [ref=f4e39]:
+            - generic [ref=f4e40]:
+              - heading "Images are missing alternative text" [level=3] [ref=f4e42]
+              - generic [ref=f4e43]: Critical
+            - paragraph [ref=f4e44]: WCAG 1.1.1 (A) · 33 elements
+          - listitem [ref=f4e45]:
+            - generic [ref=f4e46]:
+              - heading "Text has insufficient colour contrast" [level=3] [ref=f4e48]
+              - generic [ref=f4e49]: Critical
+            - paragraph [ref=f4e50]: WCAG 1.4.3 (AA) · 2 elements
+          - listitem [ref=f4e51]:
+            - generic [ref=f4e52]:
+              - heading "Form inputs have no associated label" [level=3] [ref=f4e54]
+              - generic [ref=f4e55]: Critical
+            - paragraph [ref=f4e56]: WCAG 3.3.2 (A) · 1 element
+          - listitem [ref=f4e57]:
+            - generic [ref=f4e58]:
+              - heading "Focus indicator has been removed" [level=3] [ref=f4e60]
+              - generic [ref=f4e61]: Serious
+            - paragraph [ref=f4e62]: WCAG 2.4.7 (AA) · 14 elements
+          - listitem [ref=f4e63]:
+            - generic [ref=f4e64]:
+              - heading "Link text does not describe its destination" [level=3] [ref=f4e66]
+              - generic [ref=f4e67]: Serious
+            - paragraph [ref=f4e68]: WCAG 2.4.4 (A) · 7 elements
+          - listitem [ref=f4e69]:
+            - generic [ref=f4e70]:
+              - heading "Target size is below 24 by 24 CSS pixels" [level=3] [ref=f4e72]
+              - generic [ref=f4e73]: Serious
+            - paragraph [ref=f4e74]: WCAG 2.5.8 (AA) · 2 elements · New in WCAG 2.2
+          - listitem [ref=f4e75]:
+            - generic [ref=f4e76]:
+              - heading "Content is clipped at 200% zoom" [level=3] [ref=f4e78]
+              - generic [ref=f4e79]: Moderate
+            - paragraph [ref=f4e80]: WCAG 1.4.4 (AA) · 2 elements
+          - listitem [ref=f4e81]:
+            - generic [ref=f4e82]:
+              - heading "html element has no lang attribute" [level=3] [ref=f4e84]
+              - generic [ref=f4e85]: Moderate
+            - paragraph [ref=f4e86]: WCAG 3.1.1 (A) · 1 element
+      - region [ref=f4e87]:
+        - heading "See the fix for each issue" [level=2] [ref=f4e88]
+        - paragraph [ref=f4e89]:
+          - text: You can see
+          - strong [ref=f4e90]: what
+          - text: is wrong above. The Webflow Designer steps for 62 issues across 8 rules, 36 of them critical, are behind one field.
+        - generic [ref=f4e91]:
+          - generic [ref=f4e92]:
+            - generic [ref=f4e93]: Work email
+            - textbox "Work email" [ref=f4e94]
+          - generic [ref=f4e95]:
+            - checkbox "Also send me a monthly re-scan of this page. Unsubscribe in one click." [ref=f4e96]
+            - generic [ref=f4e97]: Also send me a monthly re-scan of this page. Unsubscribe in one click.
+          - button "Open the full report" [ref=f4e98] [cursor=pointer]
+          - paragraph [ref=f4e99]: One email, no drip sequence, no reselling your address. The contrast checker stays free and ungated either way.
+  - alert [ref=f4e100]

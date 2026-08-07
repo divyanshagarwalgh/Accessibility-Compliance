@@ -105,6 +105,15 @@
   --swatch--brand-tint: #fff1eb;
   --swatch--brand-wash: #fff6f2;
 
+  /* Muted body copy on a dark slab.
+   *
+   * NOT --swatch--light-faded. That token is #e9eaeb26 — a 15% alpha overlay
+   * intended for borders and dividers — and it composites to #393939 over
+   * --swatch--dark, which is 1.5:1. Our own scanner caught exactly that on the
+   * caveat slab. This is the prototype's "Muted-on-dark" value and it is solid,
+   * not alpha: 7.32:1 on #1a1a1a. */
+  --swatch--muted-on-dark: #a8a8a8;
+
   /* --- Theme channel ---------------------------------------------------- */
   --_theme---background: var(--swatch--light);
   --_theme---text: var(--swatch--dark);

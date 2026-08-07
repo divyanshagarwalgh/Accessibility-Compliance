@@ -171,9 +171,11 @@
 }
 .checkRow { display: flex; gap: var(--_spacing---space--2); align-items: flex-start; font-size: 0.875rem; color: var(--swatch--gray-600); }
 .checkRow input { min-inline-size: 24px; min-block-size: 24px; }
+/* White on the raw brand orange is 3.32:1. See modules.module.css .btn — this
+ * button had the same failure and has carried it since Phase 4. */
 .submit {
   appearance: none; border: 0; cursor: pointer;
-  background: var(--swatch--brand); color: var(--swatch--white);
+  background: var(--swatch--brand-accessible); color: var(--swatch--white);
   font: inherit; font-weight: 600;
   padding: 0.875rem 1.25rem; min-height: 24px;
   border-radius: var(--radius--small);

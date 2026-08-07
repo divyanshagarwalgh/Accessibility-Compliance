@@ -1,0 +1,58 @@
+- generic [active] [ref=f5e1]:
+  - link "Skip to main content" [ref=f5e2] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=f5e3]:
+    - generic [ref=f5e4]:
+      - generic [ref=f5e5]:
+        - paragraph [ref=f5e6]: Accessibility & compliance suite
+        - heading "Scan a page, then take the result anywhere." [level=1] [ref=f5e7]
+        - paragraph [ref=f5e8]: Scan any page against WCAG 2.1 and 2.2 AA, and get the exact fix for each issue in Webflow Designer. Every module below runs on the same scan, so the results carry across.
+      - region [ref=f5e9]:
+        - heading "Run a scan" [level=2] [ref=f5e10]
+        - generic [ref=f5e11]:
+          - generic [ref=f5e12]:
+            - generic [ref=f5e13]: Page to scan
+            - textbox "Page to scan" [ref=f5e14]:
+              - /placeholder: https://example.com/pricing
+          - button "Run a scan" [ref=f5e16] [cursor=pointer]
+          - paragraph [ref=f5e17]: One page per scan, ten scans an hour. The score and the rule names are public; the Webflow fix steps are behind one email.
+      - heading "Modules" [level=2] [ref=f5e18]
+      - list "Modules" [ref=f5e19]:
+        - listitem [ref=f5e20]:
+          - link "Jurisdiction mapper Pick the markets you sell into and see which regimes bind you, with the deadline for each. ADA, EAA, EN 301 549" [ref=f5e21] [cursor=pointer]:
+            - /url: /app/jurisdiction
+            - paragraph [ref=f5e22]: Jurisdiction mapper
+            - paragraph [ref=f5e23]: Pick the markets you sell into and see which regimes bind you, with the deadline for each.
+            - generic [ref=f5e24]: ADA, EAA, EN 301 549
+        - listitem [ref=f5e25]:
+          - link "Accessibility statement Generates the statement the EAA requires, populated from your own scan results. Required by law in the EU" [ref=f5e26] [cursor=pointer]:
+            - /url: /app/statement
+            - paragraph [ref=f5e27]: Accessibility statement
+            - paragraph [ref=f5e28]: Generates the statement the EAA requires, populated from your own scan results.
+            - generic [ref=f5e29]: Required by law in the EU
+        - listitem [ref=f5e30]:
+          - link "VPAT and ACR draft Fills a Voluntary Product Accessibility Template so procurement stops blocking the deal. Section 508 ready" [ref=f5e31] [cursor=pointer]:
+            - /url: /app/vpat
+            - paragraph [ref=f5e32]: VPAT and ACR draft
+            - paragraph [ref=f5e33]: Fills a Voluntary Product Accessibility Template so procurement stops blocking the deal.
+            - generic [ref=f5e34]: Section 508 ready
+        - listitem [ref=f5e35]:
+          - link "Alt text auditor Finds missing and unhelpful alt text and drafts replacements for review. Review every line" [ref=f5e36] [cursor=pointer]:
+            - /url: /app/alt-text
+            - paragraph [ref=f5e37]: Alt text auditor
+            - paragraph [ref=f5e38]: Finds missing and unhelpful alt text and drafts replacements for review.
+            - generic [ref=f5e39]: Review every line
+        - listitem [ref=f5e40]:
+          - link "Continuous monitoring Scheduled re-scans with an alert the moment a publish breaks something that used to pass. Retainer clients" [ref=f5e41] [cursor=pointer]:
+            - /url: /app/monitoring
+            - paragraph [ref=f5e42]: Continuous monitoring
+            - paragraph [ref=f5e43]: Scheduled re-scans with an alert the moment a publish breaks something that used to pass.
+            - generic [ref=f5e44]: Retainer clients
+      - paragraph [ref=f5e45]:
+        - text: The colour contrast checker needs no scan and no email — it lives on the main site at
+        - code [ref=f5e46]: /tools/color-contrast-checker
+        - text: .
+      - region "What automated scanning cannot do" [ref=f5e47]:
+        - paragraph [ref=f5e48]: Automated scanning catches about a third of WCAG.
+        - paragraph [ref=f5e49]: "No scanner can confirm that a page is compliant, and any tool that says otherwise is selling you something. Roughly two thirds of the success criteria need a human to judge them: reading order, meaningful alt text, error recovery, and whether a keyboard user can actually finish the task. Every report here tells you which criteria were tested and which were not."
+  - alert [ref=f5e50]

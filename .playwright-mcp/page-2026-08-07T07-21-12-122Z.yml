@@ -1,0 +1,62 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - paragraph [ref=e6]:
+          - link "Accessibility workspace" [ref=e7] [cursor=pointer]:
+            - /url: /app
+          - text: · Statement
+        - heading "Accessibility statement" [level=1] [ref=e8]
+        - paragraph [ref=e9]: The EAA requires a published statement with a working feedback channel. This one is populated from your latest scan, so the known issues section stays honest.
+      - generic [ref=e10]:
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: Organisation
+            - textbox "Organisation" [ref=e15]
+            - generic [ref=e16]: Appears in the first line of the statement.
+          - generic [ref=e17]:
+            - generic [ref=e18]: Domain
+            - textbox "Domain" [ref=e19]:
+              - /placeholder: example.com
+            - generic [ref=e20]: The site the statement covers. Filled from the scan if you supply one.
+          - generic [ref=e21]:
+            - generic [ref=e22]: Contact for accessibility issues
+            - textbox "Contact for accessibility issues" [ref=e23]
+            - generic [ref=e24]: The EAA requires a working feedback channel. This address has to be monitored by a person.
+          - generic [ref=e25]:
+            - generic [ref=e26]: Conformance target
+            - generic [ref=e27]:
+              - combobox "Conformance target" [ref=e28]:
+                - option "WCAG 2.2" [selected]
+                - option "WCAG 2.1"
+              - generic [ref=e29]: Conformance level
+              - combobox "Conformance level" [ref=e30]:
+                - option "Level AA" [selected]
+                - option "Level A"
+            - generic [ref=e31]: AA is the level every regime actually requires.
+          - generic [ref=e32]:
+            - generic [ref=e33]: Conformance status you are claiming
+            - combobox "Conformance status you are claiming" [ref=e34]:
+              - option "Partially conformant" [selected]
+              - option "Fully conformant"
+              - option "Not conformant"
+            - generic [ref=e35]: Checked against the evidence. A claim the scan does not support is downgraded and you will be told why.
+          - generic [ref=e36]:
+            - generic [ref=e37]: Scan ID (optional)
+            - textbox "Scan ID (optional)" [ref=e38]
+            - generic [ref=e39]: With a scan, the known limitations section writes itself and stays honest. Without one, you still get the statement.
+          - generic [ref=e40]:
+            - generic [ref=e41]: Last reviewed
+            - textbox "Last reviewed" [ref=e42]: 2026-08-07
+            - generic [ref=e43]: Review at least once a year.
+          - generic [ref=e44]:
+            - checkbox "A manual review of the criteria automated testing cannot reach has been completed. Only tick this if it is true — it is the attestation that lets the statement claim full conformance." [ref=e45]
+            - generic [ref=e46]: A manual review of the criteria automated testing cannot reach has been completed. Only tick this if it is true — it is the attestation that lets the statement claim full conformance.
+          - button "Generate statement" [ref=e48] [cursor=pointer]
+        - paragraph [ref=e51]: Fill in the form and the statement appears here, ready to paste into a Webflow rich text block.
+      - region "What this statement is based on" [ref=e52]:
+        - paragraph [ref=e53]: A statement is your claim, not our certificate.
+        - paragraph [ref=e54]: Automated testing reaches roughly a fifth of the WCAG 2.2 Level A and AA success criteria. A clean scan means no failures were found, not that none exist — which is why this generator will not write “fully conformant” unless you confirm a manual review was done. Have the wording reviewed by counsel before you publish it.
+  - alert [ref=e55]

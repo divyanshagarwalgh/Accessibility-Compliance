@@ -118,6 +118,32 @@ export async function markDispatched(monitor: MonitorRow): Promise<void> {
     .run();
 }
 
+/**
+ * Pauses or resumes a monitor.
+ *
+ * Pausing clears `next_run_at` rather than only flipping `is_active`. The due
+ * query filters on both, so leaving a stale timestamp behind would work today
+ * and fire a backlog of overdue runs the moment someone resumed it.
+ */
+export async function setMonitorActive(id: string, isActive: boolean): Promise<void> {
+  const db = await getDb();
+  await db
+    .prepare("update monitors set is_active = ?, next_run_at = ? where id = ?")
+    .bind(isActive ? 1 : 0, isActive ? Date.now() : null, id)
+    .run();
+}
+
+/** Deletes a monitor and its run history. */
+export async function deleteMonitor(id: string): Promise<void> {
+  const db = await getDb();
+  // Runs first: orphaned rows in monitor_runs would keep the history reachable
+  // by monitor_id after the monitor itself is gone.
+  await db.batch([
+    db.prepare("delete from monitor_runs where monitor_id = ?").bind(id),
+    db.prepare("delete from monitors where id = ?").bind(id),
+  ]);
+}
+
 export type MonitorRunRow = {
   id: string;
   monitor_id: string;
