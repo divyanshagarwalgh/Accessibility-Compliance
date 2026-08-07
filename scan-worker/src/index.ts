@@ -5,6 +5,13 @@ export type Env = {
   BROWSER: Fetcher;
   /** Shared with the Webflow Cloud app. Set via `wrangler secret put SHARED_SECRET`. */
   SHARED_SECRET: string;
+  /**
+   * The app's monitor cron target. A plain `vars` entry in wrangler.json, not a
+   * secret — it is a public staging URL, and burying it in `wrangler secret`
+   * would mean nobody could see what it was pointed at. The shared secret that
+   * authenticates the call is still a secret.
+   */
+  MONITOR_CRON_URL?: string;
 };
 
 type ScanRequest = {
@@ -60,5 +67,44 @@ export default {
     ctx.waitUntil(runScan(puppeteer, env, body));
 
     return Response.json({ accepted: true, scanId: body.scanId }, { status: 202 });
+  },
+
+  /**
+   * Hourly cron. Asks the app which monitors are due and lets it do the work.
+   *
+   * This worker deliberately holds no monitor state: the monitors live in the
+   * app's D1, which Webflow Cloud provisions and which this worker has no
+   * binding to. So the cron is a doorbell, not a scheduler — it carries the
+   * shared secret and nothing else, and the app decides what is due.
+   */
+  async scheduled(_event: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+    if (!env.MONITOR_CRON_URL || !env.SHARED_SECRET) {
+      console.error("monitor_cron_skipped", "MONITOR_CRON_URL or SHARED_SECRET is unset");
+      return;
+    }
+
+    ctx.waitUntil(
+      (async () => {
+        try {
+          const res = await fetch(env.MONITOR_CRON_URL!, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${env.SHARED_SECRET}`,
+            },
+            body: "{}",
+            signal: AbortSignal.timeout(30_000),
+          });
+          console.log(
+            "monitor_cron",
+            JSON.stringify({ status: res.status, body: (await res.text()).slice(0, 300) }),
+          );
+        } catch (err) {
+          // Logged, not rethrown: a failed tick should not retry-storm, and the
+          // next one is an hour away.
+          console.error("monitor_cron_failed", String(err));
+        }
+      })(),
+    );
   },
 };

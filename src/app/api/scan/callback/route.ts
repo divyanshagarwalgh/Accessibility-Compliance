@@ -4,8 +4,67 @@ import { timingSafeEqual } from "@/lib/ids";
 import { setStatus, pctForStep, type ScanStep } from "@/lib/scan-status";
 import { mapAxeResults, type AxeViolation } from "@/rules/map-axe";
 import { scoreScan } from "@/rules/score";
+import { compareRuns, snapshotFromIssues, type RuleSnapshot } from "@/rules/regression";
+import { getLastRun, getMonitor, recordRun, snapshotOf } from "@/lib/monitors";
+import { composeRegressionAlert, sendEmail } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
+
+/**
+ * Compares a monitored scan against the monitor's previous run, records the
+ * result, and emails only when something actually regressed.
+ */
+async function recordMonitorRun(params: {
+  monitorId: string;
+  scanId: string;
+  siteUrl: string;
+  score: number;
+  snapshot: RuleSnapshot[];
+  reportUrl: string;
+}): Promise<{ compared: boolean; alerted: boolean }> {
+  const monitor = await getMonitor(params.monitorId);
+  if (!monitor) return { compared: false, alerted: false };
+
+  const last = await getLastRun(params.monitorId);
+  const previous =
+    last && last.score !== null
+      ? { score: last.score, rules: snapshotOf(last) }
+      : null;
+
+  const comparison = compareRuns(
+    previous,
+    { score: params.score, rules: params.snapshot },
+    JSON.parse(monitor.thresholds),
+  );
+
+  let alerted = false;
+  if (comparison.shouldAlert) {
+    const recipients = [
+      monitor.owner_email,
+      ...(JSON.parse(monitor.recipients) as string[]),
+    ].filter((v, i, a) => a.indexOf(v) === i);
+
+    const mail = composeRegressionAlert({
+      siteUrl: params.siteUrl,
+      comparison,
+      reportUrl: params.reportUrl,
+    });
+    const result = await sendEmail({ to: recipients, ...mail });
+    alerted = result.sent;
+  }
+
+  await recordRun({
+    monitorId: params.monitorId,
+    scanId: params.scanId,
+    score: params.score,
+    delta: comparison.delta,
+    regressions: comparison.regressions,
+    snapshot: params.snapshot,
+    alertSent: alerted,
+  });
+
+  return { compared: !comparison.isFirstRun, alerted };
+}
 
 type CallbackBody = {
   scanId: string;
@@ -116,5 +175,29 @@ export async function POST(request: Request): Promise<Response> {
     startedAt: scan.requested_at,
   });
 
-  return Response.json({ ok: true, score: score.score, issues: issues.length });
+  // A monitored scan has one more job: say what changed since last time.
+  // Wrapped because a monitoring failure must not discard a completed scan —
+  // the report is already written and is the more valuable artefact.
+  let monitoring: { compared: boolean; alerted: boolean } | undefined;
+  if (scan.monitor_id) {
+    try {
+      monitoring = await recordMonitorRun({
+        monitorId: scan.monitor_id,
+        scanId: body.scanId,
+        siteUrl: scan.url,
+        score: score.score,
+        snapshot: snapshotFromIssues(issues),
+        reportUrl: `${new URL(request.url).origin}${env.BASE_URL ?? "/app"}/report/${body.scanId}`,
+      });
+    } catch {
+      monitoring = { compared: false, alerted: false };
+    }
+  }
+
+  return Response.json({
+    ok: true,
+    score: score.score,
+    issues: issues.length,
+    ...(monitoring ? { monitoring } : {}),
+  });
 }

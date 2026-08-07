@@ -29,6 +29,8 @@ export type ScanRow = {
   criteria_tested: number | null;
   criteria_total: number | null;
   raw_result_key: string | null;
+  /** Set when the scan was fired by a monitor rather than by a person. */
+  monitor_id: string | null;
 };
 
 export async function createScan(params: {
@@ -38,12 +40,14 @@ export async function createScan(params: {
   domain: string;
   requesterIpHash: string;
   sourceTool: string;
+  /** Links the scan back to the monitor that scheduled it. */
+  monitorId?: string | null;
 }): Promise<void> {
   const db = await getDb();
   await db
     .prepare(
-      `insert into scans (id, url, url_normalised, domain, status, requested_at, requester_ip_hash, source_tool)
-       values (?, ?, ?, ?, 'queued', ?, ?, ?)`,
+      `insert into scans (id, url, url_normalised, domain, status, requested_at, requester_ip_hash, source_tool, monitor_id)
+       values (?, ?, ?, ?, 'queued', ?, ?, ?, ?)`,
     )
     .bind(
       params.id,
@@ -53,6 +57,7 @@ export async function createScan(params: {
       Date.now(),
       params.requesterIpHash,
       params.sourceTool,
+      params.monitorId ?? null,
     )
     .run();
 }
