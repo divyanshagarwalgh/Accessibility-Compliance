@@ -6,7 +6,20 @@ export type StyleRule = {
   breakpoint: string;
   props: Record<string, string>;
 };
-export type PageBody = { slug: string; file: string; html: string };
+export type TreeNode =
+  | { text: string }
+  | {
+      tag: string;
+      classes: string[];
+      attrs: Record<string, string>;
+      children: TreeNode[];
+    };
+export type PageBody = {
+  slug: string;
+  file: string;
+  html: string;
+  tree: TreeNode;
+};
 
 export const STYLE_RULES: StyleRule[] = [
   {
@@ -333,21 +346,5083 @@ export const PAGE_BODIES: PageBody[] = [
   {
     "slug": "tools/accessibility-laws",
     "file": "accessibility-laws.html",
-    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">Which accessibility laws apply to you</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        Web accessibility law follows the markets you sell into, not the country you are\n        registered in. Pick your markets and we map the regimes that bind you, the standard\n        each is measured against, and the dates that already passed.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Map my markets</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; Not legal advice</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">The regimes</h2>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">Law</th>\n              <th class=\"a11yp_th\" scope=\"col\">Where</th>\n              <th class=\"a11yp_th\" scope=\"col\">Standard</th>\n              <th class=\"a11yp_th\" scope=\"col\">Date</th>\n              <th class=\"a11yp_th\" scope=\"col\">Status</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">European Accessibility Act</td>\n              <td class=\"a11yp_td\">EU</td>\n              <td class=\"a11yp_td\">EN 301 549, WCAG 2.1 AA</td>\n              <td class=\"a11yp_td_num\">28 Jun 2025</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">ADA Title III</td>\n              <td class=\"a11yp_td\">US, private business</td>\n              <td class=\"a11yp_td\">WCAG 2.1 AA in practice</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">ADA Title II</td>\n              <td class=\"a11yp_td\">US, public entities</td>\n              <td class=\"a11yp_td\">WCAG 2.1 AA</td>\n              <td class=\"a11yp_td_num\">26 Apr 2027 / 2028</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_soon\">Upcoming</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Section 508</td>\n              <td class=\"a11yp_td\">US federal procurement</td>\n              <td class=\"a11yp_td\">Revised 508, WCAG 2.0 AA</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Equality Act 2010</td>\n              <td class=\"a11yp_td\">UK</td>\n              <td class=\"a11yp_td\">No fixed standard; WCAG 2.1 AA is the benchmark</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">AODA</td>\n              <td class=\"a11yp_td\">Ontario, Canada</td>\n              <td class=\"a11yp_td\">WCAG 2.0 AA</td>\n              <td class=\"a11yp_td_num\">1 Jan 2021</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Disability Discrimination Act</td>\n              <td class=\"a11yp_td\">Australia</td>\n              <td class=\"a11yp_td\">WCAG 2.1 AA for government</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        Meeting WCAG 2.2 AA satisfies every row above. Each version is a superset of the one\n        before it, apart from a single criterion that WCAG 2.2 withdrew, so building to the\n        newest standard is simpler than tracking which regime wants which vintage.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Three things businesses get wrong</h2>\n      <div class=\"a11yp_grid\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">&ldquo;We are not in the EU&rdquo;</h3>\n          <p class=\"a11yp_card_body\">\n            The European Accessibility Act binds the offering, not the seller's address. If you\n            sell to EU consumers you are in scope, and an accessibility statement is mandatory.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">&ldquo;We will certify&rdquo;</h3>\n          <p class=\"a11yp_card_body\">\n            There is no certification for the ADA and no safe harbour. Enforcement is private\n            litigation. Nobody can sell you a badge that ends the exposure, and anyone offering\n            one is selling something else.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">&ldquo;An overlay covers it&rdquo;</h3>\n          <p class=\"a11yp_card_body\">\n            Overlay vendors are being sued. Installing one is a matter of public record that\n            plaintiffs search for, and the products are widely rejected by the disabled users\n            they claim to serve.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">The dates that matter</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          <strong>28 June 2025</strong> &mdash; the European Accessibility Act became\n          enforceable. It is past, not upcoming, and it binds any business selling to EU\n          consumers regardless of where it is based.\n        </p>\n        <p>\n          <strong>26 April 2027</strong> &mdash; ADA Title II compliance deadline for public\n          entities serving 50,000 people or more.\n        </p>\n        <p>\n          <strong>26 April 2028</strong> &mdash; the same deadline for smaller public entities.\n        </p>\n        <p>\n          The enforcement picture changed in June 2026, when a French court ordered Carrefour to\n          reach full compliance under a EUR 500 per day penalty and explicitly rejected a 71%\n          conformance score as sufficient. Partial compliance is not a legal position.\n        </p>\n      </div>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">This is a planning aid, not legal advice</h3>\n        <p class=\"a11yp_caveat_body\">\n          The mapping is generated from the markets you select and is meant for planning what to\n          build and in what order. It is not legal advice, it does not account for your sector's\n          specific obligations, and it cannot tell you how a court would rule. Have the wording\n          reviewed by counsel before you rely on it. Separately: our scan evaluates 12 of the 55\n          WCAG 2.2 Level A and AA success criteria, so no result from it establishes compliance\n          with any regime on this page.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Which standard should we build to?</h3>\n        <p class=\"a11yp_faq_a\">\n          WCAG 2.2 level AA. It is the newest, it satisfies every regime listed above, and\n          building to the strictest baseline once is cheaper than re-auditing each time a\n          regulator adopts a newer version.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Does any of this apply to a small business?</h3>\n        <p class=\"a11yp_faq_a\">\n          ADA Title III has no employee threshold, so size is not a defence in the US. The EAA\n          does exempt microenterprises &mdash; fewer than 10 people and under EUR 2 million\n          turnover &mdash; from some obligations, but the exemption is narrower than most\n          people assume and does not extend to everything.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">How likely is enforcement, really?</h3>\n        <p class=\"a11yp_faq_a\">\n          In the US, thousands of web accessibility suits are filed annually, concentrated in\n          retail and hospitality. In the EU, enforcement is newer and the Carrefour ruling\n          suggests courts are willing to order full remediation with daily penalties. WebAIM's\n          2026 study found 95.9% of the top million homepages fail, which means the constraint\n          on enforcement is attention, not eligibility.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>"
+    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">Which accessibility laws apply to you</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        Web accessibility law follows the markets you sell into, not the country you are\n        registered in. Pick your markets and we map the regimes that bind you, the standard\n        each is measured against, and the dates that already passed.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Map my markets</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; Not legal advice</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">The regimes</h2>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">Law</th>\n              <th class=\"a11yp_th\" scope=\"col\">Where</th>\n              <th class=\"a11yp_th\" scope=\"col\">Standard</th>\n              <th class=\"a11yp_th\" scope=\"col\">Date</th>\n              <th class=\"a11yp_th\" scope=\"col\">Status</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">European Accessibility Act</td>\n              <td class=\"a11yp_td\">EU</td>\n              <td class=\"a11yp_td\">EN 301 549, WCAG 2.1 AA</td>\n              <td class=\"a11yp_td_num\">28 Jun 2025</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">ADA Title III</td>\n              <td class=\"a11yp_td\">US, private business</td>\n              <td class=\"a11yp_td\">WCAG 2.1 AA in practice</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">ADA Title II</td>\n              <td class=\"a11yp_td\">US, public entities</td>\n              <td class=\"a11yp_td\">WCAG 2.1 AA</td>\n              <td class=\"a11yp_td_num\">26 Apr 2027 / 2028</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_soon\">Upcoming</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Section 508</td>\n              <td class=\"a11yp_td\">US federal procurement</td>\n              <td class=\"a11yp_td\">Revised 508, WCAG 2.0 AA</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Equality Act 2010</td>\n              <td class=\"a11yp_td\">UK</td>\n              <td class=\"a11yp_td\">No fixed standard; WCAG 2.1 AA is the benchmark</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">AODA</td>\n              <td class=\"a11yp_td\">Ontario, Canada</td>\n              <td class=\"a11yp_td\">WCAG 2.0 AA</td>\n              <td class=\"a11yp_td_num\">1 Jan 2021</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Disability Discrimination Act</td>\n              <td class=\"a11yp_td\">Australia</td>\n              <td class=\"a11yp_td\">WCAG 2.1 AA for government</td>\n              <td class=\"a11yp_td_num\">In force</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">In force</span></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        Meeting WCAG 2.2 AA satisfies every row above. Each version is a superset of the one\n        before it, apart from a single criterion that WCAG 2.2 withdrew, so building to the\n        newest standard is simpler than tracking which regime wants which vintage.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Three things businesses get wrong</h2>\n      <div class=\"a11yp_grid\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">&ldquo;We are not in the EU&rdquo;</h3>\n          <p class=\"a11yp_card_body\">\n            The European Accessibility Act binds the offering, not the seller's address. If you\n            sell to EU consumers you are in scope, and an accessibility statement is mandatory.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">&ldquo;We will certify&rdquo;</h3>\n          <p class=\"a11yp_card_body\">\n            There is no certification for the ADA and no safe harbour. Enforcement is private\n            litigation. Nobody can sell you a badge that ends the exposure, and anyone offering\n            one is selling something else.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">&ldquo;An overlay covers it&rdquo;</h3>\n          <p class=\"a11yp_card_body\">\n            Overlay vendors are being sued. Installing one is a matter of public record that\n            plaintiffs search for, and the products are widely rejected by the disabled users\n            they claim to serve.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">The dates that matter</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          <strong>28 June 2025</strong> &mdash; the European Accessibility Act became\n          enforceable. It is past, not upcoming, and it binds any business selling to EU\n          consumers regardless of where it is based.\n        </p>\n        <p>\n          <strong>26 April 2027</strong> &mdash; ADA Title II compliance deadline for public\n          entities serving 50,000 people or more.\n        </p>\n        <p>\n          <strong>26 April 2028</strong> &mdash; the same deadline for smaller public entities.\n        </p>\n        <p>\n          The enforcement picture changed in June 2026, when a French court ordered Carrefour to\n          reach full compliance under a EUR 500 per day penalty and explicitly rejected a 71%\n          conformance score as sufficient. Partial compliance is not a legal position.\n        </p>\n      </div>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">This is a planning aid, not legal advice</h3>\n        <p class=\"a11yp_caveat_body\">\n          The mapping is generated from the markets you select and is meant for planning what to\n          build and in what order. It is not legal advice, it does not account for your sector's\n          specific obligations, and it cannot tell you how a court would rule. Have the wording\n          reviewed by counsel before you rely on it. Separately: our scan evaluates 12 of the 55\n          WCAG 2.2 Level A and AA success criteria, so no result from it establishes compliance\n          with any regime on this page.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Which standard should we build to?</h3>\n        <p class=\"a11yp_faq_a\">\n          WCAG 2.2 level AA. It is the newest, it satisfies every regime listed above, and\n          building to the strictest baseline once is cheaper than re-auditing each time a\n          regulator adopts a newer version.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Does any of this apply to a small business?</h3>\n        <p class=\"a11yp_faq_a\">\n          ADA Title III has no employee threshold, so size is not a defence in the US. The EAA\n          does exempt microenterprises &mdash; fewer than 10 people and under EUR 2 million\n          turnover &mdash; from some obligations, but the exemption is narrower than most\n          people assume and does not extend to everything.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">How likely is enforcement, really?</h3>\n        <p class=\"a11yp_faq_a\">\n          In the US, thousands of web accessibility suits are filed annually, concentrated in\n          retail and hospitality. In the EU, enforcement is newer and the Carrefour ruling\n          suggests courts are willing to order full remediation with daily penalties. WebAIM's\n          2026 study found 95.9% of the top million homepages fail, which means the constraint\n          on enforcement is attention, not eligibility.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>",
+    "tree": {
+      "tag": "div",
+      "classes": [],
+      "attrs": {},
+      "children": [
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Which accessibility laws apply to you"
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_lede",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " Web accessibility law follows the markets you sell into, not the country you are registered in. Pick your markets and we map the regimes that bind you, the standard each is measured against, and the dates that already passed. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "a",
+                  "classes": [
+                    "a11yp_cta"
+                  ],
+                  "attrs": {
+                    "href": "/app"
+                  },
+                  "children": [
+                    {
+                      "text": "Map my markets"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "g_section_space"
+                  ],
+                  "attrs": {},
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_updated"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Last updated 7 August 2026 &middot; Not legal advice"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "The regimes"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_tablewrap",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "table",
+                      "classes": [
+                        "a11yp_table"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "thead",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Law"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Where"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Standard"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Date"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Status"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "tbody",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "European Accessibility Act"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "EU"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "EN 301 549, WCAG 2.1 AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "28 Jun 2025"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "In force"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "ADA Title III"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "US, private business"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "WCAG 2.1 AA in practice"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "In force"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "In force"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "ADA Title II"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "US, public entities"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "WCAG 2.1 AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "26 Apr 2027 / 2028"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_soon"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "Upcoming"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Section 508"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "US federal procurement"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Revised 508, WCAG 2.0 AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "In force"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "In force"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Equality Act 2010"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "UK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "No fixed standard; WCAG 2.1 AA is the benchmark"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "In force"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "In force"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "AODA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Ontario, Canada"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "WCAG 2.0 AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "1 Jan 2021"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "In force"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Disability Discrimination Act"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Australia"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "WCAG 2.1 AA for government"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "In force"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "In force"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " Meeting WCAG 2.2 AA satisfies every row above. Each version is a superset of the one before it, apart from a single criterion that WCAG 2.2 withdrew, so building to the newest standard is simpler than tracking which regime wants which vintage. "
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Three things businesses get wrong"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_grid"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "“We are not in the EU”"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " The European Accessibility Act binds the offering, not the seller's address. If you sell to EU consumers you are in scope, and an accessibility statement is mandatory. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "“We will certify”"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " There is no certification for the ADA and no safe harbour. Enforcement is private litigation. Nobody can sell you a badge that ends the exposure, and anyone offering one is selling something else. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "“An overlay covers it”"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " Overlay vendors are being sued. Installing one is a matter of public record that plaintiffs search for, and the products are widely rejected by the disabled users they claim to serve. "
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "The dates that matter"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "strong",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "28 June 2025"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " — the European Accessibility Act became enforceable. It is past, not upcoming, and it binds any business selling to EU consumers regardless of where it is based. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "strong",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "26 April 2027"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " — ADA Title II compliance deadline for public entities serving 50,000 people or more. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "strong",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "26 April 2028"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " — the same deadline for smaller public entities. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " The enforcement picture changed in June 2026, when a French court ordered Carrefour to reach full compliance under a EUR 500 per day penalty and explicitly rejected a 71% conformance score as sufficient. Partial compliance is not a legal position. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_caveat"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_caveat_title"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "This is a planning aid, not legal advice"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_caveat_body"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " The mapping is generated from the markets you select and is meant for planning what to build and in what order. It is not legal advice, it does not account for your sector's specific obligations, and it cannot tell you how a court would rule. Have the wording reviewed by counsel before you rely on it. Separately: our scan evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, so no result from it establishes compliance with any regime on this page. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Questions"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Which standard should we build to?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " WCAG 2.2 level AA. It is the newest, it satisfies every regime listed above, and building to the strictest baseline once is cheaper than re-auditing each time a regulator adopts a newer version. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Does any of this apply to a small business?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " ADA Title III has no employee threshold, so size is not a defence in the US. The EAA does exempt microenterprises — fewer than 10 people and under EUR 2 million turnover — from some obligations, but the exemption is narrower than most people assume and does not extend to everything. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "How likely is enforcement, really?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " In the US, thousands of web accessibility suits are filed annually, concentrated in retail and hospitality. In the EU, enforcement is newer and the Carrefour ruling suggests courts are willing to order full remediation with daily penalties. WebAIM's 2026 study found 95.9% of the top million homepages fail, which means the constraint on enforcement is attention, not eligibility. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "tools/accessibility-statement-generator",
     "file": "accessibility-statement-generator.html",
-    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">Accessibility statement generator</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        The European Accessibility Act requires a published accessibility statement with a\n        working feedback channel. Most sites selling into the EU do not have one. This\n        generates a complete statement in the EU model structure, populated from your latest\n        scan so the known-limitations section stays honest.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Generate a statement</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; EU model statement structure &middot; WCAG 2.2 AA</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Who needs one</h2>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">If you</th>\n              <th class=\"a11yp_th\" scope=\"col\">Statement</th>\n              <th class=\"a11yp_th\" scope=\"col\">Under</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">Sell to consumers in the EU, wherever you are based</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">Mandatory</span></td>\n              <td class=\"a11yp_td\">European Accessibility Act, in force since 28 June 2025</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Are an EU public-sector body</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">Mandatory</span></td>\n              <td class=\"a11yp_td\">Web Accessibility Directive</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Are a US public entity</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_soon\">Expected</span></td>\n              <td class=\"a11yp_td\">ADA Title II &mdash; not named in the rule, but standard practice</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Are a US private business</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_ok\">Optional</span></td>\n              <td class=\"a11yp_td\">ADA Title III &mdash; no statutory requirement, but it demonstrates good faith</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        Optional is not the same as pointless. A dated statement naming known issues and a\n        remediation plan is evidence of good-faith effort, which matters when the enforcement\n        mechanism is private litigation and there is no certification to hold up.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What goes in it</h2>\n      <div class=\"a11yp_grid u-mb-24\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Commitment</h3>\n          <p class=\"a11yp_card_body\">\n            Who you are, which site this covers, and the standard you are working towards\n            &mdash; normally WCAG 2.2 level AA.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Conformance status</h3>\n          <p class=\"a11yp_card_body\">\n            Fully, partially or not conformant. The wording is prescribed; the choice is yours\n            and it is a legal claim.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Known limitations</h3>\n          <p class=\"a11yp_card_body\">\n            What currently fails, in plain language, with a fix date where you have one. Filled\n            in from your scan.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Feedback channel</h3>\n          <p class=\"a11yp_card_body\">\n            A monitored address and a response time you will actually meet. The EAA requires\n            the channel to be real.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Assessment approach</h3>\n          <p class=\"a11yp_card_body\">\n            How you evaluated the site, and how much of that was automated. We state the real\n            coverage figure.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Date</h3>\n          <p class=\"a11yp_card_body\">\n            When it was last reviewed. An undated statement, or a three-year-old one, is worse\n            than none.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">We will not write &ldquo;fully conformant&rdquo; for you</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          A statement is your legal claim about your own site, not ours about it. So the\n          generator will not put full conformance in your mouth on the strength of a scan.\n        </p>\n        <p>\n          A clean automated result means we found nothing. It does not mean there is nothing.\n          Those are different sentences and only one of them is supportable, because the scan\n          reaches 12 of the 55 Level A and AA criteria and the other 43 need a person.\n        </p>\n        <p>\n          Full conformance is available &mdash; some sites genuinely are conformant and are\n          entitled to say so &mdash; but only once you confirm that the criteria a machine\n          cannot reach were reviewed by hand. Ask for that confirmation and the claim belongs\n          to whoever made it. Infer it from a green scan and it would belong to us, and it\n          would be false.\n        </p>\n      </div>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">Partial compliance is not a legal position</h3>\n        <p class=\"a11yp_caveat_body\">\n          In June 2026 a French court ordered Carrefour to reach full compliance under a EUR 500\n          per day penalty, explicitly rejecting a 71% conformance score as insufficient. A\n          statement that overclaims is worse than one that admits gaps, because the overclaim\n          is the thing that gets quoted back at you. Nothing here is legal advice &mdash; have\n          the wording reviewed by counsel before you rely on it.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Publishing it on Webflow</h2>\n      <ol class=\"a11yp_steps u-mb-24\">\n        <li class=\"a11yp_step\">Create a page at <strong>/accessibility</strong>. It is the path people and regulators look for first.</li>\n        <li class=\"a11yp_step\">Paste the generated HTML into an Embed element, or rebuild it with real Webflow elements if you want it editable in Designer.</li>\n        <li class=\"a11yp_step\">Link it from the footer on every page. A statement nobody can find does not satisfy the requirement.</li>\n        <li class=\"a11yp_step\">Point the feedback address at an inbox somebody reads.</li>\n        <li class=\"a11yp_step\">Re-generate after each remediation round so the limitations stay true.</li>\n      </ol>\n      <p class=\"a11yp_prose\">\n        Keep the review date current. The single most common failure with accessibility\n        statements is not a wrong claim &mdash; it is a correct claim that stopped being true\n        eighteen months ago and was never revisited.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Does the EAA apply to me if I am not in the EU?</h3>\n        <p class=\"a11yp_faq_a\">\n          If you sell to consumers in the EU, yes. The Act binds the offering, not the\n          business's address. A US or Indian company selling into the EU market is in scope on\n          the same terms as a company in Berlin.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Can I say partially conformant while I fix things?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes, and for most sites it is the accurate answer. Partially conformant with named\n          limitations and dated commitments is a defensible position. It is the claim of full\n          conformance that has to be earned.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Is the generated statement legal advice?</h3>\n        <p class=\"a11yp_faq_a\">\n          No. It follows the EU model structure and uses the prescribed wording, which is a\n          sound starting point, but jurisdictions differ and your circumstances are yours. Have\n          it reviewed before you publish it.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>"
+    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">Accessibility statement generator</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        The European Accessibility Act requires a published accessibility statement with a\n        working feedback channel. Most sites selling into the EU do not have one. This\n        generates a complete statement in the EU model structure, populated from your latest\n        scan so the known-limitations section stays honest.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Generate a statement</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; EU model statement structure &middot; WCAG 2.2 AA</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Who needs one</h2>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">If you</th>\n              <th class=\"a11yp_th\" scope=\"col\">Statement</th>\n              <th class=\"a11yp_th\" scope=\"col\">Under</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">Sell to consumers in the EU, wherever you are based</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">Mandatory</span></td>\n              <td class=\"a11yp_td\">European Accessibility Act, in force since 28 June 2025</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Are an EU public-sector body</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_now\">Mandatory</span></td>\n              <td class=\"a11yp_td\">Web Accessibility Directive</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Are a US public entity</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_soon\">Expected</span></td>\n              <td class=\"a11yp_td\">ADA Title II &mdash; not named in the rule, but standard practice</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Are a US private business</td>\n              <td class=\"a11yp_td\"><span class=\"a11yp_chip a11yp_chip_ok\">Optional</span></td>\n              <td class=\"a11yp_td\">ADA Title III &mdash; no statutory requirement, but it demonstrates good faith</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        Optional is not the same as pointless. A dated statement naming known issues and a\n        remediation plan is evidence of good-faith effort, which matters when the enforcement\n        mechanism is private litigation and there is no certification to hold up.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What goes in it</h2>\n      <div class=\"a11yp_grid u-mb-24\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Commitment</h3>\n          <p class=\"a11yp_card_body\">\n            Who you are, which site this covers, and the standard you are working towards\n            &mdash; normally WCAG 2.2 level AA.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Conformance status</h3>\n          <p class=\"a11yp_card_body\">\n            Fully, partially or not conformant. The wording is prescribed; the choice is yours\n            and it is a legal claim.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Known limitations</h3>\n          <p class=\"a11yp_card_body\">\n            What currently fails, in plain language, with a fix date where you have one. Filled\n            in from your scan.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Feedback channel</h3>\n          <p class=\"a11yp_card_body\">\n            A monitored address and a response time you will actually meet. The EAA requires\n            the channel to be real.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Assessment approach</h3>\n          <p class=\"a11yp_card_body\">\n            How you evaluated the site, and how much of that was automated. We state the real\n            coverage figure.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Date</h3>\n          <p class=\"a11yp_card_body\">\n            When it was last reviewed. An undated statement, or a three-year-old one, is worse\n            than none.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">We will not write &ldquo;fully conformant&rdquo; for you</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          A statement is your legal claim about your own site, not ours about it. So the\n          generator will not put full conformance in your mouth on the strength of a scan.\n        </p>\n        <p>\n          A clean automated result means we found nothing. It does not mean there is nothing.\n          Those are different sentences and only one of them is supportable, because the scan\n          reaches 12 of the 55 Level A and AA criteria and the other 43 need a person.\n        </p>\n        <p>\n          Full conformance is available &mdash; some sites genuinely are conformant and are\n          entitled to say so &mdash; but only once you confirm that the criteria a machine\n          cannot reach were reviewed by hand. Ask for that confirmation and the claim belongs\n          to whoever made it. Infer it from a green scan and it would belong to us, and it\n          would be false.\n        </p>\n      </div>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">Partial compliance is not a legal position</h3>\n        <p class=\"a11yp_caveat_body\">\n          In June 2026 a French court ordered Carrefour to reach full compliance under a EUR 500\n          per day penalty, explicitly rejecting a 71% conformance score as insufficient. A\n          statement that overclaims is worse than one that admits gaps, because the overclaim\n          is the thing that gets quoted back at you. Nothing here is legal advice &mdash; have\n          the wording reviewed by counsel before you rely on it.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Publishing it on Webflow</h2>\n      <ol class=\"a11yp_steps u-mb-24\">\n        <li class=\"a11yp_step\">Create a page at <strong>/accessibility</strong>. It is the path people and regulators look for first.</li>\n        <li class=\"a11yp_step\">Paste the generated HTML into an Embed element, or rebuild it with real Webflow elements if you want it editable in Designer.</li>\n        <li class=\"a11yp_step\">Link it from the footer on every page. A statement nobody can find does not satisfy the requirement.</li>\n        <li class=\"a11yp_step\">Point the feedback address at an inbox somebody reads.</li>\n        <li class=\"a11yp_step\">Re-generate after each remediation round so the limitations stay true.</li>\n      </ol>\n      <p class=\"a11yp_prose\">\n        Keep the review date current. The single most common failure with accessibility\n        statements is not a wrong claim &mdash; it is a correct claim that stopped being true\n        eighteen months ago and was never revisited.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Does the EAA apply to me if I am not in the EU?</h3>\n        <p class=\"a11yp_faq_a\">\n          If you sell to consumers in the EU, yes. The Act binds the offering, not the\n          business's address. A US or Indian company selling into the EU market is in scope on\n          the same terms as a company in Berlin.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Can I say partially conformant while I fix things?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes, and for most sites it is the accurate answer. Partially conformant with named\n          limitations and dated commitments is a defensible position. It is the claim of full\n          conformance that has to be earned.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Is the generated statement legal advice?</h3>\n        <p class=\"a11yp_faq_a\">\n          No. It follows the EU model structure and uses the prescribed wording, which is a\n          sound starting point, but jurisdictions differ and your circumstances are yours. Have\n          it reviewed before you publish it.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>",
+    "tree": {
+      "tag": "div",
+      "classes": [],
+      "attrs": {},
+      "children": [
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Accessibility statement generator"
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_lede",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " The European Accessibility Act requires a published accessibility statement with a working feedback channel. Most sites selling into the EU do not have one. This generates a complete statement in the EU model structure, populated from your latest scan so the known-limitations section stays honest. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "a",
+                  "classes": [
+                    "a11yp_cta"
+                  ],
+                  "attrs": {
+                    "href": "/app"
+                  },
+                  "children": [
+                    {
+                      "text": "Generate a statement"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "g_section_space"
+                  ],
+                  "attrs": {},
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_updated"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Last updated 7 August 2026 &middot; EU model statement structure &middot; WCAG 2.2 AA"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Who needs one"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_tablewrap",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "table",
+                      "classes": [
+                        "a11yp_table"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "thead",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "If you"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Statement"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Under"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "tbody",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Sell to consumers in the EU, wherever you are based"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "Mandatory"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "European Accessibility Act, in force since 28 June 2025"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Are an EU public-sector body"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_now"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "Mandatory"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Web Accessibility Directive"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Are a US public entity"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_soon"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "Expected"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "ADA Title II — not named in the rule, but standard practice"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Are a US private business"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "tag": "span",
+                                      "classes": [
+                                        "a11yp_chip",
+                                        "a11yp_chip_ok"
+                                      ],
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "text": "Optional"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "ADA Title III — no statutory requirement, but it demonstrates good faith"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " Optional is not the same as pointless. A dated statement naming known issues and a remediation plan is evidence of good-faith effort, which matters when the enforcement mechanism is private litigation and there is no certification to hold up. "
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "What goes in it"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_grid",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Commitment"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " Who you are, which site this covers, and the standard you are working towards — normally WCAG 2.2 level AA. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Conformance status"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " Fully, partially or not conformant. The wording is prescribed; the choice is yours and it is a legal claim. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Known limitations"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " What currently fails, in plain language, with a fix date where you have one. Filled in from your scan. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Feedback channel"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " A monitored address and a response time you will actually meet. The EAA requires the channel to be real. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Assessment approach"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " How you evaluated the site, and how much of that was automated. We state the real coverage figure. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Date"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " When it was last reviewed. An undated statement, or a three-year-old one, is worse than none. "
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "We will not write “fully conformant” for you"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " A statement is your legal claim about your own site, not ours about it. So the generator will not put full conformance in your mouth on the strength of a scan. "
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " A clean automated result means we found nothing. It does not mean there is nothing. Those are different sentences and only one of them is supportable, because the scan reaches 12 of the 55 Level A and AA criteria and the other 43 need a person. "
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Full conformance is available — some sites genuinely are conformant and are entitled to say so — but only once you confirm that the criteria a machine cannot reach were reviewed by hand. Ask for that confirmation and the claim belongs to whoever made it. Infer it from a green scan and it would belong to us, and it would be false. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_caveat"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_caveat_title"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Partial compliance is not a legal position"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_caveat_body"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " In June 2026 a French court ordered Carrefour to reach full compliance under a EUR 500 per day penalty, explicitly rejecting a 71% conformance score as insufficient. A statement that overclaims is worse than one that admits gaps, because the overclaim is the thing that gets quoted back at you. Nothing here is legal advice — have the wording reviewed by counsel before you rely on it. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Publishing it on Webflow"
+                    }
+                  ]
+                },
+                {
+                  "tag": "ol",
+                  "classes": [
+                    "a11yp_steps",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Create a page at "
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "strong",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "/accessibility"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": ". It is the path people and regulators look for first."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Paste the generated HTML into an Embed element, or rebuild it with real Webflow elements if you want it editable in Designer."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Link it from the footer on every page. A statement nobody can find does not satisfy the requirement."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Point the feedback address at an inbox somebody reads."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Re-generate after each remediation round so the limitations stay true."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " Keep the review date current. The single most common failure with accessibility statements is not a wrong claim — it is a correct claim that stopped being true eighteen months ago and was never revisited. "
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Questions"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Does the EAA apply to me if I am not in the EU?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " If you sell to consumers in the EU, yes. The Act binds the offering, not the business's address. A US or Indian company selling into the EU market is in scope on the same terms as a company in Berlin. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Can I say partially conformant while I fix things?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Yes, and for most sites it is the accurate answer. Partially conformant with named limitations and dated commitments is a defensible position. It is the claim of full conformance that has to be earned. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Is the generated statement legal advice?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " No. It follows the EU model structure and uses the prescribed wording, which is a sound starting point, but jurisdictions differ and your circumstances are yours. Have it reviewed before you publish it. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "tools/vpat-generator",
     "file": "vpat-generator.html",
-    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">VPAT generator for Webflow sites</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        A VPAT is the accessibility conformance report procurement teams ask for before they\n        sign. Scan your site and we pre-fill the WCAG 2.2 rows we can evidence, mark the rest\n        Not evaluated, and leave every row for a human to confirm. It is a draft that saves\n        you a day, not a certificate.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Scan a page to start a draft</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; VPAT 2.5 &middot; WCAG 2.2 Level A and AA</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What a VPAT actually is</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          The Voluntary Product Accessibility Template is a document published by the\n          Information Technology Industry Council. Filling one in produces an Accessibility\n          Conformance Report &mdash; an ACR. In practice the two words are used\n          interchangeably, and a buyer asking for &ldquo;your VPAT&rdquo; means the completed report.\n        </p>\n        <p>\n          It is voluntary in the sense that nobody forces you to publish one. It stops feeling\n          voluntary the moment a public university, a hospital group or a federal contractor\n          puts it in a procurement checklist, which is where most requests come from.\n        </p>\n      </div>\n\n      <div class=\"a11yp_grid u-mb-24\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">WCAG edition</h3>\n          <p class=\"a11yp_card_body\">\n            The WCAG 2.2 success criteria on their own. The right choice when a private buyer\n            asks for conformance evidence and names no regulation.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Section 508 edition</h3>\n          <p class=\"a11yp_card_body\">\n            Adds the US federal chapters. Ask for this one if you sell to a federal agency or\n            to anyone spending federal money.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">EU edition</h3>\n          <p class=\"a11yp_card_body\">\n            Maps to EN 301 549, the harmonised standard behind the European Accessibility Act.\n            Needed for EU public-sector procurement.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">INT edition</h3>\n          <p class=\"a11yp_card_body\">\n            All three at once. Longest to complete, and the one to pick if you sell into every\n            market and would rather maintain a single document.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">The conformance vocabulary is fixed</h2>\n      <p class=\"a11yp_prose u-mb-24\">\n        A VPAT has four permitted answers per criterion. Using anything else &mdash; &ldquo;mostly&rdquo;,\n        &ldquo;in progress&rdquo;, &ldquo;95%&rdquo; &mdash; marks the document as amateur to anyone who\n        reads these for a living.\n      </p>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">Term</th>\n              <th class=\"a11yp_th\" scope=\"col\">What it means</th>\n              <th class=\"a11yp_th\" scope=\"col\">What we fill in</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">Supports</td>\n              <td class=\"a11yp_td\">The functionality meets the criterion.</td>\n              <td class=\"a11yp_td\">Only where we tested and found nothing, with a remark naming what was checked.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Partially supports</td>\n              <td class=\"a11yp_td\">Some functionality does not meet the criterion.</td>\n              <td class=\"a11yp_td\">Where we found element-level failures. We see failures, never passes, so we cannot claim a majority either way.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Does not support</td>\n              <td class=\"a11yp_td\">The majority of functionality does not meet the criterion.</td>\n              <td class=\"a11yp_td\">Where the failure is page-wide. A missing lang attribute is not partially missing.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Not evaluated</td>\n              <td class=\"a11yp_td\">The criterion has not been assessed.</td>\n              <td class=\"a11yp_td\">The 43 criteria no scanner can reach. They appear in the table rather than being dropped from it.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        There is a fifth value, Not applicable, for criteria that cannot arise in your product\n        &mdash; captions for a site with no video, for instance. We never fill that in\n        automatically, because whether your product has video is not something a single page\n        scan can establish.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What the scan can and cannot fill in</h2>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">&nbsp;</th>\n              <th class=\"a11yp_th\" scope=\"col\">Criteria</th>\n              <th class=\"a11yp_th\" scope=\"col\">How they are filled</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">Evidenced by the scan</td>\n              <td class=\"a11yp_td_num\">12</td>\n              <td class=\"a11yp_td\">Pre-filled with a conformance value and a remark naming the failing elements and their count.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Not evaluated</td>\n              <td class=\"a11yp_td_num\">43</td>\n              <td class=\"a11yp_td\">Listed with the criterion number and name, marked Not evaluated, waiting for a human.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Total, WCAG 2.2 A and AA</td>\n              <td class=\"a11yp_td_num\">55</td>\n              <td class=\"a11yp_td\">Every one appears. None is omitted.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        Leaving the untested rows out would be the easier document to produce and the more\n        dangerous one to send. A table containing only the criteria we happen to check reads,\n        to someone working through their own checklist, as a table where everything passed.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">How to finish the draft</h2>\n      <ol class=\"a11yp_steps u-mb-24\">\n        <li class=\"a11yp_step\">Scan the pages that represent your product &mdash; a template each, not every URL.</li>\n        <li class=\"a11yp_step\">Generate the draft and pick the edition your buyer asked for.</li>\n        <li class=\"a11yp_step\">Work through the 43 Not evaluated rows. Most need a keyboard, a screen reader and twenty minutes each.</li>\n        <li class=\"a11yp_step\">Rewrite our remarks in your own voice. They are accurate, not diplomatic.</li>\n        <li class=\"a11yp_step\">Have someone who did not write it read it against the criteria.</li>\n        <li class=\"a11yp_step\">Date it, version it, and re-issue when the product changes.</li>\n      </ol>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">What this does not do</h3>\n        <p class=\"a11yp_caveat_body\">\n          Automated testing evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria,\n          about 22%. The rest need a person: whether alternative text is meaningful, whether\n          reading order makes sense, whether a keyboard user can finish the task. We will not\n          tell you that you are compliant, and a VPAT produced from a scan alone is not one you\n          should send. This is a starting draft that removes the mechanical half of the work.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Is a VPAT legally required?</h3>\n        <p class=\"a11yp_faq_a\">\n          No. It is a voluntary disclosure. What is required is the underlying accessibility,\n          under the ADA, Section 508, the European Accessibility Act and others depending on\n          where you sell. The VPAT is how a buyer checks before committing, so in procurement\n          it behaves like a requirement even though no statute names it.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Can I publish a VPAT that admits failures?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes, and it is usually the better document. Buyers expect Partially supports rows;\n          what loses deals is a report that claims full support and falls apart when their own\n          team tests it. A candid report with a remediation date attached is a stronger\n          position than an optimistic one.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">How often should it be re-issued?</h3>\n        <p class=\"a11yp_faq_a\">\n          Whenever the product changes materially, and at least annually. A VPAT carries a date\n          and a version for that reason. On Webflow, a publish can change the rendered markup\n          without anyone editing a template, so tie the review to your release cadence rather\n          than the calendar.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Do you complete VPATs for clients?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes. The generator handles the mechanical rows; the manual criteria need a person\n          testing with a keyboard and a screen reader. If you would rather not do that in\n          house, we do the review, complete the document and hand back something you can send.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>"
+    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">VPAT generator for Webflow sites</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        A VPAT is the accessibility conformance report procurement teams ask for before they\n        sign. Scan your site and we pre-fill the WCAG 2.2 rows we can evidence, mark the rest\n        Not evaluated, and leave every row for a human to confirm. It is a draft that saves\n        you a day, not a certificate.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Scan a page to start a draft</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; VPAT 2.5 &middot; WCAG 2.2 Level A and AA</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What a VPAT actually is</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          The Voluntary Product Accessibility Template is a document published by the\n          Information Technology Industry Council. Filling one in produces an Accessibility\n          Conformance Report &mdash; an ACR. In practice the two words are used\n          interchangeably, and a buyer asking for &ldquo;your VPAT&rdquo; means the completed report.\n        </p>\n        <p>\n          It is voluntary in the sense that nobody forces you to publish one. It stops feeling\n          voluntary the moment a public university, a hospital group or a federal contractor\n          puts it in a procurement checklist, which is where most requests come from.\n        </p>\n      </div>\n\n      <div class=\"a11yp_grid u-mb-24\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">WCAG edition</h3>\n          <p class=\"a11yp_card_body\">\n            The WCAG 2.2 success criteria on their own. The right choice when a private buyer\n            asks for conformance evidence and names no regulation.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Section 508 edition</h3>\n          <p class=\"a11yp_card_body\">\n            Adds the US federal chapters. Ask for this one if you sell to a federal agency or\n            to anyone spending federal money.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">EU edition</h3>\n          <p class=\"a11yp_card_body\">\n            Maps to EN 301 549, the harmonised standard behind the European Accessibility Act.\n            Needed for EU public-sector procurement.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">INT edition</h3>\n          <p class=\"a11yp_card_body\">\n            All three at once. Longest to complete, and the one to pick if you sell into every\n            market and would rather maintain a single document.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">The conformance vocabulary is fixed</h2>\n      <p class=\"a11yp_prose u-mb-24\">\n        A VPAT has four permitted answers per criterion. Using anything else &mdash; &ldquo;mostly&rdquo;,\n        &ldquo;in progress&rdquo;, &ldquo;95%&rdquo; &mdash; marks the document as amateur to anyone who\n        reads these for a living.\n      </p>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">Term</th>\n              <th class=\"a11yp_th\" scope=\"col\">What it means</th>\n              <th class=\"a11yp_th\" scope=\"col\">What we fill in</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">Supports</td>\n              <td class=\"a11yp_td\">The functionality meets the criterion.</td>\n              <td class=\"a11yp_td\">Only where we tested and found nothing, with a remark naming what was checked.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Partially supports</td>\n              <td class=\"a11yp_td\">Some functionality does not meet the criterion.</td>\n              <td class=\"a11yp_td\">Where we found element-level failures. We see failures, never passes, so we cannot claim a majority either way.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Does not support</td>\n              <td class=\"a11yp_td\">The majority of functionality does not meet the criterion.</td>\n              <td class=\"a11yp_td\">Where the failure is page-wide. A missing lang attribute is not partially missing.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Not evaluated</td>\n              <td class=\"a11yp_td\">The criterion has not been assessed.</td>\n              <td class=\"a11yp_td\">The 43 criteria no scanner can reach. They appear in the table rather than being dropped from it.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        There is a fifth value, Not applicable, for criteria that cannot arise in your product\n        &mdash; captions for a site with no video, for instance. We never fill that in\n        automatically, because whether your product has video is not something a single page\n        scan can establish.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What the scan can and cannot fill in</h2>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">&nbsp;</th>\n              <th class=\"a11yp_th\" scope=\"col\">Criteria</th>\n              <th class=\"a11yp_th\" scope=\"col\">How they are filled</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td\">Evidenced by the scan</td>\n              <td class=\"a11yp_td_num\">12</td>\n              <td class=\"a11yp_td\">Pre-filled with a conformance value and a remark naming the failing elements and their count.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Not evaluated</td>\n              <td class=\"a11yp_td_num\">43</td>\n              <td class=\"a11yp_td\">Listed with the criterion number and name, marked Not evaluated, waiting for a human.</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td\">Total, WCAG 2.2 A and AA</td>\n              <td class=\"a11yp_td_num\">55</td>\n              <td class=\"a11yp_td\">Every one appears. None is omitted.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <p class=\"a11yp_prose\">\n        Leaving the untested rows out would be the easier document to produce and the more\n        dangerous one to send. A table containing only the criteria we happen to check reads,\n        to someone working through their own checklist, as a table where everything passed.\n      </p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">How to finish the draft</h2>\n      <ol class=\"a11yp_steps u-mb-24\">\n        <li class=\"a11yp_step\">Scan the pages that represent your product &mdash; a template each, not every URL.</li>\n        <li class=\"a11yp_step\">Generate the draft and pick the edition your buyer asked for.</li>\n        <li class=\"a11yp_step\">Work through the 43 Not evaluated rows. Most need a keyboard, a screen reader and twenty minutes each.</li>\n        <li class=\"a11yp_step\">Rewrite our remarks in your own voice. They are accurate, not diplomatic.</li>\n        <li class=\"a11yp_step\">Have someone who did not write it read it against the criteria.</li>\n        <li class=\"a11yp_step\">Date it, version it, and re-issue when the product changes.</li>\n      </ol>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">What this does not do</h3>\n        <p class=\"a11yp_caveat_body\">\n          Automated testing evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria,\n          about 22%. The rest need a person: whether alternative text is meaningful, whether\n          reading order makes sense, whether a keyboard user can finish the task. We will not\n          tell you that you are compliant, and a VPAT produced from a scan alone is not one you\n          should send. This is a starting draft that removes the mechanical half of the work.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Is a VPAT legally required?</h3>\n        <p class=\"a11yp_faq_a\">\n          No. It is a voluntary disclosure. What is required is the underlying accessibility,\n          under the ADA, Section 508, the European Accessibility Act and others depending on\n          where you sell. The VPAT is how a buyer checks before committing, so in procurement\n          it behaves like a requirement even though no statute names it.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Can I publish a VPAT that admits failures?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes, and it is usually the better document. Buyers expect Partially supports rows;\n          what loses deals is a report that claims full support and falls apart when their own\n          team tests it. A candid report with a remediation date attached is a stronger\n          position than an optimistic one.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">How often should it be re-issued?</h3>\n        <p class=\"a11yp_faq_a\">\n          Whenever the product changes materially, and at least annually. A VPAT carries a date\n          and a version for that reason. On Webflow, a publish can change the rendered markup\n          without anyone editing a template, so tie the review to your release cadence rather\n          than the calendar.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Do you complete VPATs for clients?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes. The generator handles the mechanical rows; the manual criteria need a person\n          testing with a keyboard and a screen reader. If you would rather not do that in\n          house, we do the review, complete the document and hand back something you can send.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>",
+    "tree": {
+      "tag": "div",
+      "classes": [],
+      "attrs": {},
+      "children": [
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "VPAT generator for Webflow sites"
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_lede",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " A VPAT is the accessibility conformance report procurement teams ask for before they sign. Scan your site and we pre-fill the WCAG 2.2 rows we can evidence, mark the rest Not evaluated, and leave every row for a human to confirm. It is a draft that saves you a day, not a certificate. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "a",
+                  "classes": [
+                    "a11yp_cta"
+                  ],
+                  "attrs": {
+                    "href": "/app"
+                  },
+                  "children": [
+                    {
+                      "text": "Scan a page to start a draft"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "g_section_space"
+                  ],
+                  "attrs": {},
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_updated"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Last updated 7 August 2026 &middot; VPAT 2.5 &middot; WCAG 2.2 Level A and AA"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "What a VPAT actually is"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " The Voluntary Product Accessibility Template is a document published by the Information Technology Industry Council. Filling one in produces an Accessibility Conformance Report — an ACR. In practice the two words are used interchangeably, and a buyer asking for “your VPAT” means the completed report. "
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " It is voluntary in the sense that nobody forces you to publish one. It stops feeling voluntary the moment a public university, a hospital group or a federal contractor puts it in a procurement checklist, which is where most requests come from. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_grid",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "WCAG edition"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " The WCAG 2.2 success criteria on their own. The right choice when a private buyer asks for conformance evidence and names no regulation. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Section 508 edition"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " Adds the US federal chapters. Ask for this one if you sell to a federal agency or to anyone spending federal money. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "EU edition"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " Maps to EN 301 549, the harmonised standard behind the European Accessibility Act. Needed for EU public-sector procurement. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "INT edition"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " All three at once. Longest to complete, and the one to pick if you sell into every market and would rather maintain a single document. "
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "The conformance vocabulary is fixed"
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " A VPAT has four permitted answers per criterion. Using anything else — “mostly”, “in progress”, “95%” — marks the document as amateur to anyone who reads these for a living. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_tablewrap",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "table",
+                      "classes": [
+                        "a11yp_table"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "thead",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Term"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "What it means"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "What we fill in"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "tbody",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Supports"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "The functionality meets the criterion."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Only where we tested and found nothing, with a remark naming what was checked."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Partially supports"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Some functionality does not meet the criterion."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Where we found element-level failures. We see failures, never passes, so we cannot claim a majority either way."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Does not support"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "The majority of functionality does not meet the criterion."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Where the failure is page-wide. A missing lang attribute is not partially missing."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Not evaluated"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "The criterion has not been assessed."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "The 43 criteria no scanner can reach. They appear in the table rather than being dropped from it."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " There is a fifth value, Not applicable, for criteria that cannot arise in your product — captions for a site with no video, for instance. We never fill that in automatically, because whether your product has video is not something a single page scan can establish. "
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "What the scan can and cannot fill in"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_tablewrap",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "table",
+                      "classes": [
+                        "a11yp_table"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "thead",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Criteria"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "How they are filled"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "tbody",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Evidenced by the scan"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "12"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Pre-filled with a conformance value and a remark naming the failing elements and their count."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Not evaluated"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "43"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Listed with the criterion number and name, marked Not evaluated, waiting for a human."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Total, WCAG 2.2 A and AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "55"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Every one appears. None is omitted."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " Leaving the untested rows out would be the easier document to produce and the more dangerous one to send. A table containing only the criteria we happen to check reads, to someone working through their own checklist, as a table where everything passed. "
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "How to finish the draft"
+                    }
+                  ]
+                },
+                {
+                  "tag": "ol",
+                  "classes": [
+                    "a11yp_steps",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Scan the pages that represent your product — a template each, not every URL."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Generate the draft and pick the edition your buyer asked for."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Work through the 43 Not evaluated rows. Most need a keyboard, a screen reader and twenty minutes each."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Rewrite our remarks in your own voice. They are accurate, not diplomatic."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Have someone who did not write it read it against the criteria."
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "li",
+                      "classes": [
+                        "a11yp_step"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Date it, version it, and re-issue when the product changes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_caveat"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_caveat_title"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "What this does not do"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_caveat_body"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Automated testing evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, about 22%. The rest need a person: whether alternative text is meaningful, whether reading order makes sense, whether a keyboard user can finish the task. We will not tell you that you are compliant, and a VPAT produced from a scan alone is not one you should send. This is a starting draft that removes the mechanical half of the work. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Questions"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Is a VPAT legally required?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " No. It is a voluntary disclosure. What is required is the underlying accessibility, under the ADA, Section 508, the European Accessibility Act and others depending on where you sell. The VPAT is how a buyer checks before committing, so in procurement it behaves like a requirement even though no statute names it. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Can I publish a VPAT that admits failures?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Yes, and it is usually the better document. Buyers expect Partially supports rows; what loses deals is a report that claims full support and falls apart when their own team tests it. A candid report with a remediation date attached is a stronger position than an optimistic one. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "How often should it be re-issued?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Whenever the product changes materially, and at least annually. A VPAT carries a date and a version for that reason. On Webflow, a publish can change the rendered markup without anyone editing a template, so tie the review to your release cadence rather than the calendar. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Do you complete VPATs for clients?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Yes. The generator handles the mechanical rows; the manual criteria need a person testing with a keyboard and a screen reader. If you would rather not do that in house, we do the review, complete the document and hand back something you can send. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "tools/wcag-compliance-checker",
     "file": "wcag-compliance-checker.html",
-    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">WCAG compliance checker</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        Enter a URL and get every WCAG 2.2 Level A and AA failure a machine can find, each one\n        mapped to the exact fix in Webflow Designer rather than to a line of HTML you cannot\n        edit. Free, no account, and the score is public so you can share it.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Scan a page</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; axe-core 4.13 &middot; WCAG 2.2 Level A and AA</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What gets checked</h2>\n      <p class=\"a11yp_prose u-mb-24\">\n        Thirteen rules across twelve success criteria. Three of them have no equivalent in any\n        open-source engine and are ours, because the criteria they cover need a rendered page\n        with real computed styles rather than static HTML.\n      </p>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">Criterion</th>\n              <th class=\"a11yp_th\" scope=\"col\">What we look for</th>\n              <th class=\"a11yp_th\" scope=\"col\">Level</th>\n              <th class=\"a11yp_th\" scope=\"col\">Severity</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td_num\">1.4.3</td>\n              <td class=\"a11yp_td\">Text below 4.5:1 against its real background, measured on every text node</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.1.1</td>\n              <td class=\"a11yp_td\">Images with no alternative text, including CMS-bound ones</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">3.3.2</td>\n              <td class=\"a11yp_td\">Form inputs relying on placeholder text instead of a label</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.1.1</td>\n              <td class=\"a11yp_td\">Controls built as divs that a keyboard cannot reach</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.2.2</td>\n              <td class=\"a11yp_td\">Video with no caption track</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.4.4</td>\n              <td class=\"a11yp_td\">Links whose text does not describe where they go</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.4.7</td>\n              <td class=\"a11yp_td\">Focus indicators removed by a global reset &mdash; our own check</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.5.8</td>\n              <td class=\"a11yp_td\">Targets under 24 by 24 CSS pixels, new in WCAG 2.2</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.3.1</td>\n              <td class=\"a11yp_td\">Skipped heading levels, and pages with no main landmark</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.4.4</td>\n              <td class=\"a11yp_td\">Content clipped at 200% zoom &mdash; our own check, measured at 640px</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Moderate</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">3.1.1</td>\n              <td class=\"a11yp_td\">A missing lang attribute on the html element</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Moderate</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.4.11</td>\n              <td class=\"a11yp_td\">Anchor targets hidden behind a sticky header &mdash; our own check, new in 2.2</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Minor</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Why the fixes are Webflow-specific</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          Generic scanners tell you that an element fails and hand you a CSS selector. On\n          Webflow that is the least useful half of the answer, because you do not edit\n          selectors &mdash; you edit classes, elements and CMS fields in Designer, and the\n          markup is generated for you.\n        </p>\n        <p>\n          So every issue we report names the panel to open and the control to change. Where a\n          failing element sits inside a Collection List, we say so, because fixing the element\n          only fixes the first item and the next publish overwrites it. The fix belongs on the\n          CMS field.\n        </p>\n      </div>\n      <div class=\"a11yp_grid\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">One class, not 200 elements</h3>\n          <p class=\"a11yp_card_body\">\n            Contrast failures usually trace to a single class used everywhere. We group by\n            class so you fix it once, and the score is weighted to reflect that rather than\n            punishing you 200 times for one mistake.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">CMS-bound issues are flagged</h3>\n          <p class=\"a11yp_card_body\">\n            An image inside a Collection List needs its alt text bound to a field. We name the\n            collection so the fix survives the next publish.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Gaps are visible</h3>\n          <p class=\"a11yp_card_body\">\n            Where we have no Webflow-specific guidance for a rule, the report says so rather\n            than quietly showing generic output as though it were tailored.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">How the score works</h2>\n      <p class=\"a11yp_prose u-mb-24\">\n        The score is a triage aid, not a compliance percentage, and the method is published so\n        you can argue with it. Each failing rule contributes a penalty weighted by severity\n        &mdash; Critical 12, Serious 7, Moderate 3, Minor 1 &mdash; scaled by the base-ten\n        logarithm of how many elements it affects.\n      </p>\n      <p class=\"a11yp_prose u-mb-24\">\n        The logarithm is deliberate. Two hundred contrast failures is usually one class fixed\n        in one place; straight multiplication would drive any site with a repeated component to\n        zero and tell you nothing. Breadth costs more than depth, but not linearly.\n      </p>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">A score of 100 is not compliance</h3>\n        <p class=\"a11yp_caveat_body\">\n          This scan evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, about 22%.\n          A clean result means we found nothing, not that there is nothing. Whether alternative\n          text is meaningful, whether reading order makes sense, whether a keyboard user can\n          complete a purchase &mdash; none of that is machine-decidable, and all of it is where\n          real barriers live. In June 2026 a French court ordered Carrefour to reach full\n          compliance under a EUR 500 per day penalty and explicitly rejected a 71% conformance\n          score as insufficient. Partial compliance is not a legal position, and neither is a\n          good score.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Is WCAG 2.2 AA the standard I need?</h3>\n        <p class=\"a11yp_faq_a\">\n          For most businesses, yes. The European Accessibility Act is measured against EN 301\n          549, which incorporates WCAG at AA. ADA Title II names WCAG 2.1 AA explicitly. Section\n          508 still references WCAG 2.0 AA. Meeting 2.2 AA satisfies all of them, because each\n          version is a superset of the last apart from one criterion that WCAG 2.2 withdrew.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Will you build me an accessibility overlay?</h3>\n        <p class=\"a11yp_faq_a\">\n          No, and we would advise against buying one. Overlay vendors are being sued, the\n          products are widely rejected by the disabled users they claim to help, and installing\n          one is a matter of public record that plaintiffs' lawyers search for. We fix the\n          underlying markup instead. There is no one-line version of this.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Do you scan the whole site?</h3>\n        <p class=\"a11yp_faq_a\">\n          One page at a time today. In practice a Webflow site is a handful of templates, so\n          scanning one page per template finds nearly everything &mdash; the failures live in\n          shared classes and components, not in individual pages.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Do you respect robots.txt?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes. We check it before rendering and honour a disallow for our user agent. The\n          crawler identifies itself as WebyanshBot.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>"
+    "html": "<div>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h1 class=\"u-mb-16\">WCAG compliance checker</h1>\n      <p class=\"a11yp_lede u-mb-24\">\n        Enter a URL and get every WCAG 2.2 Level A and AA failure a machine can find, each one\n        mapped to the exact fix in Webflow Designer rather than to a line of HTML you cannot\n        edit. Free, no account, and the score is public so you can share it.\n      </p>\n      <a href=\"/app\" class=\"a11yp_cta\">Scan a page</a>\n      <div class=\"g_section_space\"></div>\n      <p class=\"a11yp_updated\">Last updated 7 August 2026 &middot; axe-core 4.13 &middot; WCAG 2.2 Level A and AA</p>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">What gets checked</h2>\n      <p class=\"a11yp_prose u-mb-24\">\n        Thirteen rules across twelve success criteria. Three of them have no equivalent in any\n        open-source engine and are ours, because the criteria they cover need a rendered page\n        with real computed styles rather than static HTML.\n      </p>\n      <div class=\"a11yp_tablewrap u-mb-24\">\n        <table class=\"a11yp_table\">\n          <thead>\n            <tr>\n              <th class=\"a11yp_th\" scope=\"col\">Criterion</th>\n              <th class=\"a11yp_th\" scope=\"col\">What we look for</th>\n              <th class=\"a11yp_th\" scope=\"col\">Level</th>\n              <th class=\"a11yp_th\" scope=\"col\">Severity</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td class=\"a11yp_td_num\">1.4.3</td>\n              <td class=\"a11yp_td\">Text below 4.5:1 against its real background, measured on every text node</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.1.1</td>\n              <td class=\"a11yp_td\">Images with no alternative text, including CMS-bound ones</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">3.3.2</td>\n              <td class=\"a11yp_td\">Form inputs relying on placeholder text instead of a label</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.1.1</td>\n              <td class=\"a11yp_td\">Controls built as divs that a keyboard cannot reach</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.2.2</td>\n              <td class=\"a11yp_td\">Video with no caption track</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Critical</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.4.4</td>\n              <td class=\"a11yp_td\">Links whose text does not describe where they go</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.4.7</td>\n              <td class=\"a11yp_td\">Focus indicators removed by a global reset &mdash; our own check</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.5.8</td>\n              <td class=\"a11yp_td\">Targets under 24 by 24 CSS pixels, new in WCAG 2.2</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.3.1</td>\n              <td class=\"a11yp_td\">Skipped heading levels, and pages with no main landmark</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Serious</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">1.4.4</td>\n              <td class=\"a11yp_td\">Content clipped at 200% zoom &mdash; our own check, measured at 640px</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Moderate</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">3.1.1</td>\n              <td class=\"a11yp_td\">A missing lang attribute on the html element</td>\n              <td class=\"a11yp_td_num\">A</td>\n              <td class=\"a11yp_td\">Moderate</td>\n            </tr>\n            <tr>\n              <td class=\"a11yp_td_num\">2.4.11</td>\n              <td class=\"a11yp_td\">Anchor targets hidden behind a sticky header &mdash; our own check, new in 2.2</td>\n              <td class=\"a11yp_td_num\">AA</td>\n              <td class=\"a11yp_td\">Minor</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Why the fixes are Webflow-specific</h2>\n      <div class=\"a11yp_prose u-mb-24\">\n        <p>\n          Generic scanners tell you that an element fails and hand you a CSS selector. On\n          Webflow that is the least useful half of the answer, because you do not edit\n          selectors &mdash; you edit classes, elements and CMS fields in Designer, and the\n          markup is generated for you.\n        </p>\n        <p>\n          So every issue we report names the panel to open and the control to change. Where a\n          failing element sits inside a Collection List, we say so, because fixing the element\n          only fixes the first item and the next publish overwrites it. The fix belongs on the\n          CMS field.\n        </p>\n      </div>\n      <div class=\"a11yp_grid\">\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">One class, not 200 elements</h3>\n          <p class=\"a11yp_card_body\">\n            Contrast failures usually trace to a single class used everywhere. We group by\n            class so you fix it once, and the score is weighted to reflect that rather than\n            punishing you 200 times for one mistake.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">CMS-bound issues are flagged</h3>\n          <p class=\"a11yp_card_body\">\n            An image inside a Collection List needs its alt text bound to a field. We name the\n            collection so the fix survives the next publish.\n          </p>\n        </div>\n        <div class=\"a11yp_card\">\n          <h3 class=\"a11yp_card_title\">Gaps are visible</h3>\n          <p class=\"a11yp_card_body\">\n            Where we have no Webflow-specific guidance for a rule, the report says so rather\n            than quietly showing generic output as though it were tailored.\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">How the score works</h2>\n      <p class=\"a11yp_prose u-mb-24\">\n        The score is a triage aid, not a compliance percentage, and the method is published so\n        you can argue with it. Each failing rule contributes a penalty weighted by severity\n        &mdash; Critical 12, Serious 7, Moderate 3, Minor 1 &mdash; scaled by the base-ten\n        logarithm of how many elements it affects.\n      </p>\n      <p class=\"a11yp_prose u-mb-24\">\n        The logarithm is deliberate. Two hundred contrast failures is usually one class fixed\n        in one place; straight multiplication would drive any site with a repeated component to\n        zero and tell you nothing. Breadth costs more than depth, but not linearly.\n      </p>\n      <div class=\"a11yp_caveat\">\n        <h3 class=\"a11yp_caveat_title\">A score of 100 is not compliance</h3>\n        <p class=\"a11yp_caveat_body\">\n          This scan evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, about 22%.\n          A clean result means we found nothing, not that there is nothing. Whether alternative\n          text is meaningful, whether reading order makes sense, whether a keyboard user can\n          complete a purchase &mdash; none of that is machine-decidable, and all of it is where\n          real barriers live. In June 2026 a French court ordered Carrefour to reach full\n          compliance under a EUR 500 per day penalty and explicitly rejected a 71% conformance\n          score as insufficient. Partial compliance is not a legal position, and neither is a\n          good score.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n  <section class=\"g_section_wrap u-theme-light\">\n    <div class=\"g_section_space\"></div>\n    <div class=\"u-container\">\n      <h2 class=\"u-mb-16\">Questions</h2>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Is WCAG 2.2 AA the standard I need?</h3>\n        <p class=\"a11yp_faq_a\">\n          For most businesses, yes. The European Accessibility Act is measured against EN 301\n          549, which incorporates WCAG at AA. ADA Title II names WCAG 2.1 AA explicitly. Section\n          508 still references WCAG 2.0 AA. Meeting 2.2 AA satisfies all of them, because each\n          version is a superset of the last apart from one criterion that WCAG 2.2 withdrew.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Will you build me an accessibility overlay?</h3>\n        <p class=\"a11yp_faq_a\">\n          No, and we would advise against buying one. Overlay vendors are being sued, the\n          products are widely rejected by the disabled users they claim to help, and installing\n          one is a matter of public record that plaintiffs' lawyers search for. We fix the\n          underlying markup instead. There is no one-line version of this.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Do you scan the whole site?</h3>\n        <p class=\"a11yp_faq_a\">\n          One page at a time today. In practice a Webflow site is a handful of templates, so\n          scanning one page per template finds nearly everything &mdash; the failures live in\n          shared classes and components, not in individual pages.\n        </p>\n      </div>\n\n      <div class=\"a11yp_faq_item\">\n        <h3 class=\"a11yp_faq_q\">Do you respect robots.txt?</h3>\n        <p class=\"a11yp_faq_a\">\n          Yes. We check it before rendering and honour a disallow for our user agent. The\n          crawler identifies itself as WebyanshBot.\n        </p>\n      </div>\n    </div>\n    <div class=\"g_section_space\"></div>\n  </section>\n\n</div>",
+    "tree": {
+      "tag": "div",
+      "classes": [],
+      "attrs": {},
+      "children": [
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "WCAG compliance checker"
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_lede",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " Enter a URL and get every WCAG 2.2 Level A and AA failure a machine can find, each one mapped to the exact fix in Webflow Designer rather than to a line of HTML you cannot edit. Free, no account, and the score is public so you can share it. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "a",
+                  "classes": [
+                    "a11yp_cta"
+                  ],
+                  "attrs": {
+                    "href": "/app"
+                  },
+                  "children": [
+                    {
+                      "text": "Scan a page"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "g_section_space"
+                  ],
+                  "attrs": {},
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_updated"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Last updated 7 August 2026 &middot; axe-core 4.13 &middot; WCAG 2.2 Level A and AA"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "What gets checked"
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " Thirteen rules across twelve success criteria. Three of them have no equivalent in any open-source engine and are ours, because the criteria they cover need a rendered page with real computed styles rather than static HTML. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_tablewrap",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "table",
+                      "classes": [
+                        "a11yp_table"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "thead",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Criterion"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "What we look for"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Level"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "th",
+                                  "classes": [
+                                    "a11yp_th"
+                                  ],
+                                  "attrs": {
+                                    "scope": "col"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": "Severity"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "tbody",
+                          "classes": [],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "1.4.3"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Text below 4.5:1 against its real background, measured on every text node"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Critical"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "1.1.1"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Images with no alternative text, including CMS-bound ones"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Critical"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "3.3.2"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Form inputs relying on placeholder text instead of a label"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Critical"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "2.1.1"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Controls built as divs that a keyboard cannot reach"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Critical"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "1.2.2"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Video with no caption track"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Critical"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "2.4.4"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Links whose text does not describe where they go"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Serious"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "2.4.7"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Focus indicators removed by a global reset — our own check"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Serious"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "2.5.8"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Targets under 24 by 24 CSS pixels, new in WCAG 2.2"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Serious"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "1.3.1"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Skipped heading levels, and pages with no main landmark"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Serious"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "1.4.4"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Content clipped at 200% zoom — our own check, measured at 640px"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Moderate"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "3.1.1"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A missing lang attribute on the html element"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "A"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Moderate"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "tr",
+                              "classes": [],
+                              "attrs": {},
+                              "children": [
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "2.4.11"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Anchor targets hidden behind a sticky header — our own check, new in 2.2"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td_num"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "AA"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "td",
+                                  "classes": [
+                                    "a11yp_td"
+                                  ],
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "text": "Minor"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Why the fixes are Webflow-specific"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Generic scanners tell you that an element fails and hand you a CSS selector. On Webflow that is the least useful half of the answer, because you do not edit selectors — you edit classes, elements and CMS fields in Designer, and the markup is generated for you. "
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " So every issue we report names the panel to open and the control to change. Where a failing element sits inside a Collection List, we say so, because fixing the element only fixes the first item and the next publish overwrites it. The fix belongs on the CMS field. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_grid"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "One class, not 200 elements"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " Contrast failures usually trace to a single class used everywhere. We group by class so you fix it once, and the score is weighted to reflect that rather than punishing you 200 times for one mistake. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "CMS-bound issues are flagged"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " An image inside a Collection List needs its alt text bound to a field. We name the collection so the fix survives the next publish. "
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "classes": [
+                        "a11yp_card"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "classes": [
+                            "a11yp_card_title"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": "Gaps are visible"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "classes": [
+                            "a11yp_card_body"
+                          ],
+                          "attrs": {},
+                          "children": [
+                            {
+                              "text": " Where we have no Webflow-specific guidance for a rule, the report says so rather than quietly showing generic output as though it were tailored. "
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "How the score works"
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " The score is a triage aid, not a compliance percentage, and the method is published so you can argue with it. Each failing rule contributes a penalty weighted by severity — Critical 12, Serious 7, Moderate 3, Minor 1 — scaled by the base-ten logarithm of how many elements it affects. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "classes": [
+                    "a11yp_prose",
+                    "u-mb-24"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": " The logarithm is deliberate. Two hundred contrast failures is usually one class fixed in one place; straight multiplication would drive any site with a repeated component to zero and tell you nothing. Breadth costs more than depth, but not linearly. "
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_caveat"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_caveat_title"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "A score of 100 is not compliance"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_caveat_body"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " This scan evaluates 12 of the 55 WCAG 2.2 Level A and AA success criteria, about 22%. A clean result means we found nothing, not that there is nothing. Whether alternative text is meaningful, whether reading order makes sense, whether a keyboard user can complete a purchase — none of that is machine-decidable, and all of it is where real barriers live. In June 2026 a French court ordered Carrefour to reach full compliance under a EUR 500 per day penalty and explicitly rejected a 71% conformance score as insufficient. Partial compliance is not a legal position, and neither is a good score. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "section",
+          "classes": [
+            "g_section_wrap",
+            "u-theme-light"
+          ],
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "u-container"
+              ],
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "classes": [
+                    "u-mb-16"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "text": "Questions"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Is WCAG 2.2 AA the standard I need?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " For most businesses, yes. The European Accessibility Act is measured against EN 301 549, which incorporates WCAG at AA. ADA Title II names WCAG 2.1 AA explicitly. Section 508 still references WCAG 2.0 AA. Meeting 2.2 AA satisfies all of them, because each version is a superset of the last apart from one criterion that WCAG 2.2 withdrew. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Will you build me an accessibility overlay?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " No, and we would advise against buying one. Overlay vendors are being sued, the products are widely rejected by the disabled users they claim to help, and installing one is a matter of public record that plaintiffs' lawyers search for. We fix the underlying markup instead. There is no one-line version of this. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Do you scan the whole site?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " One page at a time today. In practice a Webflow site is a handful of templates, so scanning one page per template finds nearly everything — the failures live in shared classes and components, not in individual pages. "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "classes": [
+                    "a11yp_faq_item"
+                  ],
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "classes": [
+                        "a11yp_faq_q"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": "Do you respect robots.txt?"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "classes": [
+                        "a11yp_faq_a"
+                      ],
+                      "attrs": {},
+                      "children": [
+                        {
+                          "text": " Yes. We check it before rendering and honour a disallow for our user agent. The crawler identifies itself as WebyanshBot. "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "classes": [
+                "g_section_space"
+              ],
+              "attrs": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
   }
 ];
