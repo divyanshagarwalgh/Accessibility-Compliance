@@ -1,6 +1,7 @@
 import { getIssues, getScan } from "@/lib/db";
 import { rateLimit, tooManyRequests } from "@/lib/ratelimit";
 import { auditImages, type ImageRecord } from "@/documents/alt-text";
+import { draftFailureMessage } from "@/lib/draft-failure";
 import {
   AnthropicNotConfigured,
   AnthropicRefused,
@@ -112,27 +113,6 @@ export async function POST(request: Request): Promise<Response> {
       draftMessage: draftFailureMessage(err),
     });
   }
-}
-
-/**
- * Turns a drafting failure into something the user can act on.
- *
- * The unreachable-image case is worth calling out by name because it is both
- * the most common and the only one the user can fix. Matching on the message is
- * a heuristic, so the fallback stays honest rather than guessing.
- */
-function draftFailureMessage(err: unknown): string {
-  const message = err instanceof Error ? err.message : String(err);
-
-  if (/image|url|fetch|download/i.test(message)) {
-    return (
-      "Drafting failed, most likely because one of the images could not be " +
-      "fetched from its URL. Check that every image is reachable without a login " +
-      "and try again. The classification below is unaffected."
-    );
-  }
-
-  return "Drafting failed. The classification below is unaffected — it needs no model.";
 }
 
 /**
