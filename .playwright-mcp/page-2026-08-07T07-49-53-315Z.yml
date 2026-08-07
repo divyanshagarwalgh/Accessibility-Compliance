@@ -1,0 +1,248 @@
+- generic [ref=f12e2]:
+  - generic:
+    - link "Skip to main content" [ref=f12e3] [cursor=pointer]:
+      - /url: /#main
+    - banner:
+      - generic [ref=f12e5]:
+        - link "Home Page" [ref=f12e6] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=f12e11]:
+          - generic [ref=f12e12]:
+            - list [ref=f12e13]:
+              - listitem [ref=f12e14]:
+                - button "Services" [ref=f12e16] [cursor=pointer]
+              - listitem [ref=f12e20]:
+                - button "Industries" [ref=f12e22] [cursor=pointer]
+              - listitem [ref=f12e26]:
+                - link "Portfolio" [ref=f12e27] [cursor=pointer]:
+                  - /url: /case-studies
+              - listitem [ref=f12e29]:
+                - button "Resources" [ref=f12e31] [cursor=pointer]
+            - list [ref=f12e35]:
+              - listitem [ref=f12e36]:
+                - link "Chat with Webyansh on WhatsApp" [ref=f12e40] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f12e42]:
+                - link "staggering button" [ref=f12e43] [cursor=pointer]:
+                  - /url: /contact-us
+                  - generic [ref=f12e45]:
+                    - generic [ref=f12e46]: B
+                    - generic [ref=f12e47]: o
+                    - generic [ref=f12e48]: o
+                    - generic [ref=f12e49]: k
+                    - generic [ref=f12e51]: a
+                    - generic [ref=f12e53]: c
+                    - generic [ref=f12e54]: a
+                    - generic [ref=f12e55]: l
+                    - generic [ref=f12e56]: l
+  - main [ref=f12e57]:
+    - generic [ref=f12e60]:
+      - paragraph [ref=f12e61]: Free tools · No overlay widget, ever
+      - heading "Accessibility checker for Webflow sites" [level=1] [ref=f12e62]
+      - paragraph [ref=f12e63]: Scan any page against WCAG 2.1 and 2.2 Level AA, see which accessibility laws apply to the markets you sell into, and get the exact fix for each issue written as Webflow Designer steps rather than generic developer output. Automated scanning covers roughly a third of the WCAG success criteria, so this finds real problems and tells you plainly what it cannot check.
+    - generic [ref=f12e65]:
+      - heading "The tools" [level=2] [ref=f12e66]
+      - generic [ref=f12e67]:
+        - heading "Colour contrast checker" [level=3] [ref=f12e68]
+        - paragraph [ref=f12e69]: Any foreground and background pair against AA and AAA, plus a palette sweep that flags every failing combination in a brand system. Runs in your browser, needs no email, and has no limit.
+        - heading "WCAG 2.1 and 2.2 scanner" [level=3] [ref=f12e70]
+        - paragraph [ref=f12e71]: "A full page audit with severity, the success criterion at fault, and the element that broke it. Built on axe-core, with three additional checks for criteria axe has no rule for: focus visibility, focus obscured by sticky headers, and real text clipping at 200% zoom."
+        - heading "Webflow remediation steps" [level=3] [ref=f12e72]
+        - paragraph [ref=f12e73]: "Each issue mapped to the panel, class and setting in Webflow Designer that fixes it. Where an element sits inside a Collection List we say so, because the fix belongs on the CMS field: change the element and only the first item changes, and the next publish overwrites it."
+        - heading "Jurisdiction mapper" [level=3] [ref=f12e74]
+        - paragraph [ref=f12e75]: Pick the markets you sell into and see which regimes bind you, with the deadline and the standard for each. A planning aid, not legal advice.
+        - heading "Accessibility statement and VPAT drafts" [level=3] [ref=f12e76]
+        - paragraph [ref=f12e77]: The statement the European Accessibility Act requires, and a VPAT 2.5 draft for procurement, both populated from your own scan so the known-issues section stays honest.
+    - generic [ref=f12e80]:
+      - heading "What this tool does not do" [level=2] [ref=f12e81]
+      - paragraph [ref=f12e82]: "No scanner can confirm that a page is compliant, and any tool that says otherwise is selling you something. Roughly two thirds of the WCAG success criteria need a human to judge them: reading order, whether alt text is meaningful, error recovery, and whether a keyboard user can actually finish the task."
+      - paragraph [ref=f12e83]: We tell you exactly which criteria were tested, which were not, and what a manual audit would add. Every report carries that figure.
+      - paragraph [ref=f12e84]: We also do not build, sell or recommend accessibility overlay widgets. Overlay vendors are being sued, and a one-line script cannot fix a heading order or write meaningful alt text. This is an audit and remediation tool, and that is all it claims to be.
+      - link "Talk to us about remediation" [ref=f12e85] [cursor=pointer]:
+        - /url: /contact-us
+  - contentinfo [ref=f12e86]:
+    - heading "Footer" [level=2] [ref=f12e87]
+    - navigation [ref=f12e89]:
+      - generic [ref=f12e90]:
+        - link "Go to the homepage" [ref=f12e91] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f12e92]: Home Page
+        - list [ref=f12e97]:
+          - listitem [ref=f12e98]:
+            - link "Linked In" [ref=f12e99] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/webyansh/
+          - listitem [ref=f12e103]:
+            - link "Webflow" [ref=f12e104] [cursor=pointer]:
+              - /url: https://webflow.com/@divyansh-agarwal
+          - listitem [ref=f12e108]:
+            - link "Instagram" [ref=f12e109] [cursor=pointer]:
+              - /url: https://www.instagram.com/webyansh/
+          - listitem [ref=f12e114]:
+            - link "X" [ref=f12e115] [cursor=pointer]:
+              - /url: https://x.com/webyansh
+          - listitem [ref=f12e119]:
+            - link "Dribbble" [ref=f12e120] [cursor=pointer]:
+              - /url: https://dribbble.com/webyansh
+          - listitem [ref=f12e124]:
+            - link "Behance" [ref=f12e125] [cursor=pointer]:
+              - /url: https://www.behance.net/webyansh-
+        - generic [ref=f12e129]:
+          - paragraph [ref=f12e130]: India, Rajajinagar, Bangalore,Karnataka, 560021
+          - link "Phone number" [ref=f12e131] [cursor=pointer]:
+            - /url: tel:+916377588843
+            - text: +91 6377588843
+          - link "Email" [ref=f12e132] [cursor=pointer]:
+            - /url: mailto:divyansh@webyansh.com
+            - text: divyansh@webyansh.com
+        - generic [ref=f12e133]:
+          - generic [ref=f12e134]: Explore AI Summary
+          - generic [ref=f12e135]:
+            - link "ChatGPT" [ref=f12e136] [cursor=pointer]:
+              - /url: https://chat.openai.com/?model=gpt-4&q=Visit%20https%3A%2F%2Fwebyansh-webflow-agency.webflow.io%2Ftools%2Faccessibility%20and%20answer%3A%20what%20does%20Webyansh%20do%2C%20who%20is%20it%20for%2C%20and%20why%20should%20I%20work%20with%20them%3F
+            - link "Grok" [ref=f12e139] [cursor=pointer]:
+              - /url: https://x.com/i/grok?text=Visit%20https%3A%2F%2Fwebyansh-webflow-agency.webflow.io%2Ftools%2Faccessibility%20and%20answer%3A%20what%20does%20Webyansh%20do%2C%20who%20is%20it%20for%2C%20and%20why%20should%20I%20work%20with%20them%3F
+            - link "Claude" [ref=f12e142] [cursor=pointer]:
+              - /url: https://claude.ai/new?q=Visit%20https%3A%2F%2Fwebyansh-webflow-agency.webflow.io%2Ftools%2Faccessibility%20and%20answer%3A%20what%20does%20Webyansh%20do%2C%20who%20is%20it%20for%2C%20and%20why%20should%20I%20work%20with%20them%3F
+            - link "Perplexity" [ref=f12e145] [cursor=pointer]:
+              - /url: https://www.perplexity.ai/search?focus=internet&q=Visit%20https%3A%2F%2Fwebyansh-webflow-agency.webflow.io%2Ftools%2Faccessibility%20and%20answer%3A%20what%20does%20Webyansh%20do%2C%20who%20is%20it%20for%2C%20and%20why%20should%20I%20work%20with%20them%3F
+            - link "Google AI" [ref=f12e148] [cursor=pointer]:
+              - /url: https://www.google.com/search?udm=50&aep=11&q=Visit%20https%3A%2F%2Fwebyansh-webflow-agency.webflow.io%2Ftools%2Faccessibility%20and%20answer%3A%20what%20does%20Webyansh%20do%2C%20who%20is%20it%20for%2C%20and%20why%20should%20I%20work%20with%20them%3F
+        - generic [ref=f12e170]:
+          - link [ref=f12e171] [cursor=pointer]:
+            - /url: https://clutch.co/profile/webyansh
+            - img "Clutch" [ref=f12e172]
+          - link "Forbes India" [ref=f12e173] [cursor=pointer]:
+            - /url: https://www.forbesindia.com/article/upfront/brand-connect/the-founders-shaping-the-future-of-business-growth/2993865/1
+            - img "Forbes India logo" [ref=f12e174]
+      - generic [ref=f12e175]:
+        - generic [ref=f12e176]:
+          - link "Services" [ref=f12e177] [cursor=pointer]:
+            - /url: /webflow-agency
+          - list [ref=f12e178]:
+            - listitem [ref=f12e179]:
+              - link "Web Design (UI/UX)" [ref=f12e180] [cursor=pointer]:
+                - /url: /webflow-agency/ui-ux-design
+            - listitem [ref=f12e182]:
+              - link "Webflow Development" [ref=f12e183] [cursor=pointer]:
+                - /url: /webflow-agency
+            - listitem [ref=f12e185]:
+              - link "Webflow SEO" [ref=f12e186] [cursor=pointer]:
+                - /url: /webflow-agency/webflow-seo-agency
+            - listitem [ref=f12e188]:
+              - link "Webflow Migration" [ref=f12e189] [cursor=pointer]:
+                - /url: /webflow-agency/migrate-to-webflow
+            - listitem [ref=f12e191]:
+              - link "Webflow Integration" [ref=f12e192] [cursor=pointer]:
+                - /url: /webflow-agency/webflow-integrations
+            - listitem [ref=f12e194]:
+              - link "Webflow AEO / AIO" [ref=f12e195] [cursor=pointer]:
+                - /url: /webflow-agency/answer-engine-optimization
+            - listitem [ref=f12e197]:
+              - link "SaaS SEO" [ref=f12e198] [cursor=pointer]:
+                - /url: /saas-seo-agency
+            - listitem [ref=f12e200]:
+              - link "SEO for US companies" [ref=f12e201] [cursor=pointer]:
+                - /url: /seo-for-us-companies
+            - listitem [ref=f12e203]:
+              - link "International SEO" [ref=f12e204] [cursor=pointer]:
+                - /url: /international-seo-agencies
+            - listitem [ref=f12e206]:
+              - link "Webflow Support" [ref=f12e207] [cursor=pointer]:
+                - /url: /webflow-agency/webflow-maintenance
+            - listitem [ref=f12e209]:
+              - link "Growth Marketing" [ref=f12e210] [cursor=pointer]:
+                - /url: /webflow-agency/growth-marketing
+            - listitem [ref=f12e212]:
+              - link "Converstion Rate Optimization (CRO)" [ref=f12e213] [cursor=pointer]:
+                - /url: /webflow-agency/conversion-rate-optimization
+            - listitem [ref=f12e215]:
+              - link "Branding" [ref=f12e216] [cursor=pointer]:
+                - /url: /webflow-agency/branding
+            - listitem [ref=f12e218]:
+              - link "Webflow Agency India" [ref=f12e219] [cursor=pointer]:
+                - /url: /webflow-agencies-india
+            - listitem [ref=f12e221]:
+              - link "Custom Web Apps" [ref=f12e222] [cursor=pointer]:
+                - /url: /webflow-agency/custom-web-app-development
+        - generic [ref=f12e224]:
+          - link "Industry" [ref=f12e225] [cursor=pointer]:
+            - /url: /industry
+          - list [ref=f12e226]:
+            - listitem [ref=f12e227]:
+              - link "B2B SaaS" [ref=f12e228] [cursor=pointer]:
+                - /url: /industry/b2b-saas
+            - listitem [ref=f12e230]:
+              - link "Artificial Intelligence" [ref=f12e231] [cursor=pointer]:
+                - /url: /industry/ai
+            - listitem [ref=f12e233]:
+              - link "Web3" [ref=f12e234] [cursor=pointer]:
+                - /url: /industry/web3
+            - listitem [ref=f12e236]:
+              - link "Information Technology" [ref=f12e237] [cursor=pointer]:
+                - /url: /industry/information-technology
+            - listitem [ref=f12e239]:
+              - link "Financial Services" [ref=f12e240] [cursor=pointer]:
+                - /url: /industry/financial-services
+            - listitem [ref=f12e242]:
+              - link "Healthcare" [ref=f12e243] [cursor=pointer]:
+                - /url: /industry/healthcare
+            - listitem [ref=f12e245]:
+              - link "E-commerce" [ref=f12e246] [cursor=pointer]:
+                - /url: /industry/ecommerce
+            - listitem [ref=f12e248]:
+              - link "Hospitality" [ref=f12e249] [cursor=pointer]:
+                - /url: /industry/hospitality
+            - listitem [ref=f12e251]:
+              - link "Gaming" [ref=f12e252] [cursor=pointer]:
+                - /url: /industry/gaming
+            - listitem [ref=f12e254]:
+              - link "Startups" [ref=f12e255] [cursor=pointer]:
+                - /url: /industry/startup
+            - listitem [ref=f12e257]:
+              - link "Enterprises" [ref=f12e258] [cursor=pointer]:
+                - /url: /industry/enterprise
+        - generic [ref=f12e260]:
+          - heading "Company" [level=3] [ref=f12e261]
+          - list [ref=f12e262]:
+            - listitem [ref=f12e263]:
+              - link "Portfolio" [ref=f12e264] [cursor=pointer]:
+                - /url: /case-studies
+            - listitem [ref=f12e266]:
+              - link "Pricing" [ref=f12e267] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=f12e269]:
+              - link "Contact" [ref=f12e270] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=f12e272]:
+              - link "Resources" [ref=f12e273] [cursor=pointer]:
+                - /url: /resources
+            - listitem [ref=f12e275]:
+              - link "Blogs" [ref=f12e276] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=f12e278]:
+              - link "Integration" [ref=f12e279] [cursor=pointer]:
+                - /url: /integrations
+            - listitem [ref=f12e281]:
+              - link "Migrations" [ref=f12e282] [cursor=pointer]:
+                - /url: /migrations
+            - listitem [ref=f12e284]:
+              - link "Press & Media" [ref=f12e285] [cursor=pointer]:
+                - /url: /press
+            - listitem [ref=f12e287]:
+              - link "Awards & Recognition" [ref=f12e288] [cursor=pointer]:
+                - /url: /awards-and-recognition
+            - listitem [ref=f12e290]:
+              - link "Careers" [ref=f12e291] [cursor=pointer]:
+                - /url: /careers
+    - generic [ref=f12e295]:
+      - generic [ref=f12e296]: © 2026 Webyansh. All Rights Reserved.
+      - list [ref=f12e297]:
+        - listitem [ref=f12e298]:
+          - link "Privacy Policy" [ref=f12e299] [cursor=pointer]:
+            - /url: /privacy-policy
+        - listitem [ref=f12e301]:
+          - link "Terms & Conditions" [ref=f12e302] [cursor=pointer]:
+            - /url: /terms-of-service
+        - listitem [ref=f12e304]:
+          - link "Site Map" [ref=f12e305] [cursor=pointer]:
+            - /url: https://webyansh.com/sitemap.xml

@@ -77,7 +77,34 @@ Body > div.page_wrap
 
 **"Custom Code" is load-bearing, not decoration.** It emits the fluid `clamp()` type
 scale. A page without it silently falls back to fixed rems and sizes differently from
-the rest of the site.
+the rest of the site. **Verified present and working on all six pages, 7 Aug** — the
+live HTML carries 25 `clamp()` declarations.
+
+### Add WhatsApp Modal and Mascot too — they are not really optional
+
+The skeleton above renders correctly without them, which is why they read as
+optional. But the site's **global** custom code initialises them on every page and
+does not null-check, so a page that omits them throws JS errors. Measured 7 Aug: the
+homepage throws **0** console errors, `/tools/accessibility` throws **3**, and each
+one is a missing element rather than a broken script:
+
+| Error | Element the global script queries | Home | New pages |
+|---|---|---|---|
+| `initWhatsAppModal` | `[data-whatsapp-modal]` | 1 | 0 |
+| `initDynamicCustomTextCursor` | `.cursor` (Mascot) | 1 | 0 |
+| `hiddenKey02` (line ~1540) | `<input id="hiddenKey02">` | 1 | 0 |
+
+Adding the **WhatsApp Modal** and **Mascot** component instances to each new page
+clears the first two and restores the site-wide UX those components provide. Both are
+additive — placing an existing component on a new page, exactly as the skeleton
+already does for Navbar and Footer.
+
+The third is different: `hiddenKey02` is a hidden field inside the **contact form**,
+and adding a contact form to a tools page just to silence a log line is the wrong
+trade. That error will fire on *any* page without that form. The real fix is a null
+check in the site's global custom code — which is **existing site code, so it needs
+your explicit go-ahead** under guardrail 1. It is harmless today: the line only
+stamps `location.pathname` into a hidden analytics field.
 
 ### Then
 

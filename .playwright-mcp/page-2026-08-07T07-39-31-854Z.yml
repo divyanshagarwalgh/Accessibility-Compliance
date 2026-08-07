@@ -1,0 +1,36 @@
+- generic [active] [ref=f11e1]:
+  - link "Skip to main content" [ref=f11e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f11e3]:
+    - generic [ref=f11e4]:
+      - link "Webyansh" [ref=f11e5] [cursor=pointer]:
+        - /url: /
+      - navigation "Accessibility suite" [ref=f11e6]:
+        - link "Contrast checker" [ref=f11e7] [cursor=pointer]:
+          - /url: /tools/color-contrast-checker
+        - link "Talk to us" [ref=f11e8] [cursor=pointer]:
+          - /url: /contact-us
+  - main [ref=f11e9]:
+    - generic [ref=f11e10]:
+      - generic [ref=f11e11]:
+        - paragraph [ref=f11e12]:
+          - link "Accessibility workspace" [ref=f11e13] [cursor=pointer]:
+            - /url: /app
+          - text: · Alt text
+        - heading "Alt text auditor" [level=1] [ref=f11e14]
+        - paragraph [ref=f11e15]: Missing and unhelpful alt text, with a drafted replacement for each. Review every line before applying. A wrong description is worse than none.
+      - generic [ref=f11e16]:
+        - group "Where the images come from" [ref=f11e17]:
+          - generic [ref=f11e19]:
+            - button "From a scan" [ref=f11e20] [cursor=pointer]
+            - button "Paste image URLs" [pressed] [ref=f11e21] [cursor=pointer]
+        - generic [ref=f11e22]:
+          - generic [ref=f11e23]: Image URLs
+          - textbox "Image URLs" [ref=f11e24]:
+            - /placeholder: "https://example.com/hero.avif\nhttps://example.com/logo.svg | image"
+          - generic [ref=f11e25]: One per line. Add the current alt text after a vertical bar to have it judged as well — a line with no bar is treated as having no alt attribute at all.
+        - generic [ref=f11e26]:
+          - checkbox "Draft replacement text as well. This is the one part of the tool that looks at the image with a model, so it needs the images to be reachable at a public URL." [ref=f11e27]
+          - generic [ref=f11e28]: Draft replacement text as well. This is the one part of the tool that looks at the image with a model, so it needs the images to be reachable at a public URL.
+        - button "Audit alt text" [ref=f11e30] [cursor=pointer]
+  - alert [ref=f11e31]
