@@ -113,6 +113,39 @@ package opens; the VPAT is 56 rows in one table across 288 paragraphs. A
 well-formedness check is now a test, so that class of bug fails here rather than
 on a procurement team's desk.
 
+### The tool now passes its own audit
+
+Staging's `robots.txt` is `Disallow: /` and our scanner respects robots.txt, so
+the app **cannot** audit itself there. axe-core 4.10.2 was run in-page against
+every screen instead. It found three real failures, and writing the fix for one
+surfaced a fourth:
+
+| Failure | Where | Measured |
+|---|---|---|
+| White on brand orange | every primary button, incl. the report screen since Phase 4 | 3.32:1 |
+| Caveat body on the dark slab | `--swatch--light-faded` is `#e9eaeb26`, a 15% alpha overlay meant for borders; over `--swatch--dark` it composites to `#393939` | 1.5:1 |
+| Two region landmarks named "Run history" | monitoring dashboard: the section and the scroll region inside it | 1.3.1 |
+| Focused anchor targets 4px under the new header | `scroll-margin-top` was 64px against a 68px header | 2.4.11 |
+
+All four are fixed. The lesson worth keeping: **the alpha overlay tokens
+(`--swatch--light-faded`, `--swatch--dark-faded`) are for borders, never text.**
+`--swatch--muted-on-dark` (`#a8a8a8`, 7.32:1) was added for body copy on a dark
+slab.
+
+Every screen now reports zero axe violations at the wcag2a/2aa/21a/21aa/22aa and
+best-practice tags.
+
+### Chrome and monitor controls
+
+A sticky 68px header, per design-inventory §1.1 — and deliberately **no footer**,
+which the same section specifies for report and module screens.
+
+Monitors can be paused and deleted. Pausing takes only the monitor id, because
+the id is already the capability for reading the dashboard; deleting also takes
+the owner email, because it is the one action that destroys data. Pausing clears
+`next_run_at` as well as the flag — leaving a stale timestamp would fire a
+backlog of overdue runs on resume.
+
 ---
 
 ## Blocked — needs a credential I do not have
@@ -183,19 +216,36 @@ No separate provider needed. Brevo's SMTP relay is enabled on the account and th
 free tier allows 300 sends a day, far more than a regression-only alert policy
 uses. Blocked only by the same missing REST key as item 1.
 
-### 4. Applying the `/tools/*` page bodies
+### 4. Applying the `/tools/*` page bodies — THE launch blocker
 
-The four bodies are written and verified in `webflow-pages/`. They could not be
-applied from Claude Code: every page-building Webflow MCP tool takes an
-`actions[]` array while the server advertises an empty input schema, so the
-client sends a string and the call is rejected — `expected array, received
-string`, and even `actions: []` fails. The Data API is not a fallback; the local
-CLI token has no `pages` scope, and its static-content endpoint only rewrites
-existing text nodes rather than creating elements.
+The four bodies are written, and now **validated**: `node webflow-pages/validate.mjs`
+checks every constraint the Designer enforces and all four pass. They will paste
+correctly.
 
-Apply them from an interactive session or the Designer extension. Full
-instructions, including the load-bearing page skeleton and the staging-publish
-dance for draft pages, are in [`webflow-pages/README.md`](../webflow-pages/README.md).
+Re-tested against Webflow MCP **2.0.1** on 7 August. Still blocked, and now
+diagnosed precisely rather than guessed at:
+
+- Scalar parameters marshal fine — `webflow_guide_tool` returns, and
+  `data_pages_tool` with only `site_id` reaches the server and complains that
+  `actions` is missing. **Arrays do not**: with no `properties` in the advertised
+  schema the client has no type to marshal against, sends a string, and the
+  server rejects its own request. Not fixable from the calling side.
+- `ask_webflow_ai` takes a plain `message` string and *does* marshal — but the
+  service behind it returns `Failed to fetch from FAI chat service`.
+- `get_more_tools` reports no additional tools.
+- The Data API token authenticates and reads the site (`GET /v2/sites/{id}` →
+  200); it is the **`pages` scope** that 403s. Granting it would not help — the
+  Data API has no create-element endpoint at all, only static-content rewriting
+  of existing text nodes.
+
+**This needs a human in the Webflow Designer**, and it is the only thing standing
+between the build and a public surface. Instructions, the load-bearing page
+skeleton and the staging-publish dance for draft pages are in
+[`webflow-pages/README.md`](../webflow-pages/README.md).
+
+Note also that of the six planned `/tools/*` pages only
+`/tools/color-contrast-checker` is published on staging; `/tools/accessibility`
+is still a **draft** and returns 404. Nothing is on the production domain.
 
 ### Browser Rendering throughput
 
